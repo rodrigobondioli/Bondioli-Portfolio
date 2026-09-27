@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter"
 import MeetingBar from "@/components/MeetingBar"
 import CountUpNumber from "@/components/CountUpNumber"
 import YouTube from "@/components/YouTube"
+import ProjectVideo from "@/components/ProjectVideo"
 import Marquee from "@/components/Marquee"
 import ProjectCard from "@/components/ProjectCard"
 import ClosingSection from "@/components/ClosingSection"
@@ -95,11 +96,7 @@ export default function WorkPage() {
         {/* ---------- Video de abertura ---------- */}
         <section className={`section ${s.reel}`}>
           <div className={`container ${s.reelInner}`}>
-            <YouTube id="QSAe2rouM24" title="Ford + Tattoaria" autoplay />
-            <p className="caption">
-              Ford + Tattoaria campaign, in partnership with JWT (J. Walter
-              Thompson).
-            </p>
+            <ProjectVideo file="/video/reel-home.mp4" title="Reel" />
           </div>
         </section>
 
