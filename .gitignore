@@ -1,29 +1,22 @@
-
-# backups locais (o bundle do portfolio sozinho tem 46MB)
-# descarte local
-# docs internos de marketing (nao publicar)
-# experimentos de landing que nao fazem parte do deploy oficial
-# lixo local que nunca deve entrar no deploy
-# site novo (repo proprio)
-*.log
-.DS_Store
-.next/
-.vercel
-.vercel/
-DIAG.txt
-Marketing/
-New-LP/
-_backups/
-_originais/
-_site-v2-descarte/
-_to_delete/
-_to_delete_git_locks/
-node_modules/
-out/
-site-v2.tar.gz
-site-v2/
-tsconfig.tsbuildinfo
-
 # segredos locais
 .env
 .env.local
+
+# gerado
+node_modules/
+.next/
+out/
+.vercel/
+tsconfig.tsbuildinfo
+*.log
+.DS_Store
+
+# originais pesados (vídeo bruto, foto em alta) — só a versão comprimida
+# vai pra public/
+_originais/
+
+# documentos internos (nao publicar)
+Marketing/
+
+# descarte local
+_to_delete/

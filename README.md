@@ -1,76 +1,41 @@
-# Rodrigo Bondioli - mapa do projeto
+# rodrigobondioli.com
 
-Este repositorio concentra quatro frentes publicas/privadas do ecossistema:
+Site pessoal e portfólio. Next.js na Vercel: todo push no `main` vai pro ar.
+Detalhes técnicos e decisões de design ficam no `CLAUDE.md`.
 
-## 1. Site principal
+## Onde salvar cada coisa
 
-- URL: https://www.rodrigobondioli.com/
-- Entrada: `index.html`
-- Apoio: `shared/`, `img/`, `docs/design.md`
-- Funcao: site pessoal/portfolio do Rodrigo Bondioli.
+| o quê | pasta |
+|---|---|
+| **vídeo que vai aparecer no site** (já comprimido) | `public/video/` |
+| **original pesado** (vídeo bruto, foto em alta) — não vai pro ar | `_originais/` |
+| fotos, avatar, logos do site | `public/images/` |
+| imagens da página `/work` | `public/site/` |
+| imagens de um projeto | `public/projects/<slug>/` |
+| logos de clientes | `public/logos/` |
+| fontes | `public/fonts/` |
 
-## 2. Landing oficial do curso low ticket
+Tudo em `public/` é publicado. Arquivo grande demais ali pesa pra quem
+visita e gasta a cota da Vercel — o original fica em `_originais/` e só a
+versão comprimida entra em `public/`.
 
-- URL: https://www.rodrigobondioli.com/antipato
-- Pasta: `antipato/`
-- Funcao: pagina de vendas oficial do curso Anti Designer Pato / De Generico a Especialista.
-- Observacao: esta e a versao principal para copy, checkout, SEO e imagem social.
+## As pastas da raiz
 
-## 3. Landing antiga/secundaria do curso
+| pasta | o que é | vai pro ar? |
+|---|---|---|
+| `src/` | o código do site (páginas, componentes, textos em `src/content/`) | sim |
+| `public/` | imagens, vídeos e fontes servidos pelo site | sim |
+| `_originais/` | originais pesados | não (fora do git) |
+| `Marketing/` | documentos do projeto Anti Designer Pato | não (fora do git) |
+| `_to_delete/` | descarte. Cada faxina tem uma pasta datada com um LEIA-ME | não (fora do git) |
 
-- URL: https://www.rodrigobondioli.com/quak
-- Pasta: `quak/`
-- Funcao: versao secundaria/legada da landing do curso.
-- Observacao: manter enquanto a URL ainda for util, mas nao tratar como fonte principal.
+O resto da raiz é configuração (`package.json`, `next.config.mjs`,
+`vercel.json`, `tsconfig.json`…) e pastas geradas (`node_modules/`, `.next/`).
 
-## 4. App do curso
+## Comandos
 
-- URL principal esperada: https://app.rodrigobondioli.com/
-- Frontend: `app/`
-- APIs serverless: `api/`
-- Banco e policies: `supabase/`
-- Funcao: plataforma do curso, no estilo comunidade/app fechado, com login, aulas, progresso, Canvas e IA.
-
-## Rotas importantes do app
-
-- `/` em `app.rodrigobondioli.com`: login (`app/index.html`)
-- `/curso`: home do curso (`app/curso/home.html`)
-- `/curso/aula.html`: player/aula/exercicio
-- `/curso/canvas.html`: Canvas do aluno
-- `/curso/posicionamento.html`: geracao/refino do posicionamento com IA
-- `/admin`: painel interno de aulas e alunos
-
-O roteamento limpo do subdominio do app fica em `middleware.js`.
-
-## Pastas internas e descarte
-
-- `docs/`: documentacao operacional e referencias do projeto.
-- `tools/`: scripts internos de desenvolvimento/teste.
-- `Marketing/`: documentos internos de copy, criativos e estrategia. Nao publicar.
-- `Marketing/anti-pato/`: acervo interno organizado do produto Anti Pato, importado da pasta externa antiga.
-- `_to_delete/`: descarte local ignorado pelo Git.
-- `_to_delete_git_locks/`: residuos antigos de locks, ja marcado para sair do controle de versao.
-- `design-system/`: referencia visual/prototipos.
-
-## Arquivos que ficam na raiz
-
-- `index.html`: pagina inicial publica do dominio principal.
-- `politica-de-privacidade.html` e `termos.html`: paginas legais publicas com URLs diretas usadas pelas landings.
-- `middleware.js`: roteamento do subdominio do app na Vercel.
-- `vercel.json`: configuracao de headers/cache/deploy.
-- `README.md`: mapa do repositorio.
-
-## Deploy
-
-O projeto atual roda como site estatico + funcoes serverless na Vercel.
-
-- Configuracao: `vercel.json`
-- Variaveis esperadas no ambiente: Supabase, Resend, IA, Greenn e admins.
-- O app depende de Supabase para autenticacao, controle de acesso, progresso, Canvas e planos.
-
-## Cuidados antes de mexer
-
-- Nao mover `antipato/`, `quak/`, `app/`, `api/` ou `shared/` sem ajustar URLs absolutas e o deploy.
-- A landing oficial e `antipato/`; `quak/` e legado.
-- O app pago deve checar acesso do aluno nas APIs, nao so no frontend.
-- Chave anon/publishable do Supabase pode ficar no cliente; service role e chaves de IA/Resend nunca devem entrar no repositorio.
+```bash
+npm run dev     # localhost:3000
+npm run build   # build de produção
+npm run start   # serve o build em localhost:3000
+```

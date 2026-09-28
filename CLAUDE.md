@@ -86,8 +86,12 @@ npm run start   # serve o build em localhost:3000
   filhos — com space-between o bloco do meio só cai no centro se as duas
   pontas tiverem a mesma largura, e não têm (logo 44, assinatura ~190).
   Medido antes da correção: 55px à esquerda do centro, em todas as páginas.
-- **`_site-v2-descarte/`, `site-v2/`, `quak/`, `antipato/`** e afins são entulho
-  do repo antigo. Estão no `.gitignore` e fora do `tsconfig`. Não entram no build.
+- **A raiz foi limpa em 28/09/2026.** O que não fazia parte do site no ar
+  (site-v2, landings do curso, assets do site estático antigo, backups)
+  está em `_to_delete/2026-09-28-faxina/`, com um LEIA-ME. `_to_delete/`,
+  `_originais/` e `Marketing/` ficam fora do git e do deploy. Original
+  pesado de vídeo/foto vai em `_originais/`; só a versão comprimida entra
+  em `public/`.
 
 ## Animações — o que já deu errado
 
@@ -245,5 +249,6 @@ O site é **em inglês**. Isso vale pro texto visível, `alt`, `aria-label` e
 | fotos, avatar, logos do site | `public/images/` |
 | assets da página `/work` | `public/site/` |
 | vídeos | `public/video/` |
+| originais pesados (fora do deploy) | `_originais/` |
 | imagens dos projetos | `public/projects/<slug>/` |
 | logos de cliente | `public/logos/` |
