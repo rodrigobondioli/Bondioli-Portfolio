@@ -26,7 +26,6 @@ versão comprimida entra em `public/`.
 | `src/` | o código do site (páginas, componentes, textos em `src/content/`) | sim |
 | `public/` | imagens, vídeos e fontes servidos pelo site | sim |
 | `_originais/` | originais pesados | não (fora do git) |
-| `Marketing/` | documentos do projeto Anti Designer Pato | não (fora do git) |
 | `_to_delete/` | descarte. Cada faxina tem uma pasta datada com um LEIA-ME | não (fora do git) |
 
 O resto da raiz é configuração (`package.json`, `next.config.mjs`,

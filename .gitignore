@@ -15,8 +15,5 @@ tsconfig.tsbuildinfo
 # vai pra public/
 _originais/
 
-# documentos internos (nao publicar)
-Marketing/
-
 # descarte local
 _to_delete/
