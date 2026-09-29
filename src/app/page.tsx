@@ -7,7 +7,7 @@ import styles from "./home.module.css"
 export const metadata: Metadata = {
   title: "Rodrigo Bondioli · Design Strategist",
   description:
-    "Rodrigo Bondioli works at the intersection of design and AI, with more than 20 years leading design for startups and global brands.",
+    "20+ years working across advertising, branding and digital products. Today I work at the intersection of strategy, design and technology, helping turn complex ideas into clear, relevant and future-ready products and brands.",
   alternates: { canonical: "/" },
 }
 
@@ -74,8 +74,10 @@ export default function HomePage() {
 
       <footer className={styles.bottom}>
         <p className={`${styles.label} ${styles.bio}`}>
-          Rodrigo Bondioli works at the intersection of design and AI, with
-          more than 20 years leading design for startups and global brands.
+          20+ years working across advertising, branding and digital
+          products. Today I work at the intersection of strategy, design and
+          technology, helping turn complex ideas into clear, relevant and
+          future-ready products and brands.
         </p>
 
         <div className={styles.contact}>
