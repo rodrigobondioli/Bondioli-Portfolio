@@ -5,7 +5,7 @@ import CubeLink from "@/components/CubeLink"
 import styles from "./home.module.css"
 
 export const metadata: Metadata = {
-  title: "Rodrigo Bondioli · Digital Product Strategist",
+  title: "Rodrigo Bondioli · Design Strategist",
   description:
     "Rodrigo Bondioli works at the intersection of design and AI, with more than 20 years leading design for startups and global brands.",
   alternates: { canonical: "/" },
@@ -62,7 +62,7 @@ export default function HomePage() {
         <p className={`${styles.label} ${styles.brand}`}>
           <span>Rodrigo Bondioli</span>
           <span className={styles.dot} aria-hidden="true">·</span>
-          <span className={styles.role}>Digital Product Strategist</span>
+          <span className={styles.role}>Design Strategist</span>
         </p>
 
         <Social className={styles.socialTop} />
