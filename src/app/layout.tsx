@@ -9,7 +9,7 @@ import "@/styles/globals.css"
 export const metadata: Metadata = {
   metadataBase: new URL("https://rodrigobondioli.com"),
   title: {
-    default: "Rodrigo Bondioli — Design Strategist",
+    default: "Rodrigo Bondioli — Strategic Designer",
     template: "%s — Rodrigo Bondioli",
   },
   description:

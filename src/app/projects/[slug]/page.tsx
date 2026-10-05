@@ -32,9 +32,10 @@ export function generateStaticParams() {
 }
 
 /* O Next entrega o parâmetro como ele aparece na URL, ou seja, percent-encoded.
-   Um slug com acento ("amor-de-cão") chega aqui como "amor-de-c%C3%A3o" e a
-   busca no JSON falha em silêncio — a página saía em branco, só com o título
-   genérico do site. Decodificar é o que faz a rota bater com o conteúdo. */
+   Um slug com acento chegava aqui como "amor-de-c%C3%A3o" e a busca no JSON
+   falhava em silêncio. Desde 05/10 nenhum slug tem acento (o amor-de-cão
+   virou amor-de-cao, com 301 da URL antiga no next.config) — a regra é
+   slug só com a-z, 0-9 e hífen. O decode fica como rede. */
 function lerSlug(bruto: string): string {
   try {
     return decodeURIComponent(bruto)

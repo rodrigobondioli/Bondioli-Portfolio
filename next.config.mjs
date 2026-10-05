@@ -16,5 +16,15 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: false,
+
+  /* Slug sem acento desde 05/10. A URL antiga pode chegar crua ("ã") ou
+     codificada ("%C3%A3"), dependendo de quem a montou — as duas vão pra
+     nova com 301, que é o que os buscadores leem como mudança permanente. */
+  async redirects() {
+    return [
+      { source: "/projects/amor-de-c%C3%A3o", destination: "/projects/amor-de-cao", statusCode: 301 },
+      { source: "/projects/amor-de-cão", destination: "/projects/amor-de-cao", statusCode: 301 },
+    ]
+  },
 }
 export default nextConfig

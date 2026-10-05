@@ -39,7 +39,9 @@ const CREDENTIALS: [string, string][] = [
   ["Webflow Partner", "Framer PRO Partner"],
 ]
 
-const TAGS = ["Concept", "Brand", "App design", "Landing page"]
+/* O mesmo vocabulário e a mesma ordem das tags dos cards (projects.json,
+   campo `type`) — o Go Ink aparece nos dois lugares e tem que bater. */
+const TAGS = ["Product Strategy", "Brand", "Interface"]
 
 /* Com largura e altura declaradas o navegador reserva a caixa antes da
    imagem chegar. Sem isso a caixa nasce com altura zero, a máscara calcula
@@ -291,7 +293,7 @@ export default function WorkPage() {
               <div className={s.aboutText}>
                 {/* O cargo sai do cabeçalho e vem pra cá: encostado no topo
                     do vídeo e na esquerda do texto. */}
-                <p className={`overline ${s.aboutRole}`}>Design Strategist</p>
+                <p className={`overline ${s.aboutRole}`}>Strategic Designer</p>
                 <div className={s.aboutCopy}>
                 <p className="body">
                 Big projects rarely fail because of execution. They fail because
@@ -299,7 +301,7 @@ export default function WorkPage() {
                 had the nerve to say so. I&rsquo;ve been in that room. I was
                 Head of Creative at Netshoes and Americanas.com, two of
                 Brazil&rsquo;s largest digital businesses. Before that, I spent
-                20 years at agencies including Wunderman Thompson and McCann.
+                years at agencies including Wunderman Thompson and McCann.
                 You&rsquo;re hiring my judgment. I join the conversation where
                 decisions are made, speak up before the wrong call becomes an
                 expensive problem, and stay through launch&mdash;until the

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, type CSSProperties } from "react"
-import { aoAparecer } from "@/lib/ready"
+import { aoAparecer, estaPronto } from "@/lib/ready"
 
 /**
  * Um número que conta e desacelera até o valor final.
@@ -13,6 +13,13 @@ import { aoAparecer } from "@/lib/ready"
  * Espera a tela de carregamento sair. A faixa de números fica no topo da
  * página: ela já está intersectando a viewport atrás da cortina, e sem
  * essa espera a contagem inteira acontecia antes de alguém ver.
+ *
+ * O HTML nasce com o valor FINAL (05/10). Antes nascia com 0 e o número só
+ * existia via JS: o Google lia "0+", e sem JS a faixa dizia "0+ years". Agora
+ * o servidor entrega "20+", e quem anima é o cliente — e só zera o número
+ * quando ele está escondido: atrás da tela de carregamento ou fora da janela.
+ * Se já está à vista (navegação interna, sem cortina), fica no valor final;
+ * zerar ali seria ver "20+" virar "0+". prefers-reduced-motion: não anima.
  */
 
 interface CountUpNumberProps {
@@ -35,22 +42,28 @@ export default function CountUpNumber({
   style,
 }: CountUpNumberProps) {
   const ref = useRef<HTMLSpanElement>(null)
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(target)
   const done = useRef(false)
 
   useEffect(() => {
     done.current = false
-    setValue(0)
+    setValue(target)
 
     const reduce =
       typeof window !== "undefined" &&
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
-    if (reduce) {
-      setValue(target)
-      return
-    }
+    if (reduce) return
+
+    const node = ref.current
+    const r = node?.getBoundingClientRect()
+    const aVista =
+      !!r && r.bottom > 0 && r.top < window.innerHeight
+    // à vista e sem cortina: quem olha já está lendo o número, não anima
+    if (estaPronto() && aVista) return
+
+    setValue(0)
 
     let frame = 0
     let startedAt = 0
@@ -69,8 +82,6 @@ export default function CountUpNumber({
 
       frame = requestAnimationFrame(tick)
     }
-
-    const node = ref.current
 
     if (!startOnView || !node || typeof IntersectionObserver !== "function") {
       const delay = window.setTimeout(run, 180)
