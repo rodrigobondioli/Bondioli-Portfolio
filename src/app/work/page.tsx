@@ -333,9 +333,10 @@ export default function WorkPage() {
             </div>
 
             <YouTube
-              id="99REpcA26k4"
-              start={326}
-              title="Como designers brasileiros estão ganhando em dólar com Framer"
+              id="cSBSVxPP0as"
+              start={1}
+              title="O que você tem feito com IA, além de conversar?"
+              hideLabel
             />
 
             <div className="head-row">
