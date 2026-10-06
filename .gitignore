@@ -17,3 +17,6 @@ _originais/
 
 # descarte local
 _to_delete/
+
+# CRM de prospecção: repositório e projeto Vercel próprios
+app.prospect/
