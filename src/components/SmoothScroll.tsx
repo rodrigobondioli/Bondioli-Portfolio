@@ -25,6 +25,14 @@ export default function SmoothScroll() {
       syncTouch: false,
       touchMultiplier: 1.6,
       wheelMultiplier: 1,
+      /* Clique em link interno pra outra página (o Next/Previous do fim de
+         um projeto, por exemplo) corta o embalo do scroll. Sem isto, quem
+         clicava com a rolagem ainda deslizando abria o próximo projeto lá
+         embaixo: o Next levava a página pro topo e, no quadro seguinte, o
+         Lenis terminava o embalo antigo e devolvia ela pra posição de
+         antes — ou mais abaixo, se o gesto era pra baixo. Ele sobrevive à
+         troca de projeto porque a página é a mesma rota, só muda o slug. */
+      stopInertiaOnNavigate: true,
     })
 
     /* Sem laço próprio: quem gira o Lenis é o compasso do site, e ele
