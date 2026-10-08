@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { SpinningLogo } from "./Logo"
 import PillButton from "./PillButton"
 import RollLabel from "./RollLabel"
 import styles from "./SiteNav.module.css"
@@ -30,10 +31,17 @@ export default function SiteNav({
       {/* O nome sobe um nível. Na capa isso é a /work; dentro de um projeto
           é o arquivo — e no celular, onde o "Back to portfolio" não aparece,
           é a única volta que existe. */}
-      <Link href={brandHref} className={`no-underline ${styles.brand}`}>
-        <strong>Rodrigo Bondioli</strong>
-        <span className={styles.dot}>·</span>
-        <span className={styles.role}>Strategic Designer</span>
+      {/* No lugar do nome, a marca: o nome já está no H1 da /work (05/10,
+          pedido do Rodrigo). É o mesmo SpinningLogo do rodapé, no mesmo
+          tamanho (44) e com o mesmo vento — não uma cópia. O nome continua
+          no aria-label, pra quem usa leitor de tela. */}
+      <Link
+        href={brandHref}
+        className={`no-underline ${styles.brand}`}
+        aria-label="Rodrigo Bondioli, Strategic Designer"
+      >
+        <SpinningLogo size={44} />
+        <span className={styles.role} aria-hidden="true">Strategic Designer</span>
       </Link>
       {back ? (
         <Link href="/work#projects" className={styles.back} data-roll-host="">

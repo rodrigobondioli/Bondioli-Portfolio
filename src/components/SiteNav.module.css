@@ -11,21 +11,14 @@
 }
 .nav > * { pointer-events: auto; }
 
+/* Marca girando + cargo ao lado, centralizados na altura da pílula. */
 .brand {
   display: flex;
-  align-items: baseline;
-  gap: 0.35em;
+  align-items: center;
+  gap: var(--s2);
   font-size: var(--t-body-sm);
   line-height: 1.3;
 }
-/* Sublinha só o nome no hover, não o cargo: o clique é no nome. */
-.brand:hover strong {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: from-font;
-}
-.brand strong { font-weight: 600; }
-.dot { opacity: 0.45; }
 .role { color: var(--ink-60); }
 
 /* A barra é `position: absolute`: ela flutua por cima da página e fica
@@ -36,7 +29,7 @@
 .dark .role { color: rgba(242, 242, 242, 0.6); }
 
 @media (max-width: 640px) {
-  .role, .dot { display: none; }
+  .role { display: none; }
 }
 
 /* Saída da página de projeto. Sublinhado porque é o único link de texto
