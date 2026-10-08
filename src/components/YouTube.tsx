@@ -60,6 +60,23 @@ export default function YouTube({
     return () => io.disconnect()
   }, [autoplay, mounted])
 
+  /* Depois de montado, toca só enquanto está na tela: sai da janela, pausa;
+     volta, dá o play de novo. Um player rodando fora da vista disputa
+     processador com o scroll suave, e quem volta até ele encontra o vídeo
+     em movimento, não parado. (A montagem acima tem 200px de folga pra o
+     YouTube já estar carregado quando o vídeo aparece; aqui é sem folga.) */
+  useEffect(() => {
+    if (!autoplay || !playing) return
+    const node = host.current
+    if (!node || typeof IntersectionObserver !== "function") return
+    const io = new IntersectionObserver(([entry]) => {
+      command(entry.isIntersecting ? "playVideo" : "pauseVideo")
+    })
+    io.observe(node)
+    return () => io.disconnect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoplay, playing])
+
   /* O player recarrega o módulo de legenda sozinho — quando o vídeo começa,
      e de novo a cada volta do loop. Uma rajada no load não segura: tem que
      insistir enquanto ele estiver tocando. Um postMessage a cada 2s não
