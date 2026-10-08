@@ -175,7 +175,7 @@ export default function WorkPage() {
             </div>
 
             <div className={s.case}>
-              <YouTube id="A2U0nzGS094" title="Go Ink APP by Tattoaria" />
+              <YouTube id="A2U0nzGS094" title="Go Ink APP by Tattoaria" autoplay />
 
               <div className={s.block}>
                 <h3 className="h4">The challenge</h3>
