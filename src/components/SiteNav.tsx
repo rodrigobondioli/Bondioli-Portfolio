@@ -38,10 +38,10 @@ export default function SiteNav({
       <Link
         href={brandHref}
         className={`no-underline ${styles.brand}`}
-        aria-label="Rodrigo Bondioli, Strategic Designer"
+        aria-label="Rodrigo Bondioli, Creative Director"
       >
         <SpinningLogo size={44} />
-        <span className={styles.role} aria-hidden="true">Strategic Designer</span>
+        <span className={styles.role} aria-hidden="true">Creative Director</span>
       </Link>
       {back ? (
         <Link href="/work#projects" className={styles.back} data-roll-host="">
