@@ -314,6 +314,25 @@ Pra conferir depois de mexer: medir com as linhas na tela, não no olho —
 o script de auditoria compara a borda esquerda de cada bloco com a linha
 mais próxima.
 
+## O case da Tattoaria (12/10/2026)
+
+`/projects/tattoaria` não é o template do CMS: é o case completo do
+tumulto.ai (`/en/projects/tattoaria`, código em `~/Developer/Tumulto/site`,
+`components/case/` e `content/en/tattoaria.ts`), trazido pra cá a pedido do
+Rodrigo — é o projeto principal dele, por isso abre o Selected work. Os
+projetos não são todos iguais: cada um tem o tamanho que tem, e só a
+Tattoaria tem um case deste porte.
+
+- Rota fixa em `src/app/projects/tattoaria/` (ganha da dinâmica; o
+  `[slug]` tira a Tattoaria do `generateStaticParams`). Conteúdo em
+  `src/content/cases/tattoaria.ts`, fotos em `public/projects/tattoaria/case/`.
+- Estrutura de lá; roupa daqui (barra, rodapé, pílula, grade, faixas).
+  Lá é GSAP; aqui o texto que acende (`case/LitText`) e o passeio pelo
+  galpão (`case/Tour`, preso com `position: sticky`) são feitos à mão,
+  com as mesmas contas.
+- A voz muda: lá "we" é a agência; aqui os créditos e o fecho são do
+  Rodrigo, e o "Let's talk" desce pro contato da própria página.
+
 ## Tema claro e escuro (12/10/2026)
 
 Dark (`#121211`) é o padrão; light é o site como era. O tema mora no

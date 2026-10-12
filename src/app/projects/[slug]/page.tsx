@@ -28,8 +28,14 @@ import s from "./project.module.css"
    Metade dos campos é opcional — vídeo em 5 dos 16, outcome em 7, link em
    12, press em 1. Cada bloco decide sozinho se aparece. */
 
+/* A Tattoaria tem rota própria (projects/tattoaria): o case completo,
+   portado do tumulto.ai. Fica de fora daqui pra as duas não disputarem. */
+const ROTA_PROPRIA = new Set(["tattoaria"])
+
 export function generateStaticParams() {
-  return allSlugs().map((slug) => ({ slug }))
+  return allSlugs()
+    .filter((slug) => !ROTA_PROPRIA.has(slug))
+    .map((slug) => ({ slug }))
 }
 
 /* O Next entrega o parâmetro como ele aparece na URL, ou seja, percent-encoded.

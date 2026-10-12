@@ -1,0 +1,18 @@
+/* A frase solta do case (tumulto.ai): corpo do manifesto da /work, primeira
+   linha recuada — 4 colunas de 24, 2 de 12, 1 de 6, como lá. */
+.text {
+  grid-column: 1 / -1;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: var(--t-h2);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-indent: calc(var(--col) * var(--cols) / 6);
+  text-wrap: pretty;
+}
+
+/* A cor de cada palavra mistura o texto com o acento (verde-limão) na
+   proporção que o efeito escreve em --k. Sem o efeito, --k fica em 0%. */
+.word {
+  color: color-mix(in srgb, var(--accent) var(--k, 0%), currentColor);
+}

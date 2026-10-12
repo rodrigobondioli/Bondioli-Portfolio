@@ -1,0 +1,440 @@
+/*
+ * Case Tattoaria, portado do tumulto.ai (components/case/Case.module.css de
+ * lá). Celular empilhado · 12 colunas acima de 640 · 24 acima de 1100 — os
+ * mesmos números de coluna de lá, nos degraus daqui (lá eram 768/1200).
+ *
+ * Tradução dos tokens de lá:
+ *   --space-section → --s7   --space-block → --s6   --space-stack → --s4
+ *   --space-para → --s2      --space-inset → --s3   --gutter → --col-gap
+ *   --margin → --gutter      --to-line → .to-line (meio passo menos o vão)
+ *   --c-card → #1e1e1c (o grafite da seção do YouTube)
+ *   --c-muted → branco a 60%   --c-accent → --accent (verde-limão)
+ */
+
+.page {
+  background: var(--bg-dark);
+  --muted: rgba(242, 242, 242, 0.6);
+  --card: #1e1e1c;
+  --to-line: calc(var(--col) / 2 - var(--col-gap));
+}
+
+/* --- Tipos (os do tumulto, em Geist) --- */
+.label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  margin: 0;
+}
+.small {
+  font-size: clamp(0.8125rem, 0.798rem + 0.06vw, 0.875rem);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+.bodyText {
+  font-size: clamp(0.9375rem, 0.907rem + 0.13vw, 1.0625rem);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.title {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.375rem, 1.223rem + 0.65vw, 2rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+/* --- Abertura: uma tela só no desktop --- */
+.head {
+  --gap: var(--s6);
+  padding-block: calc(var(--s7) + var(--s4)) var(--s6);
+  row-gap: var(--s4);
+}
+@media (min-width: 1101px) {
+  .head {
+    --gap: clamp(32px, 9svh, 96px);
+    min-height: 100svh;
+    grid-template-rows: auto auto auto 1fr;
+    row-gap: 0;
+    padding-block: calc(var(--s7) + var(--s2)) var(--s4);
+  }
+}
+
+.top {
+  position: relative;
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s2);
+  padding-block-end: var(--s3);
+}
+.top::after {
+  content: "";
+  position: absolute;
+  inset: auto calc(var(--gutter) * -1) 0;
+  height: 1px;
+  background: var(--rule);
+}
+@media (min-width: 1101px) {
+  .top { margin-block-end: var(--gap); }
+}
+.back { color: var(--muted); transition: color var(--fast) var(--ease); }
+.back:hover, .back:focus-visible { color: #f2f2f2; }
+
+.caseTitle { grid-column: 1 / -1; text-wrap: balance; margin: 0; }
+@media (min-width: 1101px) {
+  .caseTitle { grid-column: 1 / 22; }
+}
+
+.summary { grid-column: 1 / -1; text-wrap: pretty; }
+@media (min-width: 641px) {
+  .summary { grid-column: 5 / 13; }
+}
+@media (min-width: 1101px) {
+  .summary { grid-column: 13 / 23; margin-block-start: var(--gap); }
+}
+
+/* ficha: (a.) (b.) (c.) (d.) */
+.facts {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: var(--s4);
+  margin: var(--s4) 0 0;
+  padding-block-start: var(--s4);
+  border-block-start: 1px solid var(--rule);
+}
+@media (min-width: 1101px) {
+  .facts { align-self: end; margin-block-start: var(--gap); }
+}
+.fact {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--s1);
+  align-content: start;
+}
+.fact dt { color: var(--muted); }
+.fact dd { margin: 0; text-wrap: balance; }
+@media (min-width: 641px) {
+  .fact { grid-column: span 6; }
+}
+
+.film { position: relative; z-index: 2; }
+
+/* --- Objetivo --- */
+.objective { margin-block-start: var(--s6); }
+
+/* --- Números: 2 cards grandes em cima, 3 fotos embaixo --- */
+.numbers {
+  row-gap: var(--col-gap);
+  margin-block-start: var(--s6);
+}
+@media (min-width: 641px) {
+  .numbers { row-gap: var(--gap-line); }
+}
+
+.numCard {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  min-height: 12rem;
+  padding: var(--s3);
+  background: var(--card);
+}
+@media (min-width: 641px) {
+  .numCard { grid-column: span 6; min-height: 16rem; }
+  .numCard:first-child { margin-inline-end: var(--to-line); }
+}
+@media (min-width: 1101px) {
+  .numCard { grid-column: span 12; min-height: 20rem; }
+}
+
+.numPhotoItem {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--s4);
+  align-content: start;
+}
+@media (min-width: 641px) {
+  .numPhotoItem { grid-column: span 4; }
+  .numPhotoItem:not(:last-child) { margin-inline-end: var(--to-line); }
+}
+@media (min-width: 1101px) {
+  .numPhotoItem { grid-column: span 8; }
+}
+
+.numData { display: grid; gap: var(--s1); }
+.numData .numLabel { max-width: none; padding-inline-end: var(--s2); text-wrap: balance; }
+.numData .numValue { align-self: start; }
+
+.numIndex { color: var(--muted); }
+.numValue {
+  align-self: end;
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.625rem, 1.049rem + 2.46vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+.numLabel { max-width: 34ch; color: var(--muted); text-wrap: pretty; }
+
+/* --- Capítulos: (01) 1–2 · título 3–10 · texto 13–24, mídia depois --- */
+.chapter {
+  row-gap: var(--s4);
+  margin-block-start: var(--s7);
+  padding-block-start: var(--s4);
+  border-block-start: 1px solid var(--rule);
+  align-items: start;
+}
+@media (min-width: 641px) {
+  .chapter { row-gap: calc(var(--s4) * 2); }
+}
+
+.chNum { grid-column: 1 / -1; color: var(--muted); }
+@media (min-width: 641px) {
+  .chNum { grid-column: 1 / 2; padding-block-start: 0.6em; }
+}
+@media (min-width: 1101px) {
+  .chNum { grid-column: 1 / 3; }
+}
+
+.chTitle { grid-column: 1 / -1; text-wrap: balance; }
+@media (min-width: 641px) {
+  .chTitle { grid-column: 2 / 6; }
+}
+@media (min-width: 1101px) {
+  .chTitle { grid-column: 3 / 11; }
+}
+
+.chText {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--s2);
+  text-wrap: pretty;
+}
+.chText p { margin: 0; }
+@media (min-width: 641px) {
+  .chText { grid-column: 6 / 13; }
+}
+@media (min-width: 1101px) {
+  .chText { grid-column: 13 / 25; padding-block-start: 0.2em; }
+  /* "\n" no texto vira quebra de linha só aqui; no celular vira espaço */
+  .chText p { text-wrap: balance; white-space: pre-line; }
+}
+
+/* foto única embaixo do título, com o texto ao lado */
+.chSide {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--s1);
+}
+@media (min-width: 641px) {
+  .chSide { grid-column: 2 / 6; grid-row: 2; margin-inline-end: var(--to-line); }
+  /* a legenda fica pendurada embaixo, fora da conta: o pé da célula é o pé da foto */
+  .chSide .caption { position: absolute; inset: calc(100% + var(--s1)) 0 auto; }
+  .chLead, .chRest { grid-row: 2; }
+  .chLead { align-self: start; margin-block-start: calc((1lh - 1cap) / -2); }
+  .chRest { align-self: end; }
+}
+@media (min-width: 1101px) {
+  .chSide { grid-column: 3 / 11; }
+}
+
+.quote { padding-block-start: var(--s4); }
+
+/* capítulo 08: ativações em linhas */
+.list {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  margin: 0;
+}
+.listRow {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: var(--s1);
+  padding-block: var(--s4);
+  border-block-start: 1px solid var(--rule);
+}
+.listTitle { grid-column: 1 / -1; text-wrap: balance; }
+.listText { grid-column: 1 / -1; color: var(--muted); text-wrap: pretty; margin: 0; }
+@media (min-width: 641px) {
+  .listTitle { grid-column: 2 / 6; }
+  .listText { grid-column: 6 / 13; }
+}
+@media (min-width: 1101px) {
+  .listTitle { grid-column: 3 / 11; }
+  .listText { grid-column: 13 / 25; text-wrap: balance; }
+}
+
+/* capítulo 09: matérias em linhas (veículo · título · ↗), a linha toda é o link */
+.press {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  margin: 0;
+  border-block-end: 1px solid var(--rule);
+}
+.press li { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; }
+.pressRow {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px var(--col-gap);
+  align-items: baseline;
+  padding-block: var(--s4);
+  border-block-start: 1px solid var(--rule);
+  color: inherit;
+}
+.pressOutlet { color: var(--muted); }
+.pressTitle { grid-column: 1; text-wrap: balance; transition: color var(--fast) var(--ease); }
+.pressArrow {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  justify-self: end;
+  color: var(--muted);
+  transition: translate var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+@media (min-width: 641px) {
+  .pressRow { grid-template-columns: subgrid; }
+  .pressOutlet { grid-column: 2 / 6; }
+  .pressTitle { grid-column: 6 / 12; }
+  .pressArrow { grid-column: -2 / -1; grid-row: auto; align-self: baseline; }
+}
+@media (min-width: 1101px) {
+  .pressOutlet { grid-column: 3 / 11; }
+  .pressTitle { grid-column: 13 / 24; }
+}
+@media (hover: hover) {
+  .pressRow:hover .pressTitle,
+  .pressRow:hover .pressArrow { color: var(--accent); }
+  .pressRow:hover .pressArrow { translate: 2px -2px; }
+}
+
+/* texto corrido do resultado e do fecho */
+.body { display: grid; gap: var(--s2); align-content: start; text-wrap: pretty; }
+.body p { margin: 0; }
+
+.chFilm { position: relative; z-index: 2; grid-column: 1 / -1; }
+
+/* --- Blocos de mídia --- */
+.media {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: var(--col-gap);
+  align-items: end;
+}
+/* blocos seguidos ficam colados, como uma montagem */
+.media + .media { margin-block-start: calc(var(--col-gap) - var(--s4) * 2); }
+@media (min-width: 641px) {
+  .media { row-gap: var(--gap-line); }
+  .media + .media { margin-block-start: calc(var(--gap-line) - var(--s4) * 2); }
+}
+
+.mediaItem { grid-column: 1 / -1; display: grid; gap: var(--s1); margin: 0; }
+
+@media (min-width: 641px) {
+  .pair .mediaItem { grid-column: span 6; }
+  .pair .mediaItem:first-child { margin-inline-end: var(--to-line); }
+  .trio .mediaItem { grid-column: span 4; }
+  .trio .mediaItem:not(:last-child) { margin-inline-end: var(--to-line); }
+}
+@media (min-width: 1101px) {
+  .pair .mediaItem { grid-column: span 12; }
+  .trio .mediaItem { grid-column: span 8; }
+}
+
+/* toda foto do case: recorte no formato do bloco, canto vivo */
+.figure { position: relative; z-index: 2; overflow: hidden; background: var(--card); }
+.figure img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.caption { color: var(--muted); }
+
+/* --- O que a Tattoaria virou --- */
+.result {
+  row-gap: var(--s6);
+  margin-block-start: var(--s7);
+  padding-block-start: var(--s6);
+  border-block-start: 1px solid var(--rule);
+}
+.result > .body { grid-column: 1 / -1; margin: 0; }
+.result .chTitle { grid-column: 1 / -1; }
+@media (min-width: 641px) {
+  .result > .body { grid-column: 6 / 13; }
+  .result .chTitle { grid-column: 2 / 7; }
+}
+@media (min-width: 1101px) {
+  .result > .body { grid-column: 13 / 25; }
+  .result .chTitle { grid-column: 3 / 13; }
+}
+
+.strip {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s6) var(--col-gap);
+  margin: 0;
+}
+.strip li {
+  display: grid;
+  gap: var(--s1);
+  align-content: start;
+  padding-block-start: var(--s2);
+  border-block-start: 1px solid var(--rule);
+}
+@media (min-width: 641px) {
+  .strip { grid-column: 2 / 13; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1101px) {
+  .strip { grid-column: 3 / 25; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+.stripValue { color: #f2f2f2; }
+.stripLabel { max-width: 28ch; color: var(--muted); text-wrap: balance; }
+
+/* --- Fecho --- */
+.closing {
+  row-gap: var(--s6);
+  margin-block-start: var(--s7);
+  padding-block: var(--s6) var(--s7);
+  border-block-start: 1px solid var(--rule);
+}
+.closing .body { grid-column: 1 / -1; justify-items: start; }
+@media (min-width: 641px) {
+  .closing .body { grid-column: 6 / 13; }
+}
+@media (min-width: 1101px) {
+  .closing .body { grid-column: 13 / 25; }
+}
+.cta { margin-block-start: var(--s4); }
+
+/* --- Créditos --- */
+.credits { padding-block-end: var(--s7); row-gap: var(--s4); }
+.creditsLabel { grid-column: 1 / -1; color: var(--muted); }
+.creditList { grid-column: 1 / -1; margin: 0; }
+@media (min-width: 1101px) {
+  .creditsLabel { grid-column: 1 / 13; }
+  .creditList { grid-column: 13 / 25; }
+}
+.creditRow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--col-gap);
+  padding-block: 12px;
+  border-block-start: 1px solid var(--rule);
+}
+.creditRow dd { margin: 0; color: var(--muted); text-align: end; }

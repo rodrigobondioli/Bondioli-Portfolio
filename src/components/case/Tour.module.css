@@ -1,0 +1,66 @@
+/* Passeio pelo galpão (tumulto.ai): sangra a tela, sai das margens. */
+.tour {
+  position: relative;
+  z-index: 2; /* por cima das linhas da grade */
+  grid-column: 1 / -1;
+  margin-inline: calc(var(--gutter) * -1);
+}
+
+/* celular / sem efeito: fotos empilhadas, cada uma com o nome embaixo */
+.stage {
+  position: relative;
+  display: grid;
+  gap: var(--col-gap);
+  width: 100%;
+}
+.slide { position: relative; overflow: hidden; }
+.img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+@media (min-width: 641px) {
+  .img { aspect-ratio: 16 / 9; }
+}
+
+.slideMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s2);
+  padding: var(--s1) var(--gutter) 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--ink-60);
+}
+
+/* contador fixo no pé do palco (só preso) */
+.meta { display: none; }
+
+/* Preso: o passeio tem uma tela de altura por foto (o efeito escreve), o
+   palco gruda no topo e as fotos ficam umas sobre as outras. */
+.tour[data-pinned] .stage {
+  position: sticky;
+  top: 0;
+  display: block;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--bg-dark);
+}
+.tour[data-pinned] .slide { position: absolute; inset: 0; }
+.tour[data-pinned] .img { aspect-ratio: auto; height: 100%; }
+.tour[data-pinned] .slideMeta { display: none; }
+.tour[data-pinned] .meta {
+  position: absolute;
+  z-index: 20;
+  inset: auto var(--gutter) var(--s3);
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: #f2f2f2;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
