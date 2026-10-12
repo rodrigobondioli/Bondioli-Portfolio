@@ -8,7 +8,7 @@ import ClosingSection from "@/components/ClosingSection"
 import ProjectPager from "@/components/ProjectPager"
 import PillButton from "@/components/PillButton"
 import StripReveal from "@/components/StripReveal"
-import YouTube from "@/components/YouTube"
+import CaseFilm from "@/components/case/CaseFilm"
 import LitText from "@/components/case/LitText"
 import Tour from "@/components/case/Tour"
 import { around } from "@/lib/projects"
@@ -133,9 +133,7 @@ function ChapterSection({ ch }: { ch: Chapter }) {
       {ch.quote ? <LitText className={s.quote}>{ch.quote}</LitText> : null}
 
       {ch.youtube ? (
-        <div className={s.chFilm}>
-          <YouTube id={ch.youtube.id} title={ch.youtube.title} start={ch.youtube.start} autoplay />
-        </div>
+        <CaseFilm id={ch.youtube.id} title={ch.youtube.title} start={ch.youtube.start} />
       ) : null}
 
       {blocks?.map((block, i) =>
@@ -193,9 +191,7 @@ export default function TattoariaCase() {
               </dl>
             </section>
 
-            <div className={s.film}>
-              <YouTube id={film.id} title={film.title} autoplay />
-            </div>
+            <CaseFilm id={film.id} title={film.title} />
 
             {/* O objetivo, logo depois do filme: acende com o scroll */}
             <section className={`grid ${s.objective}`} aria-label="Objective">

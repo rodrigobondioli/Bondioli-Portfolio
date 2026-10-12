@@ -36,6 +36,15 @@ export default function YouTube({
   const [mounted, setMounted] = useState(false)
   const [sound, setSound] = useState(false)
   const [playing, setPlaying] = useState(false)
+  // a capa sai só uns segundos depois do iframe carregar: é o tempo em que o
+  // YouTube mostra título, canal e "More videos" por cima (o tumulto.ai faz
+  // igual — a capa cobre a interface do começo)
+  const [capaFora, setCapaFora] = useState(false)
+  useEffect(() => {
+    if (!playing) return
+    const t = window.setTimeout(() => setCapaFora(true), 3500)
+    return () => window.clearTimeout(t)
+  }, [playing])
   const host = useRef<HTMLDivElement>(null)
   const frame = useRef<HTMLIFrameElement>(null)
 
@@ -129,6 +138,19 @@ export default function YouTube({
             onLoad={() => setPlaying(true)}
           />
         ) : null}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className={styles.poster}
+          src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+          alt=""
+          aria-hidden="true"
+          data-hidden={capaFora || undefined}
+          // nem todo vídeo tem a capa grande; a média existe sempre
+          onError={(e) => {
+            const img = e.currentTarget
+            if (!img.src.includes("hqdefault")) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+          }}
+        />
         <button
           className={styles.soundToggle}
           onClick={toggleSound}
