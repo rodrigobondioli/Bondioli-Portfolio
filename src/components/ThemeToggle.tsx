@@ -4,10 +4,11 @@ import { useEffect, useState } from "react"
 import styles from "./ThemeToggle.module.css"
 
 /**
- * Troca entre dark (o padrão) e light. Fica em pé no canto direito, no
- * meio da altura da tela, em todas as páginas — desenho do Rodrigo a partir
- * da referência "EN | PT ☼" (12/10). Por enquanto só o tema: o site ainda
- * não tem versão em português pra um "PT" levar a algum lugar.
+ * A barra lateral: idioma (EN / BR) em cima e o ícone do tema embaixo, em
+ * pé no canto direito, no meio da altura da tela, em todas as páginas —
+ * desenho do Rodrigo a partir da referência "EN | PT ☼" (12/10). O tema
+ * troca de verdade (dark é o padrão); o idioma, por enquanto, só mostra
+ * como vai ficar.
  *
  * O tema mora no `data-theme` do <html>. Quem aplica no carregamento é o
  * script do <head> (sem piscar); aqui só se troca e se grava a escolha.
@@ -36,6 +37,17 @@ export default function ThemeToggle() {
 
   return (
     <div className={styles.rail}>
+      {/* Idioma: por enquanto só a cara (12/10). O site é em inglês; o
+          português ainda não existe, então BR aparece apagado e não leva a
+          lugar nenhum — não é botão, pra ninguém clicar num link morto. */}
+      <div className={styles.langs}>
+        <span className={styles.lang} aria-current="true" lang="en">
+          EN
+        </span>
+        <span className={`${styles.lang} ${styles.soon}`} title="Portuguese — coming soon" lang="pt-BR">
+          BR
+        </span>
+      </div>
       <button
         type="button"
         className={styles.button}
@@ -45,9 +57,6 @@ export default function ThemeToggle() {
       >
         {tema === "dark" ? <Sol /> : <Lua />}
       </button>
-      <span className={styles.label} aria-hidden="true">
-        {tema === "dark" ? "Dark" : "Light"}
-      </span>
     </div>
   )
 }

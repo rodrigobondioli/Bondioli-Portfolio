@@ -28,16 +28,22 @@
 .button:hover { rotate: 45deg; }
 .button:focus-visible { outline-offset: 2px; }
 
-/* "Dark" / "Light" em pé, lendo de baixo pra cima */
-.label {
-  writing-mode: vertical-rl;
-  rotate: 180deg;
+/* EN / BR, um embaixo do outro, em cima do ícone */
+.langs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s1);
+  margin-bottom: var(--s1);
+}
+.lang {
   font-size: var(--t-overline);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
   line-height: 1;
 }
+/* o que ainda não existe fica apagado */
+.soon { opacity: 0.4; font-weight: 500; cursor: default; }
 
 /* No celular a margem é 16: em pé no meio da tela ficaria em cima do
    texto. Vai pro canto de baixo, deitado — logo acima da barra "Book a
@@ -50,7 +56,7 @@
     translate: none;
     flex-direction: row;
   }
-  .label { writing-mode: horizontal-tb; rotate: none; }
+  .langs { flex-direction: row; margin-bottom: 0; margin-right: var(--s1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
