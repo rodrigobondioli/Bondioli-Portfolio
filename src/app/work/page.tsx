@@ -98,9 +98,9 @@ export default function WorkPage() {
             </div>
 
             {/* Um projeto por bloco, no desenho do brandbeet.com (12/10):
-                nome e serviços, colagem de quatro imagens, barra pro case. */}
+                nome e serviços e uma colagem de quatro imagens que leva pro case. */}
             <ul className={s.cases}>
-              {projects.map((p) => {
+              {projects.map((p, i) => {
                 // a galeria primeiro: a thumb costuma ser recorte da
                 // primeira foto dela, e as duas lado a lado se repetiam
                 const galeria = galleryUrls(p.gallery)
@@ -114,6 +114,7 @@ export default function WorkPage() {
                       name={p.projectName ?? p.slug}
                       services={p.type}
                       images={fotos}
+                      index={i}
                     />
                   </li>
                 )

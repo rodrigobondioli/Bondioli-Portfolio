@@ -239,9 +239,12 @@ com blur forte faz emenda visível; em degraus ela some. A lógica de
 entrar e sair abaixo continua a mesma.
 
 O "Selected work" também veio do brandbeet: `ProjectShowcase` — nome
-grande + "Services" (o campo `type`), colagem de quatro imagens em
-4·7·6·7 colunas de 24, presas pelo topo, e uma barra "View project →".
-Lá a barra abre mais fotos; aqui tudo leva pra `/projects/<slug>`. As
+grande + "Services" (o campo `type`) e uma colagem de quatro imagens em
+5·7·4·8 colunas de 24, presas pelo topo, nos formatos medidos lá (quase
+quadrada, retrato 4:5, quadrada, quase quadrada — recorte com
+`object-fit: cover`, as fotos são 16:9), espelhada projeto sim, projeto
+não. Sem botão: a barra "View project" saiu no mesmo dia; o nome e
+qualquer imagem levam pra `/projects/<slug>`. As
 fotos saem da galeria; a thumb só entra se faltar imagem (ela costuma ser
 recorte da primeira da galeria, e as duas lado a lado se repetiam).
 

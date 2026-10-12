@@ -8,35 +8,41 @@ import styles from "./ProjectShowcase.module.css"
  * pedido do Rodrigo): o nome grande à esquerda e "Services" à direita; uma
  * colagem de quatro imagens em larguras alternadas, alinhadas pelo topo —
  * com a mesma proporção, a largura diferente já dá a altura diferente, e
- * é esse desencontro que faz a colagem; e uma barra da largura da página
- * no fim. Lá a barra abre mais imagens ("View more"); aqui ela leva pra
- * página do projeto, e o nome e as imagens também.
+ * é esse desencontro que faz a colagem. Sem botão: o nome e qualquer
+ * imagem levam pra página do projeto (a barra "View project" saiu no
+ * mesmo dia, a pedido).
  *
- * Larguras em colunas de 24 (as linhas da grade): 4 · 7 · 6 · 7. Com três
- * imagens, 7 · 10 · 7. As imagens abrem em faixas (StripReveal).
+ * Os formatos copiam os de lá, medidos: quase quadrada, retrato alto,
+ * quadrada, quase quadrada — em 5 · 7 · 4 · 8 colunas de 24. As fotos
+ * daqui são 16:9, então o recorte é `object-fit: cover`. Projeto sim,
+ * projeto não, a ordem espelha, pra as linhas não se repetirem.
+ * As imagens abrem em faixas (StripReveal).
  */
 
-const SPANS: Record<number, number[]> = {
-  1: [24],
-  2: [10, 14],
-  3: [7, 10, 7],
-  4: [4, 7, 6, 7],
-}
+const SLOTS = [
+  { span: 5, ratio: "24 / 25" },
+  { span: 7, ratio: "4 / 5" },
+  { span: 4, ratio: "1 / 1" },
+  { span: 8, ratio: "20 / 21" },
+]
 
 export default function ProjectShowcase({
   slug,
   name,
   services,
   images,
+  index = 0,
 }: {
   slug: string
   name: string
   services?: string | null
   images: string[]
+  /** posição na lista: os ímpares espelham a colagem */
+  index?: number
 }) {
   const href = `/projects/${slug}`
   const fotos = images.slice(0, 4)
-  const spans = SPANS[fotos.length] ?? SPANS[4]
+  const slots = index % 2 ? [...SLOTS].reverse() : SLOTS
   const lista = services
     ? services.split("•").map((s) => s.trim()).filter(Boolean).join(", ")
     : null
@@ -57,24 +63,20 @@ export default function ProjectShowcase({
         ) : null}
       </header>
 
-      <Link href={href} className={`no-underline ${styles.collage}`} tabIndex={-1} aria-hidden="true">
+      <Link href={href} className={`no-underline ${styles.collage}`} aria-label={`${name} — view project`}>
         {fotos.map((src, i) => {
           const size = imageSize(src)
           return (
             <StripReveal
               key={src}
               className={styles.shot}
-              style={{ ["--span" as string]: spans[i] }}
+              style={{ ["--span" as string]: slots[i].span, aspectRatio: slots[i].ratio }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={src} alt="" loading="lazy" width={size?.w} height={size?.h} />
             </StripReveal>
           )
         })}
-      </Link>
-
-      <Link href={href} className={`no-underline ${styles.bar}`}>
-        View project <span aria-hidden="true">→</span>
       </Link>
     </article>
   )
