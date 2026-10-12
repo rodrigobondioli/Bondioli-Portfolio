@@ -3,28 +3,40 @@
 import { useEffect, useRef, useState } from "react"
 import { marcarCarregando, marcarPronto } from "@/lib/ready"
 import { irProTopo, soltarScroll, travarScroll } from "@/lib/lenis"
+import { Logo } from "./Logo"
 import styles from "./Preloader.module.css"
 
 /**
- * A tela que cobre o site enquanto ele carrega.
+ * A abertura do site, portada do tumulto.ai (components/Loader.tsx de lá,
+ * pedido do Rodrigo em 12/10) — com a marca dele no lugar do asterisco:
  *
- * Nada aparece e nada rola: uma régua atravessa a tela da esquerda pra
- * direita e o número grande anda junto com a ponta dela, contando até 100.
- * A régua fica a 88 do rodapé — a mesma altura da linha que corre acima
- * dos números na capa, então quando a tela sai a linha já está no lugar.
+ * 1. a marca pequena gira como spinner enquanto o contador sobe de 0 a
+ *    100% e os rótulos ("Loading" · "rodrigobondioli.com") se afastam;
+ * 2. aos 100% ela desacelera e cresce até o tamanho cheio;
+ * 3. dá uma volta rápida e some num ponto, de onde a cortina rosa cresce
+ *    até cobrir a tela;
+ * 4. a cortina sobe e revela a página.
  *
- * O progresso é real, não uma animação de tempo fixo: ele sobe conforme as
- * fontes ficam prontas e o `load` da janela acontece. O que é inventado é
- * só o miolo — entre um marco e outro a barra continua andando devagar,
- * senão ela ficaria parada olhando pra cara da pessoa. Nunca passa de 95
- * antes de estar tudo pronto, e nunca volta atrás.
+ * Lá é GSAP; aqui são as animações nativas do navegador (WAAPI), com as
+ * mesmas curvas (expo / power1 em cubic-bezier) e os mesmos tempos — sem
+ * mais uma biblioteca no site.
  *
- * Duas travas: um piso de 600ms, pra ela não piscar em conexão rápida, e
- * um teto de 6s, pra um recurso que nunca chega não prender o site.
+ * Continua fazendo o que a tela anterior fazia: trava o scroll (o CSS e o
+ * Lenis), volta pro topo, e só avisa "o site apareceu" (marcarPronto)
+ * quando a cortina começa a subir — é por esse sinal que a contagem dos
+ * números do herói espera. Espera as fontes antes de começar (no máximo
+ * 2,5s), pra nada trocar de fonte já à vista. Sem JS ela não aparece
+ * (noscript no layout); com movimento reduzido, não roda.
  */
 
-const PISO = 600
-const TETO = 6000
+// curvas do GSAP em cubic-bezier
+const EXPO_IN_OUT = "cubic-bezier(0.87, 0, 0.13, 1)"
+const EXPO_OUT = "cubic-bezier(0.16, 1, 0.3, 1)"
+const EXPO_IN = "cubic-bezier(0.7, 0, 0.84, 0)"
+const power1InOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)
+
+const LOAD = 1800 // o contador
+const ESPERA_FONTES = 2500
 
 /* Fora de qualquer efeito, de propósito: a marca tem que existir antes do
    primeiro `useEffect` da página rodar, senão os efeitos que esperam por
@@ -32,152 +44,186 @@ const TETO = 6000
 marcarCarregando()
 
 export default function Preloader() {
-  const [pct, setPct] = useState(0)
-  const [saindo, setSaindo] = useState(false)
   const [fora, setFora] = useState(false)
-  const alvo = useRef(0)
+  const root = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const inicio = performance.now()
+    const el = root.current
+    if (!el) return
+    const html = document.documentElement
+
+    const terminar = () => {
+      html.style.overflowY = ""
+      soltarScroll()
+      irProTopo()
+      marcarPronto()
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      terminar()
+      setFora(true)
+      return
+    }
+
+    /* Duas travas: o CSS pra quem não tem Lenis, o Lenis pra quem tem —
+       rolagem programática passa por cima de `overflow: hidden`. */
+    html.style.overflowY = "hidden"
+    travarScroll()
+    window.scrollTo(0, 0)
+
+    const mark = el.querySelector<HTMLElement>("[data-mark]")!
+    const panel = el.querySelector<HTMLElement>("[data-panel]")!
+    const chrome = el.querySelector<HTMLElement>("[data-chrome]")!
+    const bg = el.querySelector<HTMLElement>("[data-bg]")!
+    const count = el.querySelector<HTMLElement>("[data-count]")!
+    const left = el.querySelector<HTMLElement>("[data-left]")!
+    const right = el.querySelector<HTMLElement>("[data-right]")!
+
+    const animacoes: Animation[] = []
+    const timers: number[] = []
     let frame = 0
     let vivo = true
+    const depois = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms))
 
-    /* Cada marco empurra o alvo. O `Math.max` é o que garante que a barra
-       nunca ande pra trás quando dois marcos chegam fora de ordem. */
-    const marco = (v: number) => {
-      alvo.current = Math.max(alvo.current, v)
+    // rótulos se afastam até 22% da largura, sem passar da margem da página
+    const spread = (label: HTMLElement, lado: "left" | "right") => {
+      const r = label.getBoundingClientRect()
+      const margem = parseFloat(getComputedStyle(chrome).getPropertyValue("--m")) || 16
+      const sobra = lado === "left" ? r.left - margem : innerWidth - r.right - margem
+      return Math.max(0, Math.min(innerWidth * 0.22, sobra))
     }
 
-    marco(8)
-    if (document.readyState !== "loading") marco(25)
-    document.fonts?.ready.then(() => marco(60))
-
-    const imgs = Array.from(document.images)
-    if (imgs.length) {
-      let prontas = imgs.filter((i) => i.complete).length
-      const passo = () => {
-        prontas += 1
-        marco(25 + (prontas / imgs.length) * 55)
-      }
-      imgs
-        .filter((i) => !i.complete)
-        .forEach((i) => {
-          i.addEventListener("load", passo, { once: true })
-          i.addEventListener("error", passo, { once: true })
-        })
-      marco(25 + (prontas / imgs.length) * 55)
-    } else {
-      marco(60)
-    }
-
-    let acabou = false
-    const terminar = () => {
-      acabou = true
-      alvo.current = 100
-    }
-    if (document.readyState === "complete") terminar()
-    else window.addEventListener("load", terminar, { once: true })
-    const teto = window.setTimeout(terminar, TETO)
-
-    /* O valor corrente mora num ref, não no estado: o efeito colateral de
-       "chegou em 100, começa a sair" não pode viver dentro do updater do
-       useState — em desenvolvimento o React chama o updater duas vezes e a
-       saída seria agendada em dobro. */
-    const atual = { v: 0 }
-
-    const passo = () => {
+    const comecar = () => {
       if (!vivo) return
-      const t = performance.now() - inicio
+      const inicio = performance.now()
 
-      /* Enquanto não acabou, o alvo também sobe sozinho — devagar e com
-         teto em 95. É o que impede a barra de travar num número enquanto
-         espera um recurso lento. */
-      if (!acabou) alvo.current = Math.max(alvo.current, Math.min(95, t / 28))
+      // 1. contador
+      const contar = () => {
+        const t = Math.min(1, (performance.now() - inicio) / LOAD)
+        count.textContent = `${Math.round(power1InOut(t) * 100)}%`
+        if (t < 1 && vivo) frame = requestAnimationFrame(contar)
+      }
+      frame = requestAnimationFrame(contar)
 
-      const destino = acabou && t >= PISO ? 100 : Math.min(alvo.current, 95)
-      // aproximação exponencial: rápida longe do alvo, macia perto dele
-      atual.v =
-        destino - atual.v < 0.4
-          ? destino
-          : atual.v + (destino - atual.v) * 0.08
-      setPct(atual.v)
+      /* 1–3. a marca: gira constante (spinner), desacelera crescendo até o
+         tamanho cheio parando numa volta inteira, segura 350ms e dá uma
+         volta rápida sumindo num ponto. */
+      const GIRO_FIM = LOAD + 1000 + 350 + 600 // 3750
+      const k = (ms: number) => ms / GIRO_FIM
+      animacoes.push(
+        mark.animate(
+          [
+            { offset: 0, transform: "rotate(0deg) scale(0.22)", easing: "linear" },
+            { offset: k(LOAD), transform: "rotate(720deg) scale(0.22)", easing: EXPO_OUT },
+            { offset: k(LOAD + 1000), transform: "rotate(1080deg) scale(1)" },
+            { offset: k(LOAD + 1350), transform: "rotate(1080deg) scale(1)", easing: EXPO_IN },
+            { offset: 1, transform: "rotate(1440deg) scale(0)" },
+          ],
+          { duration: GIRO_FIM, fill: "forwards" }
+        )
+      )
 
-      if (atual.v >= 100) {
-        window.setTimeout(() => setSaindo(true), 220)
-        return
+      // os rótulos se afastam
+      for (const [label, lado] of [[left, "left"], [right, "right"]] as const) {
+        const d = spread(label, lado)
+        animacoes.push(
+          label.animate(
+            [{ transform: "translateX(0)" }, { transform: `translateX(${lado === "left" ? -d : d}px)` }],
+            { duration: 1300, delay: 300, easing: EXPO_IN_OUT, fill: "forwards" }
+          )
+        )
       }
 
-      frame = requestAnimationFrame(passo)
+      // 3. o ponto vira a cortina: nasce num quadradinho no centro da marca
+      const G = GIRO_FIM
+      depois(G, () => {
+        const r = mark.getBoundingClientRect()
+        const cx = r.left + r.width / 2
+        const cy = r.top + r.height / 2
+        const h = 2
+        const ponto = `inset(${cy - h}px ${innerWidth - cx - h}px ${innerHeight - cy - h}px ${cx - h}px)`
+        panel.style.visibility = "visible"
+        animacoes.push(
+          panel.animate([{ clipPath: ponto }, { clipPath: "inset(0px 0px 0px 0px)" }], {
+            duration: 1100,
+            easing: EXPO_IN_OUT,
+            fill: "forwards",
+          })
+        )
+      })
+      depois(G + 450, () => {
+        animacoes.push(
+          chrome.animate([{ opacity: 1 }, { opacity: 0 }], {
+            duration: 350,
+            easing: "ease-out",
+            fill: "forwards",
+          })
+        )
+      })
+      depois(G + 1150, () => {
+        bg.style.visibility = "hidden"
+      })
+
+      // 4. a cortina sobe e a página aparece por trás
+      depois(G + 1200, () => {
+        terminar()
+        animacoes.push(
+          panel.animate(
+            [{ clipPath: "inset(0px 0px 0px 0px)" }, { clipPath: `inset(0px 0px ${innerHeight}px 0px)` }],
+            { duration: 950, easing: EXPO_IN_OUT, fill: "forwards" }
+          )
+        )
+      })
+      depois(G + 1200 + 950 + 50, () => setFora(true))
     }
-    frame = requestAnimationFrame(passo)
+
+    /* As fontes antes de começar — no máximo 2,5s esperando. 200ms de
+       respiro, como lá. */
+    let comecou = false
+    const largar = () => {
+      if (comecou) return
+      comecou = true
+      depois(200, comecar)
+    }
+    document.fonts?.ready.then(largar)
+    depois(ESPERA_FONTES, largar)
 
     return () => {
       vivo = false
       cancelAnimationFrame(frame)
-      window.clearTimeout(teto)
-      window.removeEventListener("load", terminar)
+      timers.forEach(window.clearTimeout)
+      animacoes.forEach((a) => a.cancel())
+      html.style.overflowY = ""
+      soltarScroll()
     }
   }, [])
 
-  /* Trava a rolagem enquanto a tela está no ar. Só o eixo vertical: o
-     `overflow-x: clip` da folha global tem que continuar valendo, senão o
-     ticker inclinado volta a criar rolagem lateral.
-
-     Quem impede o salto de ~15px quando a barra some e volta é o
-     `scrollbar-gutter: stable` no html — sem ele a página inteira
-     escorrega de lado no instante em que esta tela sai. */
-  /* O `overflow` sozinho não segura o Lenis: ele escreve a posição por
-     JS, e rolagem programática passa por cima de `overflow: hidden`.
-     Medido antes desta trava: rodando a roda durante o carregamento, a
-     página ia parar em 3.656px por baixo da tela, e saía no meio do
-     site. Então as duas travas — a do CSS pra quem não tem Lenis, a do
-     Lenis pra quem tem. */
-  useEffect(() => {
-    if (fora) return
-    const html = document.documentElement
-    const anterior = html.style.overflowY
-    html.style.overflowY = "hidden"
-    travarScroll()
-    return () => {
-      html.style.overflowY = anterior
-      soltarScroll()
-    }
-  }, [fora])
-
-  useEffect(() => {
-    if (!saindo) return
-    const t = window.setTimeout(() => {
-      setFora(true)
-      irProTopo()
-      // agora sim: quem estava esperando pra animar pode começar
-      marcarPronto()
-    }, 620)
-    return () => window.clearTimeout(t)
-  }, [saindo])
-
   if (fora) return null
 
-  const inteiro = Math.round(pct)
-
   return (
-    <div
-      data-preloader=""
-      className={`${styles.screen} ${saindo ? styles.leaving : ""}`}
-      role="progressbar"
-      aria-label="Loading"
-      aria-valuenow={inteiro}
-      aria-valuemin={0}
-      aria-valuemax={100}
-    >
-      {/* O número anda com a ponta da régua. A conta é a mesma do
-          preenchimento, então os dois nunca se descolam. */}
-      <div className={styles.track} style={{ ["--p" as string]: `${pct}%` }}>
-        <span className={styles.counter}>
-          {inteiro}
-          <span className={styles.percent}>%</span>
-        </span>
-        <span className={styles.fill} />
+    <div ref={root} data-preloader="" className={styles.screen} aria-hidden="true">
+      <div className={styles.bg} data-bg="" />
+      <div className={styles.chrome} data-chrome="">
+        <span className={`${styles.corner} ${styles.tl}`} />
+        <span className={`${styles.corner} ${styles.tr}`} />
+        <span className={`${styles.corner} ${styles.bl}`} />
+        <span className={`${styles.corner} ${styles.br}`} />
+        <div className={styles.row}>
+          <span className={styles.left} data-left="">
+            Loading
+          </span>
+          <span className={styles.mark} data-mark="">
+            <Logo size={96} />
+          </span>
+          <span className={styles.right} data-right="">
+            rodrigobondioli.com
+          </span>
+        </div>
+        <p className={styles.count}>
+          ( <span data-count="">0%</span> )
+        </p>
       </div>
+      <div className={styles.panel} data-panel="" />
     </div>
   )
 }

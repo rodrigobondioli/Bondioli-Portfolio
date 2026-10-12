@@ -3,7 +3,7 @@ import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
 import { SiteFooter } from "@/components/SiteFooter"
 import MeetingBar from "@/components/MeetingBar"
-import MaskReveal from "@/components/MaskReveal"
+import StripReveal from "@/components/StripReveal"
 import ProjectVideo from "@/components/ProjectVideo"
 import ProjectPager from "@/components/ProjectPager"
 import ClosingSection from "@/components/ClosingSection"
@@ -82,14 +82,14 @@ function Block({
   )
 }
 
-/** Imagem com as dimensões lidas do arquivo, sob a máscara de revelação. */
-function Shot({ src, alt, lag }: { src: string; alt: string; lag: number }) {
+/** Imagem com as dimensões lidas do arquivo, aberta em faixas (StripReveal). */
+function Shot({ src, alt }: { src: string; alt: string }) {
   const size = imageSize(src)
   return (
-    <MaskReveal className={s.shot} lag={lag} span={0.58} shift={32}>
+    <StripReveal className={s.shot}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} loading="lazy" width={size?.w} height={size?.h} />
-    </MaskReveal>
+    </StripReveal>
   )
 }
 
@@ -194,19 +194,19 @@ export default async function ProjectPage({
             ) : null}
 
             {temVideo ? (
-              <div className={s.video}>
+              <StripReveal className={s.video}>
                 <ProjectVideo
                   youtube={p.videoYouTube}
                   vimeo={p.videoVimeo}
                   file={asset(p.videoUpload)}
                   title={name}
                 />
-              </div>
+              </StripReveal>
             ) : null}
 
             {primeiraFoto ? (
               <div className={s.primeira}>
-                <Shot src={primeiraFoto} alt={`${name} — 1`} lag={0.04} />
+                <Shot src={primeiraFoto} alt={`${name} — 1`} />
               </div>
             ) : null}
 
@@ -217,7 +217,6 @@ export default async function ProjectPage({
                     key={src}
                     src={src}
                     alt={`${name} — ${i + 2}`}
-                    lag={0.04 + ((i + 1) % 3) * 0.05}
                   />
                 ))}
               </div>
@@ -236,7 +235,6 @@ export default async function ProjectPage({
                     key={src}
                     src={src}
                     alt={`${name} — post ${i + 1}`}
-                    lag={0.04 + (i % 2) * 0.06}
                   />
                 ))}
               </div>

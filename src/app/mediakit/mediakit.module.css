@@ -55,8 +55,14 @@
 .stage {
   width: max(180px, min(294px, 28vw));
   aspect-ratio: 1;
-  object-fit: cover;
   background: var(--ink-10);
+}
+/* a caixa é o StripReveal; o vídeo preenche ela inteira */
+.stage video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 640px) {

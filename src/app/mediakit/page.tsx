@@ -4,7 +4,7 @@ import SmoothScroll from "@/components/SmoothScroll"
 import { SiteFooter } from "@/components/SiteFooter"
 import MeetingBar from "@/components/MeetingBar"
 import YouTube from "@/components/YouTube"
-import MaskReveal from "@/components/MaskReveal"
+import StripReveal from "@/components/StripReveal"
 import Brands from "@/components/Brands"
 import TypeBand from "@/components/TypeBand"
 import { dadosDoCanal } from "@/lib/youtube"
@@ -93,15 +93,16 @@ export default async function MediaKitPage() {
               <span className="overline">Last updated &mdash; {atualizado}</span>
             </p>
 
-            <video
-              className={s.stage}
-              src="/video/eu-profile.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-            />
+            <StripReveal className={s.stage}>
+              <video
+                src="/video/eu-profile.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="none"
+              />
+            </StripReveal>
           </div>
         </section>
 
@@ -281,13 +282,9 @@ export default async function MediaKitPage() {
             <ul className={s.picks}>
               {videos.map(({ id, title }, i) => (
                 <li key={id}>
-                  <MaskReveal
-                    lag={0.04 + scatter(i) * 0.2}
-                    span={0.5 + scatter(i + 7) * 0.24}
-                    shift={28}
-                  >
+                  <StripReveal delay={scatter(i) * 0.15}>
                     <YouTube id={id} title={title} />
-                  </MaskReveal>
+                  </StripReveal>
                 </li>
               ))}
             </ul>

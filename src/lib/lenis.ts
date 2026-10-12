@@ -4,7 +4,7 @@ import type Lenis from "lenis"
  * O compasso do site.
  *
  * Um laço de quadros só, e o Lenis sempre na frente dele. Antes cada
- * efeito amarrado ao scroll (MaskReveal, ScrollReveal) tinha o seu próprio
+ * efeito amarrado ao scroll (StripReveal, ScrollReveal) tinha o seu próprio
  * requestAnimationFrame, e a ordem entre eles e o Lenis dependia de quem
  * se inscreveu primeiro. Quem rodasse antes do Lenis no quadro lia a
  * posição do quadro anterior e desenhava um quadro atrasado. É o que a

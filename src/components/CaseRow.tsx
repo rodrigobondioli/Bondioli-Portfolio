@@ -1,5 +1,5 @@
 import Link from "next/link"
-import MaskReveal from "./MaskReveal"
+import StripReveal from "./StripReveal"
 import { imageSize } from "@/lib/imageSize"
 import styles from "./CaseRow.module.css"
 
@@ -9,8 +9,8 @@ import styles from "./CaseRow.module.css"
  * metade do texto, imagem 16:9 na outra, 64 entre uma linha e outra).
  *
  * Esquerda: régua, cliente (peso 600), o que foi entregue e o ano, e a
- * frase do case em caixa alta embaixo. Direita: a thumb, com a mesma
- * revelação por máscara e o mesmo zoom de hover que os cards tinham.
+ * frase do case em caixa alta embaixo. Direita: a thumb, aberta em faixas
+ * (StripReveal, a revelação do tumulto.ai) e com o zoom de hover dos cards.
  * A linha inteira é o link.
  *
  * Os campos vêm do projects.json: projectName, what, year e headline.
@@ -49,14 +49,14 @@ export default function CaseRow({
         {headline ? <p className={`h3 ${styles.headline}`}>{headline}</p> : null}
       </div>
 
-      <MaskReveal className={styles.media} shift={28}>
+      <StripReveal className={styles.media}>
         {thumb ? (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img src={thumb} alt="" loading="lazy" width={size?.w} height={size?.h} />
         ) : (
           <span />
         )}
-      </MaskReveal>
+      </StripReveal>
     </Link>
   )
 }

@@ -96,15 +96,20 @@ npm run start   # serve o build em localhost:3000
 
 ## Animações — o que já deu errado
 
-- **`MaskReveal`** revela por `clip-path`, amarrado ao scroll (rAF + IO), não
-  por `transition`. Três coisas fazem ele falhar de forma intermitente, e as
-  três já aconteceram: `rootMargin` curto no IntersectionObserver (o loop
-  começa com progresso já em 1 e a peça aparece inteira); imagem sem
-  `width`/`height` intrínsecos (caixa de altura zero antes do load, progresso
-  calculado errado); e máscara aplicada no HTML de origem (reload no meio da
-  página faz a peça saltar de invisível pra inteira). Hoje: folga de uma
-  janela inteira, dimensões em toda `<img>` dentro dele, e o HTML nasce limpo
-  — quem põe a máscara é o efeito.
+- **`StripReveal`** (12/10/2026, no lugar do `MaskReveal`) é a revelação do
+  tumulto.ai, trabalho do Rodrigo (código em `~/Developer/Tumulto/site`,
+  `lib/reveal.ts`): imagens e vídeos se abrem em faixas verticais de ~30px
+  (grade da página, `src/lib/strips.ts`), subindo de baixo pra cima, da
+  esquerda pra direita, por TEMPO (1.3s, expo.inOut) quando o topo passa de
+  85% da janela. Herdou as três lições do MaskReveal: o HTML nasce sem
+  máscara (quem põe é o efeito); a "porta" espera a imagem carregar (até
+  1,2s) pra não abrir caixa vazia; e uma rede tira a máscara se o laço não
+  terminar.
+- **A abertura (`Preloader`)** também é a do tumulto (`components/Loader.tsx`
+  de lá), com a marca do Rodrigo no lugar do asterisco e a cortina no rosa.
+  Lá é GSAP; aqui é WAAPI com as mesmas curvas e tempos (~6s no total). Ela
+  ainda trava o scroll (CSS + Lenis) e só dispara `marcarPronto` quando a
+  cortina começa a subir. Com movimento reduzido, não aparece.
 - **`lag`** desencontra uma grade: a peça espera mais um tanto da janela antes
   de largar. O valor vem de hash do índice, **nunca `Math.random`** — o
   servidor e o navegador têm que chegar no mesmo número, senão é erro de

@@ -6,6 +6,7 @@ import MeetingBar from "@/components/MeetingBar"
 import CountUpNumber from "@/components/CountUpNumber"
 import YouTube from "@/components/YouTube"
 import ProjectVideo from "@/components/ProjectVideo"
+import StripReveal from "@/components/StripReveal"
 import Marquee from "@/components/Marquee"
 import CaseRow from "@/components/CaseRow"
 import ClosingSection from "@/components/ClosingSection"
@@ -76,7 +77,9 @@ export default function WorkPage() {
         {/* ---------- Video de abertura ---------- */}
         <section className={`section ${s.reel}`}>
           <div className={`container ${s.reelInner}`}>
-            <ProjectVideo file="/video/reel-home.mp4" title="Reel" />
+            <StripReveal>
+              <ProjectVideo file="/video/reel-home.mp4" title="Reel" />
+            </StripReveal>
           </div>
         </section>
 
@@ -140,15 +143,16 @@ export default function WorkPage() {
             </div>
 
             <div className={s.aboutBody}>
-              <video
-                className={s.aboutVideo}
-                src="/video/eu-profile.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
-              />
+              <StripReveal className={s.aboutVideo}>
+                <video
+                  src="/video/eu-profile.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                />
+              </StripReveal>
               <div className={s.aboutText}>
                 {/* O cargo sai do cabeçalho e vem pra cá: encostado no topo
                     do vídeo e na esquerda do texto. */}
@@ -191,12 +195,14 @@ export default function WorkPage() {
               <p className="overline">YouTube @falabondioli</p>
             </div>
 
-            <YouTube
-              id="cSBSVxPP0as"
-              start={1}
-              title="O que você tem feito com IA, além de conversar?"
-              hideLabel
-            />
+            <StripReveal>
+              <YouTube
+                id="cSBSVxPP0as"
+                start={1}
+                title="O que você tem feito com IA, além de conversar?"
+                hideLabel
+              />
+            </StripReveal>
 
             <div className="head-row">
               <p className="overline">31K subscribers</p>
