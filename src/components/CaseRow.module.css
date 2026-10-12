@@ -9,10 +9,10 @@
 }
 
 /* A régua de 1px fica só em cima da metade do texto; a imagem encosta no
-   mesmo topo. Preta, não o --rule cinza das outras réguas: é ela que
-   separa um case do outro. */
+   mesmo topo. Na cor das réguas (--rule) — era a cor do texto, e no tema
+   escuro saía branca; o Rodrigo pediu o tom do tumulto (12/10). */
 .text {
-  border-top: var(--hairline) solid var(--ink);
+  border-top: var(--hairline) solid var(--rule);
   padding-top: var(--s2);
   display: flex;
   flex-direction: column;

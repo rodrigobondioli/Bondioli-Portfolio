@@ -78,7 +78,6 @@ export default function WorkPage() {
           <div className={`container ${s.statementInner}`}>
             <div className={s.headLine}>
               <p className="overline">No point of view, no project.</p>
-              <span className="rule rule-sm" />
             </div>
             <p className={s.statementText}>
               Everyone is a prompt designer now. The result? Work that looks

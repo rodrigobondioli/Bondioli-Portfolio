@@ -80,7 +80,9 @@
   --page-w: 100vw;   /* o SmoothScroll troca pela largura sem a barra */
   --col: calc((var(--page-w) - 2 * var(--gutter) + var(--col-gap)) / var(--cols));
   --gap-line: calc(var(--col) / 2);
-  --line-color: rgba(16, 16, 16, 0.06);
+  /* As linhas verticais da grade são mais densas que as horizontais, então
+     mais apagadas — 4,5%, como no tumulto (--c-line-soft de lá). */
+  --line-color: rgba(16, 16, 16, 0.045);
   --measure: 68ch;   /* medida máxima de texto corrido */
 
   /* --- Tipografia --- *
@@ -125,9 +127,11 @@
   --ink-25:  rgba(241, 241, 241, 0.25);
   --ink-10:  rgba(241, 241, 241, 0.1);
   --paper:   #1c1c1b;
-  --rule:    rgba(241, 241, 241, 0.12);
+  /* réguas horizontais: 16%, o --c-rule do tumulto — mais fortes que as
+     verticais da grade (4,5%) */
+  --rule:    rgba(241, 241, 241, 0.16);
   --glass:   rgba(18, 18, 17, 0.4);
-  --line-color: rgba(241, 241, 241, 0.06);
+  --line-color: rgba(241, 241, 241, 0.045);
 }
 
 /* O que tem fundo próprio claro (o amarelo das seções de destaque) volta
