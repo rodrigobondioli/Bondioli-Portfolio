@@ -7,10 +7,9 @@ import CountUpNumber from "@/components/CountUpNumber"
 import YouTube from "@/components/YouTube"
 import ProjectVideo from "@/components/ProjectVideo"
 import Marquee from "@/components/Marquee"
-import ProjectCard from "@/components/ProjectCard"
+import CaseRow from "@/components/CaseRow"
 import ClosingSection from "@/components/ClosingSection"
 import Brands from "@/components/Brands"
-import MaskReveal from "@/components/MaskReveal"
 import { orderedProjects, asset } from "@/lib/projects"
 import order from "@/content/order.json"
 import s from "./work.module.css"
@@ -37,13 +36,6 @@ const CREDENTIALS: [string, string][] = [
   ["YouTube content creator", "Dora Ambassador"],
   ["Webflow Partner", "Framer PRO Partner"],
 ]
-
-/* Desencontro dos cards do arquivo. Três entram na tela lado a lado; se
-   todos largassem no mesmo ponto, a grade piscaria inteira de uma vez.
-   Hash multiplicativo em vez de Math.random: o servidor e o navegador
-   chegam no mesmo número, e o resultado é o mesmo a cada visita — o que
-   varia é de card pra card, não de carregamento pra carregamento. */
-const scatter = (i: number) => ((i * 2654435761) % 1000) / 1000
 
 export default function WorkPage() {
   const projects = orderedProjects(order as string[])
@@ -117,21 +109,18 @@ export default function WorkPage() {
               </p>
             </div>
 
-            <ul className={s.grid}>
-              {projects.map((p, i) => (
+            {/* Cases empilhados, um por linha (12/10): era uma grade de três. */}
+            <ul className={s.cases}>
+              {projects.map((p) => (
                 <li key={p.slug}>
-                  <MaskReveal
-                    lag={0.04 + scatter(i) * 0.2}
-                    span={0.5 + scatter(i + 7) * 0.24}
-                    shift={28}
-                  >
-                    <ProjectCard
-                      slug={p.slug}
-                      name={p.projectName ?? p.slug}
-                      what={p.type}
-                      thumb={asset(p.thumb)}
-                    />
-                  </MaskReveal>
+                  <CaseRow
+                    slug={p.slug}
+                    name={p.projectName ?? p.slug}
+                    what={p.what}
+                    year={p.year}
+                    headline={p.headline}
+                    thumb={asset(p.thumb)}
+                  />
                 </li>
               ))}
             </ul>

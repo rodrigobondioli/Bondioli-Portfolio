@@ -14,6 +14,8 @@ export interface Project {
   year: string | null
   type: string | null
   what: string | null
+  /** frase curta da linha do case na /work (caixa alta pelo CSS) */
+  headline?: string | null
   description: string | null
   challenge: string | null
   solution: string | null

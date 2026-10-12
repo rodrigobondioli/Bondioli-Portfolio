@@ -1,0 +1,65 @@
+/* Duas metades, 32 entre elas (no aboutmarco.com: 640 + 32 + 640). */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s4);
+  align-items: start;
+}
+
+/* A régua de 1px fica só em cima da metade do texto; a imagem encosta no
+   mesmo topo. Preta, não o --rule cinza das outras réguas: é ela que
+   separa um case do outro. */
+.text {
+  border-top: var(--hairline) solid var(--ink);
+  padding-top: var(--s2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s5);
+}
+
+.meta {
+  font-size: var(--t-body);
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.client { font: inherit; font-weight: 600; margin: 0; }
+.kind { margin: 0; }
+/* "WEBSITE • 2023": o ponto é desenhado entre os itens, nunca sobra sozinho */
+.kind span + span::before {
+  content: "•";
+  margin-inline: 0.5em;
+}
+
+/* A frase do case. Ocupa 80% da metade, como lá (512 de 640). */
+.headline {
+  max-width: 80%;
+  margin: 0;
+}
+
+.media {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--ink-10);
+}
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* o mesmo zoom de hover dos cards que esta lista substituiu */
+  transition: scale 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: scale;
+}
+.row:hover .media img,
+.row:focus-visible .media img {
+  scale: 1.06;
+  transition-duration: 1100ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .media img, .row:hover .media img { transition: none; scale: 1; }
+}
+
+/* Tablet e celular: as metades empilham — texto em cima, imagem embaixo. */
+@media (max-width: 900px) {
+  .row { grid-template-columns: 1fr; gap: var(--s3); }
+  .headline { max-width: none; }
+}
