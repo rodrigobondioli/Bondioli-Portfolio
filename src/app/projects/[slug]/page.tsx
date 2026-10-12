@@ -194,14 +194,14 @@ export default async function ProjectPage({
             ) : null}
 
             {temVideo ? (
-              <StripReveal className={s.video}>
+              <div className={s.video}>
                 <ProjectVideo
                   youtube={p.videoYouTube}
                   vimeo={p.videoVimeo}
                   file={asset(p.videoUpload)}
                   title={name}
                 />
-              </StripReveal>
+              </div>
             ) : null}
 
             {primeiraFoto ? (

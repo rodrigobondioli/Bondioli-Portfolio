@@ -4,7 +4,6 @@ import SmoothScroll from "@/components/SmoothScroll"
 import { SiteFooter } from "@/components/SiteFooter"
 import MeetingBar from "@/components/MeetingBar"
 import YouTube from "@/components/YouTube"
-import StripReveal from "@/components/StripReveal"
 import Brands from "@/components/Brands"
 import TypeBand from "@/components/TypeBand"
 import { dadosDoCanal } from "@/lib/youtube"
@@ -49,9 +48,6 @@ const ages = kit.ages as string[][]
 const cases = kit.case.cards as string[][]
 const credentials = kit.about.credentials as string[][]
 
-/* O mesmo desencontro da grade do arquivo na /work: hash do índice, nunca
-   Math.random — servidor e navegador têm que chegar no mesmo número. */
-const scatter = (i: number) => ((i * 2654435761) % 1000) / 1000
 
 export default async function MediaKitPage() {
   /* Sem chave, sem rede, ou API fora do ar: `canal` vem nulo e tudo abaixo
@@ -93,7 +89,7 @@ export default async function MediaKitPage() {
               <span className="overline">Last updated &mdash; {atualizado}</span>
             </p>
 
-            <StripReveal className={s.stage}>
+            <div className={s.stage}>
               <video
                 src="/video/eu-profile.mp4"
                 autoPlay
@@ -102,7 +98,7 @@ export default async function MediaKitPage() {
                 playsInline
                 preload="none"
               />
-            </StripReveal>
+            </div>
           </div>
         </section>
 
@@ -280,11 +276,9 @@ export default async function MediaKitPage() {
             </div>
 
             <ul className={s.picks}>
-              {videos.map(({ id, title }, i) => (
+              {videos.map(({ id, title }) => (
                 <li key={id}>
-                  <StripReveal delay={scatter(i) * 0.15}>
-                    <YouTube id={id} title={title} />
-                  </StripReveal>
+                  <YouTube id={id} title={title} />
                 </li>
               ))}
             </ul>

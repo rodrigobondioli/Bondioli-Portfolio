@@ -275,11 +275,18 @@
    desconto o vídeo encostava no texto de 1440 pra baixo — a coluna já é
    mais estreita que 623 ali. --s5 é o mesmo vão entre imagem e texto do
    projeto em destaque. */
-/* O vídeo ocupa a metade esquerda e termina na linha do meio da última
-   coluna dela (12/10, grade) — o vão até o texto vira meio passo. */
+/* O vídeo começa na margem e termina numa linha do meio (to-line no JSX).
+   Era a metade inteira; em 12/10 o Rodrigo pediu ~6 linhas a menos: no
+   desktop vai até a coluna 9 de 24 (3 colunas = 6 linhas antes do meio),
+   no tablet até a 5 de 12. Fica quadrado — não estica junto com o texto. */
 .aboutVideo {
+  grid-column: 1 / 6;
+  align-self: start;
   aspect-ratio: 1;
   background: var(--ink-10);
+}
+@media (min-width: 1101px) {
+  .aboutVideo { grid-column: 1 / 10; }
 }
 /* a caixa é o StripReveal; o vídeo preenche ela inteira */
 .aboutVideo video {
