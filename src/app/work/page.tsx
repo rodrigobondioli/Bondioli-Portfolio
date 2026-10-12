@@ -10,7 +10,6 @@ import Marquee from "@/components/Marquee"
 import ProjectCard from "@/components/ProjectCard"
 import ClosingSection from "@/components/ClosingSection"
 import Brands from "@/components/Brands"
-import ScrollReveal from "@/components/ScrollReveal"
 import MaskReveal from "@/components/MaskReveal"
 import { orderedProjects, asset } from "@/lib/projects"
 import order from "@/content/order.json"
@@ -39,25 +38,12 @@ const CREDENTIALS: [string, string][] = [
   ["Webflow Partner", "Framer PRO Partner"],
 ]
 
-/* O mesmo vocabulário e a mesma ordem das tags dos cards (projects.json,
-   campo `type`) — o Go Ink aparece nos dois lugares e tem que bater. */
-const TAGS = ["Product Strategy", "Brand", "Interface"]
-
-/* Com largura e altura declaradas o navegador reserva a caixa antes da
-   imagem chegar. Sem isso a caixa nasce com altura zero, a máscara calcula
-   o progresso em cima de uma posição errada e a peça pula quando carrega. */
 /* Desencontro dos cards do arquivo. Três entram na tela lado a lado; se
    todos largassem no mesmo ponto, a grade piscaria inteira de uma vez.
    Hash multiplicativo em vez de Math.random: o servidor e o navegador
    chegam no mesmo número, e o resultado é o mesmo a cada visita — o que
    varia é de card pra card, não de carregamento pra carregamento. */
 const scatter = (i: number) => ((i * 2654435761) % 1000) / 1000
-
-const SHOTS = [
-  { src: "/site/work-2.png", w: 848, h: 834 },
-  { src: "/site/work-3.png", w: 848, h: 647 },
-  { src: "/site/work-4.png", w: 848, h: 614 },
-]
 
 export default function WorkPage() {
   const projects = orderedProjects(order as string[])
@@ -117,121 +103,6 @@ export default function WorkPage() {
               feel inevitable. If you want fast and forgettable, plenty of
               people are waiting for your brief.
             </p>
-          </div>
-        </section>
-
-        {/* ---------- Projeto em destaque ---------- */}
-        <section className={s.featured}>
-          <div className={`section ${s.featuredHead}`}>
-            <div className="container">
-              <h2 className="h3">
-                <span className={s.dash}>&mdash;</span> Featured project
-              </h2>
-            </div>
-          </div>
-
-          <div className={s.featuredBody}>
-            <div className={s.featuredImageCol}>
-              <ScrollReveal className={s.featuredImage}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/homem-charuto.webp" alt="Go Ink — Get inspired, get inked" />
-              </ScrollReveal>
-            </div>
-
-            <div className={s.featuredContent}>
-              <div className={s.intro}>
-              <div className={s.metaHolder}>
-              <div className={s.metaRow}>
-                <a
-                  className="overline"
-                  href="https://goink.framer.ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  goink.com
-                </a>
-                <span className="overline">Get inspired. Get inked.</span>
-              </div>
-              </div>
-
-              <div className={s.introBottom}>
-                <p className="body">
-                  Go Ink is a marketplace where tattoo artists only sell the
-                  work they actually want to do, each piece already priced,
-                  sized and placed on the body. No client and no brief: I built
-                  it alone, out of something I watched happen for years while I
-                  ran a tattoo studio.
-                </p>
-
-                <ul className={s.tags}>
-                  {TAGS.map((t) => (
-                    <li className={`pill pill-sm overline ${s.tag}`} key={t}>
-                      <span className={s.tagDot} aria-hidden="true" />
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className={s.case}>
-              <YouTube id="A2U0nzGS094" title="Go Ink APP by Tattoaria" autoplay />
-
-              <div className={s.block}>
-                <h3 className="h4">The challenge</h3>
-                <p className="body">
-                  Artists were constantly posting drawings on Facebook captioned
-                  &ldquo;available to tattoo.&rdquo; Their weeks were full of
-                  commercial work: the same lettering, the same little hearts,
-                  the same names. Meanwhile the pieces they were dying to make
-                  sat stranded in a sketchbook. And clients kept asking for the
-                  safe thing, because the safe thing was all they&rsquo;d ever
-                  been shown. Every platform in the category sold the
-                  artist&rsquo;s time. None of them sold the artist&rsquo;s
-                  work.
-                </p>
-              </div>
-
-              <MaskReveal className={s.shotWrap} style={{ maxWidth: 848 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className={s.shot}
-                  src="/site/work-6.png"
-                  alt="Go Ink brand"
-                  width={848}
-                  height={468}
-                  loading="lazy"
-                />
-              </MaskReveal>
-
-              <div className={s.block}>
-                <h3 className="h4">The solution</h3>
-                <p className="body">
-                  Go Ink flips who chooses: the artist uploads only the pieces
-                  they want to tattoo, each one already priced, sized and placed
-                  on the body. The client swipes, picks one and books the
-                  session, with no negotiation, no brief and nothing watered
-                  down along the way. I took it end to end on my own: market
-                  research, product strategy, the name, the logo, the app, the
-                  site and the T-shirt.
-                </p>
-              </div>
-
-              {SHOTS.map(({ src, w, h }) => (
-                <MaskReveal className={s.shotWrap} key={src} style={{ maxWidth: w }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    className={s.shot}
-                    src={src}
-                    alt="Go Ink"
-                    width={w}
-                    height={h}
-                    loading="lazy"
-                  />
-                </MaskReveal>
-              ))}
-            </div>
-            </div>
           </div>
         </section>
 
