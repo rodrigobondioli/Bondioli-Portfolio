@@ -296,7 +296,6 @@ export default async function MediaKitPage() {
           <div className={`container ${s.aboutInner}`}>
             <div className={s.aboutHead}>
               <h2 className="h3">{kit.about.title}</h2>
-              <span className="rule rule-md" />
             </div>
 
             <div className={s.aboutBody}>

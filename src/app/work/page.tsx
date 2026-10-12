@@ -7,7 +7,6 @@ import CountUpNumber from "@/components/CountUpNumber"
 import YouTube from "@/components/YouTube"
 import ProjectVideo from "@/components/ProjectVideo"
 import StripReveal from "@/components/StripReveal"
-import Marquee from "@/components/Marquee"
 import CaseRow from "@/components/CaseRow"
 import ClosingSection from "@/components/ClosingSection"
 import Brands from "@/components/Brands"
@@ -21,15 +20,6 @@ export const metadata: Metadata = {
     "Selected work: brand, product and interface for startups and global brands. Work that started with a problem, not a prompt.",
   alternates: { canonical: "/work" },
 }
-
-const CAPABILITIES = [
-  "CONCEPT FIRST",
-  "BEAUTY WITH A REASON",
-  "YOUR BRIEF IS A GUESS",
-  "DIRECTION BEFORE CODE",
-  "I'LL DISAGREE WITH YOU",
-  "NO BULLSHIT",
-]
 
 const CREDENTIALS: [string, string][] = [
   ["Orpetron X3 / 2024", "Cannes Lion 2014 / Silver / Cyber"],
@@ -129,17 +119,11 @@ export default function WorkPage() {
           </div>
         </section>
 
-        {/* ---------- Ticker ---------- */}
-        <section className={s.ticker}>
-          <Marquee items={CAPABILITIES} />
-        </section>
-
         {/* ---------- Sobre ---------- */}
         <section className={`section ${s.about}`} id="about">
           <div className={`container ${s.aboutInner}`}>
             <div className={s.aboutHead}>
               <h2 className="h3">I&rsquo;m Rodrigo Bondioli</h2>
-              <span className="rule rule-md" />
             </div>
 
             <div className={s.aboutBody}>

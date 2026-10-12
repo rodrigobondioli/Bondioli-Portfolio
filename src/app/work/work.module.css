@@ -216,12 +216,6 @@
   gap: var(--s5);
 }
 
-/* ---------- Ticker ---------- */
-
-.ticker {
-  padding-block: var(--s7);
-  overflow: hidden;
-}
 
 /* ---------- Sobre ---------- */
 
@@ -234,10 +228,12 @@
    amarela em cima do rótulo, não espaço. Aqui não tem cor nenhuma — é
    cinza de página dos dois lados da conta. O vão cai de 352 pra 232, e os
    176 que sobram são todos amarelos. */
-.about { padding-bottom: var(--s5); }
+/* Em cima, a quebra maior de seção: aqui ficava a faixa de chips
+   (removida em 12/10), que dava o respiro entre os cases e este bloco. */
+.about { padding-top: var(--s7); padding-bottom: var(--s5); }
 .aboutInner { display: flex; flex-direction: column; gap: var(--s5); }
 
-/* Título e régua, sem nada empurrado pra direita — o cargo agora mora na
+/* Só o título (a régua ao lado saiu em 12/10) — o cargo mora na
    coluna de texto, não aqui. */
 .aboutHead {
   display: flex;
