@@ -103,7 +103,6 @@ export default function WorkPage() {
           <div className={`container ${s.archiveInner}`}>
             <div className="head-row">
               <h2 className="h3">Selected work</h2>
-              <span className="rule rule-lg" />
               <p className="overline">
                 Work that started with a problem, not a prompt.
               </p>

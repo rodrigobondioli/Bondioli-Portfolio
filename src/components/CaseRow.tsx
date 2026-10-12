@@ -39,7 +39,7 @@ export default function CaseRow({
         <div className={styles.meta}>
           <h3 className={styles.client}>{name}</h3>
           {meta.length ? (
-            <p className={styles.kind}>
+            <p className={`body-sm ${styles.kind}`}>
               {meta.map((m, i) => (
                 <span key={i}>{m}</span>
               ))}

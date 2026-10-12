@@ -23,6 +23,9 @@
   text-transform: uppercase;
 }
 .client { font: inherit; font-weight: 600; margin: 0; }
+/* "WEBSITE • 2025" um passo abaixo do nome: o mesmo body-sm das
+   credenciais do "about" (12.8, entrelinha 1.3), pedido do Rodrigo. Fica
+   em caixa alta, como o nome em cima. */
 .kind { margin: 0; }
 /* "WEBSITE • 2023": o ponto é desenhado entre os itens, nunca sobra sozinho */
 .kind span + span::before {
