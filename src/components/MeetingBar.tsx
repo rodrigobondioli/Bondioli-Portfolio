@@ -90,7 +90,7 @@ export default function MeetingBar({
         tabIndex={visible ? undefined : -1}
       >
         <span className={styles.mark} aria-hidden="true">
-          <SpinningLogo size={18} />
+          <SpinningLogo size={24} />
         </span>
         <span className={styles.label}>{label}</span>
       </a>
