@@ -83,6 +83,12 @@
     grid-template-rows: 1fr auto;
     /* o gutter desce pros filhos: a faixa tem o seu próprio */
     padding-inline: 0;
+    /* Respiro do tamanho da barra do topo, que flutua por cima do herói.
+       Sem ele, em celular baixo (320×568 a 375×667) o título — 7 a 8
+       linhas — enchia a tela e começava em 0, embaixo da barra; em 390
+       sobravam 2px. A barra tem 81px numa linha e 131 quando o contato
+       desce (320); --s7 + --s6 = 144 cobre os dois. */
+    padding-top: calc(var(--s7) + var(--s6));
   }
   .heroInner {
     padding-inline: var(--gutter);

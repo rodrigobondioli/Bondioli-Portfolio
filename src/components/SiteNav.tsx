@@ -1,54 +1,62 @@
 import Link from "next/link"
-import { SpinningLogo } from "./Logo"
-import PillButton from "./PillButton"
-import RollLabel from "./RollLabel"
+import CopyEmail from "./CopyEmail"
 import styles from "./SiteNav.module.css"
 
 /**
- * Navegação do topo. Medidas do Framer: nome em 12.8px, pílula de 48px de
- * altura com padding lateral de 24 e texto preto sobre o rosa.
+ * Navegação do topo — três blocos de duas linhas (12/10, desenho do
+ * Rodrigo a partir de uma referência):
+ *
+ *   Rodrigo Bondioli        Creative Director        Get in touch
+ *   Selected Work 15'—26'   São Paulo, Brazil        hello@…
+ *
+ * A primeira linha de cada bloco é o rótulo (peso 600), a segunda é o
+ * dado. O bloco do meio começa no meio exato da tela: a barra é uma grade
+ * de duas metades, e a metade direita espalha o meio e o contato.
+ *
+ * Saiu o "Say hello" (a pílula rosa): o contato agora é o e-mail, com o
+ * mesmo CopyEmail da capa — clique copia, hover gira o cubo. O nome volta
+ * no lugar da marca girando, e "Selected Work" leva à grade de projetos.
+ *
+ * O ano final é o do build: em 2027 vira 27' sem ninguém lembrar.
  */
+const ATE = String(new Date().getFullYear()).slice(-2)
+
 export default function SiteNav({
   dark = false,
-  ctaHref = "#contact",
-  back = false,
   brandHref = "/",
 }: {
   dark?: boolean
-  /* nas páginas de projeto não existe âncora #contact: o formulário está
-     na /work, então o botão aponta pra lá */
-  ctaHref?: string
-  /* a página de projeto troca o papel da navegação: em vez de marca à
-     esquerda e ação à direita, ela oferece a saída — "Back to portfolio",
-     sublinhado, em 12.8px, antes da pílula */
-  back?: boolean
-  /* o nome sobe um nível: da capa vai pra /work, e de dentro de um projeto
-     volta pro arquivo */
+  /* o nome sobe um nível: da /work vai pra capa; de um projeto ou do
+     media kit, volta pra /work */
   brandHref?: string
 }) {
   return (
     <header className={`${styles.nav} ${dark ? styles.dark : ""}`}>
-      {/* O nome sobe um nível. Na capa isso é a /work; dentro de um projeto
-          é o arquivo — e no celular, onde o "Back to portfolio" não aparece,
-          é a única volta que existe. */}
-      {/* No lugar do nome, a marca: o nome já está no H1 da /work (05/10,
-          pedido do Rodrigo). É o mesmo SpinningLogo do rodapé, no mesmo
-          tamanho (44) e com o mesmo vento — não uma cópia. O nome continua
-          no aria-label, pra quem usa leitor de tela. */}
-      <Link
-        href={brandHref}
-        className={`no-underline ${styles.brand}`}
-        aria-label="Rodrigo Bondioli, Creative Director"
-      >
-        <SpinningLogo size={44} />
-        <span className={styles.role} aria-hidden="true">Creative Director</span>
-      </Link>
-      {back ? (
-        <Link href="/work#projects" className={styles.back} data-roll-host="">
-          <RollLabel text="Back to portfolio" underline />
+      <div className={styles.block}>
+        <Link href={brandHref} className={`no-underline ${styles.label}`}>
+          Rodrigo Bondioli
         </Link>
-      ) : null}
-      <PillButton href={ctaHref}>Say hello</PillButton>
+        <Link href="/work#projects" className={`no-underline ${styles.value}`}>
+          Selected Work 15&rsquo; &mdash; {ATE}&rsquo;
+        </Link>
+      </div>
+
+      <div className={styles.half}>
+        <div className={`${styles.block} ${styles.middle}`}>
+          <p className={styles.label}>Creative Director</p>
+          <p className={styles.value}>São Paulo, Brazil</p>
+        </div>
+
+        <div className={styles.block}>
+          <p className={styles.label}>Get in touch</p>
+          <CopyEmail
+            email="hello@rodrigobondioli.com"
+            copiedLabel="Email copied"
+            color="currentColor"
+            className={styles.value}
+          />
+        </div>
+      </div>
     </header>
   )
 }

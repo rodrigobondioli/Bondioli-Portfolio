@@ -170,8 +170,8 @@ final é o da `/work`: mesmo `SiteNav`, `SiteFooter`, `MeetingBar`,
 vivo e hairline de `--rule`. Ficaram pra trás, de propósito: o raio de
 16px dos cards, os paddings de 40/56 (aqui são `--s3`/`--s4`), a fita
 adesiva colada no vídeo e o roxo #822DFF — o roxo é o `--accent-violet`
-do sistema, escolha do Rodrigo. O "Say hello" atravessa pra
-`/work#contact`: esta página não tem formulário.
+do sistema, escolha do Rodrigo. Esta página não tem formulário: o contato
+é o e-mail da barra do topo.
 
 A faixa gigante da capa ("MEDIA KIT —") é `min(288px, 20vw)`: 288 é a
 medida do Framer e vale de 1440 pra cima. No celular ela sai de trás do
@@ -228,7 +228,7 @@ O `MeetingBar` é o mesmo componente em todas as páginas, e o que muda é
 **quem manda nele entrar e sair**:
 
 - **Entrar:** o piso é sempre a altura medida da navegação — enquanto o
-  "Say hello" do topo estiver na tela, seriam dois convites ao mesmo tempo.
+  contato do topo estiver na tela, seriam dois convites ao mesmo tempo.
   `entraApos` é um piso a mais, em frações da janela. Na `/work` ele é 0.9
   porque lá o herói termina com a faixa de números presa no rodapé da tela,
   e a barra entrando antes sentaria em cima dela. Na `/mediakit` é 0: não
@@ -237,6 +237,18 @@ O `MeetingBar` é o mesmo componente em todas as páginas, e o que muda é
   fecho, onde o convite já ocupa a página inteira. Em página sem contato
   (o media kit) quem a esconde é o `footer`, senão ela termina sentada em
   cima das redes.
+
+## A barra do topo (12/10/2026)
+
+Três blocos de duas linhas, desenho do Rodrigo a partir de uma referência:
+"Rodrigo Bondioli / Selected Work 15' — 26'", "Creative Director / São
+Paulo, Brazil", "Get in touch / e-mail". O "Say hello" (pílula) saiu da
+barra; o e-mail é o mesmo `CopyEmail` da capa. O bloco do meio começa no
+meio exato da tela (grade de duas metades). Abaixo de 900 o cargo sai e,
+se nome e contato não couberem na mesma linha (≤375), o contato desce.
+No celular o herói da `/work` tem respiro no topo (`--s7 + --s6`) pra o
+título não nascer embaixo da barra — isso já acontecia antes, com a barra
+antiga, em 320–375px.
 
 ## Idioma
 

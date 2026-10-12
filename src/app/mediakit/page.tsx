@@ -74,7 +74,7 @@ export default async function MediaKitPage() {
     <>
       <SmoothScroll />
       {/* A página não tem formulário: o "Say hello" atravessa pra /work */}
-      <SiteNav ctaHref="/work#contact" brandHref="/work" />
+      <SiteNav brandHref="/work" />
 
       <main>
         {/* ---------- Capa ---------- */}

@@ -131,7 +131,7 @@ export default async function ProjectPage({
   return (
     <>
       <SmoothScroll />
-      <SiteNav dark back ctaHref="#contact" brandHref="/work" />
+      <SiteNav dark brandHref="/work" />
 
       <main className={`on-dark ${s.page}`}>
         {/* ---------- Capa ---------- */}
