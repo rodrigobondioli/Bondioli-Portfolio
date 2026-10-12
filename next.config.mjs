@@ -24,6 +24,10 @@ const nextConfig = {
     return [
       { source: "/projects/amor-de-c%C3%A3o", destination: "/projects/amor-de-cao", statusCode: 301 },
       { source: "/projects/amor-de-cão", destination: "/projects/amor-de-cao", statusCode: 301 },
+      // cases tirados do ar em 12/10/2026 (ficam como rascunho no projects.json);
+      // 307 e não 301, porque podem voltar
+      { source: "/projects/filmboss", destination: "/work", statusCode: 307 },
+      { source: "/projects/ccarbon", destination: "/work", statusCode: 307 },
     ]
   },
 }

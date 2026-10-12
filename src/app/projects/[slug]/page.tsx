@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
@@ -100,7 +101,8 @@ export default async function ProjectPage({
 }) {
   const slug = lerSlug((await params).slug)
   const p = getProject(slug)
-  if (!p) return null
+  // rascunho (fora do ar, ex.: filmboss e ccarbon desde 12/10) não abre
+  if (!p || p.draft) notFound()
 
   const name = p.projectName ?? slug
   const capa = asset(p.heroImage)

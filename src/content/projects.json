@@ -255,7 +255,7 @@
  {
   "id": "UJ5oUBf6Q",
   "slug": "filmboss",
-  "draft": false,
+  "draft": true,
   "projectName": "Filmboss",
   "linkText": "filmboss.com.br",
   "linkUrl": null,
@@ -608,7 +608,7 @@
  {
   "id": "yy5o7ujlA",
   "slug": "ccarbon",
-  "draft": false,
+  "draft": true,
   "projectName": "cCarbon",
   "linkText": "ccarbon.com",
   "linkUrl": null,
