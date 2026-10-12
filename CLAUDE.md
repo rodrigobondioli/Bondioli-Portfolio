@@ -81,9 +81,11 @@ npm run start   # serve o build em localhost:3000
 - **Imagens dos projetos** estão em `public/projects/<slug>/`. O CMS do Framer
   guardava URLs de `framerusercontent.com`; `src/content/assets.json` traduz
   URL → arquivo local, e `asset()` em `src/lib/projects.ts` faz a busca.
-- **Rodapé:** desde a grade (12/10/2026) as redes começam na linha da
-  coluna do meio (13 de 24), não no centro exato da página — o centro cai
-  entre duas linhas. No celular o rodapé empilha alinhado à esquerda.
+- **Rodapé:** as redes ficam no centro exato da tela (`1fr auto 1fr`
+  acima de 900). Na grade (12/10) elas começaram na linha da coluna 13, e
+  o Rodrigo achou torto, puxado pra direita — voltou pro centro no mesmo
+  dia. O último item é ".md", o download do portfólio (`/portfolio.md`),
+  sem ícone, no mesmo estilo das redes. No celular empilha à esquerda.
 - **A raiz foi limpa em 28/09/2026.** O que não fazia parte do site no ar
   (site-v2, landings do curso, assets do site estático antigo, backups)
   está em `_to_delete/2026-09-28-faxina/`, com um LEIA-ME. `_to_delete/`
@@ -300,11 +302,9 @@ mais próxima.
 Dark (`#121211`) é o padrão; light é o site como era. O tema mora no
 `data-theme` do `<html>`, posto por um script no `<head>` antes da primeira
 pintura; o `ThemeToggle` troca e grava em `localStorage`. Ele mora numa barra em
-pé na margem direita: EN / BR no topo, na linha do "Get in touch"; o
-tema no meio; e o download do portfólio (`/portfolio.md`, com o rótulo
-".md" — só a seta não dizia o que baixava) logo acima da faixa de
-números da `/work`, 24px acima da linha dela, e não dentro dela. Trocar o tema é trocar os tokens (`--bg`, `--ink`,
-`--rule`...). O que tem fundo próprio claro (o amarelo das seções de
+pé na margem direita: EN / BR no topo, na linha do "Get in touch", e o
+tema no meio da tela. O download do portfólio passou por ela e foi pro
+rodapé (12/10). O que tem fundo próprio claro (o amarelo das seções de
 destaque) usa `.on-accent`, que devolve os tokens escuros de texto.
 
 ## Idioma

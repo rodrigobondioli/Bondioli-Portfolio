@@ -32,8 +32,14 @@
 .inner > :first-child { grid-column: 1 / span 2; }
 .inner > :nth-child(2) { grid-column: 7 / span 6; }
 .inner > :last-child { grid-column: -5 / -1; justify-self: end; }
-@media (min-width: 1101px) {
-  .inner > :nth-child(2) { grid-column: 13 / span 8; }
+/* As redes no centro exato da tela (12/10, pedido do Rodrigo: começando
+   na coluna 13 elas pareciam tortas, puxadas pra direita). Três colunas
+   `1fr auto 1fr`: com as pontas iguais, o meio é o centro de verdade. */
+@media (min-width: 901px) {
+  .inner { grid-template-columns: 1fr auto 1fr; }
+  .inner > :first-child { grid-column: 1; }
+  .inner > :nth-child(2) { grid-column: 2; }
+  .inner > :last-child { grid-column: 3; }
 }
 
 .logo {

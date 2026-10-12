@@ -29,6 +29,10 @@ const SOCIAL = [
   { label: "Linkedin", href: "https://linkedin.com/in/bondioli" },
 ]
 
+/* O portfólio inteiro em Markdown, pra baixar — veio da barra lateral pra
+   cá (12/10, pedido do Rodrigo): sem ícone, só ".md", irmão das redes. */
+const MD = { label: ".md", href: "/portfolio.md", file: "rodrigo-bondioli-portfolio.md" }
+
 export function SiteFooter() {
   const year = new Date().getFullYear()
 
@@ -55,6 +59,18 @@ export function SiteFooter() {
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href={MD.href}
+                download={MD.file}
+                className={styles.link}
+                data-roll-host=""
+                aria-label="Download portfolio as Markdown (.md)"
+                title="Download portfolio (.md)"
+              >
+                <RollLabel text={MD.label} underline />
+              </a>
+            </li>
           </ul>
         </nav>
 

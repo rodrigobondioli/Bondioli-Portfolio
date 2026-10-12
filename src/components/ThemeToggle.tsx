@@ -5,8 +5,8 @@ import styles from "./ThemeToggle.module.css"
 
 /**
  * A barra lateral, em pé na margem direita, em todas as páginas: idioma
- * (EN / BR) no topo, na linha do "Get in touch"; o tema no meio da tela; e
- * o de baixar o portfólio em Markdown (/portfolio.md) no pé —
+ * (EN / BR) no topo, na linha do "Get in touch", e o tema no meio da tela.
+ * (O download do portfólio em .md foi pro rodapé, junto das redes.) —
  * desenho do Rodrigo a partir da referência "EN | PT ☼" (12/10). O tema
  * troca de verdade (dark é o padrão); o idioma, por enquanto, só mostra
  * como vai ficar.
@@ -58,22 +58,6 @@ export default function ThemeToggle() {
       >
         {tema === "dark" ? <Sol /> : <Lua />}
       </button>
-      {/* O portfólio inteiro em Markdown (/portfolio.md), pra baixar. O
-          ".md" escrito embaixo é o que diz o que é — a seta sozinha não. */}
-      <a
-        className={`no-underline ${styles.download}`}
-        href="/portfolio.md"
-        download="rodrigo-bondioli-portfolio.md"
-        aria-label="Download portfolio as Markdown (.md)"
-        title="Download portfolio (.md)"
-      >
-        <span className={styles.button}>
-          <Arquivo />
-        </span>
-        <span className={styles.ext} aria-hidden="true">
-          .md
-        </span>
-      </a>
     </div>
   )
 }
@@ -85,20 +69,6 @@ function Sol() {
       {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
         <line key={a} x1="10" y1="1.8" x2="10" y2="3.6" transform={`rotate(${a} 10 10)`} />
       ))}
-    </svg>
-  )
-}
-
-/* Seta caindo numa base: "baixar". No mesmo traço do sol (1.4, pontas
-   redondas). A seta é um grupo à parte pra poder descer no hover. */
-function Arquivo() {
-  return (
-    <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <g className={styles.seta}>
-        <path d="M10 3v9.5" />
-        <path d="M6.2 9 10 12.8 13.8 9" />
-      </g>
-      <path d="M4 16.5h12" />
     </svg>
   )
 }
