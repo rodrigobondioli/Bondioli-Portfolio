@@ -226,7 +226,24 @@ da capa fala pelos números automáticos, não pelos do JSON.
 São contas. Se um dia forem automatizados, a fórmula tem que ser decidida
 antes — senão vira número oficial inventado.
 
-## A barra "Book a call"
+## A pílula "See if we're a fit" (era a barra "Book a call")
+
+Desde 12/10/2026 o `MeetingBar` tem o desenho do brandbeet.com: pílula
+pequena de vidro, a marca girando (`SpinningLogo`, o vento da capa) num
+disco claro, e "See if we're a fit". Atrás dela, um desfoque progressivo
+no pé da tela — quatro camadas de `backdrop-filter` (2/5/10/18px), cada
+uma com a sua faixa de máscara — que aparece e some junto. Uma camada só
+com blur forte faz emenda visível; em degraus ela some. A lógica de
+entrar e sair abaixo continua a mesma.
+
+O "Selected work" também veio do brandbeet: `ProjectShowcase` — nome
+grande + "Services" (o campo `type`), colagem de quatro imagens em
+4·7·6·7 colunas de 24, presas pelo topo, e uma barra "View project →".
+Lá a barra abre mais fotos; aqui tudo leva pra `/projects/<slug>`. As
+fotos saem da galeria; a thumb só entra se faltar imagem (ela costuma ser
+recorte da primeira da galeria, e as duas lado a lado se repetiam).
+
+### Entrar e sair
 
 O `MeetingBar` é o mesmo componente em todas as páginas, e o que muda é
 **quem manda nele entrar e sair**:
