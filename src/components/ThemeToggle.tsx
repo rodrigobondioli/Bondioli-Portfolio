@@ -5,7 +5,8 @@ import styles from "./ThemeToggle.module.css"
 
 /**
  * A barra lateral, em pé na margem direita, em todas as páginas: idioma
- * (EN / BR) no topo, na linha do "Get in touch", e o tema no meio da tela.
+ * (EN / BR) no topo, na linha do "Get in touch", um tracinho e o tema
+ * logo embaixo.
  * (O download do portfólio em .md foi pro rodapé, junto das redes.) —
  * desenho do Rodrigo a partir da referência "EN | PT ☼" (12/10). O tema
  * troca de verdade (dark é o padrão); o idioma, por enquanto, só mostra
@@ -49,6 +50,7 @@ export default function ThemeToggle() {
           BR
         </span>
       </div>
+      <span className={styles.divider} aria-hidden="true" />
       <button
         type="button"
         className={styles.button}

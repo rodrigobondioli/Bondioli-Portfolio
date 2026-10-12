@@ -302,8 +302,8 @@ mais próxima.
 Dark (`#121211`) é o padrão; light é o site como era. O tema mora no
 `data-theme` do `<html>`, posto por um script no `<head>` antes da primeira
 pintura; o `ThemeToggle` troca e grava em `localStorage`. Ele mora numa barra em
-pé na margem direita: EN / BR no topo, na linha do "Get in touch", e o
-tema no meio da tela. O download do portfólio passou por ela e foi pro
+pé na margem direita: EN / BR no topo, na linha do "Get in touch", um
+tracinho de divisão e o tema logo embaixo. O download do portfólio passou por ela e foi pro
 rodapé (12/10). O que tem fundo próprio claro (o amarelo das seções de
 destaque) usa `.on-accent`, que devolve os tokens escuros de texto.
 

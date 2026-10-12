@@ -1,28 +1,30 @@
-/* Em pé na margem direita (centrada nela; no desktop a margem é 56), da
-   altura da tela inteira menos o respiro da barra do topo em cima e
-   embaixo (12/10, desenho do Rodrigo): EN / BR em cima, na linha do "Get
-   in touch"; o tema no meio exato da tela (a terceira linha da grade
-   fica vazia, de contrapeso).
-   Por cima de tudo, menos da abertura. */
+/* Em pé na margem direita (centrada nela; no desktop a margem é 56), tudo
+   no topo, na linha do "Get in touch" (12/10, desenho do Rodrigo): EN, BR,
+   um tracinho e o tema logo embaixo. Por cima de tudo, menos da abertura. */
 .rail {
   position: fixed;
   top: var(--s3);
-  bottom: var(--s3);
   right: calc(var(--gutter) / 2);
   z-index: 200;
   translate: 50% 0;
-  display: grid;
-  grid-template-rows: 1fr auto 1fr;
-  justify-items: center;
-  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s1);
   /* Branco em "difference": sai escuro sobre fundo claro e claro sobre
      escuro, sozinho — inclusive nas páginas de projeto (escuras nos dois
      temas) e por cima de imagens. */
   color: #fff;
   mix-blend-mode: difference;
 }
-.rail > * { pointer-events: auto; }
-.langs { align-self: start; }
+
+/* A divisão entre o idioma e o tema: um tracinho na largura das letras */
+.divider {
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
 
 .button {
   display: grid;
@@ -63,11 +65,10 @@ button.button:hover { rotate: 45deg; }
     bottom: calc(var(--s3) + 64px + var(--s2));
     right: var(--s2);
     translate: none;
-    display: flex;
-    align-items: center;
-    gap: var(--s1);
+    flex-direction: row;
   }
-  .langs { flex-direction: row; margin-right: var(--s1); }
+  .langs { flex-direction: row; }
+  .divider { width: 1px; height: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
