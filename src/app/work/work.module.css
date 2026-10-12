@@ -204,6 +204,11 @@
   font-size: var(--t-h2);
   line-height: 1.2;
   letter-spacing: -0.03em;
+  /* Recuo da primeira linha, grande (12/10, referência do Rodrigo): a
+     frase começa a um terço da página e o resto volta pra margem. Um terço
+     da grade em qualquer tela (8 de 24, 4 de 12, 2 de 6), então a primeira
+     palavra cai em cima de uma linha da grade. */
+  text-indent: calc(var(--col) * var(--cols) / 3);
 }
 
 .headLine {
