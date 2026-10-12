@@ -6,10 +6,10 @@ import MeetingBar from "@/components/MeetingBar"
 import CountUpNumber from "@/components/CountUpNumber"
 import YouTube from "@/components/YouTube"
 import ProjectVideo from "@/components/ProjectVideo"
-import CaseRow from "@/components/CaseRow"
+import ProjectShowcase from "@/components/ProjectShowcase"
 import ClosingSection from "@/components/ClosingSection"
 import Brands from "@/components/Brands"
-import { orderedProjects, asset } from "@/lib/projects"
+import { orderedProjects, asset, galleryUrls } from "@/lib/projects"
 import order from "@/content/order.json"
 import s from "./work.module.css"
 
@@ -97,20 +97,27 @@ export default function WorkPage() {
               </p>
             </div>
 
-            {/* Cases empilhados, um por linha (12/10): era uma grade de três. */}
+            {/* Um projeto por bloco, no desenho do brandbeet.com (12/10):
+                nome e serviços, colagem de quatro imagens, barra pro case. */}
             <ul className={s.cases}>
-              {projects.map((p) => (
-                <li key={p.slug}>
-                  <CaseRow
-                    slug={p.slug}
-                    name={p.projectName ?? p.slug}
-                    what={p.what}
-                    year={p.year}
-                    headline={p.headline}
-                    thumb={asset(p.thumb)}
-                  />
-                </li>
-              ))}
+              {projects.map((p) => {
+                // a galeria primeiro: a thumb costuma ser recorte da
+                // primeira foto dela, e as duas lado a lado se repetiam
+                const galeria = galleryUrls(p.gallery)
+                const thumb = asset(p.thumb)
+                const fotos = (galeria.length >= 4 || !thumb ? galeria : [thumb, ...galeria])
+                  .filter((u, i, a) => a.indexOf(u) === i)
+                return (
+                  <li key={p.slug}>
+                    <ProjectShowcase
+                      slug={p.slug}
+                      name={p.projectName ?? p.slug}
+                      services={p.type}
+                      images={fotos}
+                    />
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </section>

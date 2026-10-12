@@ -1,97 +1,103 @@
-/* Medidas do Framer: 420x64, fixa 24 do rodapé, padding 8, gap 12.
-   O vidro é blur(18px) + saturate(1.4), com um fio branco por dentro em
-   cima — é o que dá o relevo. Sem isso a barra fica chapada. */
+/* Pílula do brandbeet.com (12/10), medida lá: vidro escuro com blur(20) e
+   saturate(1.5), fio de 1px branco a 14%, relevo por um fio branco por
+   dentro em cima, sombra larga. Padding 8/20/8/8, gap 10, 15px de texto.
+   Entra subindo de fora da tela (0.7s) e cresce 4% no hover — mesma curva
+   nos dois. É o mesmo vidro nos dois temas: lá também é. */
 .bar {
   position: fixed;
-  z-index: 90;
-  bottom: var(--s3);
+  z-index: 91;
+  bottom: clamp(18px, 3vh, 32px);
   left: 50%;
-  transform: translateX(-50%);
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  /* 100vw inclui a barra de rolagem, e com `scrollbar-gutter: stable` ela
-     está sempre reservada — a conta sobrava ~15px e a barra estourava o
-     documento em telas muito estreitas. 100% do body já é a largura útil. */
-  width: min(357px, calc(100% - var(--s4)));
-  height: 64px;
-  padding: var(--s1);
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  gap: 10px;
+  padding: 8px 20px 8px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--r-pill);
-  background: rgba(16, 16, 16, 0.58);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  background: rgba(24, 24, 22, 0.55);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.13),
-    0 14px 40px 0 rgba(0, 0, 0, 0.28);
-  color: #fff;
-  /* escondida enquanto o hero está na tela */
-  opacity: 0;
+    rgba(0, 0, 0, 0.3) 0 8px 32px,
+    rgba(255, 255, 255, 0.1) 0 1px 0 inset;
+  color: #f1f1f1;
+  white-space: nowrap;
+  transform: translate(-50%, calc(100% + 48px));
   visibility: hidden;
-  transform: translateX(-50%) translateY(16px);
   transition:
-    opacity 380ms var(--ease),
-    transform 380ms var(--ease),
-    visibility 0s linear 380ms,
-    background var(--fast) var(--ease);
+    transform 700ms cubic-bezier(0.625, 0.05, 0, 1),
+    visibility 0s linear 700ms;
 }
 .on {
-  opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translate(-50%, 0);
   transition:
-    opacity 380ms var(--ease),
-    transform 380ms var(--ease),
-    visibility 0s,
-    background var(--fast) var(--ease);
+    transform 700ms cubic-bezier(0.625, 0.05, 0, 1),
+    visibility 0s;
 }
 .on:hover {
-  background: rgba(16, 16, 16, 0.72);
-  transform: translateX(-50%) translateY(-2px);
+  transform: translate(-50%, 0) scale(1.04);
+  transition-duration: 400ms;
 }
 
-.avatar {
+/* A marca num disco claro, como o selo girando de lá */
+.mark {
   flex: 0 0 auto;
-  width: 44px;
-  height: 44px;
   display: grid;
   place-items: center;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  overflow: hidden;
+  background: #f1f1f1;
+  color: #121211;
 }
-.avatar img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
 
 .label {
-  flex: 1 1 auto;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 1;
 }
 
-.arrow {
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--accent-pink);
-  color: var(--ink);
+/* Desfoque progressivo no pé da tela (brandbeet): quatro camadas, cada
+   uma mais desfocada e presa mais embaixo pela máscara. Uma camada só com
+   blur forte faria uma emenda visível; em degraus a passagem some. */
+.blur {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 90;
+  height: clamp(11.25rem, 22svh, 13.75rem);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 500ms var(--ease);
 }
-
-/* Uma volta inteira no hover. Termina onde começou, então não chama
-   atenção; o que dá o gosto é a curva — sai rápido e assenta devagar,
-   com um respiro de overshoot no fim. Linear pareceria motor de ventilador. */
-.arrow svg {
-  transition: transform 820ms cubic-bezier(0.34, 1.12, 0.32, 1);
+.blurOn { opacity: 1; }
+.blur span { position: absolute; inset: 0; }
+.blur span:nth-child(1) {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  mask-image: linear-gradient(transparent 0%, #000 30%, #000 60%, transparent 90%);
+  -webkit-mask-image: linear-gradient(transparent 0%, #000 30%, #000 60%, transparent 90%);
 }
-.bar:hover .arrow svg,
-.bar:focus-visible .arrow svg {
-  transform: rotate(360deg);
+.blur span:nth-child(2) {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  mask-image: linear-gradient(transparent 30%, #000 60%, #000 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(transparent 30%, #000 60%, #000 80%, transparent 100%);
+}
+.blur span:nth-child(3) {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  mask-image: linear-gradient(transparent 50%, #000 80%, #000 100%);
+  -webkit-mask-image: linear-gradient(transparent 50%, #000 80%, #000 100%);
+}
+.blur span:nth-child(4) {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  mask-image: linear-gradient(transparent 70%, #000 100%);
+  -webkit-mask-image: linear-gradient(transparent 70%, #000 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .arrow svg { transition: none; }
-  .bar:hover .arrow svg { transform: none; }
+  .bar, .on { transition: visibility 0s; }
+  .on:hover { transform: translate(-50%, 0); }
 }

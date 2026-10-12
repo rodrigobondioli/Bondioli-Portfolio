@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { SpinningLogo } from "./Logo"
 import styles from "./MeetingBar.module.css"
 
 const BOOKING =
@@ -8,6 +9,12 @@ const BOOKING =
 
 /**
  * Pílula flutuante de agendamento. Mesmo link do Framer.
+ *
+ * Desenho do brandbeet.com (12/10, pedido do Rodrigo): pílula pequena de
+ * vidro com a nossa marca girando (o mesmo vento da capa) e "See if we're
+ * a fit"; atrás dela, um desfoque progressivo no pé da tela — quatro
+ * camadas de blur crescente, cada uma com a sua faixa de máscara — que
+ * aparece e some junto com a pílula.
  *
  * Ela existe pra cobrir o vão: o "Say hello" da navegação sai da tela nos
  * primeiros 100px de rolagem, e daí em diante a página fica sem nenhum
@@ -28,7 +35,7 @@ const BOOKING =
  * contato, quem a esconde é o rodapé.
  */
 export default function MeetingBar({
-  label = "Book a call",
+  label = "See if we\u2019re a fit",
   hideOver = ".on-accent, #contact",
   entraApos = 0.9,
 }: {
@@ -47,8 +54,8 @@ export default function MeetingBar({
         setVisible(false)
         return
       }
-      // a linha onde a barra começa: 64 de altura + 24 do rodapé
-      const line = window.innerHeight - 88
+      // a linha onde a pílula começa: ~50 de altura + até 32 do rodapé
+      const line = window.innerHeight - 84
       const covered = Array.from(
         document.querySelectorAll<HTMLElement>(hideOver)
       ).some((el) => {
@@ -67,33 +74,26 @@ export default function MeetingBar({
   }, [hideOver, entraApos])
 
   return (
-    <a
-      className={`no-underline ${styles.bar} ${visible ? styles.on : ""}`}
-      href={BOOKING}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-hidden={!visible}
-      tabIndex={visible ? undefined : -1}
-    >
-      <span className={styles.avatar} aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/rodrigo.png" alt="" width={42} height={42} />
-      </span>
-      <span className={styles.label}>{label}</span>
-      <span className={styles.arrow} aria-hidden="true">
-        <svg
-          viewBox="0 0 18 18"
-          width="18"
-          height="18"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M3.5 9h11M10 4.5 14.5 9 10 13.5" />
-        </svg>
-      </span>
-    </a>
+    <>
+      <div className={`${styles.blur} ${visible ? styles.blurOn : ""}`} aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+      <a
+        className={`no-underline ${styles.bar} ${visible ? styles.on : ""}`}
+        href={BOOKING}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-hidden={!visible}
+        tabIndex={visible ? undefined : -1}
+      >
+        <span className={styles.mark} aria-hidden="true">
+          <SpinningLogo size={18} />
+        </span>
+        <span className={styles.label}>{label}</span>
+      </a>
+    </>
   )
 }
