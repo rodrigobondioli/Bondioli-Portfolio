@@ -35,9 +35,11 @@
 
 /* O Framer escala este título pra encher a linha (SVG de texto ajustado).
    Aqui é a mesma conta: largura útil dividida pelo comprimento da frase. */
+/* itálico (12/10, pedido do Rodrigo), no mesmo peso do h1 */
 .title {
   font-size: calc(100cqw / 12.05);
   line-height: 1.1;
+  font-style: italic;
   text-transform: none;
   text-wrap: nowrap;
 }

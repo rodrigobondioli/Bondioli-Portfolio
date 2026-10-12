@@ -24,7 +24,11 @@ import localFont from "next/font/local"
  */
 
 export const body = localFont({
-  src: [{ path: "../../public/fonts/Geist-Variable.woff2", weight: "100 900", style: "normal" }],
+  src: [
+    { path: "../../public/fonts/Geist-Variable.woff2", weight: "100 900", style: "normal" },
+    // itálico de verdade (não o oblíquo falso do navegador): "Your next decision."
+    { path: "../../public/fonts/Geist-Italic-Variable.woff2", weight: "100 900", style: "italic" },
+  ],
   variable: "--font-body",
   display: "swap",
   fallback: ["system-ui", "sans-serif"],
