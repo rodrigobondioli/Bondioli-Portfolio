@@ -81,11 +81,9 @@ npm run start   # serve o build em localhost:3000
 - **Imagens dos projetos** estão em `public/projects/<slug>/`. O CMS do Framer
   guardava URLs de `framerusercontent.com`; `src/content/assets.json` traduz
   URL → arquivo local, e `asset()` em `src/lib/projects.ts` faz a busca.
-- **Rodapé:** as redes ficam no centro da PÁGINA, não no meio do que sobra.
-  São três colunas (`1fr auto 1fr`), e não um `space-between` de três
-  filhos — com space-between o bloco do meio só cai no centro se as duas
-  pontas tiverem a mesma largura, e não têm (logo 44, assinatura ~190).
-  Medido antes da correção: 55px à esquerda do centro, em todas as páginas.
+- **Rodapé:** desde a grade (12/10/2026) as redes começam na linha da
+  coluna do meio (13 de 24), não no centro exato da página — o centro cai
+  entre duas linhas. No celular o rodapé empilha alinhado à esquerda.
 - **A raiz foi limpa em 28/09/2026.** O que não fazia parte do site no ar
   (site-v2, landings do curso, assets do site estático antigo, backups)
   está em `_to_delete/2026-09-28-faxina/`, com um LEIA-ME. `_to_delete/`
@@ -255,6 +253,39 @@ se nome e contato não couberem na mesma linha (≤375), o contato desce.
 No celular o herói da `/work` tem respiro no topo (`--s7 + --s6`) pra o
 título não nascer embaixo da barra — isso já acontecia antes, com a barra
 antiga, em 320–375px.
+
+## A grade (12/10/2026, do tumulto.ai)
+
+Linhas verticais fixas na tela (`GridLines`), bem apagadas, e o conteúdo
+encostado nelas — pedido do Rodrigo, a partir do tumulto.ai (trabalho
+dele, código em `~/Developer/Tumulto/site`). 24 colunas acima de 1100, 12
+acima de 640, 6 no celular, vão de 16/12, entre as margens (`--gutter`).
+Linha na borda esquerda de cada coluna e no meio do passo (uma a cada
+~28px) + fechamento na borda direita do conteúdo.
+
+**A regra:** todo bloco começa em cima de uma linha. Pra isso:
+- `.grid` (globals) monta as mesmas colunas dentro de uma `.section`;
+  `.g-left` / `.g-right` são as duas metades; `.to-line` faz uma caixa
+  terminar na linha do meio da última coluna dela (o vão até a vizinha
+  vira meio passo e as duas bordas caem em linhas).
+- `--col` é o passo; `--gap-line` (meio passo) é o recuo interno dos cards,
+  pra o texto de dentro também cair numa linha.
+- Texto alinhado à direita conta como alinhado se terminar numa linha.
+- Imagens e vídeos ficam por cima das linhas (`z-index: 2`); fundos, por
+  baixo.
+
+Pra conferir depois de mexer: medir com as linhas na tela, não no olho —
+o script de auditoria compara a borda esquerda de cada bloco com a linha
+mais próxima.
+
+## Tema claro e escuro (12/10/2026)
+
+Dark (`#121211`) é o padrão; light é o site como era. O tema mora no
+`data-theme` do `<html>`, posto por um script no `<head>` antes da primeira
+pintura; o `ThemeToggle` (em pé, no meio da margem direita) troca e grava
+em `localStorage`. Trocar o tema é trocar os tokens (`--bg`, `--ink`,
+`--rule`...). O que tem fundo próprio claro (o amarelo das seções de
+destaque) usa `.on-accent`, que devolve os tokens escuros de texto.
 
 ## Idioma
 

@@ -12,10 +12,12 @@
    A régua no topo é o que separa isto do conteúdo: sem ela as thumbs
    pareciam a continuação do texto acima. Ela vive na borda deste bloco, de
    gutter a gutter, como todas as outras do site. */
+/* Na grade (12/10): cada thumb ocupa 4 colunas de 24 (3 de 12), as duas
+   encostadas na linha de fechamento à direita. */
 .inner {
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--s3);
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
   border-top: var(--hairline) solid var(--rule-dark);
   padding-top: var(--s5);
   padding-bottom: var(--s6);
@@ -26,8 +28,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--s2);
-  /* 216: 10% menor que os 240 do primeiro corte */
-  width: 216px;
+}
+.card:last-child { grid-column: -4 / -1; }
+.card:nth-last-child(2) { grid-column: -7 / -4; }
+@media (min-width: 1101px) {
+  .card:last-child { grid-column: -5 / -1; }
+  .card:nth-last-child(2) { grid-column: -9 / -5; }
 }
 
 .media {
@@ -92,6 +98,6 @@
 }
 
 @media (max-width: 640px) {
-  .inner { justify-content: stretch; gap: var(--s2); }
-  .card { width: auto; flex: 1 1 0; }
+  .card:last-child { grid-column: 4 / -1; }
+  .card:nth-last-child(2) { grid-column: 1 / 4; }
 }

@@ -304,7 +304,7 @@ export default async function MediaKitPage() {
                   vídeo já abre a página. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                className={s.aboutPhoto}
+                className={`g-left to-line ${s.aboutPhoto}`}
                 src="/images/rodrigo-retrato.webp"
                 alt="Rodrigo Bondioli"
                 width={1200}
@@ -312,7 +312,7 @@ export default async function MediaKitPage() {
                 loading="lazy"
               />
 
-              <div className={s.aboutText}>
+              <div className={`g-right ${s.aboutText}`}>
                 {/* O cargo encostado no topo da foto e na esquerda do
                     texto, como na /work. */}
                 <p className={`overline ${s.aboutRole}`}>{kit.about.role}</p>

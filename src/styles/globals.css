@@ -67,6 +67,20 @@
      por decisão do Rodrigo. */
   --gutter: max(16px, min(14vw - 51.2px, 6vw, 56px));
   --container: none;   /* o Framer nao limita: 100% - gutter dos dois lados */
+
+  /* --- Grade (12/10/2026, do tumulto.ai) --- *
+   * 6 colunas no celular, 12 acima de 640, 24 acima de 1100, com vão de
+   * 12/16 entre elas, entre as margens (--gutter). As linhas desenhadas
+   * (GridLines) ficam na borda esquerda de cada coluna e no meio do passo:
+   * uma linha a cada ~29px. Todo bloco começa em cima de uma linha.
+   * --col é o passo (coluna + vão); --gap-line, meio passo: o vão entre
+   * caixas lado a lado, pra as duas bordas caírem em linhas. */
+  --cols: 6;
+  --col-gap: 12px;
+  --page-w: 100vw;   /* o SmoothScroll troca pela largura sem a barra */
+  --col: calc((var(--page-w) - 2 * var(--gutter) + var(--col-gap)) / var(--cols));
+  --gap-line: calc(var(--col) / 2);
+  --line-color: rgba(16, 16, 16, 0.06);
   --measure: 68ch;   /* medida máxima de texto corrido */
 
   /* --- Tipografia --- *
@@ -113,6 +127,7 @@
   --paper:   #1c1c1b;
   --rule:    rgba(241, 241, 241, 0.12);
   --glass:   rgba(18, 18, 17, 0.4);
+  --line-color: rgba(241, 241, 241, 0.06);
 }
 
 /* O que tem fundo próprio claro (o amarelo das seções de destaque) volta
@@ -126,6 +141,10 @@
   --rule:    rgba(16, 16, 16, 0.1);
   color: var(--ink);
 }
+
+/* Imagens e vídeos sobem um andar acima das linhas da grade (GridLines,
+   z-index 1): as linhas passam por cima dos fundos, nunca das imagens. */
+img, video, iframe { position: relative; z-index: 2; }
 
 /* ---------- 2. Reset ---------- */
 
@@ -199,6 +218,13 @@ input, textarea, select { font: inherit; color: inherit; }
    pra versalete. No desktop segue o valor do Framer. */
 @media (max-width: 640px) {
   :root { --t-overline: 0.75rem; }
+}
+
+@media (min-width: 641px) {
+  :root { --cols: 12; --col-gap: 16px; }
+}
+@media (min-width: 1101px) {
+  :root { --cols: 24; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -359,6 +385,31 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
 .on-dark .caption { color: rgba(242, 242, 242, 0.6); }
 
 /* ---------- 7. Utilitários ---------- */
+
+/* Grade do conteúdo — as mesmas colunas das linhas desenhadas (GridLines).
+   Dentro de uma .section (que já tem as margens), as colunas daqui caem
+   exatamente em cima das linhas. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+}
+/* Caixa que termina antes da vizinha: encolhe até a linha do meio da
+   última coluna dela (no tumulto, --to-line). O vão entre as duas vira
+   meio passo e as duas bordas ficam em linhas. */
+.to-line { margin-inline-end: calc(var(--col) / 2 - var(--col-gap)); }
+
+/* As duas metades da grade (12+12 de 24, 6+6 de 12). No celular, uma só. */
+.g-left, .g-right { grid-column: 1 / -1; }
+@media (min-width: 641px) {
+  .g-left { grid-column: 1 / 7; }
+  .g-right { grid-column: 7 / -1; }
+}
+@media (min-width: 1101px) {
+  .g-left { grid-column: 1 / 13; }
+  .g-right { grid-column: 13 / -1; }
+}
+
 
 .sr-only {
   position: absolute;

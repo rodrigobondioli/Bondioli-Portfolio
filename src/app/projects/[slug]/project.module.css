@@ -141,18 +141,23 @@
   gap: var(--s6);
 }
 
-/* Título à esquerda numa coluna de 420, texto à direita no que sobra. */
+/* Título à esquerda (8 colunas de 24), texto a partir da linha da coluna
+   9 (12/10, grade). Era uma coluna fixa de 420 + 88 de vão: o texto caía
+   em 564, entre duas linhas. */
 .block {
   display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: var(--s6);
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
   align-items: start;
 }
+.blockTitle { grid-column: 1 / 9; }
+.blockBody { grid-column: 9 / -1; }
 .blockTitle { color: #fff; }
 .blockBody { color: #fff; }
 
 @media (max-width: 1100px) {
-  .block { grid-template-columns: 1fr; gap: var(--s3); }
+  .block { row-gap: var(--s3); }
+  .blockTitle, .blockBody { grid-column: 1 / -1; }
 }
 
 /* ---------- Mídia ---------- */

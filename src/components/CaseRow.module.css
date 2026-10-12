@@ -1,8 +1,10 @@
-/* Duas metades, 32 entre elas (no aboutmarco.com: 640 + 32 + 640). */
+/* Duas metades da grade (12/10): o texto na esquerda, terminando na linha
+   do meio da última coluna dela; a imagem começa na linha da coluna do
+   meio. As duas bordas em linhas, como no tumulto. */
 .row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s4);
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
   align-items: start;
 }
 
@@ -63,6 +65,7 @@
 
 /* Tablet e celular: as metades empilham — texto em cima, imagem embaixo. */
 @media (max-width: 900px) {
-  .row { grid-template-columns: 1fr; gap: var(--s3); }
+  .row { row-gap: var(--s3); }
+  .row > * { grid-column: 1 / -1 !important; margin-inline-end: 0 !important; }
   .headline { max-width: none; }
 }

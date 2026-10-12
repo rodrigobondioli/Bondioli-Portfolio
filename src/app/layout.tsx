@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Preloader from "@/components/Preloader"
 import ThemeToggle from "@/components/ThemeToggle"
+import GridLines from "@/components/GridLines"
 import { display, body } from "./fonts"
 // o CSS que o Lenis pede: altura automática no html, trava que respeita
 // `stop()`, iframes sem ponteiro durante o scroll suave
@@ -63,6 +64,7 @@ export default function RootLayout({
           <style>{`[data-preloader]{display:none!important}`}</style>
         </noscript>
         <Preloader />
+        <GridLines />
         <ThemeToggle />
         {children}
       </body>

@@ -143,7 +143,7 @@ export default function WorkPage() {
             </div>
 
             <div className={s.aboutBody}>
-              <StripReveal className={s.aboutVideo}>
+              <StripReveal className={`g-left to-line ${s.aboutVideo}`}>
                 <video
                   src="/video/eu-profile.mp4"
                   autoPlay
@@ -153,7 +153,7 @@ export default function WorkPage() {
                   preload="none"
                 />
               </StripReveal>
-              <div className={s.aboutText}>
+              <div className={`g-right ${s.aboutText}`}>
                 {/* O cargo sai do cabeçalho e vem pra cá: encostado no topo
                     do vídeo e na esquerda do texto. */}
                 <p className={`overline ${s.aboutRole}`}>Creative Director</p>
@@ -188,7 +188,7 @@ export default function WorkPage() {
 
         {/* ---------- YouTube ---------- */}
         <section className={`section on-accent ${s.youtube}`}>
-          <div className={`container ${s.youtubeInner}`}>
+          <div className={s.youtubeInner}>
             <div className="head-row">
               <h2 className="h4">Content creator</h2>
               <span className="rule rule-sm" />

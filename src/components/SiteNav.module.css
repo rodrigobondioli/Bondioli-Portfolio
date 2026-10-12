@@ -1,12 +1,12 @@
-/* Três blocos de duas linhas. Grade de duas metades: o nome na esquerda;
-   a direita espalha "Creative Director" (que começa no meio exato da tela)
-   e o contato (encostado no fim, alinhado à esquerda dentro do bloco). */
+/* Três blocos de duas linhas, na grade da página (12/10): cada um começa
+   em cima de uma linha. */
 .nav {
   position: absolute;
   inset: 0 0 auto 0;
   z-index: 100;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
   align-items: start;
   padding: var(--s3) var(--gutter);
   font-size: var(--t-body-sm);
@@ -15,11 +15,14 @@
   pointer-events: none;
 }
 
-.half {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--s3);
-}
+/* O nome na primeira coluna; o cargo começa na coluna do meio (13 de 24,
+   7 de 12) e o contato nas quatro últimas — os três em cima de linhas da
+   grade. A "metade" só agrupa; quem posiciona é a grade da barra. */
+.nav > .block:first-child { grid-column: 1 / span 4; }
+.half { display: contents; }
+.middle { grid-column: 7 / span 4; }
+@media (min-width: 1101px) { .middle { grid-column: 13 / span 4; } }
+.half > .block:last-child { grid-column: -5 / -1; }
 
 .block {
   display: flex;

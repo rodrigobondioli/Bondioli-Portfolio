@@ -123,16 +123,38 @@
 /* Faixa de números: três colunas, e os dois campeões ocupam duas.
    É o desenho do Framer — Subscribers e Total impressions são os que
    carregam a página. */
-.stats {
+/* Todas as grades daqui seguem a grade da página (12/10): terços são 8
+   colunas de 24 (4 de 12), metades são 12 (6). Os cards começam em cima
+   de linhas, e o recuo interno é meio passo — o texto de dentro cai na
+   linha do meio. */
+.stats,
+.tables,
+.pairs,
+.trio,
+.picks {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s2);
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+}
+.stats { row-gap: var(--s2); }
+.stats > li,
+.trio > li { grid-column: span 4; }
+.wide { grid-column: span 8 !important; }
+.pairs > li,
+.picks > li,
+.tables > * { grid-column: span 6; }
+@media (min-width: 1101px) {
+  .stats > li,
+  .trio > li { grid-column: span 8; }
+  .wide { grid-column: span 16 !important; }
+  .pairs > li,
+  .picks > li,
+  .tables > * { grid-column: span 12; }
 }
 /* item de grid nasce com min-width:auto e se recusa a encolher; sem isto
    um rótulo longo trava a coluna e o card é decepado — foi o bug da
    grade do arquivo na /work */
 .stats > li { min-width: 0; }
-.wide { grid-column: span 2; }
 
 .stat {
   display: flex;
@@ -140,17 +162,14 @@
   justify-content: center;
   gap: var(--s1);
   min-height: var(--s7);
-  padding: var(--s3);
+  /* meio passo menos a borda: o texto cai na linha do meio */
+  padding: calc(var(--gap-line) - var(--hairline));
   border: var(--hairline) solid var(--rule);
 }
 
 /* Países e faixa etária: duas listas lado a lado, com a mesma régua entre
    linhas das credenciais da /work. */
-.tables {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s5);
-}
+.tables { row-gap: var(--s5); }
 .table {
   display: flex;
   flex-direction: column;
@@ -175,12 +194,7 @@
 /* ---------- Cartelas de cor ---------- */
 
 .pairs,
-.trio {
-  display: grid;
-  gap: var(--s2);
-}
-.pairs { grid-template-columns: repeat(2, 1fr); }
-.trio  { grid-template-columns: repeat(3, 1fr); }
+.trio { row-gap: var(--s2); }
 .pairs > li,
 .trio > li { min-width: 0; }
 
@@ -190,7 +204,7 @@
   justify-content: center;
   gap: var(--s2);
   min-height: var(--s7);
-  padding: var(--s4);
+  padding: var(--gap-line);
 }
 .accent { background: var(--accent); }
 .violet {
@@ -240,11 +254,7 @@
 
 /* ---------- Seleção de vídeos ---------- */
 
-.picks {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--s4) var(--s2);
-}
+.picks { row-gap: var(--s4); }
 .picks > li { min-width: 0; }
 
 /* ---------- Sobre ---------- */
@@ -268,15 +278,15 @@
 
 .aboutBody {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
   align-items: stretch;
 }
 
-/* O vão entre foto e texto sai da largura da foto, não de um `gap` na
-   grade: com gap a coluna de texto seria empurrada e deixaria de começar
-   no meio da página. É o mesmo desconto do vídeo da /work. */
+/* Metade esquerda, terminando na linha do meio (g-left + to-line no JSX),
+   como o vídeo da /work. */
 .aboutPhoto {
-  width: min(623px, 100% - var(--s5));
+  width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   background: var(--ink-10);
@@ -317,19 +327,16 @@
 @media (max-width: 1100px) {
   /* seis cartelas roxas em três colunas ficam estreitas antes de a tela
      virar tablet: o texto delas é título, não legenda */
-  .trio { grid-template-columns: repeat(2, 1fr); }
+  .trio > li { grid-column: span 6 !important; }
 }
 
 @media (max-width: 900px) {
-  .stats { grid-template-columns: repeat(2, 1fr); }
-  .pairs { grid-template-columns: 1fr; }
-  .tables { grid-template-columns: 1fr; }
-  .aboutBody {
-    grid-template-columns: 1fr;
-    gap: var(--s4);
-  }
-  /* empilhada não há vizinho do lado: a foto volta a ocupar a coluna */
-  .aboutPhoto { width: min(623px, 100%); }
+  .stats > li { grid-column: span 6 !important; }
+  .wide { grid-column: 1 / -1 !important; }
+  .pairs > li,
+  .tables > * { grid-column: 1 / -1 !important; }
+  .aboutBody { row-gap: var(--s4); }
+  .aboutBody > * { grid-column: 1 / -1 !important; margin-inline-end: 0 !important; }
   .credentials li {
     flex-direction: column;
     gap: var(--s1);
@@ -337,11 +344,10 @@
 }
 
 @media (max-width: 640px) {
-  .stats,
-  .trio,
-  .picks { grid-template-columns: 1fr; }
-  /* em uma coluna não existe "duas colunas" pra ocupar */
-  .wide { grid-column: auto; }
+  .stats > li,
+  .trio > li,
+  .picks > li,
+  .wide { grid-column: 1 / -1 !important; }
 
   .aboutHead { flex-wrap: wrap; gap: var(--s2); }
   /* a régua é global: dentro do módulo ela só é alcançada por :global */

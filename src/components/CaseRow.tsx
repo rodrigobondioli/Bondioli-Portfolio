@@ -35,7 +35,7 @@ export default function CaseRow({
 
   return (
     <Link href={`/projects/${slug}`} className={`no-underline ${styles.row}`}>
-      <div className={styles.text}>
+      <div className={`g-left to-line ${styles.text}`}>
         <div className={styles.meta}>
           <h3 className={styles.client}>{name}</h3>
           {meta.length ? (
@@ -49,7 +49,7 @@ export default function CaseRow({
         {headline ? <p className={`h3 ${styles.headline}`}>{headline}</p> : null}
       </div>
 
-      <StripReveal className={styles.media}>
+      <StripReveal className={`g-right ${styles.media}`}>
         {thumb ? (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img src={thumb} alt="" loading="lazy" width={size?.w} height={size?.h} />

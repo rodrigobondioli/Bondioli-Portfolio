@@ -12,7 +12,7 @@
   position: relative;
   min-height: 100svh;
   display: grid;
-  place-items: center;
+  place-items: center start;
   padding-inline: var(--gutter);
   overflow: hidden;
 }
@@ -22,6 +22,9 @@
      (12/10). --s7 de folga a mais. */
   max-width: calc(100% - var(--s7));
   justify-self: start;
+  /* .container centraliza com margem automática; aqui o título encosta na
+     margem — a primeira linha da grade */
+  margin-inline: 0;
   position: relative;
   z-index: 2;
   display: flex;
@@ -50,14 +53,19 @@
    conteudo centrado — nao itens jogados nas pontas. */
 .statsInner {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
   align-items: center;
 }
+/* um terço da grade cada (8 de 24, 4 de 12); o número começa em cima da
+   linha da coluna */
+.statsInner > .stat { grid-column: span 4; }
+@media (min-width: 1101px) { .statsInner > .stat { grid-column: span 8; } }
 
 .stat {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--s1);
 }
 
@@ -115,6 +123,7 @@
   /* empilhado, alinhar à esquerda: centrado, cada linha começaria num
      lugar diferente e a coluna de números sumiria */
   .stat { justify-content: flex-start; }
+  .statsInner > .stat { grid-column: 1 / -1; }
   /* Uma régua entre as linhas, igual à que corre em cima da faixa. Em três
      colunas a separação era o espaço; empilhado, espaço sozinho não separa
      — vira uma lista de três frases soltas. */
@@ -128,7 +137,7 @@
 @media (max-width: 900px) {
   .stats { height: auto; padding-block: var(--s2); }
   /* .statsInner é grid: flex-direction aqui não faz nada */
-  .statsInner { align-items: flex-start; gap: var(--s1); }
+  .statsInner { align-items: flex-start; row-gap: var(--s1); }
   .heroInner { padding-bottom: 120px; }
 }
 
@@ -244,7 +253,8 @@
    inteira da linha: é o que permite o cargo encostar no topo do vídeo. */
 .aboutBody {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
   align-items: stretch;
 }
 /* Parágrafo + lista de marcas ocupam a coluna da direita. */
@@ -269,8 +279,9 @@
    desconto o vídeo encostava no texto de 1440 pra baixo — a coluna já é
    mais estreita que 623 ali. --s5 é o mesmo vão entre imagem e texto do
    projeto em destaque. */
+/* O vídeo ocupa a metade esquerda e termina na linha do meio da última
+   coluna dela (12/10, grade) — o vão até o texto vira meio passo. */
 .aboutVideo {
-  width: min(623px, 100% - var(--s5));
   aspect-ratio: 1;
   background: var(--ink-10);
 }
@@ -293,9 +304,8 @@
 .credentials li:first-child { border-top: var(--hairline) solid var(--rule); }
 
 @media (max-width: 900px) {
-  .aboutBody { grid-template-columns: 1fr; gap: var(--s4); }
-  /* empilhado não há vizinho do lado: o vídeo volta a ocupar a coluna */
-  .aboutVideo { width: min(623px, 100%); }
+  .aboutBody { row-gap: var(--s4); }
+  .aboutBody > * { grid-column: 1 / -1; margin-inline-end: 0; }
   .credentials li { flex-direction: column; gap: var(--s1); }
 }
 
@@ -309,14 +319,24 @@
    borda da cor. O vão de 352 é real, mas quem tem que ceder é o lado de
    cima, que não tem cor nenhuma — não este. */
 .youtube {
+  /* a seção vira grade pra a caixa de dentro se posicionar por colunas */
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
   background: var(--accent);
   padding-top: var(--s7);
   padding-bottom: 0;
 }
+/* Era uma caixa de 1140 centrada; agora vai da linha da coluna 3 até a
+   linha do meio da 23 (~1134 em 1440), pras duas bordas caírem em linhas. */
 .youtubeInner {
-  max-width: 1140px;
-  margin-inline: auto;
+  grid-column: 2 / 12;
+  margin-inline-end: calc(var(--col) / 2 - var(--col-gap));
   display: flex;
   flex-direction: column;
   gap: var(--s4);
 }
+@media (min-width: 1101px) { .youtubeInner { grid-column: 3 / 24; } }
+/* tablet e celular: a caixa ocupa a largura toda (depois da regra base,
+   senão a base ganha) */
+@media (max-width: 900px) { .youtubeInner { grid-column: 1 / -1; margin-inline-end: 0; } }
