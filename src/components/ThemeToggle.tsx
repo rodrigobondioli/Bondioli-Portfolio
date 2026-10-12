@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import styles from "./ThemeToggle.module.css"
 
 /**
- * A barra lateral: idioma (EN / BR) em cima, o ícone do tema e o de baixar
- * o portfólio em Markdown (/portfolio.md) embaixo, em
- * pé no canto direito, no meio da altura da tela, em todas as páginas —
+ * A barra lateral, em pé na margem direita, em todas as páginas: idioma
+ * (EN / BR) no topo, na linha do "Get in touch"; o tema no meio da tela; e
+ * o de baixar o portfólio em Markdown (/portfolio.md) no pé —
  * desenho do Rodrigo a partir da referência "EN | PT ☼" (12/10). O tema
  * troca de verdade (dark é o padrão); o idioma, por enquanto, só mostra
  * como vai ficar.
@@ -58,15 +58,21 @@ export default function ThemeToggle() {
       >
         {tema === "dark" ? <Sol /> : <Lua />}
       </button>
-      {/* O portfólio inteiro em Markdown (/portfolio.md), pra baixar */}
+      {/* O portfólio inteiro em Markdown (/portfolio.md), pra baixar. O
+          ".md" escrito embaixo é o que diz o que é — a seta sozinha não. */}
       <a
-        className={`no-underline ${styles.button}`}
+        className={`no-underline ${styles.download}`}
         href="/portfolio.md"
         download="rodrigo-bondioli-portfolio.md"
         aria-label="Download portfolio as Markdown (.md)"
         title="Download portfolio (.md)"
       >
-        <Arquivo />
+        <span className={styles.button}>
+          <Arquivo />
+        </span>
+        <span className={styles.ext} aria-hidden="true">
+          .md
+        </span>
       </a>
     </div>
   )
