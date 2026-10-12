@@ -71,6 +71,10 @@
   justify-content: center;
   gap: var(--s1);
 }
+/* Mas as pontas encostam na margem (12/10): o primeiro na margem
+   esquerda, o último terminando na direita, o do meio no centro. */
+.stat:first-child { justify-content: flex-start; }
+.stat:last-child { justify-content: flex-end; }
 
 .statLabel {
   font-size: var(--t-body-sm);
@@ -127,7 +131,7 @@
   }
   /* empilhado, alinhar à esquerda: centrado, cada linha começaria num
      lugar diferente e a coluna de números sumiria */
-  .stat { justify-content: flex-start; }
+  .stat, .stat:last-child { justify-content: flex-start; }
   .statsInner > .stat { grid-column: 1 / -1; }
   /* Uma régua entre as linhas, igual à que corre em cima da faixa. Em três
      colunas a separação era o espaço; empilhado, espaço sozinho não separa
