@@ -325,6 +325,11 @@
 /* texto corrido do resultado e do fecho */
 .body { display: grid; gap: var(--s2); align-content: start; text-wrap: pretty; }
 .body p { margin: 0; }
+/* no desktop, linhas equilibradas, como nos capítulos: sem "be instead."
+   sobrando sozinho na última linha (pedido do Rodrigo) */
+@media (min-width: 1101px) {
+  .body p, .result > .body { text-wrap: balance; }
+}
 
 
 /* --- Blocos de mídia --- */
