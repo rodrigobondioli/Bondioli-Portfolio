@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { SpinningLogo } from "./Logo"
+import { useEffect, useRef, useState } from "react"
+import { Logo } from "./Logo"
 import styles from "./MeetingBar.module.css"
 
 const BOOKING =
@@ -11,8 +11,9 @@ const BOOKING =
  * Pílula flutuante de agendamento. Mesmo link do Framer.
  *
  * Desenho do brandbeet.com (12/10, pedido do Rodrigo): pílula pequena de
- * vidro com a nossa marca girando (o mesmo vento da capa) e "See if we're
- * a fit"; atrás dela, um desfoque progressivo no pé da tela — quatro
+ * vidro com a nossa marca e "See if we're a fit". A marca gira com o
+ * scroll — descendo, horário; subindo, anti-horário; parado, parada. Não é
+ * o vento da capa: aqui ela responde a quem está lendo. atrás dela, um desfoque progressivo no pé da tela — quatro
  * camadas de blur crescente, cada uma com a sua faixa de máscara — que
  * aparece e some junto com a pílula.
  *
@@ -45,6 +46,27 @@ export default function MeetingBar({
   entraApos?: number
 }) {
   const [visible, setVisible] = useState(false)
+  const marca = useRef<HTMLSpanElement>(null)
+
+  /* A marca gira com o scroll: 0.25° por pixel (uma volta a cada 1440px).
+     O Lenis já suaviza o scrollY, então a rotação herda a inércia dele. */
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    let raf = 0
+    const girar = () => {
+      raf = 0
+      if (marca.current) marca.current.style.rotate = `${window.scrollY * 0.25}deg`
+    }
+    const pedir = () => {
+      if (!raf) raf = requestAnimationFrame(girar)
+    }
+    girar()
+    window.addEventListener("scroll", pedir, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", pedir)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
 
   useEffect(() => {
     const check = () => {
@@ -90,7 +112,9 @@ export default function MeetingBar({
         tabIndex={visible ? undefined : -1}
       >
         <span className={styles.mark} aria-hidden="true">
-          <SpinningLogo size={24} />
+          <span ref={marca} className={styles.giro}>
+            <Logo size={28} />
+          </span>
         </span>
         <span className={styles.label}>{label}</span>
       </a>

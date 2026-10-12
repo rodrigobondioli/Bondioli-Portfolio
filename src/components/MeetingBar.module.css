@@ -40,7 +40,8 @@
   transition-duration: 400ms;
 }
 
-/* A marca num disco claro, como o selo girando de lá */
+/* A marca num disco claro, como o selo de lá. 28 dentro de 34: com 18 e
+   depois 24 sobrava disco demais em volta (pedido do Rodrigo). */
 .mark {
   flex: 0 0 auto;
   display: grid;
@@ -51,6 +52,8 @@
   background: #f1f1f1;
   color: #121211;
 }
+
+.giro { display: block; line-height: 0; will-change: rotate; }
 
 .label {
   font-size: 0.9375rem;

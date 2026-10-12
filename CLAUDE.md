@@ -231,8 +231,10 @@ antes — senão vira número oficial inventado.
 ## A pílula "See if we're a fit" (era a barra "Book a call")
 
 Desde 12/10/2026 o `MeetingBar` tem o desenho do brandbeet.com: pílula
-pequena de vidro, a marca girando (`SpinningLogo`, o vento da capa) num
-disco claro, e "See if we're a fit". Atrás dela, um desfoque progressivo
+pequena de vidro, a marca num disco claro (28 em 34) e "See if we're a
+fit". A marca gira **com o scroll** (0.25° por pixel: descendo, horário;
+subindo, anti-horário; parado, parada) — não com o vento da capa, que é
+aleatório. Pedido do Rodrigo. Atrás dela, um desfoque progressivo
 no pé da tela — quatro camadas de `backdrop-filter` (2/5/10/18px), cada
 uma com a sua faixa de máscara — que aparece e some junto. Uma camada só
 com blur forte faz emenda visível; em degraus ela some. A lógica de
