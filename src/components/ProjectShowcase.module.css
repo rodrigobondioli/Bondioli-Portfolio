@@ -13,6 +13,8 @@
   justify-content: space-between;
   gap: var(--s3);
 }
+/* No corpo do h3 (o mesmo do "Selected work"), sem caixa alta. Era h2
+   (48) e ficava maior que o título da seção (12/10, pedido do Rodrigo). */
 .name { margin: 0; text-transform: none; }
 .name a:hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
 

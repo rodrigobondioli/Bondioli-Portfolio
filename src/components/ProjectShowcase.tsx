@@ -50,7 +50,7 @@ export default function ProjectShowcase({
   return (
     <article className={styles.project}>
       <header className={styles.head}>
-        <h3 className={`h2 ${styles.name}`}>
+        <h3 className={`h3 ${styles.name}`}>
           <Link href={href} className="no-underline">
             {name}
           </Link>
