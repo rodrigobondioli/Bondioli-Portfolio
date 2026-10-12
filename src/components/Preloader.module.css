@@ -27,17 +27,7 @@
   letter-spacing: 0;
 }
 
-/* Os quatro cantos, como marcas de corte */
-.corner {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border: 0 solid rgba(18, 18, 17, 0.6);
-}
-.tl { top: var(--s2); left: var(--s2); border-top-width: 1px; border-left-width: 1px; }
-.tr { top: var(--s2); right: var(--s2); border-top-width: 1px; border-right-width: 1px; }
-.bl { bottom: var(--s2); left: var(--s2); border-bottom-width: 1px; border-left-width: 1px; }
-.br { bottom: var(--s2); right: var(--s2); border-bottom-width: 1px; border-right-width: 1px; }
+/* (Os quatro cantos em marca de corte saíram em 12/10, a pedido.) */
 
 /* Rótulo · marca · rótulo, no meio exato da tela */
 .row {

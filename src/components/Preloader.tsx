@@ -216,10 +216,6 @@ export default function Preloader() {
     <div ref={root} data-preloader="" className={styles.screen} aria-hidden="true">
       <div className={styles.bg} data-bg="" />
       <div className={styles.chrome} data-chrome="">
-        <span className={`${styles.corner} ${styles.tl}`} />
-        <span className={`${styles.corner} ${styles.tr}`} />
-        <span className={`${styles.corner} ${styles.bl}`} />
-        <span className={`${styles.corner} ${styles.br}`} />
         <div className={styles.row}>
           <span className={styles.left} data-left="">
             Loading

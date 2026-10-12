@@ -196,6 +196,22 @@
 
 .statement { padding-block: var(--s6) var(--s7); }
 .statementInner { display: flex; flex-direction: column; gap: var(--s6); }
+/* Acima do celular, o rótulo mora no vão do recuo da primeira linha (12/10,
+   referência do Rodrigo): rótulo e texto dividem a mesma célula, o rótulo
+   preso no canto de cima e sem passar do recuo. */
+@media (min-width: 641px) {
+  .statementInner { display: grid; gap: 0; }
+  .statementInner > * { grid-area: 1 / 1; }
+  .statementInner > .headLine {
+    align-self: start;
+    max-width: calc(var(--col) * var(--cols) / 3 - var(--col-gap));
+    /* Topo das maiúsculas da primeira linha, medido na Geist: com
+       entrelinha 1.2 ele fica a 0.244 do corpo abaixo do topo da caixa; o
+       do rótulo (mono, entrelinha 1), a 0.147. A diferença alinha os dois
+       em qualquer tamanho de tela, já que o corpo do texto é fluido. */
+    padding-top: calc(var(--t-h2) * 0.244 - var(--t-overline) * 0.147);
+  }
+}
 
 /* 48/57.6, largura inteira — medido no Framer (era Alpha Lyrae; Geist desde 12/10) */
 .statementText {
