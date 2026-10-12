@@ -51,13 +51,15 @@
 .left { justify-self: end; }
 .right { justify-self: start; }
 
-/* A marca no tamanho cheio (64 no celular, 96 acima de 640 — no tumulto
-   o degrau é 768, aqui é o 640 do site). Lá ela nasce a 22% e cresce; aqui
-   já nasce grande e gira (pedido do Rodrigo, 12/10). */
+/* O espaço da marca no tamanho cheio (64 no celular, 96 acima de 640 —
+   no tumulto o degrau é 768, aqui é o 640 do site). Ela nasce a 55% disso
+   (INICIO no Preloader.tsx) e cresce; o scale inicial está aqui pra o
+   primeiro quadro, antes do JS, já nascer no tamanho certo. */
 .mark {
   display: block;
   width: 64px;
   height: 64px;
+  transform: scale(0.55);
 }
 .mark svg { width: 100%; height: 100%; display: block; }
 @media (min-width: 641px) {

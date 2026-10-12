@@ -10,10 +10,9 @@ import styles from "./Preloader.module.css"
  * A abertura do site, portada do tumulto.ai (components/Loader.tsx de lá,
  * pedido do Rodrigo em 12/10) — com a marca dele no lugar do asterisco:
  *
- * 1. a marca, já no tamanho cheio (lá ela nasce pequena), gira enquanto o
- *    contador sobe de 0 a 100% e os rótulos ("Loading" ·
- *    "rodrigobondioli.com") se afastam;
- * 2. aos 100% ela desacelera até parar numa volta inteira;
+ * 1. a marca, a 55% do tamanho, gira enquanto o contador sobe de 0 a 100%
+ *    e os rótulos ("Loading" · "rodrigobondioli.com") se afastam;
+ * 2. aos 100% ela desacelera e cresce até o tamanho cheio;
  * 3. dá uma volta rápida e some num ponto, de onde a cortina #121211 (o
  *    fundo do tema escuro) cresce até cobrir a tela;
  * 4. a cortina sobe e revela a página.
@@ -36,7 +35,19 @@ const EXPO_OUT = "cubic-bezier(0.16, 1, 0.3, 1)"
 const EXPO_IN = "cubic-bezier(0.7, 0, 0.84, 0)"
 const power1InOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)
 
-const LOAD = 1800 // o contador
+/* Os tempos (ms). Eram os do tumulto (~6s no total); o Rodrigo achou
+   longo e com a marca parada tempo demais depois do giro (12/10). Agora
+   ~4,3s: contador mais curto, desaceleração mais curta e quase sem pausa
+   antes de sumir, cortina mais rápida. */
+const LOAD = 1400 // o contador e o giro de spinner
+const CRESCE = 600 // desacelera e cresce até o tamanho cheio
+const SEGURA = 120 // a pausa antes de sumir (era 350)
+const SOME = 450 // volta rápida até virar um ponto
+const CORTINA = 800 // o ponto cresce até cobrir a tela
+const SOBE = 750 // a cortina sobe
+/* a marca nasce a 55% e cresce até o tamanho cheio — no tumulto nasce a
+   22%; em 12/10 ela chegou a nascer cheia, e ficou grande demais */
+const INICIO = 0.55
 const ESPERA_FONTES = 2500
 
 /* Fora de qualquer efeito, de propósito: a marca tem que existir antes do
@@ -107,17 +118,17 @@ export default function Preloader() {
       frame = requestAnimationFrame(contar)
 
       /* 1–3. a marca: gira constante (spinner), desacelera crescendo até o
-         tamanho cheio parando numa volta inteira, segura 350ms e dá uma
-         volta rápida sumindo num ponto. */
-      const GIRO_FIM = LOAD + 1000 + 350 + 600 // 3750
+         tamanho cheio parando numa volta inteira, segura um instante e dá
+         uma volta rápida sumindo num ponto. */
+      const GIRO_FIM = LOAD + CRESCE + SEGURA + SOME
       const k = (ms: number) => ms / GIRO_FIM
       animacoes.push(
         mark.animate(
           [
-            { offset: 0, transform: "rotate(0deg) scale(1)", easing: "linear" },
-            { offset: k(LOAD), transform: "rotate(720deg) scale(1)", easing: EXPO_OUT },
-            { offset: k(LOAD + 1000), transform: "rotate(1080deg) scale(1)" },
-            { offset: k(LOAD + 1350), transform: "rotate(1080deg) scale(1)", easing: EXPO_IN },
+            { offset: 0, transform: `rotate(0deg) scale(${INICIO})`, easing: "linear" },
+            { offset: k(LOAD), transform: `rotate(720deg) scale(${INICIO})`, easing: EXPO_OUT },
+            { offset: k(LOAD + CRESCE), transform: "rotate(1080deg) scale(1)" },
+            { offset: k(LOAD + CRESCE + SEGURA), transform: "rotate(1080deg) scale(1)", easing: EXPO_IN },
             { offset: 1, transform: "rotate(1440deg) scale(0)" },
           ],
           { duration: GIRO_FIM, fill: "forwards" }
@@ -130,7 +141,7 @@ export default function Preloader() {
         animacoes.push(
           label.animate(
             [{ transform: "translateX(0)" }, { transform: `translateX(${lado === "left" ? -d : d}px)` }],
-            { duration: 1300, delay: 300, easing: EXPO_IN_OUT, fill: "forwards" }
+            { duration: LOAD - 300, delay: 200, easing: EXPO_IN_OUT, fill: "forwards" }
           )
         )
       }
@@ -146,36 +157,36 @@ export default function Preloader() {
         panel.style.visibility = "visible"
         animacoes.push(
           panel.animate([{ clipPath: ponto }, { clipPath: "inset(0px 0px 0px 0px)" }], {
-            duration: 1100,
+            duration: CORTINA,
             easing: EXPO_IN_OUT,
             fill: "forwards",
           })
         )
       })
-      depois(G + 450, () => {
+      depois(G + CORTINA * 0.4, () => {
         animacoes.push(
           chrome.animate([{ opacity: 1 }, { opacity: 0 }], {
-            duration: 350,
+            duration: 300,
             easing: "ease-out",
             fill: "forwards",
           })
         )
       })
-      depois(G + 1150, () => {
+      depois(G + CORTINA - 50, () => {
         bg.style.visibility = "hidden"
       })
 
       // 4. a cortina sobe e a página aparece por trás
-      depois(G + 1200, () => {
+      depois(G + CORTINA, () => {
         terminar()
         animacoes.push(
           panel.animate(
             [{ clipPath: "inset(0px 0px 0px 0px)" }, { clipPath: `inset(0px 0px ${innerHeight}px 0px)` }],
-            { duration: 950, easing: EXPO_IN_OUT, fill: "forwards" }
+            { duration: SOBE, easing: EXPO_IN_OUT, fill: "forwards" }
           )
         )
       })
-      depois(G + 1200 + 950 + 50, () => setFora(true))
+      depois(G + CORTINA + SOBE + 50, () => setFora(true))
     }
 
     /* As fontes antes de começar — no máximo 2,5s esperando. 200ms de
