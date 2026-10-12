@@ -27,6 +27,7 @@
   line-height: 1.3;
   text-align: right;
 }
+.services { font-family: var(--font-mono), ui-monospace, monospace; }
 .servicesLabel { font-weight: 600; }
 .servicesList { color: var(--ink-60); }
 

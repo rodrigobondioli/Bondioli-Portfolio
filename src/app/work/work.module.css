@@ -77,8 +77,10 @@
   line-height: 1.3;
 }
 
+/* números em Geist Mono: leem como dado, e os dígitos têm todos a mesma
+   largura enquanto o contador sobe — nada treme */
 .statNumber {
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 28px;
   font-weight: 600;
   line-height: 1.1;

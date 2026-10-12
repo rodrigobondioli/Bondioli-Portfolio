@@ -50,6 +50,7 @@
 
 /* As disciplinas e o link andam juntos, separados por barras. */
 .meta {
+  font-family: var(--font-mono), ui-monospace, monospace;
   display: flex;
   align-items: center;
   gap: var(--s2);
@@ -58,6 +59,7 @@
 }
 
 .year {
+  font-family: var(--font-mono), ui-monospace, monospace;
   color: rgb(128, 128, 128);
   /* no desktop o ano fecha a linha, depois das disciplinas — é a ordem
      que o Framer usa. No HTML ele vem antes, colado ao nome, porque é

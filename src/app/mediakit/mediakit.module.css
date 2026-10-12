@@ -43,6 +43,7 @@
 }
 
 .meta {
+  font-family: var(--font-mono), ui-monospace, monospace;
   display: flex;
   justify-content: space-between;
   gap: var(--s2);

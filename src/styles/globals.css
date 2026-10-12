@@ -259,13 +259,20 @@ input, textarea, select { font: inherit; color: inherit; }
 .h4 { font-size: var(--t-h4); line-height: 1.1;  text-transform: uppercase; }
 .h5 { font-size: var(--t-h5); line-height: 1.1;  text-transform: uppercase; }
 
+/* Geist Mono (12/10): o rótulo é dado, não frase. A mono já é espaçada de
+   fábrica — o 0.1em da Inter abria demais; ficou um respiro curto. Peso
+   500: em 600 a mono pequena empasta. */
 .overline {
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: var(--t-overline);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+
+/* Pra quem precisa da mono fora dos rótulos (metadados, números). */
+.mono { font-family: var(--font-mono), ui-monospace, monospace; }
 
 .body-lg { font-size: var(--t-body-lg); line-height: 1.3; }
 .body    { font-size: var(--t-body);    line-height: 1.3; }

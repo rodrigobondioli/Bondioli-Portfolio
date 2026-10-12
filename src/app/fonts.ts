@@ -1,13 +1,19 @@
 import localFont from "next/font/local"
 
 /**
- * Duas famílias, só. Decisão do Rodrigo em 21/09.
+ * Alpha Lyrae nos títulos e a Geist no resto. Decisão do Rodrigo em 21/09
+ * (Alpha + Inter); em 12/10 ele trocou a Inter pela Geist e a Geist Mono,
+ * e vai testar se a Alpha fica ou sai depois de ver o par.
  *
  * Alpha Lyrae  → títulos.  SIL Open Font License 1.1, © 2021 Fontfabric.
- * Inter        → todo o resto. SIL Open Font License 1.1.
+ * Geist        → todo o texto corrido. OFL 1.1, © 2023 Vercel + basement.studio.
+ * Geist Mono   → a "ficha técnica": rótulos em caixa alta (.overline),
+ *                metadados de projeto, números da faixa do herói, idioma,
+ *                a abertura. Texto que se lê como dado, não como frase.
  *
- * Ambas self-hospedadas em public/fonts, cada uma com o texto da licença
- * ao lado (OFL-AlphaLyrae.txt, OFL-Inter.txt) — a OFL pede que o aviso
+ * As duas Geist são variáveis (um arquivo cobre 100–900). Todas
+ * self-hospedadas em public/fonts, cada uma com o texto da licença
+ * ao lado (OFL-AlphaLyrae.txt, OFL-Geist.txt) — a OFL pede que o aviso
  * acompanhe o arquivo. A Alpha Lyrae não está no Google Fonts, e não
  * precisa: a licença vem gravada na própria fonte (Fontfabric, OFL 1.1,
  * sem restrição de uso na web). Conferido em 24/09. Nenhuma requisição externa, nem em
@@ -28,14 +34,17 @@ export const display = localFont({
 })
 
 export const body = localFont({
-  src: [
-    { path: "../../public/fonts/inter-latin-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "../../public/fonts/inter-latin-500-normal.woff2", weight: "500", style: "normal" },
-    { path: "../../public/fonts/inter-latin-600-normal.woff2", weight: "600", style: "normal" },
-    { path: "../../public/fonts/inter-latin-700-normal.woff2", weight: "700", style: "normal" },
-  ],
+  src: [{ path: "../../public/fonts/Geist-Variable.woff2", weight: "100 900", style: "normal" }],
   variable: "--font-body",
   display: "swap",
   fallback: ["system-ui", "sans-serif"],
   adjustFontFallback: "Arial",
+})
+
+export const mono = localFont({
+  src: [{ path: "../../public/fonts/GeistMono-Variable.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-mono",
+  display: "swap",
+  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+  adjustFontFallback: false,
 })

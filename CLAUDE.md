@@ -53,12 +53,17 @@ npm run start   # serve o build em localhost:3000
 
 ## Decisões que não são negociáveis sem falar com o Rodrigo
 
-- **Fontes:** só Alpha Lyrae (títulos) e Inter (resto). Ele mandou apagar o
-  resto. Alpha Lyrae é SIL OFL 1.1, auto-hospedada em `public/fonts`.
-  Ela não está no Google Fonts — é da Fontfabric, e a licença vem gravada
-  no arquivo. Os textos da OFL ficam ao lado das fontes (`OFL-*.txt`).
-  Em 23/09/2026 ele testou trocar tudo pela Geist e decidiu manter a Alpha:
-  é a assinatura do site, e a Geist é a cara de SaaS.
+- **Fontes:** Alpha Lyrae (títulos), Geist (texto) e Geist Mono (a "ficha
+  técnica": `.overline`, metadados de projeto, "Services", números da
+  faixa do herói, EN/BR, a abertura — texto que se lê como dado). Todas
+  OFL 1.1, auto-hospedadas em `public/fonts`, com o texto da licença ao
+  lado (`OFL-*.txt`); as Geist são variáveis, um arquivo cada. Alpha
+  Lyrae é da Fontfabric, não está no Google Fonts.
+  Histórico: era Alpha + Inter (21/09). Em 23/09 ele testou a Geist no
+  lugar de tudo e manteve a Alpha — é a assinatura do site. Em 12/10/2026
+  trocou a Inter pela Geist + Geist Mono; a Alpha fica por enquanto, ele
+  vai testar o par antes de decidir. A Inter está em
+  `_to_delete/2026-10-12-inter/`.
 - **Espaçamento:** sete passos, `--s1` a `--s7` em `globals.css`. O Framer tinha
   acumulado 19 valores onde o sistema documentava 7. Não inventar um oitavo.
 - **Réguas** (as linhas curtas ao lado dos títulos) têm largura fixa por
