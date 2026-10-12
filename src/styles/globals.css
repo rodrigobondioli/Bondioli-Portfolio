@@ -54,14 +54,15 @@
    * não cumpria em nenhum lugar.                                          */
   /* Uma curva só, sem degrau. Até 480 a margem é 16 (o --s2, celular);
      de 480 a 640 ela sobe em linha reta até encontrar os 6vw; daí pra
-     cima é 6vw, travado em 124 (que só chega em ~2070px). As três pernas
-     se encostam nos mesmos valores nas junções (16 em 480, 38.4 em 640),
-     então arrastar a janela não produz salto nenhum.
+     cima é 6vw, travado em 56 — que chega em ~933px. Ou seja: no desktop
+     a margem é 56 em tudo. As pernas se encostam nos mesmos valores nas
+     junções (16 em 480, 38.4 em 640, 56 em 933), então arrastar a janela
+     não produz salto nenhum.
 
-     Era 8.6vw, o valor do Framer — 124px de cada lado já em 1440, 17% da
-     tela só de margem. Em 22/09/2026 o Rodrigo decidiu soltar a paridade
-     aqui e ir de 6vw: 86px em 1440, 77 em 1280, 54 em 900. */
-  --gutter: max(16px, min(14vw - 51.2px, 6vw, 124px));
+     Histórico: 8.6vw/124 do Framer (124px de cada lado já em 1440); 6vw/124
+     em 22/09/2026 (86 em 1440); 56 fixo no desktop em 12/10/2026, os dois
+     por decisão do Rodrigo. */
+  --gutter: max(16px, min(14vw - 51.2px, 6vw, 56px));
   --container: none;   /* o Framer nao limita: 100% - gutter dos dois lados */
   --measure: 68ch;   /* medida máxima de texto corrido */
 

@@ -148,17 +148,18 @@ largura** — foi o que deixou esse passar: 844 de largura é "desktop".
 
 **O gutter não usa media query.** É uma curva só:
 
-    --gutter: max(16px, min(14vw - 51.2px, 6vw, 124px));
+    --gutter: max(16px, min(14vw - 51.2px, 6vw, 56px));
 
 Até 480 dá 16 (celular). De 480 a 640 sobe em reta até encostar
-exatamente nos 6vw. De 640 pra cima é 6vw, travado em 124 (que só chega
-em ~2070px). As três pernas se encontram nos mesmos valores nas junções —
+exatamente nos 6vw. De 640 pra cima é 6vw, travado em **56** — que chega em
+~933px. **No desktop a margem é 56 em tudo**, inclusive nas laterais da
+capa (decisão do Rodrigo, 12/10/2026). As três pernas se encontram nos mesmos valores nas junções —
 arrastar a janela não produz salto. O `@media` que existia aqui fazia 55px
 virar 16px ao cruzar 641.
 
-**Era 8.6vw, o valor do Framer.** Em 22/09/2026 o Rodrigo decidiu soltar a
-paridade só aqui: 8.6vw dava 124px de cada lado já em 1440 (17% da tela de
-margem). Com 6vw são 86 em 1440, 77 em 1280, 54 em 900. O resto do layout
+**Era 8.6vw, o valor do Framer.** Em 22/09/2026 o Rodrigo soltou a
+paridade aqui: 8.6vw dava 124px de cada lado já em 1440. Foi pra 6vw (86 em
+1440) e, em 12/10/2026, pra 56 fixo no desktop. O resto do layout
 continua medido contra o Framer — comparar posições horizontais com ele
 agora tem que descontar a diferença de margem.
 

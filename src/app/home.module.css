@@ -6,11 +6,14 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   padding: var(--gutter-poster, 32px);
+  /* as laterais seguem a margem do site (56 no desktop, 16 no celular);
+     o pôster continua com a borda própria em cima e embaixo */
+  padding-inline: var(--gutter);
   overflow: hidden;
 }
 
-/* Exceção de pôster: 32px em todas as bordas, sem o gutter de 124px.
-   Está documentada, não é descuido. */
+/* Exceção de pôster só em cima e embaixo: 32px. Nas laterais a capa segue
+   a margem do site desde 12/10 ("56px em tudo", pedido do Rodrigo). */
 /* O piso desceu de 20 pra 16 junto com o resto do site: no celular a
    margem é a mesma em toda página. O teto de 32 fica — aqui a borda é
    igual nos quatro lados, é pôster, não coluna de texto. */

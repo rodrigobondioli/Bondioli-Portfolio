@@ -1,7 +1,7 @@
 /* =========================================================================
    /work — medidas tiradas do Framer publicado (getComputedStyle), nao do olho.
 
-   Desktop: gutter 124, sem largura maxima de conteudo (o Framer nao limita).
+   Desktop: gutter 56 (era 124 no Framer), sem largura maxima de conteudo.
    Os respiros grandes sao 176 / 124 / 88 / 56 / 32 / 16 / 8 — os mesmos
    passos do design system, aqui escritos como --s7..--s1.
    ========================================================================= */
