@@ -1,14 +1,17 @@
 /* Em pé na margem direita (centrada nela; no desktop a margem é 56), da
    altura da tela inteira menos o respiro da barra do topo em cima e
    embaixo (12/10, desenho do Rodrigo): EN / BR em cima, na linha do "Get
-   in touch"; o tema no meio exato da tela; o .md embaixo, à mesma
-   distância do pé que o idioma tem do topo. Três linhas `1fr auto 1fr`
+   in touch"; o tema no meio; o .md embaixo, logo acima da faixa de
+   números da /work. Três linhas `1fr auto 1fr`
    seguram o do meio no centro mesmo com as pontas de alturas diferentes.
    Por cima de tudo, menos da abertura. */
 .rail {
   position: fixed;
   top: var(--s3);
-  bottom: var(--s3);
+  /* o pé fica acima da faixa de números da /work (88 de altura, presa no
+     fundo da primeira tela), com o mesmo respiro do topo — e não na linha
+     dos números (pedido do Rodrigo, 12/10). */
+  bottom: calc(88px + var(--s3));
   right: calc(var(--gutter) / 2);
   z-index: 200;
   translate: 50% 0;
