@@ -6,12 +6,12 @@
   padding-block: var(--s7) var(--s6);
 }
 
-/* No tema escuro, sem degradê: comprimido no respiro de cima ele virava
-   uma faixa verde-oliva encardida (12/10, "ficou muito feio"), e esticado
-   punha o texto claro sobre amarelo. O fecho começa direto no escuro; o
-   amarelo termina com um respiro próprio na seção do YouTube (work). */
+/* No tema escuro, o mesmo degradê do claro, só que saindo do grafite da
+   seção do vídeo (#1E1E1C) em vez do amarelo — com o texto claro, ele
+   pode correr a seção inteira. (Do amarelo pro escuro virava uma faixa
+   verde-oliva; foi por isso que a seção do vídeo virou grafite.) */
 :global([data-theme="dark"]) .closing {
-  background: var(--bg);
+  background: linear-gradient(#1e1e1c 0%, var(--bg) 100%);
 }
 
 .inner {
