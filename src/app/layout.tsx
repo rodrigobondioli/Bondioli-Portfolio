@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Preloader from "@/components/Preloader"
 import ThemeToggle from "@/components/ThemeToggle"
 import GridLines from "@/components/GridLines"
-import { display, body, mono } from "./fonts"
+import { body, mono } from "./fonts"
 // o CSS que o Lenis pede: altura automática no html, trava que respeita
 // `stop()`, iframes sem ponteiro durante o scroll suave
 import "lenis/dist/lenis.css"
@@ -40,7 +40,7 @@ export default function RootLayout({
        servidor não tem como ter. */
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={`${body.variable} ${mono.variable}`}
       data-theme="dark"
       suppressHydrationWarning
     >

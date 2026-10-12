@@ -193,12 +193,13 @@
 .statement { padding-block: var(--s6) var(--s7); }
 .statementInner { display: flex; flex-direction: column; gap: var(--s6); }
 
-/* Alpha Lyrae 48/57.6, largura inteira — medido no Framer */
+/* 48/57.6, largura inteira — medido no Framer (era Alpha Lyrae; Geist desde 12/10) */
 .statementText {
   font-family: var(--font-display), system-ui, sans-serif;
   font-weight: 500;
   font-size: var(--t-h2);
   line-height: 1.2;
+  letter-spacing: -0.03em;
 }
 
 .headLine {

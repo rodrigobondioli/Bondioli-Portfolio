@@ -11,7 +11,7 @@
   border-bottom: var(--hairline) solid var(--rule);
 }
 
-/* Alpha Lyrae, um degrau abaixo do manifesto.
+/* Fonte dos títulos (Geist desde 12/10), um degrau abaixo do manifesto.
    A lista nasceu com dez nomes em --t-h2 e ocupava três linhas. Com
    dezenove, o mesmo corpo dava nove linhas num laptop de 1440 e onze num
    celular: uma parede de tipo de display, não uma lista. Um degrau abaixo
@@ -25,9 +25,10 @@
   font-weight: 500;
   font-size: var(--t-h3);
   line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
-/* Sem linha em repouso: nesta escala (Alpha Lyrae em 48) um fio fixo
+/* Sem linha em repouso: nesta escala (título em 48) um fio fixo
    embaixo de cada palavra suja a mancha inteira — vira um monte de
    risquinho, não uma lista. A linha é a resposta ao hover, e só. */
 .brand {

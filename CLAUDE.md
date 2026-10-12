@@ -53,17 +53,17 @@ npm run start   # serve o build em localhost:3000
 
 ## Decisões que não são negociáveis sem falar com o Rodrigo
 
-- **Fontes:** Alpha Lyrae (títulos), Geist (texto) e Geist Mono (a "ficha
-  técnica": `.overline`, metadados de projeto, "Services", números da
-  faixa do herói, EN/BR, a abertura — texto que se lê como dado). Todas
-  OFL 1.1, auto-hospedadas em `public/fonts`, com o texto da licença ao
-  lado (`OFL-*.txt`); as Geist são variáveis, um arquivo cada. Alpha
-  Lyrae é da Fontfabric, não está no Google Fonts.
-  Histórico: era Alpha + Inter (21/09). Em 23/09 ele testou a Geist no
-  lugar de tudo e manteve a Alpha — é a assinatura do site. Em 12/10/2026
-  trocou a Inter pela Geist + Geist Mono; a Alpha fica por enquanto, ele
-  vai testar o par antes de decidir. A Inter está em
-  `_to_delete/2026-10-12-inter/`.
+- **Fonte: só a Geist.** Geist em tudo (títulos e texto) e Geist Mono na
+  "ficha técnica" (`.overline`, metadados de projeto, "Services", números
+  da faixa do herói, EN/BR, a abertura — texto que se lê como dado). OFL
+  1.1, variáveis (um arquivo cada), auto-hospedadas em `public/fonts` com a
+  licença ao lado (`OFL-Geist.txt`). `--font-display` ainda existe, mas
+  aponta pra Geist; os títulos têm entreletra negativa (h1 -0.04em, h2
+  -0.03em, resto -0.02em) — a Geist grande no 0 fica frouxa.
+  Histórico: Alpha Lyrae (títulos) + Inter (resto) desde 21/09. Em 23/09
+  ele testou a Geist e manteve a Alpha. Em 12/10/2026 trocou a Inter pela
+  Geist e, no mesmo dia, tirou a Alpha também: a Geist é a única família
+  do site. Inter e Alpha estão em `_to_delete/2026-10-12-*`.
 - **Espaçamento:** sete passos, `--s1` a `--s7` em `globals.css`. O Framer tinha
   acumulado 19 valores onde o sistema documentava 7. Não inventar um oitavo.
 - **Réguas** (as linhas curtas ao lado dos títulos) têm largura fixa por
