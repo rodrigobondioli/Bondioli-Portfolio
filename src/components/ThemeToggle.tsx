@@ -4,7 +4,8 @@ import { useEffect, useState } from "react"
 import styles from "./ThemeToggle.module.css"
 
 /**
- * A barra lateral: idioma (EN / BR) em cima e o ícone do tema embaixo, em
+ * A barra lateral: idioma (EN / BR) em cima, o ícone do tema e o de baixar
+ * o portfólio em Markdown (/portfolio.md) embaixo, em
  * pé no canto direito, no meio da altura da tela, em todas as páginas —
  * desenho do Rodrigo a partir da referência "EN | PT ☼" (12/10). O tema
  * troca de verdade (dark é o padrão); o idioma, por enquanto, só mostra
@@ -57,6 +58,16 @@ export default function ThemeToggle() {
       >
         {tema === "dark" ? <Sol /> : <Lua />}
       </button>
+      {/* O portfólio inteiro em Markdown (/portfolio.md), pra baixar */}
+      <a
+        className={`no-underline ${styles.button}`}
+        href="/portfolio.md"
+        download="rodrigo-bondioli-portfolio.md"
+        aria-label="Download portfolio as Markdown (.md)"
+        title="Download portfolio (.md)"
+      >
+        <Arquivo />
+      </a>
     </div>
   )
 }
@@ -68,6 +79,17 @@ function Sol() {
       {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
         <line key={a} x1="10" y1="1.8" x2="10" y2="3.6" transform={`rotate(${a} 10 10)`} />
       ))}
+    </svg>
+  )
+}
+
+/* folha com a dobra no canto e uma seta pra baixo: "baixar o arquivo" */
+function Arquivo() {
+  return (
+    <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M11.5 2.5H5.5a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V6.5l-4-4Z" />
+      <path d="M11.5 2.5v4h4" />
+      <path d="M10 9.5v5M7.8 12.4 10 14.6l2.2-2.2" />
     </svg>
   )
 }
