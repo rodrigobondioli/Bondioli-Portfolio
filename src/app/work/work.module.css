@@ -342,9 +342,22 @@
   gap: var(--s4);
 }
 @media (min-width: 1101px) { .youtubeInner { grid-column: 3 / 24; } }
-/* no escuro o fecho não continua o amarelo (corte limpo, sem degradê):
-   a seção amarela fecha com o próprio respiro */
-:global([data-theme="dark"]) .youtube { padding-bottom: var(--s6); }
+/* No escuro (o padrão) a seção do vídeo do canal é grafite #1E1E1C, não
+   amarela — pedido do Rodrigo (12/10); é o cinza dos cards do tumulto. O
+   texto volta pros tokens claros do tema (a classe on-accent, que é do
+   amarelo, deixava ele escuro). Fecha com o próprio respiro: o fecho
+   começa direto no fundo, sem degradê. No claro, o amarelo de sempre. */
+:global([data-theme="dark"]) .youtube {
+  background: #1e1e1c;
+  padding-bottom: var(--s6);
+  --ink:    #f1f1f1;
+  --ink-60: rgba(241, 241, 241, 0.6);
+  --ink-25: rgba(241, 241, 241, 0.25);
+  --ink-10: rgba(241, 241, 241, 0.1);
+  --rule:   rgba(241, 241, 241, 0.16);
+  color: var(--ink);
+}
+:global([data-theme="dark"]) .youtube :global(.rule) { background: var(--rule); }
 /* tablet e celular: a caixa ocupa a largura toda (depois da regra base,
    senão a base ganha) */
 @media (max-width: 900px) { .youtubeInner { grid-column: 1 / -1; margin-inline-end: 0; } }
