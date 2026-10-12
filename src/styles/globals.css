@@ -32,6 +32,9 @@
   --accent-pink:    #ff00d7;
   --accent-cyan:    #00fff6;
 
+  /* vidro da faixa de números do herói */
+  --glass:          rgba(242, 242, 242, 0.2);
+
   --ok:             #1f8f5e;
   --warn:           #c77b00;
   --err:            #d42d2d;
@@ -90,6 +93,38 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --fast: 160ms;
   --slow: 420ms;
+}
+
+/* ---------- 1b. Tema escuro (o padrão desde 12/10/2026) ---------- *
+ * Duas versões, dark e light, escolha do Rodrigo; dark é a padrão. O tema
+ * mora no `data-theme` do <html>, posto por um script no <head> antes da
+ * primeira pintura (sem piscar o claro). Trocar o tema é só trocar os
+ * tokens: tudo que usa --bg, --ink, --rule e companhia vira junto.
+ *
+ * O light é o site como sempre foi: os tokens de :root acima. */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:      #121211;
+  --bg-dark: #121211;   /* as páginas de projeto já eram escuras: mesmo fundo */
+  --ink:     #f1f1f1;
+  --ink-60:  rgba(241, 241, 241, 0.6);
+  --ink-25:  rgba(241, 241, 241, 0.25);
+  --ink-10:  rgba(241, 241, 241, 0.1);
+  --paper:   #1c1c1b;
+  --rule:    rgba(241, 241, 241, 0.12);
+  --glass:   rgba(18, 18, 17, 0.4);
+}
+
+/* O que tem fundo próprio claro (o amarelo das seções de destaque) volta
+   pros tokens claros em qualquer tema: texto escuro sobre o amarelo. */
+.on-accent {
+  --ink:     #101010;
+  --ink-60:  rgba(16, 16, 16, 0.6);
+  --ink-25:  rgba(16, 16, 16, 0.25);
+  --ink-10:  rgba(16, 16, 16, 0.1);
+  --paper:   #ffffff;
+  --rule:    rgba(16, 16, 16, 0.1);
+  color: var(--ink);
 }
 
 /* ---------- 2. Reset ---------- */

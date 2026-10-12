@@ -10,7 +10,8 @@
   padding-inline: var(--s3);
   border-radius: var(--r-pill);
   background: var(--accent-pink);
-  color: var(--ink);
+  /* preto sobre o rosa nos dois temas */
+  color: #101010;
   font-size: 15px;
   font-weight: 400;
   line-height: 20px;

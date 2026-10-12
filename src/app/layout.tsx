@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Preloader from "@/components/Preloader"
+import ThemeToggle from "@/components/ThemeToggle"
 import { display, body } from "./fonts"
 // o CSS que o Lenis pede: altura automática no html, trava que respeita
 // `stop()`, iframes sem ponteiro durante o scroll suave
@@ -39,8 +40,19 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${display.variable} ${body.variable}`}
+      data-theme="dark"
       suppressHydrationWarning
     >
+      <head>
+        {/* O tema antes da primeira pintura: dark é o padrão; light só se a
+            pessoa escolheu (ThemeToggle grava em localStorage). Inline e
+            síncrono de propósito — depois da pintura seria um piscar. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{document.documentElement.dataset.theme=localStorage.getItem("tema")==="light"?"light":"dark"}catch(e){}`,
+          }}
+        />
+      </head>
       {/* Extensões (ColorZilla, gramática, gerenciadores de senha) injetam
           atributos no <body> antes do React montar. O aviso de hidratação
           que sai disso não é do nosso código e não tem o que consertar. */}
@@ -51,6 +63,7 @@ export default function RootLayout({
           <style>{`[data-preloader]{display:none!important}`}</style>
         </noscript>
         <Preloader />
+        <ThemeToggle />
         {children}
       </body>
     </html>

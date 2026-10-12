@@ -4,7 +4,8 @@
   display: grid;
   place-items: center;
   padding: var(--s5) var(--gutter);
-  background-color: var(--ink);
+  /* escuro nos dois temas: o texto e o cartão são brancos */
+  background-color: var(--bg-dark);
   background-image: url("/images/thanks-bg.webp");
   background-size: cover;
   background-position: center;

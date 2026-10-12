@@ -6,6 +6,14 @@
   padding-block: var(--s7) var(--s6);
 }
 
+/* No tema escuro o degradê tem que terminar antes do texto: o amarelo vira
+   o fundo escuro dentro do respiro de cima (--s7), e o título e o
+   formulário — claros — já nascem sobre o escuro. Com o degradê na seção
+   inteira, o começo do texto caía num amarelo-oliva com letra clara. */
+:global([data-theme="dark"]) .closing {
+  background: linear-gradient(var(--accent) 0, var(--bg) var(--s7));
+}
+
 .inner {
   display: flex;
   flex-direction: column;

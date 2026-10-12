@@ -193,7 +193,7 @@ export default async function MediaKitPage() {
             <ul className={s.pairs}>
               {kit.performance.map(({ title, note }) => (
                 <li key={title}>
-                  <div className={`${s.tile} ${s.accent}`}>
+                  <div className={`on-accent ${s.tile} ${s.accent}`}>
                     <h3 className="h4">{title}</h3>
                     <p className="body">{note}</p>
                   </div>

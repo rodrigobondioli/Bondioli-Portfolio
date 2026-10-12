@@ -10,11 +10,12 @@ import styles from "./Preloader.module.css"
  * A abertura do site, portada do tumulto.ai (components/Loader.tsx de lá,
  * pedido do Rodrigo em 12/10) — com a marca dele no lugar do asterisco:
  *
- * 1. a marca pequena gira como spinner enquanto o contador sobe de 0 a
- *    100% e os rótulos ("Loading" · "rodrigobondioli.com") se afastam;
- * 2. aos 100% ela desacelera e cresce até o tamanho cheio;
- * 3. dá uma volta rápida e some num ponto, de onde a cortina rosa cresce
- *    até cobrir a tela;
+ * 1. a marca, já no tamanho cheio (lá ela nasce pequena), gira enquanto o
+ *    contador sobe de 0 a 100% e os rótulos ("Loading" ·
+ *    "rodrigobondioli.com") se afastam;
+ * 2. aos 100% ela desacelera até parar numa volta inteira;
+ * 3. dá uma volta rápida e some num ponto, de onde a cortina #121211 (o
+ *    fundo do tema escuro) cresce até cobrir a tela;
  * 4. a cortina sobe e revela a página.
  *
  * Lá é GSAP; aqui são as animações nativas do navegador (WAAPI), com as
@@ -113,8 +114,8 @@ export default function Preloader() {
       animacoes.push(
         mark.animate(
           [
-            { offset: 0, transform: "rotate(0deg) scale(0.22)", easing: "linear" },
-            { offset: k(LOAD), transform: "rotate(720deg) scale(0.22)", easing: EXPO_OUT },
+            { offset: 0, transform: "rotate(0deg) scale(1)", easing: "linear" },
+            { offset: k(LOAD), transform: "rotate(720deg) scale(1)", easing: EXPO_OUT },
             { offset: k(LOAD + 1000), transform: "rotate(1080deg) scale(1)" },
             { offset: k(LOAD + 1350), transform: "rotate(1080deg) scale(1)", easing: EXPO_IN },
             { offset: 1, transform: "rotate(1440deg) scale(0)" },

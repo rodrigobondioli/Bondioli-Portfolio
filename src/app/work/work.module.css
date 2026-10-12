@@ -18,6 +18,10 @@
 }
 
 .heroInner {
+  /* o título não vai até a margem direita: lá fica o botão de tema, em pé
+     (12/10). --s7 de folga a mais. */
+  max-width: calc(100% - var(--s7));
+  justify-self: start;
   position: relative;
   z-index: 2;
   display: flex;
@@ -37,7 +41,7 @@
   align-items: center;
   padding-inline: var(--gutter);
   border-top: var(--hairline) solid var(--rule);
-  background: rgba(242, 242, 242, 0.2);
+  background: var(--glass);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }

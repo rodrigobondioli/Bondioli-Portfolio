@@ -74,7 +74,8 @@ async function writeToClipboard(text: string): Promise<boolean> {
 export default function CopyEmail({
   email = "hello@rodrigobondioli.com",
   copiedLabel = "Email copied",
-  color = "#101010",
+  /* a cor de quem está em volta: serve os dois temas (12/10) */
+  color = "currentColor",
   underlineOffset = 3,
   underlineThickness = 1,
   perspective = 400,
