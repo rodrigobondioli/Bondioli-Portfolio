@@ -299,8 +299,11 @@ mais próxima.
 
 Dark (`#121211`) é o padrão; light é o site como era. O tema mora no
 `data-theme` do `<html>`, posto por um script no `<head>` antes da primeira
-pintura; o `ThemeToggle` (em pé, no meio da margem direita) troca e grava
-em `localStorage`. Trocar o tema é trocar os tokens (`--bg`, `--ink`,
+pintura; o `ThemeToggle` troca e grava em `localStorage`. Ele mora numa barra em
+pé na margem direita: EN / BR no topo, na linha do "Get in touch"; o
+tema no meio; e o download do portfólio (`/portfolio.md`, com o rótulo
+".md" — só a seta não dizia o que baixava) logo acima da faixa de
+números da `/work`, 24px acima da linha dela, e não dentro dela. Trocar o tema é trocar os tokens (`--bg`, `--ink`,
 `--rule`...). O que tem fundo próprio claro (o amarelo das seções de
 destaque) usa `.on-accent`, que devolve os tokens escuros de texto.
 
