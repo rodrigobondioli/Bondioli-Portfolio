@@ -83,13 +83,16 @@ function Sol() {
   )
 }
 
-/* folha com a dobra no canto e uma seta pra baixo: "baixar o arquivo" */
+/* Seta caindo numa base: "baixar". No mesmo traço do sol (1.4, pontas
+   redondas). A seta é um grupo à parte pra poder descer no hover. */
 function Arquivo() {
   return (
     <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M11.5 2.5H5.5a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V6.5l-4-4Z" />
-      <path d="M11.5 2.5v4h4" />
-      <path d="M10 9.5v5M7.8 12.4 10 14.6l2.2-2.2" />
+      <g className={styles.seta}>
+        <path d="M10 3v9.5" />
+        <path d="M6.2 9 10 12.8 13.8 9" />
+      </g>
+      <path d="M4 16.5h12" />
     </svg>
   )
 }

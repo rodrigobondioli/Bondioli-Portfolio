@@ -26,6 +26,18 @@
   transition: rotate 600ms var(--ease);
 }
 button.button:hover { rotate: 45deg; }
+
+/* O ícone de baixar anima no hover como o sol: a seta desce até a base e
+   volta, uma vez, como se caísse no lugar. */
+.seta { transition: translate 300ms var(--ease); }
+a.button:hover .seta,
+a.button:focus-visible .seta { animation: cair 700ms var(--ease); }
+@keyframes cair {
+  0%   { translate: 0 0; }
+  40%  { translate: 0 3px; }
+  70%  { translate: 0 -1px; }
+  100% { translate: 0 0; }
+}
 .button:focus-visible { outline-offset: 2px; }
 
 /* EN / BR, um embaixo do outro, em cima do ícone */
@@ -61,4 +73,5 @@ button.button:hover { rotate: 45deg; }
 
 @media (prefers-reduced-motion: reduce) {
   .button { transition: none; }
+  a.button:hover .seta, a.button:focus-visible .seta { animation: none; }
 }
