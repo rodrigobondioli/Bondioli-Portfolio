@@ -21,6 +21,12 @@ mesma cara do Framer, código e design system novos.**
 
 As URLs antigas foram mantidas. Só essa mudou.
 
+**Cases fora do ar (12/10/2026):** Filmboss e C-Carbon saíram, a pedido.
+Não foram apagados: ficam como `"draft": true` no `projects.json` (rascunho
+não entra em lista nenhuma e a página dá 404), as imagens estão em
+`_originais/fora-do-ar-2026-10-12/` com um LEIA-ME de como voltar, e as
+URLs antigas redirecionam pra `/work` (307, porque podem voltar).
+
 ## Como trabalhar nisso
 
 O jeito que funcionou, e que vale repetir: **medir o Framer, não estimar.**
