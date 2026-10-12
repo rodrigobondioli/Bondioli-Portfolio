@@ -11,6 +11,7 @@ import StripReveal from "@/components/StripReveal"
 import CaseFilm from "@/components/case/CaseFilm"
 import LitText from "@/components/case/LitText"
 import Tour from "@/components/case/Tour"
+import HoverZoom from "@/components/case/HoverZoom"
 import { around } from "@/lib/projects"
 import { imageSize } from "@/lib/imageSize"
 import { tattoaria, type Chapter, type Media } from "@/content/cases/tattoaria"
@@ -55,6 +56,7 @@ function Figure({ m, className = "" }: { m: Media; className?: string }) {
         loading="lazy"
         width={size?.w}
         height={size?.h}
+        data-zoom=""
         style={{ objectPosition: m.focus ?? "50% 50%" }}
       />
     </StripReveal>
@@ -162,6 +164,7 @@ export default function TattoariaCase() {
   return (
     <>
       <SmoothScroll />
+      <HoverZoom />
       <SiteNav dark brandHref="/work" />
 
       <main className={`on-dark ${s.page}`}>
