@@ -58,7 +58,8 @@ npm run start   # serve o build em localhost:3000
   da faixa do herói, EN/BR, a abertura — texto que se lê como dado). OFL
   1.1, variáveis (um arquivo cada), auto-hospedadas em `public/fonts` com a
   licença ao lado (`OFL-Geist.txt`). `--font-display` ainda existe, mas
-  aponta pra Geist; os títulos têm entreletra negativa (h1 -0.04em, h2
+  aponta pra Geist. Pesos: títulos em 300, só o h1 em 400 (o mais
+  grosso, a pedido). Os títulos têm entreletra negativa (h1 -0.04em, h2
   -0.03em, resto -0.02em) — a Geist grande no 0 fica frouxa.
   Histórico: Alpha Lyrae (títulos) + Inter (resto) desde 21/09. Em 23/09
   ele testou a Geist e manteve a Alpha. Em 12/10/2026 trocou a Inter pela

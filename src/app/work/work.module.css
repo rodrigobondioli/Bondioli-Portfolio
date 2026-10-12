@@ -205,18 +205,19 @@
   .statementInner > .headLine {
     align-self: start;
     max-width: calc(var(--col) * var(--cols) / 3 - var(--col-gap));
-    /* Topo das maiúsculas da primeira linha, medido na Geist: com
-       entrelinha 1.2 ele fica a 0.244 do corpo abaixo do topo da caixa; o
-       do rótulo (mono, entrelinha 1), a 0.147. A diferença alinha os dois
-       em qualquer tamanho de tela, já que o corpo do texto é fluido. */
-    padding-top: calc(var(--t-h2) * 0.244 - var(--t-overline) * 0.147);
+    /* Pela linha de base (o Rodrigo pediu o rótulo sentado na base da
+       primeira linha, não no topo dela). Medido na Geist: com entrelinha
+       1.2 a base fica a 0.954 do corpo abaixo do topo da caixa; a do
+       rótulo (mono, entrelinha 1), a 0.857. A diferença alinha os dois em
+       qualquer tela, já que o corpo do texto é fluido. */
+    padding-top: calc(var(--t-h2) * 0.954 - var(--t-overline) * 0.857);
   }
 }
 
 /* 48/57.6, largura inteira — medido no Framer (era Alpha Lyrae; Geist desde 12/10) */
 .statementText {
   font-family: var(--font-display), system-ui, sans-serif;
-  font-weight: 500;
+  font-weight: 300;
   font-size: var(--t-h2);
   line-height: 1.2;
   letter-spacing: -0.03em;

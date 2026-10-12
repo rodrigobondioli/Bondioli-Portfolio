@@ -30,7 +30,7 @@
   min-width: 100cqw;
   padding-right: var(--s2);
   font-family: var(--font-display), system-ui, sans-serif;
-  font-weight: 500;
+  font-weight: 300;
   font-size: min(288px, 20vw);
   line-height: 1;
   letter-spacing: -0.05em;
