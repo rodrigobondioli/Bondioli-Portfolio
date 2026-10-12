@@ -280,6 +280,8 @@
    desktop vai até a coluna 9 de 24 (3 colunas = 6 linhas antes do meio),
    no tablet até a 5 de 12. Fica quadrado — não estica junto com o texto. */
 .aboutVideo {
+  position: relative;
+  z-index: 2;
   grid-column: 1 / 6;
   align-self: start;
   aspect-ratio: 1;
@@ -340,6 +342,9 @@
   gap: var(--s4);
 }
 @media (min-width: 1101px) { .youtubeInner { grid-column: 3 / 24; } }
+/* no escuro o fecho não continua o amarelo (corte limpo, sem degradê):
+   a seção amarela fecha com o próprio respiro */
+:global([data-theme="dark"]) .youtube { padding-bottom: var(--s6); }
 /* tablet e celular: a caixa ocupa a largura toda (depois da regra base,
    senão a base ganha) */
 @media (max-width: 900px) { .youtubeInner { grid-column: 1 / -1; margin-inline-end: 0; } }

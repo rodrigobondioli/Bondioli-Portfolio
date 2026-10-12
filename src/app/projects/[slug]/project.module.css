@@ -23,6 +23,8 @@
    O `width`/`height` no <img> vem do arquivo, lido em tempo de build, então
    o navegador já reserva a altura certa antes da imagem chegar. */
 .hero img {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 100%;
   height: auto;
@@ -186,7 +188,7 @@
 }
 @media (max-width: 640px) { .posts { grid-template-columns: 1fr; } }
 
-.shot { width: 100%; overflow: hidden; }
+.shot { position: relative; z-index: 2; width: 100%; overflow: hidden; }
 .shot img { width: 100%; height: auto; }
 
 /* ---------- Press ---------- */

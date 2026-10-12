@@ -1,5 +1,6 @@
 .frame {
   position: relative;
+  z-index: 2; /* acima das linhas da grade */
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;

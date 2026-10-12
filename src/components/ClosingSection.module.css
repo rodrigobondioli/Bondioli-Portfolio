@@ -6,12 +6,12 @@
   padding-block: var(--s7) var(--s6);
 }
 
-/* No tema escuro o degradê tem que terminar antes do texto: o amarelo vira
-   o fundo escuro dentro do respiro de cima (--s7), e o título e o
-   formulário — claros — já nascem sobre o escuro. Com o degradê na seção
-   inteira, o começo do texto caía num amarelo-oliva com letra clara. */
+/* No tema escuro, sem degradê: comprimido no respiro de cima ele virava
+   uma faixa verde-oliva encardida (12/10, "ficou muito feio"), e esticado
+   punha o texto claro sobre amarelo. O fecho começa direto no escuro; o
+   amarelo termina com um respiro próprio na seção do YouTube (work). */
 :global([data-theme="dark"]) .closing {
-  background: linear-gradient(var(--accent) 0, var(--bg) var(--s7));
+  background: var(--bg);
 }
 
 .inner {

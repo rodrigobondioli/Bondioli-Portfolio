@@ -146,9 +146,12 @@
   color: var(--ink);
 }
 
-/* Imagens e vídeos sobem um andar acima das linhas da grade (GridLines,
-   z-index 1): as linhas passam por cima dos fundos, nunca das imagens. */
-img, video, iframe { position: relative; z-index: 2; }
+/* Mídia por cima das linhas da grade (GridLines, z-index 1): as linhas
+   passam por cima dos fundos, nunca das imagens. Quem sobe é o INVÓLUCRO
+   (.media-layer), não a <img> solta: subindo a imagem, ela cobria o que
+   mora por cima dela no mesmo invólucro — o play do YouTube, o selo de
+   som, a seta das thumbs (12/10). */
+.media-layer { position: relative; z-index: 2; }
 
 /* ---------- 2. Reset ---------- */
 

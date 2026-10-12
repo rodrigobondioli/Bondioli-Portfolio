@@ -38,6 +38,7 @@
 
 .media {
   position: relative;
+  z-index: 2; /* acima das linhas da grade */
   display: block;
   aspect-ratio: 478 / 358;
   overflow: hidden;
