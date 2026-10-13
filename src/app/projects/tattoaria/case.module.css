@@ -425,13 +425,16 @@
 }
 .result > .body { grid-column: 1 / -1; margin: 0; }
 .result .chTitle { grid-column: 1 / -1; }
+/* Medido no tumulto.ai no ar (o código de lá ainda dizia coluna 3): o
+   título começa na margem, coluna 1, e a faixa dos números ocupa a largura
+   toda, em colunas iguais. */
 @media (min-width: 641px) {
-  .result > .body { grid-column: 6 / 13; }
-  .result .chTitle { grid-column: 2 / 7; }
+  .result > .body { grid-column: 7 / 13; }
+  .result .chTitle { grid-column: 1 / 7; }
 }
 @media (min-width: 1101px) {
   .result > .body { grid-column: 13 / 25; }
-  .result .chTitle { grid-column: 3 / 13; }
+  .result .chTitle { grid-column: 1 / 13; }
 }
 
 .strip {
@@ -449,10 +452,10 @@
   border-block-start: 1px solid var(--rule);
 }
 @media (min-width: 641px) {
-  .strip { grid-column: 2 / 13; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (min-width: 1101px) {
-  .strip { grid-column: 3 / 25; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
 .stripValue { color: #f2f2f2; }
 .stripLabel { max-width: 28ch; color: var(--muted); text-wrap: balance; }
