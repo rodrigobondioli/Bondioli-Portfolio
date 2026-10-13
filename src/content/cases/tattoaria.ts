@@ -78,7 +78,7 @@ export const tattoaria = {
     },
     {
       value: "3",
-      label: "editions at Lollapalooza, with Chevrolet",
+      label: "editions at Lollapalooza,\nwith Chevrolet",
       text: "editions at Lollapalooza with Chevrolet: a studio inside the festival lounge and 200 tattoos paid up front.",
       photo: {
         src: img("lolla-fila"),

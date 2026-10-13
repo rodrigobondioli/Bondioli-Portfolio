@@ -18,7 +18,9 @@ export default function ClosingSection() {
             <s className={styles.struck}>Enough about me.</s>{" "}
             Let&rsquo;s talk about your next move.
           </p>
-          <p className={`h1 ${styles.title}`}>Your next decision.</p>
+          <p className={`h1 ${styles.title}`}>
+            Your next <em className={styles.emph}>decision.</em>
+          </p>
         </div>
         <ContactForm />
       </div>

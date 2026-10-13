@@ -13,6 +13,12 @@
 :global([data-theme="dark"]) .closing {
   background: linear-gradient(#1e1e1c 0%, var(--bg) 100%);
 }
+/* O grafite de cima só faz sentido na /work, onde o contato vem logo
+   depois da seção grafite do YouTube. Na página de projeto ele vem depois
+   do fundo normal, e o grafite virava um degrau seco (12/10). */
+:global([data-theme="dark"]) :global(.on-project) + .closing {
+  background: var(--bg);
+}
 
 .inner {
   display: flex;
@@ -35,14 +41,16 @@
 
 /* O Framer escala este título pra encher a linha (SVG de texto ajustado).
    Aqui é a mesma conta: largura útil dividida pelo comprimento da frase. */
-/* itálico (12/10, pedido do Rodrigo), no mesmo peso do h1 */
 .title {
   font-size: calc(100cqw / 12.05);
   line-height: 1.1;
-  font-style: italic;
   text-transform: none;
   text-wrap: nowrap;
 }
 @media (max-width: 640px) {
   .title { font-size: var(--t-h1); text-wrap: balance; }
 }
+
+/* Só "decision." em negrito e itálico (12/10, pedido do Rodrigo) — o resto
+   da frase fica no peso dos títulos, de pé. Itálico de verdade da Geist. */
+.emph { font-weight: 700; font-style: italic; }

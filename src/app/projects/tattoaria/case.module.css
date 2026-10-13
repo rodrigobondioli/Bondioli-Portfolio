@@ -458,7 +458,8 @@
   .strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
 .stripValue { color: var(--ink); }
-.stripLabel { max-width: 28ch; color: var(--muted); text-wrap: balance; }
+/* "\n" no rótulo quebra a linha ali (o "3": depois da vírgula) */
+.stripLabel { max-width: 28ch; color: var(--muted); text-wrap: balance; white-space: pre-line; }
 
 /* --- Fecho --- */
 .closing {
