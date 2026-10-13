@@ -7,7 +7,7 @@
   z-index: 2;
   grid-column: 1 / -1;
   overflow: hidden;
-  background: #1e1e1c;
+  background: var(--card);
 }
 @media (min-width: 1101px) {
   .figure {

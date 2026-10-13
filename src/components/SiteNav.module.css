@@ -43,11 +43,6 @@
   text-decoration-thickness: from-font;
 }
 
-/* A barra é `position: absolute`: ela flutua por cima da página e fica
-   FORA do <main class="on-dark">, então herdava a cor do body — preto.
-   Sobre o fundo escuro das páginas de projeto o texto sumia. A cor tem
-   que ser declarada aqui. */
-.dark { color: #f2f2f2; }
 
 /* Tablet e celular: abaixo de 900 a metade direita não comporta o cargo
    e o contato lado a lado (medido: em 641 o cargo quebrava em duas

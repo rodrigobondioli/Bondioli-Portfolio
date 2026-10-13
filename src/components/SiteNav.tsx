@@ -22,16 +22,14 @@ import styles from "./SiteNav.module.css"
 const ATE = String(new Date().getFullYear()).slice(-2)
 
 export default function SiteNav({
-  dark = false,
   brandHref = "/",
 }: {
-  dark?: boolean
   /* o nome sobe um nível: da /work vai pra capa; de um projeto ou do
      media kit, volta pra /work */
   brandHref?: string
 }) {
   return (
-    <header className={`${styles.nav} ${dark ? styles.dark : ""}`}>
+    <header className={styles.nav}>
       <div className={styles.block}>
         <Link href={brandHref} className={`no-underline ${styles.label}`}>
           Rodrigo Bondioli

@@ -13,8 +13,8 @@ mesma cara do Framer, código e design system novos.**
 - [x] `/thanks`
 - [x] `/work` — a página grande: hero, reel, manifesto, arquivo, sobre, YouTube, contato. O destaque do Go Ink saiu em 12/10/2026, a pedido
 - [ ] `/projects/[slug]` — 16 páginas, conteúdo em `src/content/projects.json`.
-      Estrutura extraída do Framer está descrita na conversa; o template é
-      escuro (`--bg-dark`), ao contrário do resto do site.
+      Estrutura extraída do Framer está descrita na conversa. Era escuro
+      fixo (`--bg-dark`); desde 12/10/2026 segue o tema (ver "Tema").
 - [x] `/mediakit` — conteúdo em `src/content/mediakit.json` (era `/mediakit/home`
       no Framer; a URL nova é `/mediakit`). Números e estrutura medidos no
       Framer, roupa da `/work` — decisão do Rodrigo em 23/09/2026.

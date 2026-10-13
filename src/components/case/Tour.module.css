@@ -45,7 +45,7 @@
   display: block;
   height: 100svh;
   overflow: hidden;
-  background: var(--bg-dark);
+  background: var(--bg);
 }
 .tour[data-pinned] .slide { position: absolute; inset: 0; }
 .tour[data-pinned] .img { aspect-ratio: auto; height: 100%; }

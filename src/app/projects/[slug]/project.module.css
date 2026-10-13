@@ -5,7 +5,7 @@
    O resto do sistema é o mesmo da /work — mesmas fontes, mesma régua,
    nada arredondado. */
 
-.page { background: var(--bg-dark); }
+.page { background: var(--bg); }
 
 /* ---------- Capa ---------- */
 
@@ -44,7 +44,7 @@
 }
 
 .name {
-  color: #fff;
+  color: var(--ink);
   margin-right: calc(var(--s5) - var(--s2));
 }
 
@@ -54,13 +54,13 @@
   display: flex;
   align-items: center;
   gap: var(--s2);
-  color: rgb(128, 128, 128);
+  color: var(--ink-60);
   order: 2;
 }
 
 .year {
   font-family: var(--font-mono), ui-monospace, monospace;
-  color: rgb(128, 128, 128);
+  color: var(--ink-60);
   /* no desktop o ano fecha a linha, depois das disciplinas — é a ordem
      que o Framer usa. No HTML ele vem antes, colado ao nome, porque é
      essa a ordem que importa pra quem lê por leitor de tela. */
@@ -130,7 +130,7 @@
   display: block;
   width: 100%;
   height: var(--hairline);
-  background: var(--rule-dark);
+  background: var(--rule);
 }
 
 /* ---------- Corpo ---------- */
@@ -156,8 +156,8 @@
 }
 .blockTitle { grid-column: 1 / 9; }
 .blockBody { grid-column: 9 / -1; }
-.blockTitle { color: #fff; }
-.blockBody { color: #fff; }
+.blockTitle { color: var(--ink); }
+.blockBody { color: var(--ink); }
 
 @media (max-width: 1100px) {
   .block { row-gap: var(--s3); }

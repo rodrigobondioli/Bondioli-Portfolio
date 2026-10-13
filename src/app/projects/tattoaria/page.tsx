@@ -165,9 +165,9 @@ export default function TattoariaCase() {
     <>
       <SmoothScroll />
       <HoverZoom />
-      <SiteNav dark brandHref="/work" />
+      <SiteNav brandHref="/work" />
 
-      <main className={`on-dark ${s.page}`}>
+      <main className={`on-project ${s.page}`}>
         <div className="section">
           <div className="container">
             {/* ---------- Abertura ---------- */}

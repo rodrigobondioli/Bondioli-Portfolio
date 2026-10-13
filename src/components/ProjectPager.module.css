@@ -1,9 +1,9 @@
-/* O degradê é o que fecha a página escura: ela escurece até o preto antes
-   do contato claro começar. Sem ele o corte fica seco. */
+/* No fundo da página, seguindo o tema (12/10). Era um degradê fixo do
+   grafite ao preto, de quando a página de projeto era sempre escura. */
 .pager {
   /* o conteúdo acima termina colado; este respiro é o que dá ar à régua */
   margin-top: var(--s6);
-  background: linear-gradient(#101010 0%, #000 100%);
+  background: var(--bg);
 }
 
 /* Os dois encostados à direita. Quando só existe um, ele fica no mesmo
@@ -18,10 +18,10 @@
   display: grid;
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   column-gap: var(--col-gap);
-  border-top: var(--hairline) solid var(--rule-dark);
+  border-top: var(--hairline) solid var(--rule);
   padding-top: var(--s5);
   padding-bottom: var(--s6);
-  color: #fff;
+  color: var(--ink);
 }
 
 .card {
@@ -42,7 +42,7 @@
   display: block;
   aspect-ratio: 478 / 358;
   overflow: hidden;
-  background: var(--rule-dark);
+  background: var(--card);
 }
 .media img {
   width: 100%;
@@ -71,7 +71,7 @@
   place-items: center;
   border-radius: 50%;
   background: var(--accent-pink);
-  color: var(--ink);
+  color: #101010;
   opacity: 0;
   scale: 0.8;
   transition:
@@ -88,10 +88,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--s1);
-  color: rgba(242, 242, 242, 0.6);
+  color: var(--ink-60);
 }
-/* O nome do projeto em branco; "Previous"/"Next" acima dele, apagado. */
-.label { color: #fff; }
+/* O nome do projeto na cor do texto; "Previous"/"Next" acima dele, apagado. */
+.label { color: var(--ink); }
 
 @media (prefers-reduced-motion: reduce) {
   .media img, .card:hover .media img { transition: none; scale: 1; }

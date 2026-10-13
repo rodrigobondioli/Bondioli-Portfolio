@@ -139,9 +139,9 @@ export default async function ProjectPage({
   return (
     <>
       <SmoothScroll />
-      <SiteNav dark brandHref="/work" />
+      <SiteNav brandHref="/work" />
 
-      <main className={`on-dark ${s.page}`}>
+      <main className={`on-project ${s.page}`}>
         {/* ---------- Capa ---------- */}
         <section className={`section ${s.heroSection}`}>
           <div className="container">

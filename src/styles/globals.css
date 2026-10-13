@@ -35,6 +35,13 @@
   /* vidro da faixa de números do herói */
   --glass:          rgba(242, 242, 242, 0.2);
 
+  /* Páginas de projeto (12/10): seguem o tema como o resto do site.
+     --card: o cartão/fundo de mídia, um degrau abaixo do fundo.
+     --lit: o destaque do texto que acende com o scroll — o verde-limão
+     some no claro, então aqui ele é um verde escuro. */
+  --card:           #e4e4e1;
+  --lit:            #4f6f00;
+
   --ok:             #1f8f5e;
   --warn:           #c77b00;
   --err:            #d42d2d;
@@ -136,6 +143,8 @@
   --rule:    rgba(241, 241, 241, 0.16);
   --glass:   rgba(18, 18, 17, 0.4);
   --line-color: rgba(241, 241, 241, 0.045);
+  --card:    #1e1e1c;
+  --lit:     var(--accent);
 }
 
 /* O que tem fundo próprio claro (o amarelo das seções de destaque) volta
@@ -358,7 +367,7 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
 .rule-sm { width: 88px; }
 /* Sobre o amarelo o fio precisa de mais contraste pra existir */
 .on-accent .rule { background: var(--ink-25); }
-.on-dark .rule { background: var(--rule-dark); }
+.on-project .rule { background: var(--rule); }
 
 /* Linha de cabeçalho: TÍTULO — régua — legenda à direita */
 .head-row {
@@ -400,12 +409,15 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
 
 /* ---------- 6. Tema escuro (páginas de projeto) ---------- */
 
-.on-dark {
-  background: var(--bg-dark);
-  color: #f2f2f2;
-  --rule: var(--rule-dark);
+/* Páginas de projeto. Eram escuras nos dois temas (.on-dark, fundo e
+   texto fixos); desde 12/10 seguem o tema — o claro também vale aqui. Tudo
+   que mora nelas usa os tokens (--bg, --ink, --ink-60, --rule, --card,
+   --lit), nunca cor escrita. */
+.on-project {
+  background: var(--bg);
+  color: var(--ink);
 }
-.on-dark .caption { color: rgba(242, 242, 242, 0.6); }
+.on-project .caption { color: var(--ink-60); }
 
 /* ---------- 7. Utilitários ---------- */
 

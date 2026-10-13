@@ -12,8 +12,9 @@
   text-wrap: pretty;
 }
 
-/* A cor de cada palavra mistura o texto com o acento (verde-limão) na
-   proporção que o efeito escreve em --k. Sem o efeito, --k fica em 0%. */
+/* A cor de cada palavra mistura o texto com o destaque (--lit: verde-limão
+   no escuro, verde escuro no claro) na proporção que o efeito escreve em
+   --k. Sem o efeito, --k fica em 0%. */
 .word {
-  color: color-mix(in srgb, var(--accent) var(--k, 0%), currentColor);
+  color: color-mix(in srgb, var(--lit) var(--k, 0%), currentColor);
 }

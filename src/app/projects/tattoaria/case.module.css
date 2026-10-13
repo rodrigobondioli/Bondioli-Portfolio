@@ -7,14 +7,14 @@
  *   --space-section → --s7   --space-block → --s6   --space-stack → --s4
  *   --space-para → --s2      --space-inset → --s3   --gutter → --col-gap
  *   --margin → --gutter      --to-line → .to-line (meio passo menos o vão)
- *   --c-card → #1e1e1c (o grafite da seção do YouTube)
- *   --c-muted → branco a 60%   --c-accent → --accent (verde-limão)
+ *   --c-card → --card   --c-muted → --ink-60   --c-accent → --lit
+ * Tudo em token, nunca cor escrita: a página segue o tema claro/escuro
+ * como o resto do site (.on-project, globals).
  */
 
 .page {
-  background: var(--bg-dark);
-  --muted: rgba(242, 242, 242, 0.6);
-  --card: #1e1e1c;
+  background: var(--bg);
+  --muted: var(--ink-60);
   --to-line: calc(var(--col) / 2 - var(--col-gap));
 }
 
@@ -84,7 +84,7 @@
   .top { margin-block-end: var(--gap); }
 }
 .back { color: var(--muted); transition: color var(--fast) var(--ease); }
-.back:hover, .back:focus-visible { color: #f2f2f2; }
+.back:hover, .back:focus-visible { color: var(--ink); }
 
 /* t-statement de lá: 69px em 1440, peso 500 */
 .caseTitle {
@@ -348,7 +348,7 @@
 }
 @media (hover: hover) {
   .pressRow:hover .pressTitle,
-  .pressRow:hover .pressArrow { color: var(--accent); }
+  .pressRow:hover .pressArrow { color: var(--lit); }
   .pressRow:hover .pressArrow { translate: 2px -2px; }
 }
 
@@ -457,7 +457,7 @@
 @media (min-width: 1101px) {
   .strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
-.stripValue { color: #f2f2f2; }
+.stripValue { color: var(--ink); }
 .stripLabel { max-width: 28ch; color: var(--muted); text-wrap: balance; }
 
 /* --- Fecho --- */
