@@ -251,18 +251,18 @@ input, textarea, select { font: inherit; color: inherit; }
 
 /* Geist em corpo grande pede entreletra fechada — no 0 ela fica frouxa,
    com cara de texto ampliado. Fecha mais quanto maior o corpo. */
-/* Peso 300 nos títulos (12/10: o Rodrigo pediu um degrau mais leve) — só
-   o h1 fica mais grosso, em 400. */
+/* Peso 500 em todos os títulos, h1 inclusive — o mesmo do tumulto.ai.
+   (Em 12/10 passou por 300 com h1 em 400; no mesmo dia o Rodrigo voltou
+   tudo pra 500 e pediu um padrão só.) */
 .h1, .h2, .h3, .h4, .h5 {
   font-family: var(--font-display), system-ui, sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: -0.02em;
   /* títulos longos não quebram deixando uma palavra órfã na última linha */
   text-wrap: balance;
 }
 
-/* o h1 em peso normal (400), o único título acima dos 300 */
-.h1 { font-size: var(--t-h1); line-height: 1;    text-transform: none; letter-spacing: -0.04em; font-weight: 400; }
+.h1 { font-size: var(--t-h1); line-height: 1;    text-transform: none; letter-spacing: -0.04em; }
 .h2 { font-size: var(--t-h2); line-height: 1.2;  text-transform: none; letter-spacing: -0.03em; }
 .h3 { font-size: var(--t-h3); line-height: 1.2;  text-transform: uppercase; }
 .h4 { font-size: var(--t-h4); line-height: 1.1;  text-transform: uppercase; }

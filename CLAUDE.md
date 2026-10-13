@@ -58,8 +58,8 @@ npm run start   # serve o build em localhost:3000
   da faixa do herói, EN/BR, a abertura — texto que se lê como dado). OFL
   1.1, variáveis (um arquivo cada), auto-hospedadas em `public/fonts` com a
   licença ao lado (`OFL-Geist.txt`). `--font-display` ainda existe, mas
-  aponta pra Geist. Pesos: títulos em 300, só o h1 em 400 (o mais
-  grosso, a pedido). Os títulos têm entreletra negativa (h1 -0.04em, h2
+  aponta pra Geist. Pesos: todos os títulos em 500, h1 inclusive (o
+  mesmo do tumulto.ai; passou por 300 e voltou, a pedido). Os títulos têm entreletra negativa (h1 -0.04em, h2
   -0.03em, resto -0.02em) — a Geist grande no 0 fica frouxa.
   Histórico: Alpha Lyrae (títulos) + Inter (resto) desde 21/09. Em 23/09
   ele testou a Geist e manteve a Alpha. Em 12/10/2026 trocou a Inter pela
@@ -331,8 +331,7 @@ Tattoaria tem um case deste porte.
   galpão (`case/Tour`, preso com `position: sticky`) são feitos à mão,
   com as mesmas contas.
 - Tipos e pesos **iguais aos de lá**, medidos com getComputedStyle (título
-  500, frases 500, números 700, textos pequenos 500) — é a exceção aos
-  títulos em 300 do resto do site, pedido do Rodrigo.
+  500, frases 500, números 700, textos pequenos 500), pedido do Rodrigo.
 - A voz muda: lá "we" é a agência; aqui os créditos e o fecho são do
   Rodrigo, e o "Let's talk" desce pro contato da própria página.
 
