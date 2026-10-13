@@ -125,7 +125,6 @@ export default function Tour({ items, label }: { items: Media[]; label: string }
               style={{ objectPosition: item.focus ?? "50% 50%" }}
             />
             <p className={styles.slideMeta}>
-              {item.caption ? <span>{item.caption}</span> : null}
               <span>
                 {pad(i + 1)} / {pad(items.length)}
               </span>

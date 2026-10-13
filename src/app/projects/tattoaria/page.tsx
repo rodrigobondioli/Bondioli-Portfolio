@@ -143,10 +143,11 @@ function ChapterSection({ ch }: { ch: Chapter }) {
           <Tour key={`${ch.id}-${i}`} items={block.items} label={ch.title} />
         ) : (
           <div key={`${ch.id}-${i}`} className={`${s.media} ${s[block.layout]}`}>
+            {/* sem legenda embaixo: no tumulto.ai no ar só as fotos ao lado
+                do texto ("side") mostram legenda (conferido em 12/10) */}
             {block.items.map((m) => (
               <figure key={m.src} className={s.mediaItem}>
                 <Figure m={m} />
-                {m.caption ? <figcaption className={`${s.label} ${s.caption}`}>{m.caption}</figcaption> : null}
               </figure>
             ))}
           </div>

@@ -26,8 +26,7 @@
 
 .slideMeta {
   display: flex;
-  justify-content: space-between;
-  gap: var(--s2);
+  justify-content: flex-end;
   padding: var(--s1) var(--gutter) 0;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
