@@ -345,6 +345,16 @@ tracinho de divisão e o tema logo embaixo. O download do portfólio passou por 
 rodapé (12/10). O que tem fundo próprio claro (o amarelo das seções de
 destaque) usa `.on-accent`, que devolve os tokens escuros de texto.
 
+**As páginas de projeto seguem o tema também** (12/10/2026, pedido do
+Rodrigo, a partir da Tattoaria): `<main class="on-project">` usa `--bg` e
+`--ink`, e tudo dentro delas — template do CMS, case da Tattoaria,
+`ProjectPager`, `case/*` — vai por token: `--ink`, `--ink-60`, `--rule`,
+`--card` (cartão/fundo de mídia) e `--lit` (o destaque do texto que
+acende: verde-limão no escuro, verde escuro no claro, porque o limão some
+no fundo claro). Nada de cor escrita, nem `--bg-dark`/`--rule-dark`; a
+exceção é texto por cima de foto (o contador do passeio), que é branco
+nos dois temas. A `SiteNav` perdeu o modo `dark` forçado.
+
 ## Idioma
 
 O site é **em inglês**. Isso vale pro texto visível, `alt`, `aria-label` e
