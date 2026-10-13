@@ -39,9 +39,12 @@ export default function WorkPage() {
         {/* ---------- Hero ---------- */}
         <section className={s.hero}>
           <div className={`container ${s.heroInner}`}>
+            {/* Frase de posicionamento no lugar da apresentação (12/10, pedido
+                do Rodrigo, a partir de "Se o seu produto é difícil de
+                entender, ele é impossível de vender."). Quem ele é já está na
+                barra do topo; os 20 anos, na faixa de números logo abaixo. */}
             <h1 className="h1">
-              Rodrigo Bondioli brings design and AI together, with more than 20
-              years leading design for startups and global brands.
+              If your product is hard to understand, it&rsquo;s impossible to sell.
             </h1>
           </div>
 
