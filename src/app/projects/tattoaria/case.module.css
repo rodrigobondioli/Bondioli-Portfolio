@@ -18,7 +18,10 @@
   --to-line: calc(var(--col) / 2 - var(--col-gap));
 }
 
-/* --- Tipos (os do tumulto, em Geist) --- */
+/* --- Tipos (os do tumulto, em Geist) ---
+   Pesos e corpos medidos lá com getComputedStyle (12/10, pedido do
+   Rodrigo: "igualzinho à Tumulto"). Por isso aqui os títulos são 500 e os
+   números 700, e não os 300 do resto do portfólio. */
 .label {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
@@ -26,6 +29,7 @@
   margin: 0;
 }
 .small {
+  font-weight: 500;
   font-size: clamp(0.8125rem, 0.798rem + 0.06vw, 0.875rem);
   line-height: 1.3;
   letter-spacing: -0.005em;
@@ -38,9 +42,9 @@
 }
 .title {
   font-family: var(--font-display), system-ui, sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(1.375rem, 1.223rem + 0.65vw, 2rem);
-  line-height: 1.05;
+  line-height: 1;
   letter-spacing: -0.03em;
   margin: 0;
 }
@@ -82,7 +86,16 @@
 .back { color: var(--muted); transition: color var(--fast) var(--ease); }
 .back:hover, .back:focus-visible { color: #f2f2f2; }
 
-.caseTitle { grid-column: 1 / -1; text-wrap: balance; margin: 0; }
+/* t-statement de lá: 69px em 1440, peso 500 */
+.caseTitle {
+  grid-column: 1 / -1;
+  text-wrap: balance;
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(2rem, 0.6rem + 4.2vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
 @media (min-width: 1101px) {
   .caseTitle { grid-column: 1 / 22; }
 }
@@ -167,6 +180,23 @@
 @media (min-width: 1101px) {
   .numPhotoItem { grid-column: span 8; }
 }
+/* As três fotos com a mesma altura (medido lá: 538 nas três em 1440). A
+   última não termina antes da linha, então é um pouco mais larga — em 4:5
+   ficaria mais alta que as vizinhas. Ela herda a altura das outras: a
+   largura delas × 5/4. A coluna sai da largura da própria faixa (cqw),
+   não da janela — a janela conta a barra de rolagem e errava 6px. */
+.numbers { container-type: inline-size; }
+@media (min-width: 641px) {
+  .numPhotoItem { --span: 4; }
+  .numPhotoItem:last-child .figure {
+    --passo: calc((100cqw + var(--col-gap)) / var(--cols));
+    aspect-ratio: auto !important;
+    height: calc((var(--span) * var(--passo) - var(--col-gap) - (var(--passo) / 2 - var(--col-gap))) * 5 / 4);
+  }
+}
+@media (min-width: 1101px) {
+  .numPhotoItem { --span: 8; }
+}
 
 .numData { display: grid; gap: var(--s1); }
 .numData .numLabel { max-width: none; padding-inline-end: var(--s2); text-wrap: balance; }
@@ -177,7 +207,7 @@
   align-self: end;
   margin: 0;
   font-family: var(--font-display), system-ui, sans-serif;
-  font-weight: 300;
+  font-weight: 700;
   font-size: clamp(1.625rem, 1.049rem + 2.46vw, 4rem);
   line-height: 1.08;
   letter-spacing: -0.035em;

@@ -330,6 +330,9 @@ Tattoaria tem um case deste porte.
   Lá é GSAP; aqui o texto que acende (`case/LitText`) e o passeio pelo
   galpão (`case/Tour`, preso com `position: sticky`) são feitos à mão,
   com as mesmas contas.
+- Tipos e pesos **iguais aos de lá**, medidos com getComputedStyle (título
+  500, frases 500, números 700, textos pequenos 500) — é a exceção aos
+  títulos em 300 do resto do site, pedido do Rodrigo.
 - A voz muda: lá "we" é a agência; aqui os créditos e o fecho são do
   Rodrigo, e o "Let's talk" desce pro contato da própria página.
 
