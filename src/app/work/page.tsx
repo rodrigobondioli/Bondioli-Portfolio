@@ -43,9 +43,13 @@ export default function WorkPage() {
                 do Rodrigo, a partir de "Se o seu produto é difícil de
                 entender, ele é impossível de vender."). Quem ele é já está na
                 barra do topo; os 20 anos, na faixa de números logo abaixo. */}
-            <h1 className="h1">
+            <h1 className={`h1 ${s.heroTitle}`}>
               If your product is hard to understand, it&rsquo;s impossible to sell.
             </h1>
+            <p className={s.heroSupport}>
+              I shape the architecture, positioning and design of your product so
+              any customer understands its value.
+            </p>
           </div>
 
           <div className={s.stats}>

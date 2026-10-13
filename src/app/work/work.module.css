@@ -17,21 +17,52 @@
   overflow: hidden;
 }
 
+/* Desenho do herói do tumulto.ai (12/10, medido lá): o H1 grande na
+   largura toda e, logo abaixo, uma linha de apoio pequena encostada na
+   direita — colunas 19–24 de 24 (8–12 de 12; 1–5 de 6 no celular). */
 .heroInner {
-  /* o título não vai até a margem direita: lá fica o botão de tema, em pé
-     (12/10). --s7 de folga a mais. */
-  max-width: calc(100% - var(--s7));
-  justify-self: start;
+  justify-self: stretch;
   /* .container centraliza com margem automática; aqui o título encosta na
      margem — a primeira linha da grade */
   margin-inline: 0;
   position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: var(--s3);
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
   padding-bottom: var(--s5);
   pointer-events: none;
+}
+
+/* O tamanho do display do tumulto: 105px em 1440, 137 em 1920; peso 500,
+   entrelinha 0.9, entreletra -0.05em. No celular, o teto de lá. */
+.heroTitle {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(3rem, 0.6rem + 6.6vw, 8.75rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+@media (max-width: 640px) {
+  .heroTitle { font-size: min(clamp(2.5rem, 11.2vw, 3.5rem), 13.5vw); }
+}
+
+/* Linha de apoio: termina na borda direita da grade, linhas equilibradas */
+.heroSupport {
+  grid-column: 1 / 6;
+  margin: var(--s4) 0 0;
+  font-size: clamp(0.8125rem, 0.798rem + 0.06vw, 0.875rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+@media (min-width: 641px) {
+  .heroSupport { grid-column: 8 / 13; }
+}
+@media (min-width: 1101px) {
+  .heroSupport { grid-column: 19 / 25; }
 }
 
 /* Faixa de numeros: 88px de altura, vidro leve, fio em cima */
