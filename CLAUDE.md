@@ -372,8 +372,13 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
   uma ~150ms depois da outra. Substitui o StripReveal no Selected work
   (pedido do Rodrigo: "bem parecido, com o refinamento", em todos). Vale
   pra foto, vídeo e flipbook.
-- Roadr (14/10): vaga 2 é uma colagem que rola (telas do roadr.com sobre
-  fundo claro, como o Minx Law de lá — `_originais/roadr-colagem/`), vaga 4
+- Roadr (14/10): vaga 1 é o app em movimento, feito em **Remotion** a
+  partir do frame "Roadr1" do Figma Boards (home da Maia → carrossel →
+  toque em "Tire change" → tela do pneu → "Front left" → "Next", em loop;
+  projeto em `_originais/roadr-remotion/`, `npm run render`, depois
+  comprimir pra 768×800). Vaga 2 é uma colagem que rola (telas do roadr.com sobre
+  fundo claro, em perspectiva e lenta, como o Minx Law de lá —
+  `_originais/roadr-colagem/`), vaga 4
   o vídeo do card "Car wash" do roadr.com.
 - Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
   ela inteira como link o vão embaixo das fotos menores virava área de

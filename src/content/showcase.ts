@@ -14,11 +14,13 @@
 export type Midia = string | { flipbook: string[] } | null
 
 export const SHOWCASE: Record<string, Midia[]> = {
-  // 14/10: 2 = a colagem que rola (telas do roadr.com sobre fundo claro,
+  // 14/10: 1 = o app em movimento · 2 = a colagem que rola (telas do roadr.com sobre fundo claro,
   // como o Minx Law do brandbeet; montada por _originais/roadr-colagem/
   // montar.js + ffmpeg) · 4 = o vídeo do card "Car wash" do roadr.com
   roadr: [
-    "/projects/roadr/gallery.webp",
+    // o app em movimento, feito em Remotion a partir do Figma Boards
+    // (_originais/roadr-remotion/, `npm run render`)
+    "/projects/roadr/app.mp4",
     "/projects/roadr/colagem.mp4",
     "/projects/roadr/gallery-2.webp",
     "/projects/roadr/car-wash.mp4",
