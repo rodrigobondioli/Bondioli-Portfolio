@@ -90,6 +90,8 @@
      (Era 325, a medida do Framer pra bio antiga de três linhas. Em `px`, não
      `ch`: `ch` muda com o peso da fonte.) */
   max-width: 400px;
+  /* linhas equilibradas, sem a última curtinha (14/10, pedido do Rodrigo) */
+  text-wrap: balance;
 }
 
 .contact {
