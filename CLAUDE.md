@@ -220,8 +220,13 @@ credenciais e CSS num lugar só; o retrato `rodrigo-retrato.webp` e o
 `about` do `mediakit.json` ficaram sem uso). Os títulos de seção daqui
 **não têm régua**. A faixa "MEDIA KIT —" passa no **meio exato do vídeo**
 (a legenda de cima saiu do fluxo pra não empurrar o vídeo). Os cards de
-números são **brancos nos dois temas** (`.on-accent` pro texto escuro) e
-eles e as cartelas de cor ficam **por cima das linhas da grade**.
+números são **brancos nos dois temas, sem contorno** (`.on-accent` pro
+texto escuro) e eles e as cartelas de cor ficam **por cima das linhas da
+grade**. E tudo foi posto nas linhas: o vídeo da capa mede 5,5 colunas
+(3,5 no tablet), com as duas bordas em linhas, e todo card com vizinha
+à direita termina na linha do meio da última coluna (a coluna termina
+3px depois da linha). Quem fecha a fileira dos números é calculado no
+JSX (`.fim3`/`.fim2`).
 
 O `mediakit.json` deixou de ser o despejo do Framer (uma lista de textos
 com nome de estilo) e virou conteúdo com forma: números, países, faixas
