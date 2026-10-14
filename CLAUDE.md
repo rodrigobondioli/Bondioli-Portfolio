@@ -376,9 +376,11 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
   partir do frame "Roadr1" do Figma Boards (home da Maia → carrossel →
   toque em "Tire change" → tela do pneu → "Front left" → "Next", em loop;
   projeto em `_originais/roadr-remotion/`, `npm run render`, depois
-  comprimir pra 768×800). Vaga 2 é uma colagem que rola (telas do roadr.com sobre
-  fundo claro, em perspectiva e lenta, como o Minx Law de lá —
-  `_originais/roadr-colagem/`), vaga 4
+  comprimir pra 768×800). Vaga 2 é o "brand showcase": a câmera avança devagar
+  por um campo de telas do site/app e fotos em profundidades diferentes,
+  como o vídeo do Minx Law do brandbeet (composição `Campo` no mesmo
+  projeto Remotion; loop perfeito, 15s). A colagem que rola em perspectiva
+  (`_originais/roadr-colagem/`) foi a versão anterior. vaga 4
   o vídeo do card "Car wash" do roadr.com.
 - Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
   ela inteira como link o vão embaixo das fotos menores virava área de
