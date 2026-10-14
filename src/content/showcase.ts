@@ -14,6 +14,13 @@
 export type Midia = string | { flipbook: string[] } | null
 
 export const SHOWCASE: Record<string, Midia[]> = {
+  // 14/10: no lugar do Tilt Tech; as 4 imagens do Rodrigo, na ordem dele
+  worm: [
+    "/projects/worm/worm-1.webp",
+    "/projects/worm/worm-2.webp",
+    "/projects/worm/worm-3.webp",
+    "/projects/worm/worm-4.webp",
+  ],
   // 14/10: 1 = o app em movimento · 2 = os cards de métricas · 3 = o mockup
   // do notebook · 4 = o vídeo do card "Car wash" do roadr.com
   roadr: [
