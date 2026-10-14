@@ -134,7 +134,6 @@ export default function WorkPage() {
           <div className={s.youtubeInner}>
             <div className="head-row">
               <h2 className="h4">Content creator</h2>
-              <span className="rule rule-sm" />
               <p className="overline">YouTube @falabondioli</p>
             </div>
 
@@ -147,7 +146,6 @@ export default function WorkPage() {
 
             <div className="head-row">
               <p className="overline">31K subscribers</p>
-              <span className="rule rule-md" />
               <h3 className="h4">No bullshit</h3>
             </div>
           </div>
