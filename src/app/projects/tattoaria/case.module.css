@@ -100,12 +100,14 @@
   .caseTitle { grid-column: 1 / 22; }
 }
 
-.summary { grid-column: 1 / -1; text-wrap: pretty; }
+/* Começa na mesma coluna do "Creative Director" da barra do topo — 8 de
+   24, 4 de 12 (14/10, pedido do Rodrigo; no tumulto era a 13). */
+.summary { grid-column: 1 / -1; text-wrap: balance; }
 @media (min-width: 641px) {
-  .summary { grid-column: 5 / 13; }
+  .summary { grid-column: 4 / 13; }
 }
 @media (min-width: 1101px) {
-  .summary { grid-column: 13 / 23; margin-block-start: var(--gap); }
+  .summary { grid-column: 8 / 23; margin-block-start: var(--gap); }
 }
 
 /* ficha: (a.) (b.) (c.) (d.) */
