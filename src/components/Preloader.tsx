@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { usePathname } from "next/navigation"
 import { marcarCarregando, marcarPronto } from "@/lib/ready"
 import { irProTopo, soltarScroll, travarScroll } from "@/lib/lenis"
 import { Logo } from "./Logo"
@@ -50,18 +51,26 @@ const SOBE = 750 // a cortina sobe
 const INICIO = 0.55
 const ESPERA_FONTES = 2500
 
+/* Só a /work tem abertura (14/10, pedido do Rodrigo: a capa entra direto).
+   E só quando a pessoa CHEGA nela — navegando da capa pra /work, a página
+   já está aberta e a abertura não volta. */
+const COM_ABERTURA = (path: string | null) => (path ?? "").replace(/\/$/, "") === "/work"
+
 /* Fora de qualquer efeito, de propósito: a marca tem que existir antes do
    primeiro `useEffect` da página rodar, senão os efeitos que esperam por
-   ela acham que já podem começar. */
-marcarCarregando()
+   ela acham que já podem começar. Só onde há abertura. */
+if (typeof window !== "undefined" && COM_ABERTURA(window.location.pathname)) marcarCarregando()
 
 export default function Preloader() {
+  // decidido uma vez, na chegada: o layout não desmonta entre páginas
+  const pathname = usePathname()
+  const [ativo] = useState(() => COM_ABERTURA(pathname))
   const [fora, setFora] = useState(false)
   const root = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const el = root.current
-    if (!el) return
+    if (!ativo || !el) return
     const html = document.documentElement
 
     const terminar = () => {
@@ -208,9 +217,9 @@ export default function Preloader() {
       html.style.overflowY = ""
       soltarScroll()
     }
-  }, [])
+  }, [ativo])
 
-  if (fora) return null
+  if (!ativo || fora) return null
 
   return (
     <div ref={root} data-preloader="" className={styles.screen} aria-hidden="true">

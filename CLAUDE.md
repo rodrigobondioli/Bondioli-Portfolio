@@ -117,11 +117,20 @@ npm run start   # serve o build em localhost:3000
   máscara (quem põe é o efeito); a "porta" espera a imagem carregar (até
   1,2s) pra não abrir caixa vazia; e uma rede tira a máscara se o laço não
   terminar.
-- **A abertura (`Preloader`)** também é a do tumulto (`components/Loader.tsx`
+- **A abertura (`Preloader`) só existe na `/work`**, e só quando a pessoa
+  chega direto nela (14/10, pedido do Rodrigo: a capa entra sem loading;
+  navegando da capa pra /work ela não volta). Ela também é a do tumulto (`components/Loader.tsx`
   de lá), com a marca do Rodrigo no lugar do asterisco e a cortina no rosa.
   Lá é GSAP; aqui é WAAPI com as mesmas curvas e tempos (~6s no total). Ela
   ainda trava o scroll (CSS + Lenis) e só dispara `marcarPronto` quando a
   cortina começa a subir. Com movimento reduzido, não aparece.
+- **Links de texto: `TextRoll`** (14/10). O cubo 3D numa mola (CubeLink,
+  CopyEmail, RollLabel) "parecia bugado": a mola passava do ponto e
+  voltava, a letra pequena borrava no giro e o sublinhado girava junto.
+  Agora é 2D — o texto sobe e a cópia entra por baixo (700ms, expo out,
+  sem repique) e o sublinhado fica parado, fazendo uma passada (some pela
+  direita, volta pela esquerda). Vale pra redes da capa, e-mail e redes do
+  rodapé. O `PillButton` continua com a cambalhota: é decisão do botão.
 - **`lag`** desencontra uma grade: a peça espera mais um tanto da janela antes
   de largar. O valor vem de hash do índice, **nunca `Math.random`** — o
   servidor e o navegador têm que chegar no mesmo número, senão é erro de
@@ -163,22 +172,19 @@ sobreposição em 932×430, 30px em 1024×500, 25px em 1180×560, e em
 absoluto. **Um bug de tela baixa não se conserta com breakpoint de
 largura** — foi o que deixou esse passar: 844 de largura é "desktop".
 
-**O gutter não usa media query.** É uma curva só:
+**A margem lateral é igual ao vão entre as colunas** (14/10/2026, pedido
+do Rodrigo): **32 acima de 640, 16 no celular**. `--gutter` aponta pra
+`--col-gap`, então as duas andam juntas — não separar. (Testou 24 no
+mesmo dia e subiu pra 32: 24 apertava a barra lateral na margem.) A capa
+usa a mesma medida nos quatro lados.
 
-    --gutter: max(16px, min(14vw - 51.2px, 6vw, 56px));
+Histórico: 8.6vw/124 do Framer → 6vw (22/09) → 56 fixo no desktop numa
+curva sem media query (12/10) → margem = vão, 32/16 (14/10). Comparar
+posições horizontais com o Framer tem que descontar a diferença de margem.
 
-Até 480 dá 16 (celular). De 480 a 640 sobe em reta até encostar
-exatamente nos 6vw. De 640 pra cima é 6vw, travado em **56** — que chega em
-~933px. **No desktop a margem é 56 em tudo**, inclusive nas laterais da
-capa (decisão do Rodrigo, 12/10/2026). As três pernas se encontram nos mesmos valores nas junções —
-arrastar a janela não produz salto. O `@media` que existia aqui fazia 55px
-virar 16px ao cruzar 641.
-
-**Era 8.6vw, o valor do Framer.** Em 22/09/2026 o Rodrigo soltou a
-paridade aqui: 8.6vw dava 124px de cada lado já em 1440. Foi pra 6vw (86 em
-1440) e, em 12/10/2026, pra 56 fixo no desktop. O resto do layout
-continua medido contra o Framer — comparar posições horizontais com ele
-agora tem que descontar a diferença de margem.
+**`scrollbar-gutter: stable`** reserva o lugar da barra de rolagem em toda
+página. Na capa, que não rola, isso virava 15px a mais de margem só à
+direita — por isso a capa desliga (`html:has(.page)` no home.module.css).
 
 ## O que a `/mediakit` não herdou do Framer
 

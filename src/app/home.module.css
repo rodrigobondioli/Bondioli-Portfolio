@@ -5,19 +5,21 @@
   height: 100svh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  /* a mesma borda nos quatro lados: a margem do site */
   padding: var(--gutter-poster, 32px);
-  /* as laterais seguem a margem do site (56 no desktop, 16 no celular);
-     o pôster continua com a borda própria em cima e embaixo */
-  padding-inline: var(--gutter);
   overflow: hidden;
 }
 
-/* Exceção de pôster só em cima e embaixo: 32px. Nas laterais a capa segue
-   a margem do site desde 12/10 ("56px em tudo", pedido do Rodrigo). */
-/* O piso desceu de 20 pra 16 junto com o resto do site: no celular a
-   margem é a mesma em toda página. O teto de 32 fica — aqui a borda é
-   igual nos quatro lados, é pôster, não coluna de texto. */
-.page { --gutter-poster: clamp(16px, 3vw, 32px); }
+/* Pôster: a borda é a mesma nos quatro lados, e é a margem do site
+   (14/10: margem = vão entre colunas, 32 / 16 no celular). Era 32 em cima
+   e embaixo contra 56 nas laterais. */
+.page { --gutter-poster: var(--gutter); }
+
+/* O site reserva o lugar da barra de rolagem em toda página
+   (scrollbar-gutter: stable). A capa não rola, então esse lugar virava
+   15px a mais de margem só à direita — o lado direito ficava maior que o
+   esquerdo (14/10). Aqui ele não é reservado. */
+:global(html):has(.page) { scrollbar-gutter: auto; }
 
 /* Nome à esquerda, redes à direita, na mesma linha de base. No celular
    as redes saem daqui e vão pro fim da página (.socialBottom). */

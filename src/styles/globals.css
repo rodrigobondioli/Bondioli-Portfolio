@@ -62,28 +62,26 @@
    * Gutter fluido: 16px no celular, 124px só em tela bem grande, sem degrau.
    * O contêiner é obrigatório em toda seção — era a regra que a produção
    * não cumpria em nenhum lugar.                                          */
-  /* Uma curva só, sem degrau. Até 480 a margem é 16 (o --s2, celular);
-     de 480 a 640 ela sobe em linha reta até encontrar os 6vw; daí pra
-     cima é 6vw, travado em 56 — que chega em ~933px. Ou seja: no desktop
-     a margem é 56 em tudo. As pernas se encostam nos mesmos valores nas
-     junções (16 em 480, 38.4 em 640, 56 em 933), então arrastar a janela
-     não produz salto nenhum.
+  /* A margem lateral é IGUAL ao vão entre as colunas (14/10/2026, pedido
+     do Rodrigo): 32 acima de 640, 16 no celular — 24 apertava a barra
+     lateral (idioma/tema) na margem — as duas medidas andam
+     juntas, por isso uma aponta pra outra.
 
      Histórico: 8.6vw/124 do Framer (124px de cada lado já em 1440); 6vw/124
-     em 22/09/2026 (86 em 1440); 56 fixo no desktop em 12/10/2026, os dois
-     por decisão do Rodrigo. */
-  --gutter: max(16px, min(14vw - 51.2px, 6vw, 56px));
+     em 22/09/2026 (86 em 1440); 56 fixo no desktop em 12/10/2026; 32 =
+     vão em 14/10/2026, todos por decisão do Rodrigo. */
+  --gutter: var(--col-gap);
   --container: none;   /* o Framer nao limita: 100% - gutter dos dois lados */
 
   /* --- Grade (12/10/2026, do tumulto.ai) --- *
    * 6 colunas no celular, 12 acima de 640, 24 acima de 1100, com vão de
-   * 12/16 entre elas, entre as margens (--gutter). As linhas desenhadas
+   * 16/32 entre elas — e a margem (--gutter) é igual ao vão (14/10). As linhas desenhadas
    * (GridLines) ficam na borda esquerda de cada coluna e no meio do passo:
    * uma linha a cada ~29px. Todo bloco começa em cima de uma linha.
    * --col é o passo (coluna + vão); --gap-line, meio passo: o vão entre
    * caixas lado a lado, pra as duas bordas caírem em linhas. */
   --cols: 6;
-  --col-gap: 12px;
+  --col-gap: 16px;
   --page-w: 100vw;   /* o SmoothScroll troca pela largura sem a barra */
   --col: calc((var(--page-w) - 2 * var(--gutter) + var(--col-gap)) / var(--cols));
   --gap-line: calc(var(--col) / 2);
@@ -241,7 +239,7 @@ input, textarea, select { font: inherit; color: inherit; }
 }
 
 @media (min-width: 641px) {
-  :root { --cols: 12; --col-gap: 16px; }
+  :root { --cols: 12; --col-gap: 32px; }
 }
 @media (min-width: 1101px) {
   :root { --cols: 24; }

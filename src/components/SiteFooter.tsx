@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { SpinningLogo } from "./Logo"
-import RollLabel from "./RollLabel"
+import TextRoll from "./TextRoll"
 import styles from "./SiteFooter.module.css"
 
 /**
@@ -18,8 +18,8 @@ import styles from "./SiteFooter.module.css"
  * A marca gira com as mesmas rajadas da capa: é o mesmo SpinningLogo, não
  * uma cópia da física. Se um dia o vento mudar, muda nos dois.
  *
- * E os links de rede dão a mesma cambalhota dos botões e da saída das
- * páginas de projeto — é o hover do site, não do botão.
+ * E os links de rede usam o hover dos links de texto do site (TextRoll):
+ * o texto sobe e o sublinhado faz uma passada.
  */
 
 const SOCIAL = [
@@ -55,7 +55,7 @@ export function SiteFooter() {
                   className={styles.link}
                   data-roll-host=""
                 >
-                  <RollLabel text={label} underline />
+                  <TextRoll text={label} />
                 </a>
               </li>
             ))}
@@ -68,7 +68,7 @@ export function SiteFooter() {
                 aria-label="Download portfolio as Markdown (.md)"
                 title="Download portfolio (.md)"
               >
-                <RollLabel text={MD.label} underline />
+                <TextRoll text={MD.label} />
               </a>
             </li>
           </ul>

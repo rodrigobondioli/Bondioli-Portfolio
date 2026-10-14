@@ -25,7 +25,7 @@ function gutterPx(): number {
 
 function gridLineXs(pageWidth: number): number[] {
   const cols = pageWidth > 1100 ? 24 : pageWidth > 640 ? 12 : 6
-  const colGap = pageWidth > 640 ? 16 : 12
+  const colGap = pageWidth > 640 ? 32 : 16
   const margin = gutterPx()
   const pitch = (pageWidth - 2 * margin + colGap) / cols
   const step = pitch / 2
