@@ -11,6 +11,7 @@ import ClosingSection from "@/components/ClosingSection"
 import Brands from "@/components/Brands"
 import { orderedProjects, asset, galleryUrls, COM_CASE } from "@/lib/projects"
 import order from "@/content/order.json"
+import { SHOWCASE } from "@/content/showcase"
 import s from "./work.module.css"
 
 export const metadata: Metadata = {
@@ -112,8 +113,12 @@ export default function WorkPage() {
                 // primeira foto dela, e as duas lado a lado se repetiam
                 const galeria = galleryUrls(p.gallery)
                 const thumb = asset(p.thumb)
-                const fotos = (galeria.length >= 4 || !thumb ? galeria : [thumb, ...galeria])
-                  .filter((u, i, a) => a.indexOf(u) === i)
+                // quem tem lista própria (content/showcase.ts) usa ela, na ordem
+                const fotos =
+                  SHOWCASE[p.slug] ??
+                  (galeria.length >= 4 || !thumb ? galeria : [thumb, ...galeria]).filter(
+                    (u, i, a) => a.indexOf(u) === i
+                  )
                 return (
                   <li key={p.slug}>
                     <ProjectShowcase

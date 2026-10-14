@@ -847,5 +847,31 @@
   "videoVimeo": null,
   "outcome": "",
   "press": "<p dir=\"auto\"><br class=\"trailing-break\"></p>"
+ },
+ {
+  "id": "flex-pharma",
+  "slug": "flex-pharma",
+  "draft": false,
+  "projectName": "Flex Pharma",
+  "linkText": null,
+  "linkUrl": null,
+  "color": null,
+  "isTemplate": false,
+  "year": null,
+  "type": "Brand • Marketing design",
+  "what": null,
+  "headline": null,
+  "description": null,
+  "challenge": null,
+  "solution": null,
+  "thumb": null,
+  "heroImage": null,
+  "gallery": [],
+  "galleryPosts": [],
+  "videoYouTube": null,
+  "videoUpload": null,
+  "videoVimeo": null,
+  "outcome": null,
+  "press": null
  }
 ]

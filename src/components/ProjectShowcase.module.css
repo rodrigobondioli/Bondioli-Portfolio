@@ -65,7 +65,8 @@
 @media (min-width: 1101px) {
   .shot { grid-column: span var(--span); }
 }
-.shot img {
+.shot img,
+.shot video {
   display: block;
   width: 100%;
   height: 100%;

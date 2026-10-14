@@ -42,15 +42,20 @@ export default function ProjectShowcase({
   slug: string
   name: string
   services?: string | null
-  images: string[]
+  /** fotos e vídeos (.mp4); null guarda a vaga de uma mídia que falta */
+  images: (string | null)[]
   /** posição na lista: os ímpares espelham a colagem */
   index?: number
   /** tem página interna (case) */
   linked?: boolean
 }) {
   const href = `/projects/${slug}`
-  const fotos = images.slice(0, 4)
-  const slots = index % 2 ? [...SLOTS].reverse() : SLOTS
+  // Até 8: com mais de 4, a linha de baixo espelha a de cima (como no
+  // brandbeet). Com 4, o espelho alterna de um projeto pro outro.
+  const fotos = images.slice(0, 8)
+  const duasLinhas = fotos.length > 4
+  const linha1 = !duasLinhas && index % 2 ? [...SLOTS].reverse() : SLOTS
+  const slots = duasLinhas ? [...linha1, ...[...SLOTS].reverse()] : linha1
   const lista = services
     ? services.split("•").map((s) => s.trim()).filter(Boolean).join(", ")
     : null
@@ -59,33 +64,41 @@ export default function ProjectShowcase({
   // (as alturas variam) não pode virar área de clique. Só a primeira entra
   // no Tab; as outras levam ao mesmo lugar.
   const fotosEl = fotos.map((src, i) => {
-    const size = imageSize(src)
-    const img = (
+    if (!src) return null // vaga guardada: a mídia ainda não chegou
+    const video = src.endsWith(".mp4")
+    const size = video ? null : imageSize(src)
+    const midia = video ? (
+      // vídeo curto: toca sozinho, mudo, em loop — sem a revelação em
+      // faixas, que é só das imagens
+      <video src={src} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
+    ) : (
       /* eslint-disable-next-line @next/next/no-img-element */
       <img src={src} alt="" loading="lazy" width={size?.w} height={size?.h} />
     )
-    return (
-      <StripReveal
-        key={src}
-        className={styles.shot}
-        style={{ ["--span" as string]: slots[i].span, aspectRatio: slots[i].ratio }}
+    const conteudo = linked ? (
+      <Link
+        href={href}
+        className={`no-underline ${styles.shotLink}`}
+        aria-label={i === 0 ? `${name} — view case study` : undefined}
+        aria-hidden={i === 0 ? undefined : true}
+        tabIndex={i === 0 ? undefined : -1}
       >
-        {linked ? (
-          <Link
-            href={href}
-            className={`no-underline ${styles.shotLink}`}
-            aria-label={i === 0 ? `${name} — view case study` : undefined}
-            aria-hidden={i === 0 ? undefined : true}
-            tabIndex={i === 0 ? undefined : -1}
-          >
-            {img}
-            <span className={styles.cta} aria-hidden="true">
-              View case study
-            </span>
-          </Link>
-        ) : (
-          img
-        )}
+        {midia}
+        <span className={styles.cta} aria-hidden="true">
+          View case study
+        </span>
+      </Link>
+    ) : (
+      midia
+    )
+    const estilo = { ["--span" as string]: slots[i].span, aspectRatio: slots[i].ratio }
+    return video ? (
+      <div key={src} className={styles.shot} style={estilo}>
+        {conteudo}
+      </div>
+    ) : (
+      <StripReveal key={src} className={styles.shot} style={estilo}>
+        {conteudo}
       </StripReveal>
     )
   })

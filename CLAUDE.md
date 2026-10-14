@@ -347,6 +347,12 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
   case study" no meio dela. Sem cápsula nem bolinha que siga o mouse —
   testadas no mesmo dia e descartadas ("muita capsulinha"). Ao lado do
   nome, "(case study)" na fonte e cor da lista de serviços.
+- A colagem aceita até 8 mídias (duas linhas; a de baixo espelha a de
+  cima, como no brandbeet) e vídeo curto (.mp4, mudo, em loop, sem a
+  revelação em faixas). Projeto com lista própria em
+  `src/content/showcase.ts` usa ela, na ordem do Rodrigo; `null` guarda a
+  vaga de uma mídia que ainda não chegou. O Flex Pharma (14/10, segundo da
+  lista) é o primeiro assim — falta a imagem 7, o notebook.
 - Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
   ela inteira como link o vão embaixo das fotos menores virava área de
   clique (mão e bolinha no vazio).
