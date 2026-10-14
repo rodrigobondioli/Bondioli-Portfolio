@@ -299,17 +299,16 @@ centro, fica a `min(--s7, 12svh)` abaixo do título e começa na mesma
 linha do "Creative Director" (coluna 13 de 24), em duas linhas. No
 celular e em tela baixa ela volta pro fluxo.
 
-## A barra do topo (12/10/2026)
+## A barra do topo (14/10/2026)
 
-Três blocos de duas linhas, desenho do Rodrigo a partir de uma referência:
-"Rodrigo Bondioli / Selected Work 15' — 26'", "Creative Director / São
-Paulo, Brazil", "Get in touch / e-mail". O "Say hello" (pílula) saiu da
-barra; o e-mail é o mesmo `CopyEmail` da capa. O bloco do meio começa no
-meio exato da tela (grade de duas metades). Abaixo de 900 o cargo sai e,
-se nome e contato não couberem na mesma linha (≤375), o contato desce.
-No celular o herói da `/work` tem respiro no topo (`--s7 + --s6`) pra o
-título não nascer embaixo da barra — isso já acontecia antes, com a barra
-antiga, em 320–375px.
+Quatro blocos: "Rodrigo Bondioli / Selected Work 15' — 26'", "Creative
+Director / São Paulo, Brazil", "Get in touch / e-mail" e o idioma/tema.
+Um encostado em cada canto e os dois do meio distribuídos, **com o mesmo
+espaço entre todos** (`space-between`) — desenho do Rodrigo. A segunda
+linha de cada bloco é cinza (`--ink-60`). Como a posição do "Creative
+Director" depende da largura dos textos, o `NavMeio` mede e publica
+`--nav-meio`, e a linha de apoio do herói começa ali. Abaixo de 900 o
+cargo sai; o que não couber desce pra linha de baixo.
 
 ## A grade (12/10/2026, do tumulto.ai)
 
@@ -380,18 +379,11 @@ Tattoaria tem um case deste porte.
 
 Dark (`#121211`) é o padrão; light é o site como era. O tema mora no
 `data-theme` do `<html>`, posto por um script no `<head>` antes da primeira
-pintura; o `ThemeToggle` troca e grava em `localStorage`. Ele mora numa pílula de
-vidro em pé (o mesmo vidro escuro da pílula "See if we're a fit", igual
-nos dois temas), no meio da altura da tela e centrada na margem direita:
-EN / BR, um tracinho e o tema. 36px de largura, a 16px da borda da tela —
-ela flutua por cima do conteúdo, como a outra pílula (14/10; antes os três
-ficavam soltos no topo e pareciam grudados). O vidro das duas pílulas é a classe
-`.glass` (globals): corpo escuro translúcido, aro de luz em degradê, volume
-por dentro e reflexo — tudo discreto (a primeira versão, com o topo forte,
-ficou "forçada"). O idioma ativo fica numa cápsula funda dentro dela. No
-celular ela deita no canto de baixo, acima da outra pílula. Ela não aparece na capa (`/`), a pedido
-(14/10): lá a tela é uma só, com as redes no canto. O download do portfólio passou por ela e foi pro
-rodapé (12/10). O que tem fundo próprio claro (o amarelo das seções de
+pintura; o `ThemeToggle` troca e grava em `localStorage`. Ele mora **na barra do topo**, em
+linha e só texto: EN, BR, um tracinho e o sol — o quarto bloco dela
+(14/10; passou por uma cápsula de vidro em pé na margem direita, que era
+"informação demais na tela"). Por isso não existe em página sem a barra
+(a capa, o /thanks). O que tem fundo próprio claro (o amarelo das seções de
 destaque) usa `.on-accent`, que devolve os tokens escuros de texto.
 
 **As páginas de projeto seguem o tema também** (12/10/2026, pedido do

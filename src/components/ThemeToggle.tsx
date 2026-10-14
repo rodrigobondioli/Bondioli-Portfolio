@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
 import styles from "./ThemeToggle.module.css"
 
 /**
@@ -20,9 +19,6 @@ type Tema = "dark" | "light"
 
 export default function ThemeToggle() {
   const [tema, setTema] = useState<Tema>("dark")
-  // a capa (/) é uma tela só, com as redes no canto: a barra lateral não
-  // existe lá (14/10, pedido do Rodrigo)
-  const naCapa = usePathname() === "/"
 
   useEffect(() => {
     setTema(document.documentElement.dataset.theme === "light" ? "light" : "dark")
@@ -41,10 +37,8 @@ export default function ThemeToggle() {
 
   const destino = tema === "dark" ? "light" : "dark"
 
-  if (naCapa) return null
-
   return (
-    <div className={`glass ${styles.rail}`}>
+    <div className={styles.rail}>
       {/* Idioma: por enquanto só a cara (12/10). O site é em inglês; o
           português ainda não existe, então BR aparece apagado e não leva a
           lugar nenhum — não é botão, pra ninguém clicar num link morto. */}

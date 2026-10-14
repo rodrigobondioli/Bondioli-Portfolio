@@ -1,17 +1,20 @@
 import Link from "next/link"
 import CopyEmail from "./CopyEmail"
+import ThemeToggle from "./ThemeToggle"
+import NavMeio from "./NavMeio"
 import styles from "./SiteNav.module.css"
 
 /**
- * Navegação do topo — três blocos de duas linhas (12/10, desenho do
- * Rodrigo a partir de uma referência):
+ * Navegação do topo — quatro blocos (14/10, desenho do Rodrigo):
  *
- *   Rodrigo Bondioli        Creative Director        Get in touch
- *   Selected Work 15'—26'   São Paulo, Brazil        hello@…
+ *   Rodrigo Bondioli      Creative Director      Get in touch      EN BR | ☼
+ *   Selected Work 15'—26' São Paulo, Brazil      hello@…
  *
- * A primeira linha de cada bloco é o rótulo (peso 600), a segunda é o
- * dado. O bloco do meio começa no meio exato da tela: a barra é uma grade
- * de duas metades, e a metade direita espalha o meio e o contato.
+ * Um encostado em cada canto e os dois do meio distribuídos, com o mesmo
+ * espaço entre todos (space-between). O idioma e o tema moram aqui, em
+ * linha, só texto — era uma cápsula de vidro na lateral, "informação
+ * demais na tela". A linha de apoio do herói começa onde o "Creative
+ * Director" cair (NavMeio publica essa posição).
  *
  * Saiu o "Say hello" (a pílula rosa): o contato agora é o e-mail, com o
  * mesmo CopyEmail da capa — clique copia, hover gira o cubo. O nome volta
@@ -40,7 +43,7 @@ export default function SiteNav({
       </div>
 
       <div className={styles.half}>
-        <div className={`${styles.block} ${styles.middle}`}>
+        <div className={`${styles.block} ${styles.middle}`} data-nav-meio="">
           <p className={styles.label}>Creative Director</p>
           <p className={`${styles.value} ${styles.muted}`}>São Paulo, Brazil</p>
         </div>
@@ -55,6 +58,11 @@ export default function SiteNav({
           />
         </div>
       </div>
+
+      <div className={`${styles.block} ${styles.prefs}`}>
+        <ThemeToggle />
+      </div>
+      <NavMeio />
     </header>
   )
 }

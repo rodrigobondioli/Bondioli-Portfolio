@@ -1,13 +1,13 @@
-/* Três blocos de duas linhas, na grade da página (12/10): cada um começa
-   em cima de uma linha. */
+/* Quatro blocos (14/10): um encostado em cada canto, os dois do meio
+   distribuídos com o mesmo espaço entre todos. */
 .nav {
   position: absolute;
   inset: 0 0 auto 0;
   z-index: 100;
-  display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  column-gap: var(--col-gap);
-  align-items: start;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s3);
   /* em cima a mesma margem das laterais (14/10: 32 / 16 no celular) */
   padding: var(--gutter);
   font-size: var(--t-body-sm);
@@ -15,17 +15,9 @@
   /* a barra flutua por cima do herói: só os blocos recebem clique */
   pointer-events: none;
 }
-
-/* O nome na primeira coluna; o cargo começa na coluna do meio (13 de 24,
-   7 de 12) e o contato nas quatro últimas — os três em cima de linhas da
-   grade. A "metade" só agrupa; quem posiciona é a grade da barra. */
-.nav > .block:first-child { grid-column: 1 / span 4; }
 .half { display: contents; }
-.middle { grid-column: 7 / span 4; }
-@media (min-width: 1101px) { .middle { grid-column: 13 / span 4; } }
-/* o contato termina na última linha da grade, com o texto alinhado à
-   esquerda dentro dele (14/10, pedido do Rodrigo) */
-.half > .block:last-child { grid-column: -5 / -1; justify-self: end; }
+/* idioma e tema: na altura da primeira linha dos outros blocos */
+.prefs { padding-top: 1px; }
 
 .block {
   display: flex;
@@ -52,18 +44,10 @@
 }
 
 
-/* Tablet e celular: abaixo de 900 a metade direita não comporta o cargo
-   e o contato lado a lado (medido: em 641 o cargo quebrava em duas
-   linhas). Fica o nome e o contato; o cargo sai. Se nem esses dois
-   couberem na mesma linha — num celular de 320 — o contato desce inteiro
-   pra linha de baixo, em vez de o nome quebrar em pedaços. */
+/* Tablet e celular: abaixo de 900 o cargo sai (em 641 ele quebrava em
+   duas linhas); ficam nome, contato e idioma/tema. Se não couberem na
+   mesma linha, o que sobra desce inteiro pra linha de baixo. */
 @media (max-width: 900px) {
-  .nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: var(--s2) var(--s3);
-  }
-  .half { display: contents; }
+  .nav { flex-wrap: wrap; gap: var(--s2) var(--s3); }
   .middle { display: none; }
 }
