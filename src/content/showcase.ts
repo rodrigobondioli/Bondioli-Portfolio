@@ -26,9 +26,10 @@ export const SHOWCASE: Record<string, Midia[]> = {
         "/projects/tattoaria/roupas/roupa-4.webp",
       ],
     },
-    // reel de 12s com 8 cortes de 1,5s de 4 vídeos do canal da Tattoaria
-    // (inauguração, Flash Day Terror, Tattoo Truck no Vans Park, 115 anos
-    // da Harley), recortado em pé — originais em _originais/tattoaria-reel/
+    // reel de ~12s: os 10 takes escolhidos pelo Rodrigo, em ~1,3s cada, de
+    // 5 vídeos do canal da Tattoaria (Turner/Mindnation, Vans Park,
+    // reinauguração, 115 anos Harley, Monstrinhos), recortado em pé.
+    // Originais e o script que monta em _originais/tattoaria-reel/
     "/projects/tattoaria/reel.mp4",
     "/projects/tattoaria/logo.webp",
     "/projects/tattoaria/tattoaria-4.webp",

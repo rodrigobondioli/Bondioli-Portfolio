@@ -362,9 +362,10 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
   reduzido. A Tattoaria usa na vaga 1 (as roupas, P&B, 14/10). Regra do
   Rodrigo: só algumas vagas animadas, "pra não virar carnaval".
   A colagem da Tattoaria (14/10): 1 flipbook das roupas · 2 **reel** de
-  12s (8 cortes de 1,5s de 4 vídeos do canal da Tattoaria, recortado em pé
-  4:5, sem som, ~1,4MB; originais em `_originais/tattoaria-reel/`, baixados
-  com yt-dlp) · 3 logo · 4 a sinuca.
+  ~12,5s (os 10 takes que o Rodrigo escolheu nos vídeos do canal da
+  Tattoaria, ~1,3s cada, recortado em pé 4:5, sem som, ~1,2MB; originais
+  e o script que monta, `montar-reel.py`, em `_originais/tattoaria-reel/`,
+  baixados com yt-dlp) · 3 logo · 4 a sinuca.
 - Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
   ela inteira como link o vão embaixo das fotos menores virava área de
   clique (mão e bolinha no vazio).
