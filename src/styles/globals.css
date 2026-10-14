@@ -273,7 +273,12 @@ a {
   text-underline-offset: 3px;
   text-decoration-thickness: from-font;
 }
+/* O hover dos links de texto é o rosa da marca (14/10, pedido do Rodrigo),
+   além do movimento de cada um. Botões, cards e marcas (.no-underline)
+   têm o hover deles. */
+a { transition: color var(--fast) var(--ease); }
 a:hover { text-decoration-thickness: 2px; }
+a:not(.no-underline):hover { color: var(--accent-pink); }
 
 /* Botões, cards e marcas: a área inteira é clicável, o sublinhado só
    sujaria. `.face` é a peça do RollLabel — como ela é `inline-block`, o

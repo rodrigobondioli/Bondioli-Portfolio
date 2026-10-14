@@ -42,7 +42,7 @@ export default function SiteNav({
       <div className={styles.half}>
         <div className={`${styles.block} ${styles.middle}`}>
           <p className={styles.label}>Creative Director</p>
-          <p className={styles.value}>São Paulo, Brazil</p>
+          <p className={`${styles.value} ${styles.muted}`}>São Paulo, Brazil</p>
         </div>
 
         <div className={styles.block}>

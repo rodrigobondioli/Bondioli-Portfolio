@@ -131,6 +131,9 @@ npm run start   # serve o build em localhost:3000
   sem repique) e o sublinhado fica parado, fazendo uma passada (some pela
   direita, volta pela esquerda). Vale pra redes da capa, e-mail e redes do
   rodapé. O `PillButton` continua com a cambalhota: é decisão do botão.
+  **Todo link de texto fica rosa (`--accent-pink`) no hover**, além do
+  movimento — TextRoll, links da barra do topo, nome do projeto e qualquer
+  `<a>` sublinhado (regra em globals) (14/10, pedido do Rodrigo).
 - **`lag`** desencontra uma grade: a peça espera mais um tanto da janela antes
   de largar. O valor vem de hash do índice, **nunca `Math.random`** — o
   servidor e o navegador têm que chegar no mesmo número, senão é erro de

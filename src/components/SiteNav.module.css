@@ -38,12 +38,14 @@
 
 .label { font-weight: 600; }
 .value { font-weight: 400; }
-/* "Selected Work 15' — 26'" no cinza do cargo da capa ("· Creative
-   Director"), embaixo do nome (14/10, pedido do Rodrigo) */
+/* A segunda linha dos blocos ("Selected Work 15' — 26'", "São Paulo,
+   Brazil") no cinza do cargo da capa ("· Creative Director") (14/10) */
 .muted { color: var(--ink-60); }
 
 /* Nome e "Selected Work" são links: sublinham no hover, como o resto */
+.block a { transition: color var(--fast) var(--ease); }
 .block a:hover {
+  color: var(--accent-pink);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: from-font;

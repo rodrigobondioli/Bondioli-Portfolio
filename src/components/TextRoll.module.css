@@ -6,6 +6,12 @@
   display: inline-block;
   vertical-align: bottom;
   white-space: nowrap;
+  transition: color 300ms ease;
+}
+/* além do movimento, o rosa da marca no hover — texto e sublinhado (14/10) */
+:global([data-roll-host]:hover) .root,
+:global([data-roll-host]:focus-visible) .root {
+  color: var(--accent-pink);
 }
 
 .mask {
