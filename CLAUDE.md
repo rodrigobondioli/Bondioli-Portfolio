@@ -377,12 +377,13 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
   toque em "Tire change" → tela do pneu → "Front left" → capô ("Hood",
   no laranja do Roadr) → "Next", em loop, 10s, fundo cinza do campo;
   projeto em `_originais/roadr-remotion/`, `npm run render`, depois
-  comprimir pra 768×800). Vaga 2 é o "brand showcase": a câmera avança devagar
-  por um campo de telas do site/app e fotos em 3D (CSS preserve-3d), e o
-  campo balança e gira — algumas peças passam bem perto, pra ver detalhe —,
-  a partir do vídeo do Minx Law do brandbeet (composição `Campo` no mesmo
-  projeto Remotion; loop perfeito, 15s). A colagem que rola em perspectiva
-  (`_originais/roadr-colagem/`) foi a versão anterior. vaga 4
+  comprimir pra 768×800). Vaga 2: os cards de métricas da página "Earn with us" do
+  roadr.com (Clients/Services/Verified) redesenhados com os gráficos
+  animando, em duas fileiras passando uma pra cada lado (composição
+  `Metrics`). Vaga 3: mockup fotográfico do notebook, feito pelo Rodrigo.
+  O campo 3D e o mockup em CSS foram testados e descartados ("ficou
+  ruim") — a lição: site se mostra com mockup FOTOGRÁFICO ou com a
+  própria interface animada, nunca com mockup desenhado em código. vaga 4
   o vídeo do card "Car wash" do roadr.com.
 - Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
   ela inteira como link o vão embaixo das fotos menores virava área de
