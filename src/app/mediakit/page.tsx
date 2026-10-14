@@ -57,6 +57,17 @@ export default async function MediaKitPage() {
     st.live && canal?.[st.live] ? { ...st, value: canal[st.live] as string } : st
   )
 
+  /* Quem fecha cada fileira dos números, pra encostar na borda em vez de
+     parar na linha do meio (CSS). Em terços acima de 900 (o largo vale
+     dois), em metades no tablet (o largo é a fileira inteira). */
+  let tercos = 0
+  let metades = 0
+  const fimDaFileira = numeros.map((st) => {
+    tercos += st.span === 2 ? 2 : 1
+    metades += st.span === 2 ? 2 : 1
+    return [tercos % 3 === 0 ? s.fim3 : "", metades % 2 === 0 ? s.fim2 : ""]
+  })
+
   /* Os quatro mais vistos do canal, calculados na hora. Sem chave, valem os
      quatro escolhidos à mão no JSON. */
   const videos = canal?.maisVistos.length ? canal.maisVistos : kit.picks
@@ -129,8 +140,13 @@ export default async function MediaKitPage() {
             </div>
 
             <ul className={s.stats}>
-              {numeros.map((st) => (
-                <li className={st.span === 2 ? s.wide : undefined} key={st.label}>
+              {numeros.map((st, i) => (
+                <li
+                  className={[st.span === 2 ? s.wide : "", ...fimDaFileira[i]]
+                    .filter(Boolean)
+                    .join(" ") || undefined}
+                  key={st.label}
+                >
                   <div className={`on-accent ${s.stat}`}>
                     <p className="overline">{st.label}</p>
                     <p className="h3">

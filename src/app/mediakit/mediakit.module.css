@@ -61,12 +61,21 @@
 /* Quadrado, canto vivo, medido no Framer: 294 em 1440, 246 em 900, 219 em
    810 — as três pontas caem em cima de min(294px, 28vw). O piso de 180
    impede que ele vire selo perto do degrau de 640. */
+/* 14/10: as duas bordas em linhas da grade (pedido do Rodrigo). A largura
+   é um número ímpar de meios passos (5,5 colunas de 24; 3,5 de 12) — 319
+   em 1440, quase os 294 do Framer —, e o empurrão de (vão/2 − col/4) leva
+   a borda esquerda da caixa centrada pra linha mais perto. Com número
+   ímpar, a caixa na linha fica a menos de 1px do centro da página. */
 .stage {
   position: relative;
   z-index: 2;
-  width: max(180px, min(294px, 28vw));
+  width: calc(var(--col) * 3.5);
+  translate: calc(var(--col-gap) / 2 - var(--col) / 4) 0;
   aspect-ratio: 1;
   background: var(--ink-10);
+}
+@media (min-width: 1101px) {
+  .stage { width: calc(var(--col) * 5.5); }
 }
 /* a caixa é o StripReveal; o vídeo preenche ela inteira */
 .stage video {
@@ -86,6 +95,7 @@
   /* no celular o vídeo ocupa a largura e fica em pé, como no Framer */
   .stage {
     width: 100%;
+    translate: none;
     aspect-ratio: 327 / 400;
   }
   /* Com o vídeo ocupando a largura inteira, a faixa deixaria de ser
@@ -168,17 +178,33 @@
    grade do arquivo na /work */
 .stats > li { min-width: 0; }
 
+/* Fim de fileira (14/10): a coluna termina 3px depois da linha (o vão é
+   maior que meio passo), então o card que tem vizinha à direita encolhe
+   até a linha do meio da última coluna dele — o `.to-line` dos globais.
+   O último da fileira não: esse fecha na linha da borda do conteúdo.
+   Nos números, quem fecha a fileira vem calculado no JSX (.fim3 em
+   terços, .fim2 em metades), porque os largos mudam a conta. */
+@media (min-width: 641px) {
+  .stats > li:not(.fim3),
+  .trio > li:not(:nth-child(3n)),
+  .pairs > li:nth-child(odd),
+  .picks > li:nth-child(odd),
+  .tables > :nth-child(odd) {
+    margin-inline-end: calc(var(--col) / 2 - var(--col-gap));
+  }
+}
+
 .stat {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--s1);
   min-height: var(--s7);
-  /* meio passo menos a borda: o texto cai na linha do meio */
-  padding: calc(var(--gap-line) - var(--hairline));
-  border: var(--hairline) solid var(--rule);
-  /* cartão branco nos dois temas (14/10); o `on-accent` do JSX devolve o
-     texto escuro. Por cima das linhas da grade, como a mídia. */
+  /* meio passo: o texto cai na linha do meio */
+  padding: var(--gap-line);
+  /* cartão branco nos dois temas, sem contorno (14/10); o `on-accent` do
+     JSX devolve o texto escuro. Por cima das linhas da grade, como a
+     mídia. */
   position: relative;
   z-index: 2;
   background: #fff;
@@ -283,6 +309,9 @@
   /* seis cartelas roxas em três colunas ficam estreitas antes de a tela
      virar tablet: o texto delas é título, não legenda */
   .trio > li { grid-column: span 6 !important; }
+  /* duas por fileira: fecha a de número par */
+  .trio > li:nth-child(odd) { margin-inline-end: calc(var(--col) / 2 - var(--col-gap)); }
+  .trio > li:nth-child(even) { margin-inline-end: 0; }
 }
 
 @media (max-width: 900px) {
@@ -290,6 +319,12 @@
   .wide { grid-column: 1 / -1 !important; }
   .pairs > li,
   .tables > * { grid-column: 1 / -1 !important; }
+  /* uma por fileira: ninguém tem vizinha */
+  .pairs > li,
+  .tables > * { margin-inline-end: 0 !important; }
+  /* números em metades: quem fecha agora é o .fim2 */
+  .stats > li:not(.fim2) { margin-inline-end: calc(var(--col) / 2 - var(--col-gap)); }
+  .stats > li.fim2 { margin-inline-end: 0; }
 }
 
 @media (max-width: 640px) {
@@ -297,6 +332,9 @@
   .trio > li,
   .picks > li,
   .wide { grid-column: 1 / -1 !important; }
+  .stats > li,
+  .trio > li,
+  .picks > li { margin-inline-end: 0 !important; }
 
   /* A tabela vira lista: formato e preço na primeira linha, descrição na
      segunda. O cabeçalho some da tela mas continua no leitor de tela.
