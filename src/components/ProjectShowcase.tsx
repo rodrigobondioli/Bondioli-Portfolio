@@ -1,5 +1,5 @@
 import Link from "next/link"
-import StripReveal from "./StripReveal"
+import CardReveal from "./CardReveal"
 import Flipbook from "./Flipbook"
 import type { Midia } from "@/content/showcase"
 import { imageSize } from "@/lib/imageSize"
@@ -23,7 +23,8 @@ import styles from "./ProjectShowcase.module.css"
  * quadrada, quase quadrada — em 5 · 7 · 4 · 8 colunas de 24. As fotos
  * daqui são 16:9, então o recorte é `object-fit: cover`. Projeto sim,
  * projeto não, a ordem espelha, pra as linhas não se repetirem.
- * As imagens abrem em faixas (StripReveal).
+ * As peças entram como no brandbeet.com/work (CardReveal): sobem, aparecem
+ * e se abrem de cima pra baixo, uma depois da outra.
  */
 
 const SLOTS = [
@@ -76,8 +77,7 @@ export default function ProjectShowcase({
     const midia = flip ? (
       <Flipbook srcs={flip} />
     ) : video ? (
-      // vídeo curto: toca sozinho, mudo, em loop — sem a revelação em
-      // faixas, que é só das imagens
+      // vídeo curto: toca sozinho, mudo, em loop
       <video src={src as string} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
     ) : (
       /* eslint-disable-next-line @next/next/no-img-element */
@@ -100,14 +100,11 @@ export default function ProjectShowcase({
       midia
     )
     const estilo = { ["--span" as string]: slots[i].span, aspectRatio: slots[i].ratio }
-    return video ? (
-      <div key={key} className={styles.shot} style={estilo}>
+    // a entrada do brandbeet, em sequência na linha (de 4 em 4)
+    return (
+      <CardReveal key={key} className={styles.shot} style={estilo} ordem={i % 4}>
         {conteudo}
-      </div>
-    ) : (
-      <StripReveal key={key} className={styles.shot} style={estilo}>
-        {conteudo}
-      </StripReveal>
+      </CardReveal>
     )
   })
 

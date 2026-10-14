@@ -366,6 +366,15 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
   Tattoaria, ~1,3s cada, recortado em pé 4:5, sem som, ~1,2MB; originais
   e o script que monta, `montar-reel.py`, em `_originais/tattoaria-reel/`,
   baixados com yt-dlp) · 3 logo · 4 a sinuca.
+- **Entrada das peças = a do brandbeet.com/work** (`CardReveal`, medida
+  lá em 14/10): a peça sobe 24px, aparece e se abre de cima pra baixo
+  (`clip-path` de 100% a 0) enquanto a mídia assenta de 1.08 pra 1, ~1s,
+  uma ~150ms depois da outra. Substitui o StripReveal no Selected work
+  (pedido do Rodrigo: "bem parecido, com o refinamento", em todos). Vale
+  pra foto, vídeo e flipbook.
+- Roadr (14/10): vaga 2 é uma colagem que rola (telas do roadr.com sobre
+  fundo claro, como o Minx Law de lá — `_originais/roadr-colagem/`), vaga 4
+  o vídeo do card "Car wash" do roadr.com.
 - Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
   ela inteira como link o vão embaixo das fotos menores virava área de
   clique (mão e bolinha no vazio).
