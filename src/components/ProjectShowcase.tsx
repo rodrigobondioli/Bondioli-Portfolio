@@ -28,7 +28,9 @@ const SLOTS = [
   { span: 5, ratio: "24 / 25" },
   { span: 7, ratio: "4 / 5" },
   { span: 4, ratio: "1 / 1" },
-  { span: 8, ratio: "20 / 21" },
+  // mais deitada que a de lá (20/21): alta assim ela passava do retrato
+  // vizinho; em 6:5 fica entre ele e a quadrada (14/10, pedido do Rodrigo)
+  { span: 8, ratio: "6 / 5" },
 ]
 
 export default function ProjectShowcase({

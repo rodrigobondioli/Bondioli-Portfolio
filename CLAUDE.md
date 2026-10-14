@@ -266,7 +266,8 @@ entrar e sair abaixo continua a mesma.
 O "Selected work" também veio do brandbeet: `ProjectShowcase` — nome
 grande + "Services" (o campo `type`) e uma colagem de quatro imagens em
 5·7·4·8 colunas de 24, presas pelo topo, nos formatos medidos lá (quase
-quadrada, retrato 4:5, quadrada, quase quadrada — recorte com
+quadrada, retrato 4:5, quadrada e 6:5 — a última mais deitada que a de
+lá, pra ficar entre o retrato e a quadrada (14/10) — recorte com
 `object-fit: cover`, as fotos são 16:9), espelhada projeto sim, projeto
 não. Sem botão: a barra "View project" saiu no mesmo dia; o nome e
 qualquer imagem levam pra `/projects/<slug>`. As
