@@ -14,6 +14,15 @@
 export type Midia = string | { flipbook: string[] } | null
 
 export const SHOWCASE: Record<string, Midia[]> = {
+  // 14/10: 2 = a colagem que rola (telas do roadr.com sobre fundo claro,
+  // como o Minx Law do brandbeet; montada por _originais/roadr-colagem/
+  // montar.js + ffmpeg) · 4 = o vídeo do card "Car wash" do roadr.com
+  roadr: [
+    "/projects/roadr/gallery.webp",
+    "/projects/roadr/colagem.mp4",
+    "/projects/roadr/gallery-2.webp",
+    "/projects/roadr/car-wash.mp4",
+  ],
   // 14/10, plano do Rodrigo: 1 = flipbook das roupas · 2 = reel de vídeo
   // · 3 = o logo da Tattoaria
   // · 4 = foto fixa (a sinuca, mandada pelo Rodrigo)
