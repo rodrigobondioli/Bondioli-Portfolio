@@ -22,8 +22,9 @@ export const SHOWCASE: Record<string, Midia[]> = {
     // (_originais/roadr-remotion/, `npm run render`)
     "/projects/roadr/app.mp4",
     "/projects/roadr/colagem.mp4",
-    // o splash do app no mockup do celular deitado (Remotion, Mockup.tsx)
-    "/projects/roadr/mockup-splash.webp",
+    // mockup fotográfico do site (feito pelo Rodrigo; original em
+    // _originais/roadr-mockups/)
+    "/projects/roadr/mockup-laptop.webp",
     "/projects/roadr/car-wash.mp4",
   ],
   // 14/10, plano do Rodrigo: 1 = flipbook das roupas · 2 = reel de vídeo
