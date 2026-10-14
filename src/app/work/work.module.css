@@ -422,7 +422,9 @@
   display: grid;
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   column-gap: var(--col-gap);
-  background: var(--accent);
+  /* nasce na cor da página e chega no tom da seção — sem o corte seco
+     entre o fundo e a faixa (14/10, pedido do Rodrigo) */
+  background: linear-gradient(var(--bg) 0%, var(--accent) 60%);
   padding-top: var(--s7);
   padding-bottom: 0;
 }
@@ -442,7 +444,7 @@
    amarelo, deixava ele escuro). Emenda no degradê do fecho, que sai do
    mesmo grafite. No claro, o amarelo de sempre. */
 :global([data-theme="dark"]) .youtube {
-  background: #1e1e1c;
+  background: linear-gradient(var(--bg) 0%, #1e1e1c 60%);
   --ink:    #f1f1f1;
   --ink-60: rgba(241, 241, 241, 0.6);
   --ink-25: rgba(241, 241, 241, 0.25);
