@@ -4,7 +4,7 @@ import SmoothScroll from "@/components/SmoothScroll"
 import { SiteFooter } from "@/components/SiteFooter"
 import MeetingBar from "@/components/MeetingBar"
 import YouTube from "@/components/YouTube"
-import Brands from "@/components/Brands"
+import AboutSection from "@/components/AboutSection"
 import TypeBand from "@/components/TypeBand"
 import { dadosDoCanal } from "@/lib/youtube"
 import kit from "@/content/mediakit.json"
@@ -46,7 +46,6 @@ const packages = kit.packages as Package[]
 const countries = kit.countries as string[][]
 const ages = kit.ages as string[][]
 const cases = kit.case.cards as string[][]
-const credentials = kit.about.credentials as string[][]
 
 
 export default async function MediaKitPage() {
@@ -107,7 +106,6 @@ export default async function MediaKitPage() {
           <div className={`container ${s.secInner}`}>
             <div className="head-row">
               <h2 className="h3">Audience &amp; niche</h2>
-              <span className="rule rule-lg" />
               {/* O selo era uma pílula amarela do tamanho de um título. Aqui
                   ele é o que sempre foi: uma legenda. O "@falabondioli" que
                   ocupava este lugar já aparece na frase logo abaixo. */}
@@ -133,7 +131,7 @@ export default async function MediaKitPage() {
             <ul className={s.stats}>
               {numeros.map((st) => (
                 <li className={st.span === 2 ? s.wide : undefined} key={st.label}>
-                  <div className={s.stat}>
+                  <div className={`on-accent ${s.stat}`}>
                     <p className="overline">{st.label}</p>
                     <p className="h3">
                       {st.value}
@@ -182,7 +180,6 @@ export default async function MediaKitPage() {
           <div className={`container ${s.secInner}`}>
             <div className="head-row">
               <h2 className="h3">Elite performance</h2>
-              <span className="rule rule-md" />
               <p className="overline">vs. creators with similar reach</p>
             </div>
 
@@ -204,7 +201,6 @@ export default async function MediaKitPage() {
           <div className={`container ${s.secInner}`}>
             <div className="head-row">
               <h2 className="h3">{kit.case.title}</h2>
-              <span className="rule rule-md" />
               <p className="overline">Case</p>
             </div>
 
@@ -229,7 +225,6 @@ export default async function MediaKitPage() {
           <div className={`container ${s.secInner}`}>
             <div className="head-row">
               <h2 className="h3">Partnership options</h2>
-              <span className="rule rule-lg" />
               <p className="overline">Investment in USD</p>
             </div>
 
@@ -271,7 +266,6 @@ export default async function MediaKitPage() {
           <div className={`container ${s.secInner}`}>
             <div className="head-row">
               <h2 className="h3">Most watched</h2>
-              <span className="rule rule-md" />
               <p className="overline">YouTube @falabondioli</p>
             </div>
 
@@ -285,47 +279,8 @@ export default async function MediaKitPage() {
           </div>
         </section>
 
-        {/* ---------- Sobre ---------- */}
-        <section className={`section ${s.about}`} id="about">
-          <div className={`container ${s.aboutInner}`}>
-            <div className={s.aboutHead}>
-              <h2 className="h3">{kit.about.title}</h2>
-            </div>
-
-            <div className={s.aboutBody}>
-              {/* Mesmo lugar do vídeo na /work — aqui é o retrato, porque o
-                  vídeo já abre a página. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className={`g-left to-line ${s.aboutPhoto}`}
-                src="/images/rodrigo-retrato.webp"
-                alt="Rodrigo Bondioli"
-                width={1200}
-                height={1200}
-                loading="lazy"
-              />
-
-              <div className={`g-right ${s.aboutText}`}>
-                {/* O cargo encostado no topo da foto e na esquerda do
-                    texto, como na /work. */}
-                <p className={`overline ${s.aboutRole}`}>{kit.about.role}</p>
-                <div className={s.aboutCopy}>
-                  <p className="body">{kit.about.text}</p>
-                  <Brands label="Brands I've worked with" />
-                </div>
-              </div>
-            </div>
-
-            <ul className={s.credentials}>
-              {credentials.map(([left, right]) => (
-                <li key={left}>
-                  <span className="body-sm">&mdash; {left}</span>
-                  <span className="body-sm">&mdash; {right}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+        {/* ---------- Sobre (o mesmo da /work) ---------- */}
+        <AboutSection />
       </main>
 
       <SiteFooter />

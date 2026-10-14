@@ -212,8 +212,16 @@ vídeo e desce pro fim do herói — atrás dele viraria um caco de letra de
 cada lado.
 
 O vídeo da capa é o mesmo `eu-profile.mp4` do "about" da `/work` (o
-arquivo do Framer é byte a byte o mesmo). O retrato do "about" daqui é
-novo: `public/images/rodrigo-retrato.webp`.
+arquivo do Framer é byte a byte o mesmo).
+
+Ajustes de 14/10/2026 (pedido do Rodrigo): o "about" é o **mesmo da
+`/work`**, igualzinho — os dois usam `AboutSection` (texto, vídeo,
+credenciais e CSS num lugar só; o retrato `rodrigo-retrato.webp` e o
+`about` do `mediakit.json` ficaram sem uso). Os títulos de seção daqui
+**não têm régua**. A faixa "MEDIA KIT —" passa no **meio exato do vídeo**
+(a legenda de cima saiu do fluxo pra não empurrar o vídeo). Os cards de
+números são **brancos nos dois temas** (`.on-accent` pro texto escuro) e
+eles e as cartelas de cor ficam **por cima das linhas da grade**.
 
 O `mediakit.json` deixou de ser o despejo do Framer (uma lista de textos
 com nome de estilo) e virou conteúdo com forma: números, países, faixas

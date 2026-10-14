@@ -42,7 +42,15 @@
   gap: var(--s4);
 }
 
+/* A legenda sai do fluxo e senta acima do vídeo: assim o centro do herói
+   é o centro do vídeo, e a faixa (presa em 50%) passa exatamente no meio
+   dele. Com a legenda no fluxo, ela empurrava o vídeo pra baixo e a faixa
+   ficava alta (14/10, pedido do Rodrigo). */
 .meta {
+  position: absolute;
+  bottom: calc(100% + var(--s4));
+  left: 0;
+  right: 0;
   font-family: var(--font-mono), ui-monospace, monospace;
   display: flex;
   justify-content: space-between;
@@ -70,6 +78,7 @@
 
 @media (max-width: 640px) {
   .meta {
+    position: static;
     flex-direction: column;
     align-items: center;
     gap: var(--s1);
@@ -168,6 +177,11 @@
   /* meio passo menos a borda: o texto cai na linha do meio */
   padding: calc(var(--gap-line) - var(--hairline));
   border: var(--hairline) solid var(--rule);
+  /* cartão branco nos dois temas (14/10); o `on-accent` do JSX devolve o
+     texto escuro. Por cima das linhas da grade, como a mídia. */
+  position: relative;
+  z-index: 2;
+  background: #fff;
 }
 
 /* Países e faixa etária: duas listas lado a lado, com a mesma régua entre
@@ -208,6 +222,9 @@
   gap: var(--s2);
   min-height: var(--s7);
   padding: var(--gap-line);
+  /* a cor cobre as linhas da grade em vez de deixá-las passar (14/10) */
+  position: relative;
+  z-index: 2;
 }
 .accent { background: var(--accent); }
 .violet {
@@ -260,73 +277,6 @@
 .picks { row-gap: var(--s4); }
 .picks > li { min-width: 0; }
 
-/* ---------- Sobre ---------- */
-
-/* Mesmo bloco da /work: título com régua, duas colunas iguais, e as
-   credenciais fechando em linhas com hairline. */
-.about {
-  padding-top: var(--s7);
-  padding-bottom: var(--s5);
-}
-.aboutInner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s5);
-}
-.aboutHead {
-  display: flex;
-  align-items: center;
-  gap: var(--s3);
-}
-
-.aboutBody {
-  display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  column-gap: var(--col-gap);
-  align-items: stretch;
-}
-
-/* Metade esquerda, terminando na linha do meio (g-left + to-line no JSX),
-   como o vídeo da /work. */
-.aboutPhoto {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  background: var(--ink-10);
-}
-
-.aboutText {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s5);
-}
-/* O cargo fica no topo; o resto do texto se centra na folga que sobrar —
-   igualzinho à /work. */
-.aboutRole { flex: 0 0 auto; }
-.aboutCopy {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s5);
-  margin-block: auto;
-}
-
-.credentials {
-  display: flex;
-  flex-direction: column;
-}
-.credentials li {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--s3);
-  padding-block: var(--s2);
-  border-bottom: var(--hairline) solid var(--rule);
-}
-.credentials li:first-child {
-  border-top: var(--hairline) solid var(--rule);
-}
-
 /* ---------- Os três degraus ---------- */
 
 @media (max-width: 1100px) {
@@ -340,12 +290,6 @@
   .wide { grid-column: 1 / -1 !important; }
   .pairs > li,
   .tables > * { grid-column: 1 / -1 !important; }
-  .aboutBody { row-gap: var(--s4); }
-  .aboutBody > * { grid-column: 1 / -1 !important; margin-inline-end: 0 !important; }
-  .credentials li {
-    flex-direction: column;
-    gap: var(--s1);
-  }
 }
 
 @media (max-width: 640px) {
@@ -353,10 +297,6 @@
   .trio > li,
   .picks > li,
   .wide { grid-column: 1 / -1 !important; }
-
-  .aboutHead { flex-wrap: wrap; gap: var(--s2); }
-  /* a régua é global: dentro do módulo ela só é alcançada por :global */
-  .aboutHead :global(.rule) { display: none; }
 
   /* A tabela vira lista: formato e preço na primeira linha, descrição na
      segunda. O cabeçalho some da tela mas continua no leitor de tela.
