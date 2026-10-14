@@ -374,11 +374,13 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
   pra foto, vídeo e flipbook.
 - Roadr (14/10): vaga 1 é o app em movimento, feito em **Remotion** a
   partir do frame "Roadr1" do Figma Boards (home da Maia → carrossel →
-  toque em "Tire change" → tela do pneu → "Front left" → "Next", em loop;
+  toque em "Tire change" → tela do pneu → "Front left" → capô ("Hood",
+  no laranja do Roadr) → "Next", em loop, 10s, fundo cinza do campo;
   projeto em `_originais/roadr-remotion/`, `npm run render`, depois
   comprimir pra 768×800). Vaga 2 é o "brand showcase": a câmera avança devagar
-  por um campo de telas do site/app e fotos em profundidades diferentes,
-  como o vídeo do Minx Law do brandbeet (composição `Campo` no mesmo
+  por um campo de telas do site/app e fotos em 3D (CSS preserve-3d), e o
+  campo balança e gira — algumas peças passam bem perto, pra ver detalhe —,
+  a partir do vídeo do Minx Law do brandbeet (composição `Campo` no mesmo
   projeto Remotion; loop perfeito, 15s). A colagem que rola em perspectiva
   (`_originais/roadr-colagem/`) foi a versão anterior. vaga 4
   o vídeo do card "Car wash" do roadr.com.
