@@ -10,7 +10,9 @@
      Agora o rodapé traz 88, o fecho traz 88, e o vão fecha em 176, que é o
      mesmo de todos os outros da página. Na página de projeto, onde o ritmo
      é 88, o rodapé sozinho já entrega o vão certo. */
-  padding-block: var(--s6) var(--s5);
+  /* embaixo, a margem das laterais (14/10): o rodapé termina a 32 (16 no
+     celular) do fim da página, como o resto termina a 32 das bordas */
+  padding-block: var(--s6) var(--gutter);
 }
 
 /* Três colunas, e não um `space-between` de três filhos: com

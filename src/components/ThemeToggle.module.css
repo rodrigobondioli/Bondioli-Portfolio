@@ -3,7 +3,7 @@
    um tracinho e o tema logo embaixo. Por cima de tudo, menos da abertura. */
 .rail {
   position: fixed;
-  top: var(--s3);
+  top: var(--gutter); /* a margem do topo = a das laterais (14/10) */
   right: calc(var(--gutter) / 2);
   z-index: 200;
   translate: 50% 0;
@@ -63,7 +63,8 @@ button.button:hover { rotate: 45deg; }
 @media (max-width: 640px) {
   .rail {
     top: auto;
-    bottom: calc(var(--s3) + 64px + var(--s2));
+    /* logo acima da pílula: margem + 52 de pílula + respiro */
+    bottom: calc(var(--gutter) + 52px + var(--s2));
     right: var(--s2);
     translate: none;
     flex-direction: row;

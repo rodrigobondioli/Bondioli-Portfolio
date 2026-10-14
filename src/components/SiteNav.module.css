@@ -8,7 +8,8 @@
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   column-gap: var(--col-gap);
   align-items: start;
-  padding: var(--s3) var(--gutter);
+  /* em cima a mesma margem das laterais (14/10: 32 / 16 no celular) */
+  padding: var(--gutter);
   font-size: var(--t-body-sm);
   line-height: 1.3;
   /* a barra flutua por cima do herói: só os blocos recebem clique */

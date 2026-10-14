@@ -6,7 +6,7 @@
 .bar {
   position: fixed;
   z-index: 91;
-  bottom: clamp(18px, 3vh, 32px);
+  bottom: var(--gutter); /* a margem de baixo = a das laterais (14/10) */
   left: 50%;
   display: inline-flex;
   align-items: center;

@@ -176,7 +176,9 @@ largura** — foi o que deixou esse passar: 844 de largura é "desktop".
 do Rodrigo): **32 acima de 640, 16 no celular**. `--gutter` aponta pra
 `--col-gap`, então as duas andam juntas — não separar. (Testou 24 no
 mesmo dia e subiu pra 32: 24 apertava a barra lateral na margem.) A capa
-usa a mesma medida nos quatro lados.
+usa a mesma medida nos quatro lados. E em cima e embaixo também, em todas as páginas:
+a barra do topo, a barra lateral, a pílula e o fim do rodapé ficam a
+`--gutter` das bordas (14/10).
 
 Histórico: 8.6vw/124 do Framer → 6vw (22/09) → 56 fixo no desktop numa
 curva sem media query (12/10) → margem = vão, 32/16 (14/10). Comparar
