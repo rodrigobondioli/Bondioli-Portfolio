@@ -357,7 +357,7 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
 - Uma vaga pode ser um **flipbook** (`{ flipbook: [...] }` no
   showcase.ts): fotos que se alternam em corte seco a cada 0,7s, sem
   arquivo de vídeo — `Flipbook`, para fora da tela e com movimento
-  reduzido. A Tattoaria usa na vaga 3 (as roupas, P&B, 14/10). Regra do
+  reduzido. A Tattoaria usa na vaga 1 (as roupas, P&B, 14/10). Regra do
   Rodrigo: só algumas vagas animadas, "pra não virar carnaval".
 - Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
   ela inteira como link o vão embaixo das fotos menores virava área de

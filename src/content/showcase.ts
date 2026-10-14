@@ -14,10 +14,10 @@
 export type Midia = string | { flipbook: string[] } | null
 
 export const SHOWCASE: Record<string, Midia[]> = {
-  // 14/10: a vaga 3 (a quadrada menor) virou o flipbook das roupas
+  // 14/10, plano do Rodrigo: 1 = flipbook das roupas · 2 = trecho de vídeo
+  // (a inauguração; até chegar, a foto do galpão) · 3 = o logo da Tattoaria
+  // (até chegar o arquivo, a foto de hoje) · 4 = foto fixa
   tattoaria: [
-    "/projects/tattoaria/gallery.webp",
-    "/projects/tattoaria/gallery-2.webp",
     {
       flipbook: [
         "/projects/tattoaria/roupas/roupa-1.webp",
@@ -26,6 +26,8 @@ export const SHOWCASE: Record<string, Midia[]> = {
         "/projects/tattoaria/roupas/roupa-4.webp",
       ],
     },
+    "/projects/tattoaria/gallery-2.webp",
+    "/projects/tattoaria/gallery-3.webp",
     "/projects/tattoaria/gallery-4.webp",
   ],
   "flex-pharma": [
