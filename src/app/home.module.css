@@ -85,13 +85,12 @@
   /* Normal, nao bold: decisao do Rodrigo em 21/09. O Framer usava 700
      aqui, mas em tres linhas corridas o bold pesa demais. */
   font-weight: 400;
-  /* No máximo quatro linhas, pedido do Rodrigo (29/09), com a bio nova
-     (~225 caracteres). Medido: de 360 a 455px ela fica em 4; abaixo de 360
-     vira 5, acima de 455 vira 3. 400 é o meio da faixa, com folga pra
-     diferença de fonte entre navegadores. Se o texto mudar, medir de novo.
-     (Era 325, a medida do Framer pra bio antiga de três linhas. Em `px`, não
-     `ch`: `ch` muda com o peso da fonte.) */
-  max-width: 400px;
+  /* Três linhas (14/10, pedido do Rodrigo; era quatro, em 400px). Medido
+     com a Geist: o texto inteiro dá 1289px numa linha só, e fica em três
+     de ~460 a ~640px. 520 é o meio da faixa, com folga pra diferença de
+     fonte entre navegadores. Se o texto mudar, medir de novo. (Em `px`,
+     não `ch`: `ch` muda com o peso da fonte.) */
+  max-width: 520px;
   /* linhas equilibradas, sem a última curtinha (14/10, pedido do Rodrigo) */
   text-wrap: balance;
 }
