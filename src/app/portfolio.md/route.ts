@@ -1,4 +1,4 @@
-import { orderedProjects, hasText } from "@/lib/projects"
+import { orderedProjects, hasText, COM_CASE } from "@/lib/projects"
 import order from "@/content/order.json"
 
 /**
@@ -63,7 +63,9 @@ export function GET() {
     if (hasText(p.outcome)) add("**Outcome**", "", semHtml(p.outcome), "")
     if (hasText(p.press)) add("**Press**", "", semHtml(p.press), "")
     if (p.linkUrl) add(`Live: ${p.linkUrl}`, "")
-    add(`Case: ${SITE}/projects/${p.slug}`, "", "---", "")
+    // só quem tem case ganha o link da página interna (as outras não são linkadas)
+    if (COM_CASE.has(p.slug)) add(`Case: ${SITE}/projects/${p.slug}`, "")
+    add("---", "")
   }
 
   add(`*Downloaded from ${SITE}*`, "")

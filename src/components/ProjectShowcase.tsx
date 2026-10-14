@@ -1,5 +1,6 @@
 import Link from "next/link"
 import StripReveal from "./StripReveal"
+import CaseCursor from "./CaseCursor"
 import { imageSize } from "@/lib/imageSize"
 import styles from "./ProjectShowcase.module.css"
 
@@ -8,9 +9,13 @@ import styles from "./ProjectShowcase.module.css"
  * pedido do Rodrigo): o nome grande à esquerda e "Services" à direita; uma
  * colagem de quatro imagens em larguras alternadas, alinhadas pelo topo —
  * com a mesma proporção, a largura diferente já dá a altura diferente, e
- * é esse desencontro que faz a colagem. Sem botão: o nome e qualquer
- * imagem levam pra página do projeto (a barra "View project" saiu no
- * mesmo dia, a pedido).
+ * é esse desencontro que faz a colagem.
+ *
+ * Só projeto com case (`linked`, hoje só a Tattoaria — COM_CASE em
+ * lib/projects) leva pra página interna: o nome e as fotos são link, e
+ * passar o mouse nas fotos mostra a pílula "View case study" (CaseCursor).
+ * Os outros são só as imagens, pelo craft — sem link e sem o zoom de
+ * hover, que prometeria um clique que não existe (14/10).
  *
  * Os formatos copiam os de lá, medidos: quase quadrada, retrato alto,
  * quadrada, quase quadrada — em 5 · 7 · 4 · 8 colunas de 24. As fotos
@@ -32,6 +37,7 @@ export default function ProjectShowcase({
   services,
   images,
   index = 0,
+  linked = false,
 }: {
   slug: string
   name: string
@@ -39,6 +45,8 @@ export default function ProjectShowcase({
   images: string[]
   /** posição na lista: os ímpares espelham a colagem */
   index?: number
+  /** tem página interna (case) */
+  linked?: boolean
 }) {
   const href = `/projects/${slug}`
   const fotos = images.slice(0, 4)
@@ -47,13 +55,31 @@ export default function ProjectShowcase({
     ? services.split("•").map((s) => s.trim()).filter(Boolean).join(", ")
     : null
 
+  const fotosEl = fotos.map((src, i) => {
+    const size = imageSize(src)
+    return (
+      <StripReveal
+        key={src}
+        className={styles.shot}
+        style={{ ["--span" as string]: slots[i].span, aspectRatio: slots[i].ratio }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt="" loading="lazy" width={size?.w} height={size?.h} />
+      </StripReveal>
+    )
+  })
+
   return (
-    <article className={styles.project}>
+    <article className={`${styles.project} ${linked ? styles.linked : ""}`}>
       <header className={styles.head}>
         <h3 className={`h3 ${styles.name}`}>
-          <Link href={href} className="no-underline">
-            {name}
-          </Link>
+          {linked ? (
+            <Link href={href} className="no-underline">
+              {name}
+            </Link>
+          ) : (
+            name
+          )}
         </h3>
         {lista ? (
           <p className={styles.services}>
@@ -63,21 +89,15 @@ export default function ProjectShowcase({
         ) : null}
       </header>
 
-      <Link href={href} className={`no-underline ${styles.collage}`} aria-label={`${name} — view project`}>
-        {fotos.map((src, i) => {
-          const size = imageSize(src)
-          return (
-            <StripReveal
-              key={src}
-              className={styles.shot}
-              style={{ ["--span" as string]: slots[i].span, aspectRatio: slots[i].ratio }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="" loading="lazy" width={size?.w} height={size?.h} />
-            </StripReveal>
-          )
-        })}
-      </Link>
+      {linked ? (
+        <CaseCursor>
+          <Link href={href} className={`no-underline ${styles.collage}`} aria-label={`${name} — view case study`}>
+            {fotosEl}
+          </Link>
+        </CaseCursor>
+      ) : (
+        <div className={styles.collage}>{fotosEl}</div>
+      )}
     </article>
   )
 }

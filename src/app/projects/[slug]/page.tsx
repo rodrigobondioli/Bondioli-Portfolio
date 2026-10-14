@@ -64,6 +64,8 @@ export async function generateMetadata({
     title: p.projectName ?? slug,
     description: p.description ?? undefined,
     alternates: { canonical: `/projects/${slug}` },
+    // sem case, sem link no site: a página existe, mas fora do Google (14/10)
+    robots: { index: false, follow: false },
     openGraph: {
       title: p.projectName ?? slug,
       description: p.description ?? undefined,

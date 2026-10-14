@@ -34,6 +34,12 @@ export const projects = data as unknown as Project[]
 
 export const publishedProjects = projects.filter((p) => !p.draft)
 
+/** Os projetos com case de verdade (resultados, história) — os únicos com
+ *  página interna linkada no site (14/10, pedido do Rodrigo). Os outros
+ *  aparecem só pelas imagens, pelo craft; as páginas deles continuam
+ *  existindo, mas nada leva até lá e o Google não indexa. */
+export const COM_CASE = new Set(["tattoaria"])
+
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug)
 }

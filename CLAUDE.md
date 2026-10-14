@@ -332,6 +332,21 @@ Pra conferir depois de mexer: medir com as linhas na tela, não no olho —
 o script de auditoria compara a borda esquerda de cada bloco com a linha
 mais próxima.
 
+## Só a Tattoaria tem link (14/10/2026)
+
+Decisão do Rodrigo: a Tattoaria é o único projeto com case de verdade
+(resultados, história), então é o **único com página interna linkada**.
+Os outros aparecem no Selected work só pelas imagens, pelo craft — sem
+link e sem zoom de hover. A lista mora em `COM_CASE` (`lib/projects.ts`):
+pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
+
+- Fotos da Tattoaria: pílula de vidro "View case study" segue o mouse
+  (`CaseCursor`), no lugar do cursor.
+- As páginas dos outros (`/projects/[slug]`) **continuam existindo**, mas
+  nada no site leva até elas: a página da Tattoaria não tem mais
+  anterior/próximo, o `/portfolio.md` só dá o link do case, e elas saem
+  do Google (`robots: noindex`). Quem tiver o link direto ainda abre.
+
 ## O case da Tattoaria (12/10/2026)
 
 `/projects/tattoaria` não é o template do CMS: é o case completo do

@@ -9,7 +9,7 @@ import ProjectVideo from "@/components/ProjectVideo"
 import ProjectShowcase from "@/components/ProjectShowcase"
 import ClosingSection from "@/components/ClosingSection"
 import Brands from "@/components/Brands"
-import { orderedProjects, asset, galleryUrls } from "@/lib/projects"
+import { orderedProjects, asset, galleryUrls, COM_CASE } from "@/lib/projects"
 import order from "@/content/order.json"
 import s from "./work.module.css"
 
@@ -120,6 +120,7 @@ export default function WorkPage() {
                       slug={p.slug}
                       name={p.projectName ?? p.slug}
                       services={p.type}
+                      linked={COM_CASE.has(p.slug)}
                       images={fotos}
                       index={i}
                     />

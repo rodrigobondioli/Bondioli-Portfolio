@@ -5,14 +5,12 @@ import SmoothScroll from "@/components/SmoothScroll"
 import { SiteFooter } from "@/components/SiteFooter"
 import MeetingBar from "@/components/MeetingBar"
 import ClosingSection from "@/components/ClosingSection"
-import ProjectPager from "@/components/ProjectPager"
 import PillButton from "@/components/PillButton"
 import StripReveal from "@/components/StripReveal"
 import CaseFilm from "@/components/case/CaseFilm"
 import LitText from "@/components/case/LitText"
 import Tour from "@/components/case/Tour"
 import HoverZoom from "@/components/case/HoverZoom"
-import { around } from "@/lib/projects"
 import { imageSize } from "@/lib/imageSize"
 import { tattoaria, type Chapter, type Media } from "@/content/cases/tattoaria"
 import s from "./case.module.css"
@@ -160,7 +158,6 @@ function ChapterSection({ ch }: { ch: Chapter }) {
 export default function TattoariaCase() {
   const { place, title, summary, film, objective, facts, numbers, chapters, result, closing, credits } =
     tattoaria
-  const { prev, next } = around("tattoaria")
 
   return (
     <>
@@ -275,7 +272,6 @@ export default function TattoariaCase() {
           </div>
         </div>
 
-        <ProjectPager prev={prev} next={next} />
       </main>
 
       <ClosingSection />
