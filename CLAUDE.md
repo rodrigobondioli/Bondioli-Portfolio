@@ -11,7 +11,7 @@ mesma cara do Framer, código e design system novos.**
 
 - [x] `/` — capa de uma tela, logo girando (física própria, portada do Framer)
 - [x] `/thanks`
-- [x] `/work` — a página grande: hero, reel, manifesto, arquivo, sobre, YouTube, contato. O destaque do Go Ink saiu em 12/10/2026, a pedido
+- [x] `/work` — a página grande: hero, manifesto, arquivo, sobre, YouTube, contato. O destaque do Go Ink saiu em 12/10/2026, a pedido
 - [ ] `/projects/[slug]` — 16 páginas, conteúdo em `src/content/projects.json`.
       Estrutura extraída do Framer está descrita na conversa. Era escuro
       fixo (`--bg-dark`); desde 12/10/2026 segue o tema (ver "Tema").

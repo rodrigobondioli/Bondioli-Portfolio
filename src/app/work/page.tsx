@@ -5,7 +5,6 @@ import { SiteFooter } from "@/components/SiteFooter"
 import MeetingBar from "@/components/MeetingBar"
 import CountUpNumber from "@/components/CountUpNumber"
 import YouTube from "@/components/YouTube"
-import ProjectVideo from "@/components/ProjectVideo"
 import ProjectShowcase from "@/components/ProjectShowcase"
 import ClosingSection from "@/components/ClosingSection"
 import AboutSection from "@/components/AboutSection"
@@ -63,13 +62,6 @@ export default function WorkPage() {
                 <span className={s.statLabel}>countries served</span>
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* ---------- Video de abertura ---------- */}
-        <section className={`section ${s.reel}`}>
-          <div className={`container ${s.reelInner}`}>
-            <ProjectVideo file="/video/reel-home.mp4" title="Reel" />
           </div>
         </section>
 

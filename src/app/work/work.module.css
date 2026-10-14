@@ -251,8 +251,7 @@
 
 /* ---------- Video de abertura ---------- */
 
-.reel { padding-bottom: var(--s6); }
-.reelInner { display: flex; flex-direction: column; gap: var(--s1); text-align: center; }
+/* (o vídeo de abertura embaixo do herói saiu em 14/10, a pedido) */
 
 /* ---------- Manifesto ---------- */
 
