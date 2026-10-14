@@ -352,7 +352,7 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
   revelação em faixas). Projeto com lista própria em
   `src/content/showcase.ts` usa ela, na ordem do Rodrigo; `null` guarda a
   vaga de uma mídia que ainda não chegou. O Flex Pharma (14/10, segundo da
-  lista) é o primeiro assim — falta a imagem 7, o notebook.
+  lista) é o primeiro assim. Os outros usam as 4 primeiras da galeria.
 - Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
   ela inteira como link o vão embaixo das fotos menores virava área de
   clique (mão e bolinha no vazio).

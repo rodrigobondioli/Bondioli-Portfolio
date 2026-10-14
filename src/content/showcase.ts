@@ -10,7 +10,6 @@
  * arquivo chegar, é só trocar o null pelo caminho.
  */
 export const SHOWCASE: Record<string, (string | null)[]> = {
-  // 14/10: a 7 (o notebook com o "ElectroNanoSpray (ENS)") ainda não veio
   "flex-pharma": [
     "/projects/flex-pharma/flex-pharma-1.mp4",
     "/projects/flex-pharma/flex-pharma-2.webp",
@@ -18,7 +17,7 @@ export const SHOWCASE: Record<string, (string | null)[]> = {
     "/projects/flex-pharma/flex-pharma-4.mp4",
     "/projects/flex-pharma/flex-pharma-5.webp",
     "/projects/flex-pharma/flex-pharma-6-960w.webp",
-    null,
+    "/projects/flex-pharma/flex-pharma-7.mp4",
     "/projects/flex-pharma/flex-pharma-8.webp",
   ],
 }

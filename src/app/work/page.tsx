@@ -114,11 +114,14 @@ export default function WorkPage() {
                 const galeria = galleryUrls(p.gallery)
                 const thumb = asset(p.thumb)
                 // quem tem lista própria (content/showcase.ts) usa ela, na ordem
+                // (até 8, duas linhas); os outros, as 4 primeiras da galeria —
+                // a 5ª da Tattoaria (o caminhão) aparecia sobrando numa
+                // segunda linha quando o limite subiu pra 8
                 const fotos =
                   SHOWCASE[p.slug] ??
-                  (galeria.length >= 4 || !thumb ? galeria : [thumb, ...galeria]).filter(
-                    (u, i, a) => a.indexOf(u) === i
-                  )
+                  (galeria.length >= 4 || !thumb ? galeria : [thumb, ...galeria])
+                    .filter((u, i, a) => a.indexOf(u) === i)
+                    .slice(0, 4)
                 return (
                   <li key={p.slug}>
                     <ProjectShowcase
