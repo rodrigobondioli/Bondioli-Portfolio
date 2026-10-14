@@ -131,8 +131,20 @@
 }
 .fact dt { color: var(--muted); }
 .fact dd { margin: 0; text-wrap: balance; }
+/* Nas colunas da barra do topo (14/10, pedido do Rodrigo): Role no nome,
+   Where no "Creative Director", Scope no "Get in touch" e When no que
+   sobra, onde fica o idioma/tema — 1, 8, 15, 21 de 24 (1, 4, 7, 10 de 12). */
 @media (min-width: 641px) {
-  .fact { grid-column: span 6; }
+  .fact:nth-child(1) { grid-column: 1 / 4; }
+  .fact:nth-child(2) { grid-column: 4 / 7; }
+  .fact:nth-child(3) { grid-column: 7 / 10; }
+  .fact:nth-child(4) { grid-column: 10 / -1; }
+}
+@media (min-width: 1101px) {
+  .fact:nth-child(1) { grid-column: 1 / 7; }
+  .fact:nth-child(2) { grid-column: 8 / 14; }
+  .fact:nth-child(3) { grid-column: 15 / 21; }
+  .fact:nth-child(4) { grid-column: 21 / -1; }
 }
 
 

@@ -54,11 +54,12 @@ export const tattoaria = {
   facts: [
     { label: "Role", value: "Founding and creative direction" },
     { label: "Where", value: "Moema, São Paulo, plus 10+ states with the truck" },
-    { label: "When", value: "From March 2016" },
+    // Scope antes de When (14/10): é o mais longo e fica com a coluna larga
     {
       label: "Scope",
       value: "Business model, space, brand, product, owned media, activations and partnerships",
     },
+    { label: "When", value: "From March 2016" },
   ],
   objective:
     "At the start, the goal was just one: stop giving attention away for free and turn desire into business.",
