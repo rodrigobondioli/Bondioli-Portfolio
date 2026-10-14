@@ -1,5 +1,7 @@
 import Link from "next/link"
 import StripReveal from "./StripReveal"
+import Flipbook from "./Flipbook"
+import type { Midia } from "@/content/showcase"
 import { imageSize } from "@/lib/imageSize"
 import styles from "./ProjectShowcase.module.css"
 
@@ -45,7 +47,7 @@ export default function ProjectShowcase({
   name: string
   services?: string | null
   /** fotos e vídeos (.mp4); null guarda a vaga de uma mídia que falta */
-  images: (string | null)[]
+  images: Midia[]
   /** posição na lista: os ímpares espelham a colagem */
   index?: number
   /** tem página interna (case) */
@@ -67,15 +69,19 @@ export default function ProjectShowcase({
   // no Tab; as outras levam ao mesmo lugar.
   const fotosEl = fotos.map((src, i) => {
     if (!src) return null // vaga guardada: a mídia ainda não chegou
-    const video = src.endsWith(".mp4")
-    const size = video ? null : imageSize(src)
-    const midia = video ? (
+    const flip = typeof src === "object" ? src.flipbook : null
+    const key = flip ? flip.join() : (src as string)
+    const video = !flip && (src as string).endsWith(".mp4")
+    const size = video || flip ? null : imageSize(src as string)
+    const midia = flip ? (
+      <Flipbook srcs={flip} />
+    ) : video ? (
       // vídeo curto: toca sozinho, mudo, em loop — sem a revelação em
       // faixas, que é só das imagens
-      <video src={src} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
+      <video src={src as string} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
     ) : (
       /* eslint-disable-next-line @next/next/no-img-element */
-      <img src={src} alt="" loading="lazy" width={size?.w} height={size?.h} />
+      <img src={src as string} alt="" loading="lazy" width={size?.w} height={size?.h} />
     )
     const conteudo = linked ? (
       <Link
@@ -95,11 +101,11 @@ export default function ProjectShowcase({
     )
     const estilo = { ["--span" as string]: slots[i].span, aspectRatio: slots[i].ratio }
     return video ? (
-      <div key={src} className={styles.shot} style={estilo}>
+      <div key={key} className={styles.shot} style={estilo}>
         {conteudo}
       </div>
     ) : (
-      <StripReveal key={src} className={styles.shot} style={estilo}>
+      <StripReveal key={key} className={styles.shot} style={estilo}>
         {conteudo}
       </StripReveal>
     )

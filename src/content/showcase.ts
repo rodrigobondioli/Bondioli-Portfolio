@@ -7,9 +7,27 @@
  * Até 8 por projeto: as 4 primeiras na linha de cima, as 4 seguintes na de
  * baixo, espelhada (como no brandbeet.com). `null` guarda a vaga de uma
  * mídia que ainda não chegou — as outras ficam no lugar delas; quando o
- * arquivo chegar, é só trocar o null pelo caminho.
+ * arquivo chegar, é só trocar o null pelo caminho. `{ flipbook: [...] }`
+ * é uma vaga em que as fotos se alternam (Flipbook).
  */
-export const SHOWCASE: Record<string, (string | null)[]> = {
+/** Uma vaga: foto/vídeo, flipbook (fotos alternando) ou vaga guardada. */
+export type Midia = string | { flipbook: string[] } | null
+
+export const SHOWCASE: Record<string, Midia[]> = {
+  // 14/10: a vaga 3 (a quadrada menor) virou o flipbook das roupas
+  tattoaria: [
+    "/projects/tattoaria/gallery.webp",
+    "/projects/tattoaria/gallery-2.webp",
+    {
+      flipbook: [
+        "/projects/tattoaria/roupas/roupa-1.webp",
+        "/projects/tattoaria/roupas/roupa-2.webp",
+        "/projects/tattoaria/roupas/roupa-3.webp",
+        "/projects/tattoaria/roupas/roupa-4.webp",
+      ],
+    },
+    "/projects/tattoaria/gallery-4.webp",
+  ],
   "flex-pharma": [
     "/projects/flex-pharma/flex-pharma-1.mp4",
     "/projects/flex-pharma/flex-pharma-2.webp",
