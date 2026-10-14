@@ -293,7 +293,9 @@ O `MeetingBar` é o mesmo componente em todas as páginas, e o que muda é
 ## O herói da `/work` (14/10/2026)
 
 H1 = "If your product is hard to understand, it's impossible to sell.",
-no tamanho do display do tumulto.ai, **no meio exato da altura entre o
+**em duas linhas quebrando na vírgula, à esquerda**, no maior corpo em que
+a primeira linha cabe (4.9vw, ~70px em 1440) — no tamanho do display do
+tumulto ficava "exagerado", e centralizado foi testado e descartado. **No meio exato da altura entre o
 topo da tela e a linha da faixa de números** (a reserva de 88px embaixo é
 a faixa). A linha de apoio sai do fluxo (absoluta) pra não contar no
 centro, fica a `min(--s7, 12svh)` abaixo do título e começa na mesma

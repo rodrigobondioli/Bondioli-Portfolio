@@ -45,7 +45,9 @@ export default function WorkPage() {
                 entender, ele é impossível de vender."). Quem ele é já está na
                 barra do topo; os 20 anos, na faixa de números logo abaixo. */}
             <h1 className={`h1 ${s.heroTitle}`}>
-              If your product is hard to understand, it&rsquo;s impossible to sell.
+              If your product is hard to understand,{" "}
+              <br className={s.heroBreak} />
+              it&rsquo;s impossible to sell.
             </h1>
             <p className={s.heroSupport}>
               I shape the architecture, positioning and design of your product so
