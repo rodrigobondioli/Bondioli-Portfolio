@@ -340,9 +340,10 @@ Os outros aparecem no Selected work só pelas imagens, pelo craft — sem
 link e sem zoom de hover. A lista mora em `COM_CASE` (`lib/projects.ts`):
 pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
 
-- Fotos da Tattoaria: uma bolinha de vidro (52px) com uma seta ↗ segue o
-  mouse no lugar do cursor (`CaseCursor`); a seta faz um vaivém lento. Era
-  uma pílula escrita "View case study" — o Rodrigo preferiu só a seta.
+- Fotos da Tattoaria: no hover a foto dá o zoom, escurece e mostra "View
+  case study" no meio dela. Sem cápsula nem bolinha que siga o mouse —
+  testadas no mesmo dia e descartadas ("muita capsulinha"). Ao lado do
+  nome, "(case study)" na fonte e cor da lista de serviços.
 - Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
   ela inteira como link o vão embaixo das fotos menores virava área de
   clique (mão e bolinha no vazio).

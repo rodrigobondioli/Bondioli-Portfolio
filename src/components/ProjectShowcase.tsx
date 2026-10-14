@@ -1,6 +1,5 @@
 import Link from "next/link"
 import StripReveal from "./StripReveal"
-import CaseCursor from "./CaseCursor"
 import { imageSize } from "@/lib/imageSize"
 import styles from "./ProjectShowcase.module.css"
 
@@ -13,7 +12,8 @@ import styles from "./ProjectShowcase.module.css"
  *
  * Só projeto com case (`linked`, hoje só a Tattoaria — COM_CASE em
  * lib/projects) leva pra página interna: o nome e as fotos são link, e
- * passar o mouse nas fotos mostra a bolinha com a seta (CaseCursor).
+ * passar o mouse numa foto dá o zoom, escurece e mostra "View case study"
+ * por cima dela.
  * Os outros são só as imagens, pelo craft — sem link e sem o zoom de
  * hover, que prometeria um clique que não existe (14/10).
  *
@@ -79,6 +79,9 @@ export default function ProjectShowcase({
             tabIndex={i === 0 ? undefined : -1}
           >
             {img}
+            <span className={styles.cta} aria-hidden="true">
+              View case study
+            </span>
           </Link>
         ) : (
           img
@@ -92,9 +95,13 @@ export default function ProjectShowcase({
       <header className={styles.head}>
         <h3 className={`h3 ${styles.name}`}>
           {linked ? (
-            <Link href={href} className="no-underline">
-              {name}
-            </Link>
+            <>
+              <Link href={href} className="no-underline">
+                {name}
+              </Link>
+              {/* o que diferencia o projeto com página interna (14/10) */}
+              <span className={styles.tag}>(case study)</span>
+            </>
           ) : (
             name
           )}
@@ -107,13 +114,7 @@ export default function ProjectShowcase({
         ) : null}
       </header>
 
-      {linked ? (
-        <CaseCursor>
-          <div className={styles.collage}>{fotosEl}</div>
-        </CaseCursor>
-      ) : (
-        <div className={styles.collage}>{fotosEl}</div>
-      )}
+      <div className={styles.collage}>{fotosEl}</div>
     </article>
   )
 }

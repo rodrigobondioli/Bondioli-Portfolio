@@ -33,6 +33,18 @@
 .servicesLabel { font-weight: 600; }
 .servicesList { color: var(--ink-60); }
 
+/* "(case study)" ao lado do nome: a mesma fonte e cor da lista de
+   serviços (mono, pequena, cinza), na linha de base do nome */
+.tag {
+  margin-left: var(--s2);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--t-body-sm);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-60);
+  white-space: nowrap;
+}
+
 /* A colagem: as larguras em colunas da grade, alturas pela proporção de
    cada imagem, todas presas pelo topo. */
 .collage {
@@ -60,15 +72,46 @@
   transition: scale 700ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 /* o zoom de hover só onde há clique: o projeto com case */
-.shotLink { display: block; width: 100%; height: 100%; }
-/* o zoom de hover só onde há clique, e só na foto que está sob o mouse */
-.linked .shotLink:hover img { scale: 1.03; transition-duration: 1100ms; }
-/* a pílula faz o papel do cursor por cima das fotos */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .linked .shotLink { cursor: none; }
+.shotLink { position: relative; display: block; width: 100%; height: 100%; }
+
+/* Hover de quem tem case (14/10, pedido do Rodrigo, sem cápsula nenhuma):
+   a foto sob o mouse dá o zoom, escurece e mostra "View case study" no
+   meio. Só nela — o vão entre as fotos não é link. */
+.shotLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 9, 0.5);
+  opacity: 0;
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+.cta {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  padding: var(--s2);
+  color: #f1f1f1;
+  font-size: var(--t-body-sm);
+  font-weight: 500;
+  text-align: center;
+  opacity: 0;
+  translate: 0 6px;
+  transition:
+    opacity 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    translate 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.linked .shotLink:hover img,
+.linked .shotLink:focus-visible img { scale: 1.03; transition-duration: 1100ms; }
+.shotLink:hover::after,
+.shotLink:focus-visible::after { opacity: 1; }
+.shotLink:hover .cta,
+.shotLink:focus-visible .cta { opacity: 1; translate: 0 0; }
+
 @media (prefers-reduced-motion: reduce) {
   .shot img, .linked .shotLink:hover img { transition: none; scale: 1; }
+  .cta { translate: none; }
 }
 
 /* Tablet (12 colunas): duas por linha. Celular (6): duas também, menores.
