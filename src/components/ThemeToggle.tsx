@@ -44,7 +44,7 @@ export default function ThemeToggle() {
   if (naCapa) return null
 
   return (
-    <div className={styles.rail}>
+    <div className={`glass ${styles.rail}`}>
       {/* Idioma: por enquanto só a cara (12/10). O site é em inglês; o
           português ainda não existe, então BR aparece apagado e não leva a
           lugar nenhum — não é botão, pra ninguém clicar num link morto. */}

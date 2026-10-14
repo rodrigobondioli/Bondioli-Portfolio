@@ -164,6 +164,68 @@
    som, a seta das thumbs (12/10). */
 .media-layer { position: relative; z-index: 2; }
 
+/* ---------- Vidro (liquid glass) ----------
+   As duas pílulas flutuantes — "See if we're a fit" e a do idioma/tema —
+   usam este vidro (14/10, referência do Rodrigo: vidro com luz de verdade,
+   não um fundo translúcido chapado). Em camadas, de fora pra dentro:
+
+   Tudo discreto (14/10: a primeira versão, com o topo forte, ficou
+   "forçada"): a luz é quase igual em volta, só um pouco mais em cima.
+
+   1. sombra macia por fora + uma de contato curtinha (a pílula pousa);
+   2. corpo: escuro translúcido com um degradê de cima pra baixo, sobre o
+      que está atrás desfocado e mais saturado;
+   3. volume: luz por dentro no topo, sombra por dentro no pé — é o que dá
+      espessura ao vidro;
+   4. aro (::before): uma borda de 1px em degradê — brilha em cima, some
+      nas laterais e volta fraca embaixo, como luz batendo na quina;
+   5. reflexo (::after): um brilho oval no topo.
+
+   É o mesmo nos dois temas: vidro escuro, texto claro. Quem usa precisa
+   ser posicionado (fixed/absolute/relative) e ter `border-radius`. */
+.glass {
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.04) 100%),
+    rgba(22, 22, 20, 0.5);
+  backdrop-filter: blur(18px) saturate(1.7) brightness(1.06);
+  -webkit-backdrop-filter: blur(18px) saturate(1.7) brightness(1.06);
+  box-shadow:
+    inset 0 10px 14px -14px rgba(255, 255, 255, 0.12),
+    inset 0 -10px 14px -14px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.25),
+    0 12px 32px rgba(0, 0, 0, 0.35);
+  color: #f1f1f1;
+}
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0.06) 60%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 1px 18% auto;
+  height: 40%;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.06), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* ---------- 2. Reset ---------- */
 
 *, *::before, *::after { box-sizing: border-box; }

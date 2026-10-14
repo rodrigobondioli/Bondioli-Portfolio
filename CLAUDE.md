@@ -362,7 +362,10 @@ vidro em pé (o mesmo vidro escuro da pílula "See if we're a fit", igual
 nos dois temas), no meio da altura da tela e centrada na margem direita:
 EN / BR, um tracinho e o tema. 36px de largura, a 16px da borda da tela —
 ela flutua por cima do conteúdo, como a outra pílula (14/10; antes os três
-ficavam soltos no topo e pareciam grudados). No
+ficavam soltos no topo e pareciam grudados). O vidro das duas pílulas é a classe
+`.glass` (globals): corpo escuro translúcido, aro de luz em degradê, volume
+por dentro e reflexo — tudo discreto (a primeira versão, com o topo forte,
+ficou "forçada"). O idioma ativo fica numa cápsula funda dentro dela. No
 celular ela deita no canto de baixo, acima da outra pílula. Ela não aparece na capa (`/`), a pedido
 (14/10): lá a tela é uma só, com as redes no canto. O download do portfólio passou por ela e foi pro
 rodapé (12/10). O que tem fundo próprio claro (o amarelo das seções de
