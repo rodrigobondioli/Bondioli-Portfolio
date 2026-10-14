@@ -34,7 +34,7 @@ export default function SiteNav({
         <Link href={brandHref} className={`no-underline ${styles.label}`}>
           Rodrigo Bondioli
         </Link>
-        <Link href="/work#projects" className={`no-underline ${styles.value}`}>
+        <Link href="/work#projects" className={`no-underline ${styles.value} ${styles.muted}`}>
           Selected Work 15&rsquo; &mdash; {ATE}&rsquo;
         </Link>
       </div>
