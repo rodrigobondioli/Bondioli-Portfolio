@@ -23,7 +23,9 @@
 .half { display: contents; }
 .middle { grid-column: 7 / span 4; }
 @media (min-width: 1101px) { .middle { grid-column: 13 / span 4; } }
-.half > .block:last-child { grid-column: -5 / -1; }
+/* o contato termina na última linha da grade, com o texto alinhado à
+   esquerda dentro dele (14/10, pedido do Rodrigo) */
+.half > .block:last-child { grid-column: -5 / -1; justify-self: end; }
 
 .block {
   display: flex;
