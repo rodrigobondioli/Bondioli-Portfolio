@@ -340,8 +340,12 @@ Os outros aparecem no Selected work só pelas imagens, pelo craft — sem
 link e sem zoom de hover. A lista mora em `COM_CASE` (`lib/projects.ts`):
 pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
 
-- Fotos da Tattoaria: pílula de vidro "View case study" segue o mouse
-  (`CaseCursor`), no lugar do cursor.
+- Fotos da Tattoaria: uma bolinha de vidro (52px) com uma seta ↗ segue o
+  mouse no lugar do cursor (`CaseCursor`); a seta faz um vaivém lento. Era
+  uma pílula escrita "View case study" — o Rodrigo preferiu só a seta.
+- Cada foto é o seu próprio link: a colagem tem alturas diferentes, e com
+  ela inteira como link o vão embaixo das fotos menores virava área de
+  clique (mão e bolinha no vazio).
 - As páginas dos outros (`/projects/[slug]`) **continuam existindo**, mas
   nada no site leva até elas: a página da Tattoaria não tem mais
   anterior/próximo, o `/portfolio.md` só dá o link do case, e elas saem

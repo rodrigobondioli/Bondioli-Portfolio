@@ -13,7 +13,7 @@ import styles from "./ProjectShowcase.module.css"
  *
  * Só projeto com case (`linked`, hoje só a Tattoaria — COM_CASE em
  * lib/projects) leva pra página interna: o nome e as fotos são link, e
- * passar o mouse nas fotos mostra a pílula "View case study" (CaseCursor).
+ * passar o mouse nas fotos mostra a bolinha com a seta (CaseCursor).
  * Os outros são só as imagens, pelo craft — sem link e sem o zoom de
  * hover, que prometeria um clique que não existe (14/10).
  *
@@ -55,16 +55,34 @@ export default function ProjectShowcase({
     ? services.split("•").map((s) => s.trim()).filter(Boolean).join(", ")
     : null
 
+  // Com case, cada foto é o seu próprio link: o vão embaixo das menores
+  // (as alturas variam) não pode virar área de clique. Só a primeira entra
+  // no Tab; as outras levam ao mesmo lugar.
   const fotosEl = fotos.map((src, i) => {
     const size = imageSize(src)
+    const img = (
+      /* eslint-disable-next-line @next/next/no-img-element */
+      <img src={src} alt="" loading="lazy" width={size?.w} height={size?.h} />
+    )
     return (
       <StripReveal
         key={src}
         className={styles.shot}
         style={{ ["--span" as string]: slots[i].span, aspectRatio: slots[i].ratio }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt="" loading="lazy" width={size?.w} height={size?.h} />
+        {linked ? (
+          <Link
+            href={href}
+            className={`no-underline ${styles.shotLink}`}
+            aria-label={i === 0 ? `${name} — view case study` : undefined}
+            aria-hidden={i === 0 ? undefined : true}
+            tabIndex={i === 0 ? undefined : -1}
+          >
+            {img}
+          </Link>
+        ) : (
+          img
+        )}
       </StripReveal>
     )
   })
@@ -91,9 +109,7 @@ export default function ProjectShowcase({
 
       {linked ? (
         <CaseCursor>
-          <Link href={href} className={`no-underline ${styles.collage}`} aria-label={`${name} — view case study`}>
-            {fotosEl}
-          </Link>
+          <div className={styles.collage}>{fotosEl}</div>
         </CaseCursor>
       ) : (
         <div className={styles.collage}>{fotosEl}</div>
