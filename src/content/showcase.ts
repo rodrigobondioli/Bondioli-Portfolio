@@ -14,8 +14,8 @@
 export type Midia = string | { flipbook: string[] } | null
 
 export const SHOWCASE: Record<string, Midia[]> = {
-  // 14/10, plano do Rodrigo: 1 = flipbook das roupas · 2 = trecho de vídeo
-  // (a inauguração; até chegar, a foto do galpão) · 3 = o logo da Tattoaria
+  // 14/10, plano do Rodrigo: 1 = flipbook das roupas · 2 = reel de vídeo
+  // · 3 = o logo da Tattoaria
   // · 4 = foto fixa (a sinuca, mandada pelo Rodrigo)
   tattoaria: [
     {
@@ -26,7 +26,10 @@ export const SHOWCASE: Record<string, Midia[]> = {
         "/projects/tattoaria/roupas/roupa-4.webp",
       ],
     },
-    "/projects/tattoaria/gallery-2.webp",
+    // reel de 12s com 8 cortes de 1,5s de 4 vídeos do canal da Tattoaria
+    // (inauguração, Flash Day Terror, Tattoo Truck no Vans Park, 115 anos
+    // da Harley), recortado em pé — originais em _originais/tattoaria-reel/
+    "/projects/tattoaria/reel.mp4",
     "/projects/tattoaria/logo.webp",
     "/projects/tattoaria/tattoaria-4.webp",
   ],

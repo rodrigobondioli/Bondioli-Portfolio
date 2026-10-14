@@ -104,8 +104,8 @@
     opacity 400ms cubic-bezier(0.22, 1, 0.36, 1),
     translate 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.linked .shotLink:hover img,
-.linked .shotLink:focus-visible img { scale: 1.03; transition-duration: 1100ms; }
+.linked .shotLink:hover :is(img, video),
+.linked .shotLink:focus-visible :is(img, video) { scale: 1.03; transition-duration: 1100ms; }
 .shotLink:hover::after,
 .shotLink:focus-visible::after { opacity: 1; }
 .shotLink:hover .cta,
