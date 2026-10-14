@@ -30,7 +30,11 @@
   display: grid;
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   column-gap: var(--col-gap);
-  padding-bottom: var(--s5);
+  /* O título fica no meio exato entre o topo da tela e a linha da faixa de
+     números (14/10, pedido do Rodrigo): o fundo reservado aqui é a altura
+     da faixa (88), e a linha de apoio sai da conta do centro (abaixo). */
+  --faixa: 88px;
+  padding-bottom: var(--faixa);
   pointer-events: none;
 }
 
@@ -61,11 +65,28 @@
   letter-spacing: -0.005em;
   text-wrap: balance;
 }
+/* Começa na mesma linha do "Creative Director" da barra do topo — o meio
+   da tela, coluna 13 de 24 / 7 de 12 (14/10, pedido do Rodrigo). A
+   largura fica presa em ~2 linhas: na metade inteira caberia numa só. */
 @media (min-width: 641px) {
-  .heroSupport { grid-column: 8 / 13; }
+  .heroSupport { grid-column: 7 / 13; max-width: 30em; }
 }
 @media (min-width: 1101px) {
-  .heroSupport { grid-column: 17 / 25; }
+  .heroSupport { grid-column: 13 / 25; }
+}
+/* Fora do fluxo, pendurada embaixo do título: assim só o título conta pro
+   centro. A distância é a quebra maior (--s7), limitada pela altura da
+   tela (12svh): com o título no centro sobram ~30% da tela embaixo dele,
+   e a linha de apoio fica no meio desse vão, longe da faixa. No celular e em
+   tela baixa ela volta pro fluxo (lá a faixa também sai do absoluto). */
+@media (min-width: 641px) and (min-height: 561px) {
+  .heroSupport {
+    position: absolute;
+    grid-row: 1;
+    /* 100% aqui é o pé do contêiner, com a reserva da faixa — desconta */
+    top: calc(100% - var(--faixa) + min(var(--s7), 12svh));
+    margin: 0;
+  }
 }
 
 /* Faixa de numeros: 88px de altura, vidro leve, fio em cima */

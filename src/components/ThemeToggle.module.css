@@ -2,19 +2,21 @@
    Rodrigo: os três soltos na margem ficavam grudados). O vidro é o mesmo da
    pílula "See if we're a fit" — escuro, desfocado, com fio claro —, e por
    isso também o mesmo nos dois temas: texto claro sobre vidro escuro.
-   Estreita (26px) pra caber na margem de 32 com folga dos dois lados. */
+   A 16px da borda da tela (não colada nela) e no meio da altura; 36px de
+   largura — ela flutua por cima do conteúdo, como a outra pílula (14/10:
+   na margem de 32 ela ficava grudada na borda e pequena demais). */
 .rail {
   position: fixed;
   top: 50%;
-  right: calc(var(--gutter) / 2);
+  right: var(--s2);
   z-index: 200;
-  translate: 50% -50%;
+  translate: 0 -50%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  width: 26px;
-  padding: 10px 0;
+  gap: 8px;
+  width: 36px;
+  padding: 14px 0;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--r-pill);
   background: rgba(24, 24, 22, 0.55);
@@ -28,7 +30,7 @@
 
 /* A divisão entre o idioma e o tema: um tracinho na largura das letras */
 .divider {
-  width: 10px;
+  width: 12px;
   height: 1px;
   background: currentColor;
   opacity: 0.4;
@@ -37,8 +39,8 @@
 .button {
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   color: inherit;
   transition: rotate 600ms var(--ease);
 }
@@ -55,7 +57,7 @@ button.button:hover { rotate: 45deg; }
 }
 .lang {
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.3;
@@ -75,8 +77,8 @@ button.button:hover { rotate: 45deg; }
     translate: none;
     flex-direction: row;
     width: auto;
-    height: 30px;
-    padding: 0 12px;
+    height: 36px;
+    padding: 0 14px;
     gap: 8px;
   }
   .langs { flex-direction: row; }

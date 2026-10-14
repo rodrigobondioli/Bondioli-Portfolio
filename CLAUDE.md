@@ -286,6 +286,16 @@ O `MeetingBar` é o mesmo componente em todas as páginas, e o que muda é
   (o media kit) quem a esconde é o `footer`, senão ela termina sentada em
   cima das redes.
 
+## O herói da `/work` (14/10/2026)
+
+H1 = "If your product is hard to understand, it's impossible to sell.",
+no tamanho do display do tumulto.ai, **no meio exato da altura entre o
+topo da tela e a linha da faixa de números** (a reserva de 88px embaixo é
+a faixa). A linha de apoio sai do fluxo (absoluta) pra não contar no
+centro, fica a `min(--s7, 12svh)` abaixo do título e começa na mesma
+linha do "Creative Director" (coluna 13 de 24), em duas linhas. No
+celular e em tela baixa ela volta pro fluxo.
+
 ## A barra do topo (12/10/2026)
 
 Três blocos de duas linhas, desenho do Rodrigo a partir de uma referência:
@@ -350,8 +360,9 @@ Dark (`#121211`) é o padrão; light é o site como era. O tema mora no
 pintura; o `ThemeToggle` troca e grava em `localStorage`. Ele mora numa pílula de
 vidro em pé (o mesmo vidro escuro da pílula "See if we're a fit", igual
 nos dois temas), no meio da altura da tela e centrada na margem direita:
-EN / BR, um tracinho e o tema. 26px de largura, pra caber na margem de 32
-(14/10; antes os três ficavam soltos no topo e pareciam grudados). No
+EN / BR, um tracinho e o tema. 36px de largura, a 16px da borda da tela —
+ela flutua por cima do conteúdo, como a outra pílula (14/10; antes os três
+ficavam soltos no topo e pareciam grudados). No
 celular ela deita no canto de baixo, acima da outra pílula. Ela não aparece na capa (`/`), a pedido
 (14/10): lá a tela é uma só, com as redes no canto. O download do portfólio passou por ela e foi pro
 rodapé (12/10). O que tem fundo próprio claro (o amarelo das seções de
