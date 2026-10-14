@@ -25,7 +25,8 @@ As URLs antigas foram mantidas. Só essa mudou.
 Não foram apagados: ficam como `"draft": true` no `projects.json` (rascunho
 não entra em lista nenhuma e a página dá 404), as imagens estão em
 `_originais/fora-do-ar-2026-10-12/` com um LEIA-ME de como voltar, e as
-URLs antigas redirecionam pra `/work` (307, porque podem voltar).
+URLs antigas redirecionam pra `/work` (307, porque podem voltar). O Flashbang saiu
+do mesmo jeito em 14/10/2026 (imagens em `_originais/fora-do-ar-2026-10-14/`).
 
 ## Como trabalhar nisso
 

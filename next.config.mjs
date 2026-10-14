@@ -28,6 +28,8 @@ const nextConfig = {
       // 307 e não 301, porque podem voltar
       { source: "/projects/filmboss", destination: "/work", statusCode: 307 },
       { source: "/projects/ccarbon", destination: "/work", statusCode: 307 },
+      // Flashbang saiu do ar em 14/10/2026 (mesmo esquema)
+      { source: "/projects/flashbang", destination: "/work", statusCode: 307 },
     ]
   },
 }
