@@ -1,13 +1,16 @@
-/* Quatro blocos (14/10): um encostado em cada canto, os dois do meio
-   distribuídos com o mesmo espaço entre todos. */
+/* Quatro blocos (14/10): o nome no canto esquerdo, o idioma/tema no
+   direito e os dois do meio num ritmo de 7 em 7 colunas — cargo na coluna
+   8, contato na 15 (de 24; 4 e 7 de 12, ritmo de 3). Espaço quase igual entre eles e
+   todo bloco em cima de uma linha da grade: soltos (space-between) o
+   espaço era exato, mas o "Get in touch" caía entre duas linhas. */
 .nav {
   position: absolute;
   inset: 0 0 auto 0;
   z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--s3);
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  align-items: start;
   /* em cima a mesma margem das laterais (14/10: 32 / 16 no celular) */
   padding: var(--gutter);
   font-size: var(--t-body-sm);
@@ -16,8 +19,16 @@
   pointer-events: none;
 }
 .half { display: contents; }
-/* idioma e tema: na altura da primeira linha dos outros blocos */
-.prefs { padding-top: 1px; }
+.nav > .block:first-child { grid-column: 1 / span 3; }
+.middle { grid-column: 4 / span 3; }
+.half > .block:last-child { grid-column: 7 / span 3; }
+.prefs { grid-column: 10 / -1; justify-self: end; padding-top: 1px; }
+@media (min-width: 1101px) {
+  .nav > .block:first-child { grid-column: 1 / span 6; }
+  .middle { grid-column: 8 / span 6; }
+  .half > .block:last-child { grid-column: 15 / span 6; }
+  .prefs { grid-column: 21 / -1; }
+}
 
 .block {
   display: flex;
@@ -48,6 +59,11 @@
    duas linhas); ficam nome, contato e idioma/tema. Se não couberem na
    mesma linha, o que sobra desce inteiro pra linha de baixo. */
 @media (max-width: 900px) {
-  .nav { flex-wrap: wrap; gap: var(--s2) var(--s3); }
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--s2) var(--s3);
+  }
   .middle { display: none; }
 }

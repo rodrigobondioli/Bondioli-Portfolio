@@ -296,18 +296,19 @@ no tamanho do display do tumulto.ai, **no meio exato da altura entre o
 topo da tela e a linha da faixa de números** (a reserva de 88px embaixo é
 a faixa). A linha de apoio sai do fluxo (absoluta) pra não contar no
 centro, fica a `min(--s7, 12svh)` abaixo do título e começa na mesma
-linha do "Creative Director" (coluna 13 de 24), em duas linhas. No
+linha do "Get in touch" da barra (coluna 15 de 24), em duas linhas. No
 celular e em tela baixa ela volta pro fluxo.
 
 ## A barra do topo (14/10/2026)
 
 Quatro blocos: "Rodrigo Bondioli / Selected Work 15' — 26'", "Creative
 Director / São Paulo, Brazil", "Get in touch / e-mail" e o idioma/tema.
-Um encostado em cada canto e os dois do meio distribuídos, **com o mesmo
-espaço entre todos** (`space-between`) — desenho do Rodrigo. A segunda
-linha de cada bloco é cinza (`--ink-60`). Como a posição do "Creative
-Director" depende da largura dos textos, o `NavMeio` mede e publica
-`--nav-meio`, e a linha de apoio do herói começa ali. Abaixo de 900 o
+Nome no canto esquerdo, idioma/tema no direito, e cargo e contato **em
+cima de linhas da grade**, num ritmo de 7 em 7 colunas: coluna 8 e 15 de
+24 (4 e 7 de 12). Foi primeiro `space-between` (espaço exato entre os
+quatro), mas aí o "Get in touch" caía entre duas linhas — o Rodrigo
+preferiu as linhas. A segunda linha de cada bloco é cinza (`--ink-60`).
+A linha de apoio do herói começa na mesma coluna do contato. Abaixo de 900 o
 cargo sai; o que não couber desce pra linha de baixo.
 
 ## A grade (12/10/2026, do tumulto.ai)
