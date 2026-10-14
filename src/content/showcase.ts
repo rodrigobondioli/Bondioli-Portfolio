@@ -18,8 +18,10 @@ export const SHOWCASE: Record<string, Midia[]> = {
   worm: [
     "/projects/worm/worm-1.webp",
     "/projects/worm/worm-2.webp",
-    "/projects/worm/worm-3.webp",
+    // trocadas a pedido: o kit de papelaria vai pra vaga grande, o
+    // acrílico laranja pro quadradinho
     "/projects/worm/worm-4.webp",
+    "/projects/worm/worm-3.webp",
   ],
   // 14/10: 1 = o app em movimento · 2 = os cards de métricas · 3 = o mockup
   // do notebook · 4 = o vídeo do card "Car wash" do roadr.com
