@@ -362,7 +362,7 @@
 }
 @media (hover: hover) {
   .pressRow:hover .pressTitle,
-  .pressRow:hover .pressArrow { color: var(--lit); }
+  .pressRow:hover .pressArrow { color: var(--accent-pink); } /* o rosa dos links do site (era o verde do tumulto) */
   .pressRow:hover .pressArrow { translate: 2px -2px; }
 }
 
