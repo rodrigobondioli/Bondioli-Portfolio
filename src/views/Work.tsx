@@ -21,11 +21,15 @@ export default function Work({ lang }: { lang: Lang }) {
 
       <main>
         {/* ---------- Arquivo ---------- */}
-        <section className={`section page-top ${s.archive}`} id="projects">
+        <section className={`section page-top ${s.archive}`}>
           <div className={`container ${s.archiveInner}`}>
-            {/* A página começa aqui (16/10): o título na mesma linha do nome
-                da barra e do EN / BR. A frase da direita saiu. */}
-            <h2 className="h3 page-title">{t.work.selectedWork}</h2>
+            {/* A apresentação (16/10, pedido do Rodrigo, a partir de uma
+                referência: frase grande e texto pequeno; aqui, discreta — é
+                só uma introduçãozinha). O texto é a bio da capa. Ela abre a
+                página, na linha do nome da barra e do EN / BR. */}
+            <p className={s.intro}>{t.home.bio}</p>
+
+            <h2 className="h3 page-title" id="projects">{t.work.selectedWork}</h2>
 
             {/* Um projeto por bloco, no desenho do brandbeet.com (12/10):
                 nome e serviços e uma colagem de quatro imagens que leva pro case. */}

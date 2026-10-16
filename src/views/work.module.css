@@ -8,7 +8,25 @@
 
 /* ---------- Arquivo ---------- */
 
-.archive { padding-bottom: 0; }
+.archive {
+  padding-bottom: 0;
+  /* quem abre a página é a apresentação, não o título (ver .page-top) */
+  --top-size: var(--t-h4);
+  --top-k: 0.281;
+}
+
+/* A apresentação: discreta, no corpo do h4 sem caixa alta, metade da
+   grade no desktop (12 de 24), a largura toda abaixo de 1100. */
+.intro {
+  margin: 0;
+  max-width: calc(var(--col) * var(--cols) / 2 - var(--col-gap));
+  font-size: var(--t-h4);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+@media (max-width: 1100px) { .intro { max-width: none; } }
 
 .archiveInner { display: flex; flex-direction: column; gap: var(--s6); }
 

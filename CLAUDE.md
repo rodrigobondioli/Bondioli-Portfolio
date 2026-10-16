@@ -347,6 +347,11 @@ e do EN / BR** — o topo das maiúsculas dos três no mesmo pixel (conta
 pela métrica da Geist no `.archive`; o EN / BR sobe a diferença do ícone
 do sol). A frase "Work that started with a problem, not a prompt" saiu.
 
+Antes do título, desde 16/10, uma **apresentação discreta**: a bio da
+capa ("20+ years working across…" / "Mais de 20 anos…"), no corpo do h4
+sem caixa alta, meia grade de largura. Ela é quem abre a página, na linha
+da barra (a seção passa `--top-size`/`--top-k` pro `.page-top`).
+
 **Toda página interna segue essa altura** (pedido do Rodrigo): a
 primeira seção leva `.page-top` e o título `.h3 .page-title` (globals).
 Vale pra /work, /info e /playground; página nova nasce assim.
