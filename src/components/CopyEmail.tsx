@@ -16,6 +16,8 @@ import TextRoll from "./TextRoll"
 interface CopyEmailProps {
   email?: string
   copiedLabel?: string
+  failLabel?: string
+  ariaLabel?: string
   color?: string
   copiedDuration?: number
   className?: string
@@ -56,6 +58,8 @@ async function writeToClipboard(text: string): Promise<boolean> {
 export default function CopyEmail({
   email = "hello@rodrigobondioli.com",
   copiedLabel = "Email copied",
+  failLabel = "Could not copy",
+  ariaLabel = "Copy email",
   /* a cor de quem está em volta: serve os dois temas (12/10) */
   color = "currentColor",
   copiedDuration = 1800,
@@ -75,7 +79,7 @@ export default function CopyEmail({
   const handleActivate = useCallback(async () => {
     const copied = await writeToClipboard(email)
     if (resetTimer.current !== null) window.clearTimeout(resetTimer.current)
-    const aviso = copied ? copiedLabel : "Could not copy"
+    const aviso = copied ? copiedLabel : failLabel
     startTransition(() => {
       setCopiado(aviso)
       setAnnouncement(aviso)
@@ -87,7 +91,7 @@ export default function CopyEmail({
         setAnnouncement("")
       })
     }, copiedDuration)
-  }, [copiedDuration, copiedLabel, email])
+  }, [copiedDuration, copiedLabel, failLabel, email])
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -104,7 +108,7 @@ export default function CopyEmail({
       type="button"
       onClick={handleActivate}
       onKeyDown={handleKeyDown}
-      aria-label={`Copy email ${email}`}
+      aria-label={`${ariaLabel} ${email}`}
       className={className}
       data-roll-host=""
       style={{

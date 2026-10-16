@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { marcarCarregando, marcarPronto } from "@/lib/ready"
 import { irProTopo, soltarScroll, travarScroll } from "@/lib/lenis"
 import { Logo } from "./Logo"
+import { dict, type Lang } from "@/i18n"
 import styles from "./Preloader.module.css"
 
 /**
@@ -54,14 +55,16 @@ const ESPERA_FONTES = 2500
 /* Só a /work tem abertura (14/10, pedido do Rodrigo: a capa entra direto).
    E só quando a pessoa CHEGA nela — navegando da capa pra /work, a página
    já está aberta e a abertura não volta. */
-const COM_ABERTURA = (path: string | null) => (path ?? "").replace(/\/$/, "") === "/work"
+/* nas duas línguas: /work e /pt/work */
+const COM_ABERTURA = (path: string | null) =>
+  /^(\/pt)?\/work$/.test((path ?? "").replace(/\/$/, ""))
 
 /* Fora de qualquer efeito, de propósito: a marca tem que existir antes do
    primeiro `useEffect` da página rodar, senão os efeitos que esperam por
    ela acham que já podem começar. Só onde há abertura. */
 if (typeof window !== "undefined" && COM_ABERTURA(window.location.pathname)) marcarCarregando()
 
-export default function Preloader() {
+export default function Preloader({ lang = "en" }: { lang?: Lang }) {
   // decidido uma vez, na chegada: o layout não desmonta entre páginas
   const pathname = usePathname()
   const [ativo] = useState(() => COM_ABERTURA(pathname))
@@ -227,7 +230,7 @@ export default function Preloader() {
       <div className={styles.chrome} data-chrome="">
         <div className={styles.row}>
           <span className={styles.left} data-left="">
-            Loading
+            {dict[lang].loading}
           </span>
           <span className={styles.mark} data-mark="">
             <Logo size={96} />

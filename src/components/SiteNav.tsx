@@ -1,6 +1,7 @@
 import Link from "next/link"
 import CopyEmail from "./CopyEmail"
 import ThemeToggle from "./ThemeToggle"
+import { dict, href, type Lang } from "@/i18n"
 import styles from "./SiteNav.module.css"
 
 /**
@@ -25,33 +26,38 @@ const ATE = String(new Date().getFullYear()).slice(-2)
 
 export default function SiteNav({
   brandHref = "/",
+  lang = "en",
 }: {
+  lang?: Lang
   /* o nome sobe um nível: da /work vai pra capa; de um projeto ou do
      media kit, volta pra /work */
   brandHref?: string
 }) {
+  const t = dict[lang]
   return (
     <header className={styles.nav}>
       <div className={styles.block}>
-        <Link href={brandHref} className={`no-underline ${styles.label}`}>
+        <Link href={href(lang, brandHref)} className={`no-underline ${styles.label}`}>
           Rodrigo Bondioli
         </Link>
-        <Link href="/work#projects" className={`no-underline ${styles.value} ${styles.muted}`}>
-          Selected Work 15&rsquo; &mdash; {ATE}&rsquo;
+        <Link href={href(lang, "/work") + "#projects"} className={`no-underline ${styles.value} ${styles.muted}`}>
+          {t.selectedWorkNav} 15&rsquo; &mdash; {ATE}&rsquo;
         </Link>
       </div>
 
       <div className={styles.half}>
         <div className={`${styles.block} ${styles.middle}`}>
-          <p className={styles.label}>Creative Director</p>
-          <p className={`${styles.value} ${styles.muted}`}>São Paulo, Brazil</p>
+          <p className={styles.label}>{t.role}</p>
+          <p className={`${styles.value} ${styles.muted}`}>{t.place}</p>
         </div>
 
         <div className={styles.block}>
-          <p className={styles.label}>Get in touch</p>
+          <p className={styles.label}>{t.getInTouch}</p>
           <CopyEmail
             email="hello@rodrigobondioli.com"
-            copiedLabel="Email copied"
+            copiedLabel={t.emailCopied}
+            failLabel={t.couldNotCopy}
+            ariaLabel={t.copyEmail}
             color="currentColor"
             className={styles.value}
           />
@@ -59,7 +65,7 @@ export default function SiteNav({
       </div>
 
       <div className={`${styles.block} ${styles.prefs}`}>
-        <ThemeToggle />
+        <ThemeToggle lang={lang} />
       </div>
     </header>
   )

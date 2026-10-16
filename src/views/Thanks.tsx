@@ -1,10 +1,5 @@
-import type { Metadata } from "next"
+import { dict, type Lang } from "@/i18n"
 import styles from "./thanks.module.css"
-
-export const metadata: Metadata = {
-  title: "Thanks",
-  robots: { index: false, follow: false },
-}
 
 /**
  * /thanks — confirmação pós-formulário.
@@ -15,14 +10,15 @@ export const metadata: Metadata = {
  *     agora é 100svh
  *   - o padding de 124px lateral virou o gutter fluido
  */
-export default function ThanksPage() {
+export default function Thanks({ lang }: { lang: Lang }) {
+  const t = dict[lang].thanks
   return (
     <main className={styles.page}>
       <div className={styles.card}>
         <hr className={styles.rule} />
-        <p className="h4">Thanks for getting in touch.</p>
+        <p className="h4">{t.a}</p>
         <hr className={styles.rule} />
-        <p className="h4">I&rsquo;ll get back to you soon.</p>
+        <p className="h4">{t.b}</p>
         <hr className={styles.rule} />
       </div>
     </main>

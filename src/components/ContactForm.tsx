@@ -3,6 +3,7 @@
 import { useRef, useState } from "react"
 import styles from "./ContactForm.module.css"
 import PillButton from "./PillButton"
+import { dict, type Lang } from "@/i18n"
 
 /**
  * Formulário de contato. Envia de verdade: POST pra /api/contact, que
@@ -27,7 +28,8 @@ type Erros = { name?: string; email?: string; brief?: string }
    jeito quando a resposta não chega. Só barra o que é claramente não-email. */
 const PARECE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
-export default function ContactForm() {
+export default function ContactForm({ lang = "en" }: { lang?: Lang }) {
+  const t = dict[lang].form
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [brief, setBrief] = useState("")
@@ -42,15 +44,15 @@ export default function ContactForm() {
   const briefRef = useRef<HTMLTextAreaElement>(null)
 
   const mensagem = [brief, "", "—", name, email].filter(Boolean).join("\n")
-  const assunto = name ? `Decision — ${name}` : "Let's talk"
+  const assunto = t.subject(name)
 
   function validar(): Erros {
     const e: Erros = {}
-    if (!name.trim()) e.name = "Tell me your name."
-    if (!email.trim()) e.email = "I need an address to reply to."
+    if (!name.trim()) e.name = t.errName
+    if (!email.trim()) e.email = t.errEmail
     else if (!PARECE_EMAIL.test(email.trim()))
-      e.email = "That address looks incomplete."
-    if (!brief.trim()) e.brief = "Even one line helps."
+      e.email = t.errEmailBad
+    if (!brief.trim()) e.brief = t.errBrief
     return e
   }
 
@@ -104,14 +106,14 @@ export default function ContactForm() {
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
       <div className={styles.field}>
         <label className="sr-only" htmlFor="cf-name">
-          Name
+          {t.name}
         </label>
         <input
           ref={nameRef}
           id="cf-name"
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder={t.name}
           value={name}
           onChange={(e) => {
             setName(e.target.value)
@@ -130,14 +132,14 @@ export default function ContactForm() {
 
       <div className={styles.field}>
         <label className="sr-only" htmlFor="cf-email">
-          Email
+          {t.email}
         </label>
         <input
           ref={emailRef}
           id="cf-email"
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder={t.email}
           value={email}
           onChange={(e) => {
             setEmail(e.target.value)
@@ -154,18 +156,18 @@ export default function ContactForm() {
         ) : null}
       </div>
 
-      <h3 className={`h4 ${styles.question}`}>What decision are you facing?</h3>
+      <h3 className={`h4 ${styles.question}`}>{t.question}</h3>
 
       <div className={styles.field}>
         <label className="sr-only" htmlFor="cf-brief">
-          Your situation
+          {t.situation}
         </label>
         <textarea
           ref={briefRef}
           id="cf-brief"
           name="brief"
           rows={3}
-          placeholder="Ex: we're about to rebuild the brand and I don't want the obvious version."
+          placeholder={t.placeholder}
           value={brief}
           onChange={(e) => {
             setBrief(e.target.value)
@@ -196,8 +198,8 @@ export default function ContactForm() {
       </div>
 
       <div className={styles.actions}>
-        <PillButton type="submit" busy={ocupado} busyLabel="Sending…">
-          Start with the problem
+        <PillButton type="submit" busy={ocupado} busyLabel={t.sending}>
+          {t.submit}
         </PillButton>
       </div>
 
@@ -205,25 +207,21 @@ export default function ContactForm() {
           longe de onde o foco está. */}
       <div className={styles.resultado} aria-live="polite">
         {estado === "enviado" ? (
-          <p className={styles.ok}>
-            Got it — the message is in my inbox. I answer everything myself,
-            usually within a day.
-          </p>
+          <p className={styles.ok}>{t.ok}</p>
         ) : null}
 
         {estado === "falhou" ? (
           <div className={styles.manual}>
             <p>
-              Something broke on the way out — my fault, not yours. Nothing was
-              lost: write to <a href={`mailto:${TO}`}>{TO}</a>, or copy the
-              message below and send it from wherever you like.
+              {t.failA} <a href={`mailto:${TO}`}>{TO}</a>
+              {t.failB}
             </p>
             <div className={styles.manualActions}>
               <button type="button" className={styles.link} onClick={copiarMensagem}>
-                {copiado ? "Copied" : "Copy message"}
+                {copiado ? t.copied : t.copy}
               </button>
               <button type="button" className={styles.link} onClick={() => void enviar()}>
-                Try again
+                {t.retry}
               </button>
             </div>
           </div>

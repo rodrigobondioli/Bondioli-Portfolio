@@ -1,4 +1,5 @@
 import ContactForm from "./ContactForm"
+import { dict, type Lang } from "@/i18n"
 import styles from "./ClosingSection.module.css"
 
 /**
@@ -9,20 +10,20 @@ import styles from "./ClosingSection.module.css"
  * "Enough about me." vem riscado: a frase se corrige no ar, e é o riscado
  * que faz a virada acontecer em vez de só ser dita.
  */
-export default function ClosingSection() {
+export default function ClosingSection({ lang = "en" }: { lang?: Lang }) {
+  const t = dict[lang].closing
   return (
     <section className={`section ${styles.closing}`} id="contact">
       <div className={`container ${styles.inner}`}>
         <div className={styles.head}>
           <p className="body-lg">
-            <s className={styles.struck}>Enough about me.</s>{" "}
-            Let&rsquo;s talk about your next move.
+            <s className={styles.struck}>{t.struck}</s> {t.line}
           </p>
           <p className={`h1 ${styles.title}`}>
-            Your next <em className={styles.emph}>decision.</em>
+            {t.titleA} <em className={styles.emph}>{t.titleB}</em>
           </p>
         </div>
-        <ContactForm />
+        <ContactForm lang={lang} />
       </div>
     </section>
   )

@@ -1,15 +1,8 @@
-import type { Metadata } from "next"
 import { SpinningLogo } from "@/components/Logo"
 import CopyEmail from "@/components/CopyEmail"
 import CubeLink from "@/components/CubeLink"
+import { dict, type Lang } from "@/i18n"
 import styles from "./home.module.css"
-
-export const metadata: Metadata = {
-  title: "Rodrigo Bondioli · Creative Director",
-  description:
-    "20+ years working across advertising, branding and digital products. Today I work at the intersection of strategy, design and technology, helping turn complex ideas into clear, relevant and future-ready products and brands.",
-  alternates: { canonical: "/" },
-}
 
 const SOCIAL = [
   { label: "YouTube", href: "https://www.youtube.com/@falabondioli" },
@@ -24,9 +17,9 @@ const SOCIAL = [
    usa leitor ouve a lista uma vez só. Reordenar uma instância única por
    CSS exigiria desmontar o header e o footer (`display: contents`), e os
    dois são marcos de navegação que valem mais que a economia. */
-function Social({ className }: { className: string }) {
+function Social({ className, label }: { className: string; label: string }) {
   return (
-    <nav aria-label="Social" className={className}>
+    <nav aria-label={label} className={className}>
       <ul className={styles.social}>
         {SOCIAL.map(({ label, href }) => (
           <li key={href}>
@@ -52,7 +45,8 @@ function Social({ className }: { className: string }) {
  * O bloqueio de rolagem no Framer era um override de JS. Aqui é
  * `overflow: hidden` no próprio layout — não precisa de script pra isso.
  */
-export default function HomePage() {
+export default function Home({ lang }: { lang: Lang }) {
+  const t = dict[lang]
   return (
     <main className={styles.page}>
       <header className={styles.top}>
@@ -62,10 +56,10 @@ export default function HomePage() {
         <p className={`${styles.label} ${styles.brand}`}>
           <span>Rodrigo Bondioli</span>
           <span className={styles.dot} aria-hidden="true">·</span>
-          <span className={styles.role}>Creative Director</span>
+          <span className={styles.role}>{t.role}</span>
         </p>
 
-        <Social className={styles.socialTop} />
+        <Social className={styles.socialTop} label={t.social} />
       </header>
 
       <div className={styles.center}>
@@ -73,23 +67,20 @@ export default function HomePage() {
       </div>
 
       <footer className={styles.bottom}>
-        <p className={`${styles.label} ${styles.bio}`}>
-          20+ years working across advertising, branding and digital
-          products. Today I work at the intersection of strategy, design and
-          technology, helping turn complex ideas into clear, relevant and
-          future-ready products and brands.
-        </p>
+        <p className={`${styles.label} ${styles.bio}`}>{t.home.bio}</p>
 
         <div className={styles.contact}>
-          <p className={styles.label}>Get in touch:</p>
+          <p className={styles.label}>{t.home.getInTouch}</p>
           <CopyEmail
             email="hello@rodrigobondioli.com"
-            copiedLabel="Email copied"
+            copiedLabel={t.emailCopied}
+            failLabel={t.couldNotCopy}
+            ariaLabel={t.copyEmail}
             className={`${styles.label} ${styles.email}`}
           />
         </div>
 
-        <Social className={styles.socialBottom} />
+        <Social className={styles.socialBottom} label={t.social} />
       </footer>
     </main>
   )

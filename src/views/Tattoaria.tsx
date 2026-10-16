@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
@@ -12,7 +11,8 @@ import LitText from "@/components/case/LitText"
 import Tour from "@/components/case/Tour"
 import HoverZoom from "@/components/case/HoverZoom"
 import { imageSize } from "@/lib/imageSize"
-import { tattoaria, type Chapter, type Media } from "@/content/cases/tattoaria"
+import { caseTattoaria, type Chapter, type Media } from "@/content/cases/tattoaria"
+import { dict, href, type Lang } from "@/i18n"
 import s from "./case.module.css"
 
 /**
@@ -30,17 +30,6 @@ import s from "./case.module.css"
  */
 
 const MARK = ["(a.)", "(b.)", "(c.)", "(d.)"]
-
-export const metadata: Metadata = {
-  title: tattoaria.meta.title,
-  description: tattoaria.meta.description,
-  alternates: { canonical: "/projects/tattoaria" },
-  openGraph: {
-    title: tattoaria.meta.title,
-    description: tattoaria.meta.description,
-    images: ["/projects/tattoaria/case/galpao-baias.webp"],
-  },
-}
 
 /** Foto de qualquer bloco: recorte no formato pedido, aberta em faixas. */
 function Figure({ m, className = "" }: { m: Media; className?: string }) {
@@ -61,7 +50,7 @@ function Figure({ m, className = "" }: { m: Media; className?: string }) {
   )
 }
 
-function ChapterSection({ ch }: { ch: Chapter }) {
+function ChapterSection({ ch, lang }: { ch: Chapter; lang: Lang }) {
   // "side": uma foto só, embaixo do título, com o texto ao lado
   const side = ch.media?.find((b) => b.layout === "side")?.items[0]
   const blocks = ch.media?.filter((b) => b.layout !== "side")
@@ -123,7 +112,7 @@ function ChapterSection({ ch }: { ch: Chapter }) {
                 <span className={s.pressArrow} aria-hidden="true">
                   ↗
                 </span>
-                <span className="sr-only"> (opens in a new tab)</span>
+                <span className="sr-only">{dict[lang].caseUi.newTab}</span>
               </a>
             </li>
           ))}
@@ -133,7 +122,7 @@ function ChapterSection({ ch }: { ch: Chapter }) {
       {ch.quote ? <LitText className={s.quote}>{ch.quote}</LitText> : null}
 
       {ch.youtube ? (
-        <CaseFilm id={ch.youtube.id} title={ch.youtube.title} start={ch.youtube.start} />
+        <CaseFilm id={ch.youtube.id} title={ch.youtube.title} start={ch.youtube.start} lang={lang} />
       ) : null}
 
       {blocks?.map((block, i) =>
@@ -155,15 +144,16 @@ function ChapterSection({ ch }: { ch: Chapter }) {
   )
 }
 
-export default function TattoariaCase() {
+export default function Tattoaria({ lang }: { lang: Lang }) {
+  const t = dict[lang]
   const { place, title, summary, film, objective, facts, numbers, chapters, result, closing, credits } =
-    tattoaria
+    caseTattoaria(lang)
 
   return (
     <>
       <SmoothScroll />
       <HoverZoom />
-      <SiteNav brandHref="/work" />
+      <SiteNav brandHref="/work" lang={lang} />
 
       <main className={`on-project ${s.page}`}>
         <div className="section">
@@ -172,8 +162,8 @@ export default function TattoariaCase() {
             <section className={`grid ${s.head}`} aria-labelledby="case-title">
               <div className={`${s.small} ${s.top}`}>
                 <span>{place}</span>
-                <Link href="/work#projects" className={`no-underline ${s.back}`}>
-                  All projects
+                <Link href={href(lang, "/work") + "#projects"} className={`no-underline ${s.back}`}>
+                  {t.caseUi.allProjects}
                 </Link>
               </div>
               <h1 id="case-title" className={`h1 ${s.caseTitle}`}>
@@ -192,15 +182,15 @@ export default function TattoariaCase() {
               </dl>
             </section>
 
-            <CaseFilm id={film.id} title={film.title} />
+            <CaseFilm id={film.id} title={film.title} lang={lang} />
 
             {/* O objetivo, logo depois do filme: acende com o scroll */}
-            <section className={`grid ${s.objective}`} aria-label="Objective">
+            <section className={`grid ${s.objective}`} aria-label={t.caseUi.objective}>
               <LitText>{objective}</LitText>
             </section>
 
             {/* Números: dois cards grandes em cima; três fotos em retrato embaixo, com o número fora */}
-            <section className={`grid ${s.numbers}`} aria-label="Numbers">
+            <section className={`grid ${s.numbers}`} aria-label={t.caseUi.numbers}>
               {numbers.map((n, i) => {
                 const index = <p className={`${s.label} ${s.numIndex}`}>({String(i + 1).padStart(2, "0")})</p>
                 const value = <p className={s.numValue}>{n.value}</p>
@@ -225,7 +215,7 @@ export default function TattoariaCase() {
             </section>
 
             {chapters.map((ch) => (
-              <ChapterSection key={ch.id} ch={ch} />
+              <ChapterSection key={ch.id} ch={ch} lang={lang} />
             ))}
 
             {/* O que a Tattoaria virou: os números voltam, compactos */}
@@ -245,7 +235,7 @@ export default function TattoariaCase() {
             </section>
 
             {/* Fecho: espelha o capítulo 01 */}
-            <section className={`grid ${s.closing}`} aria-label="Closing">
+            <section className={`grid ${s.closing}`} aria-label={t.caseUi.closing}>
               <LitText>{closing.quote}</LitText>
               <div className={`${s.bodyText} ${s.body}`}>
                 <p>{closing.text}</p>
@@ -274,9 +264,9 @@ export default function TattoariaCase() {
 
       </main>
 
-      <ClosingSection />
-      <SiteFooter />
-      <MeetingBar />
+      <ClosingSection lang={lang} />
+      <SiteFooter lang={lang} />
+      <MeetingBar label={t.pill} />
     </>
   )
 }

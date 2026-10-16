@@ -452,10 +452,28 @@ no fundo claro). Nada de cor escrita, nem `--bg-dark`/`--rule-dark`; a
 exceção é texto por cima de foto (o contador do passeio), que é branco
 nos dois temas. A `SiteNav` perdeu o modo `dark` forçado.
 
-## Idioma
+## Idioma — duas versões, uma URL cada (16/10/2026)
 
-O site é **em inglês**. Isso vale pro texto visível, `alt`, `aria-label` e
-`title` — comentário de código e mensagem de commit seguem em português.
+O site tem **inglês na raiz** (`/`, `/work`, `/projects/tattoaria`,
+`/thanks`) e **português em `/pt`** (`/pt`, `/pt/work`,
+`/pt/projects/tattoaria`, `/pt/thanks`). O media kit e as páginas de
+projeto sem case ficam só em inglês. O EN / BR da barra leva pro mesmo
+lugar no outro idioma (de página que só existe em inglês, o BR vai pra
+`/pt/work`).
+
+Como está montado: todo texto visível mora em `src/i18n.ts`, EN e PT lado
+a lado (o TypeScript reclama se faltar o PT). As páginas de verdade estão
+em `src/views/` e recebem `lang`; as rotas são finas, em dois layouts raiz
+— `app/(en)/` e `app/(pt)/pt/` — porque o `lang` do `<html>` é do layout
+raiz. O case da Tattoaria em PT é `content/cases/tattoaria.pt.ts` (texto
+da Tumulto em primeira pessoa). Cada página declara as duas versões pro
+Google (`alternates()` → hreflang).
+
+**REGRA DO RODRIGO: toda alteração que ele pedir vale pras DUAS versões.**
+Mexeu num texto, num layout, numa imagem — conferir e aplicar em EN e PT,
+sem ele precisar pedir. Texto novo nasce nos dois idiomas.
+
+Comentário de código e mensagem de commit seguem em português.
 
 ## Onde vai cada arquivo
 

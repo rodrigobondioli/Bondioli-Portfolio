@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { SpinningLogo } from "./Logo"
 import TextRoll from "./TextRoll"
+import { dict, href, type Lang } from "@/i18n"
 import styles from "./SiteFooter.module.css"
 
 /**
@@ -33,18 +34,19 @@ const SOCIAL = [
    cá (12/10, pedido do Rodrigo): sem ícone, só ".md", irmão das redes. */
 const MD = { label: ".md", href: "/portfolio.md", file: "rodrigo-bondioli-portfolio.md" }
 
-export function SiteFooter() {
+export function SiteFooter({ lang = "en" }: { lang?: Lang }) {
+  const t = dict[lang]
   const year = new Date().getFullYear()
 
   return (
     <footer className={`${styles.footer} section`}>
       <div className={`${styles.inner} container`}>
-        <Link href="/" className={`no-underline ${styles.logo}`} aria-label="Rodrigo Bondioli — home">
+        <Link href={href(lang, "/")} className={`no-underline ${styles.logo}`} aria-label={t.footer.home}>
           {/* sem title: o aria-label do link já nomeia isto */}
           <SpinningLogo size={44} />
         </Link>
 
-        <nav aria-label="Social">
+        <nav aria-label={t.social}>
           <ul className={styles.social}>
             {SOCIAL.map(({ label, href }) => (
               <li key={label}>
@@ -65,8 +67,8 @@ export function SiteFooter() {
                 download={MD.file}
                 className={styles.link}
                 data-roll-host=""
-                aria-label="Download portfolio as Markdown (.md)"
-                title="Download portfolio (.md)"
+                aria-label={t.footer.md}
+                title={t.footer.mdTitle}
               >
                 <TextRoll text={MD.label} />
               </a>
@@ -75,7 +77,7 @@ export function SiteFooter() {
         </nav>
 
         <p className={styles.signature}>
-          Always made with love
+          {t.footer.signature}
           <span className={styles.mark} aria-hidden="true" />
           {year}
         </p>

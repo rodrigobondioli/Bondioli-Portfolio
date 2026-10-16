@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
 import { SiteFooter } from "@/components/SiteFooter"
@@ -11,22 +10,17 @@ import AboutSection from "@/components/AboutSection"
 import { orderedProjects, asset, galleryUrls, COM_CASE } from "@/lib/projects"
 import order from "@/content/order.json"
 import { SHOWCASE } from "@/content/showcase"
+import { dict, type Lang } from "@/i18n"
 import s from "./work.module.css"
 
-export const metadata: Metadata = {
-  title: "Work",
-  description:
-    "Selected work: brand, product and interface for startups and global brands. Work that started with a problem, not a prompt.",
-  alternates: { canonical: "/work" },
-}
-
-export default function WorkPage() {
+export default function Work({ lang }: { lang: Lang }) {
+  const t = dict[lang]
   const projects = orderedProjects(order as string[])
 
   return (
     <>
       <SmoothScroll />
-      <SiteNav />
+      <SiteNav lang={lang} />
 
       <main>
         {/* ---------- Hero ---------- */}
@@ -37,29 +31,26 @@ export default function WorkPage() {
                 entender, ele é impossível de vender."). Quem ele é já está na
                 barra do topo; os 20 anos, na faixa de números logo abaixo. */}
             <h1 className={`h1 ${s.heroTitle}`}>
-              If your product is hard to understand,{" "}
+              {t.work.heroA}{" "}
               <br className={s.heroBreak} />
-              it&rsquo;s impossible to sell.
+              {t.work.heroB}
             </h1>
-            <p className={s.heroSupport}>
-              I shape the architecture, positioning and design of your product so
-              any customer understands its value.
-            </p>
+            <p className={s.heroSupport}>{t.work.heroSupport}</p>
           </div>
 
           <div className={s.stats}>
             <div className={`container ${s.statsInner}`}>
               <p className={s.stat}>
                 <CountUpNumber target={20} className={s.statNumber} />
-                <span className={s.statLabel}>years in the creative industry</span>
+                <span className={s.statLabel}>{t.work.stats[0]}</span>
               </p>
               <p className={s.stat}>
                 <CountUpNumber target={180} className={s.statNumber} />
-                <span className={s.statLabel}>projects delivered</span>
+                <span className={s.statLabel}>{t.work.stats[1]}</span>
               </p>
               <p className={s.stat}>
                 <CountUpNumber target={6} padTo={2} className={s.statNumber} />
-                <span className={s.statLabel}>countries served</span>
+                <span className={s.statLabel}>{t.work.stats[2]}</span>
               </p>
             </div>
           </div>
@@ -69,16 +60,9 @@ export default function WorkPage() {
         <section className={`section ${s.statement}`}>
           <div className={`container ${s.statementInner}`}>
             <div className={s.headLine}>
-              <p className="overline">No point of view, no project.</p>
+              <p className="overline">{t.work.manifestoLabel}</p>
             </div>
-            <p className={s.statementText}>
-              Everyone is a prompt designer now. The result? Work that looks
-              like it came from the same machine&mdash;because it did. I use the
-              same tools. The difference is what I bring to them: a point of
-              view, a problem worth solving, and the craft to make the answer
-              feel inevitable. If you want fast and forgettable, plenty of
-              people are waiting for your brief.
-            </p>
+            <p className={s.statementText}>{t.work.manifesto}</p>
           </div>
         </section>
 
@@ -86,10 +70,8 @@ export default function WorkPage() {
         <section className={`section ${s.archive}`} id="projects">
           <div className={`container ${s.archiveInner}`}>
             <div className="head-row">
-              <h2 className="h3">Selected work</h2>
-              <p className="overline">
-                Work that started with a problem, not a prompt.
-              </p>
+              <h2 className="h3">{t.work.selectedWork}</h2>
+              <p className="overline">{t.work.selectedWorkLine}</p>
             </div>
 
             {/* Um projeto por bloco, no desenho do brandbeet.com (12/10):
@@ -118,6 +100,7 @@ export default function WorkPage() {
                       linked={COM_CASE.has(p.slug)}
                       images={fotos}
                       index={i}
+                      lang={lang}
                     />
                   </li>
                 )
@@ -127,13 +110,13 @@ export default function WorkPage() {
         </section>
 
         {/* ---------- Sobre ---------- */}
-        <AboutSection />
+        <AboutSection lang={lang} />
 
         {/* ---------- YouTube ---------- */}
         <section className={`section on-accent ${s.youtube}`}>
           <div className={s.youtubeInner}>
             <div className="head-row">
-              <h2 className="h4">Content creator</h2>
+              <h2 className="h4">{t.work.contentCreator}</h2>
               <p className="overline">YouTube @falabondioli</p>
             </div>
 
@@ -142,21 +125,22 @@ export default function WorkPage() {
               start={1}
               title="O que você tem feito com IA, além de conversar?"
               hideLabel
+              lang={lang}
             />
 
             <div className="head-row">
-              <p className="overline">31K subscribers</p>
-              <h3 className="h4">No bullshit</h3>
+              <p className="overline">{t.work.subscribers}</p>
+              <h3 className="h4">{t.work.noBullshit}</h3>
             </div>
           </div>
         </section>
 
         {/* ---------- Contato ---------- */}
-        <ClosingSection />
+        <ClosingSection lang={lang} />
       </main>
 
-      <SiteFooter />
-      <MeetingBar />
+      <SiteFooter lang={lang} />
+      <MeetingBar label={t.pill} />
     </>
   )
 }

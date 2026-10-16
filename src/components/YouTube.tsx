@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { dict, type Lang } from "@/i18n"
 import styles from "./YouTube.module.css"
 
 /**
@@ -22,6 +23,7 @@ type Props = {
   className?: string
   hideLabel?: boolean
   autoplay?: boolean
+  lang?: Lang
 }
 
 export default function YouTube({
@@ -31,7 +33,9 @@ export default function YouTube({
   className,
   hideLabel = false,
   autoplay = false,
+  lang = "en",
 }: Props) {
+  const t = dict[lang]
   const [on, setOn] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [sound, setSound] = useState(false)
@@ -162,7 +166,7 @@ export default function YouTube({
           </span>
           <span className={styles.soundBadge} aria-hidden="true">
             {sound ? <IconSoundOn /> : <IconSoundOff />}
-            {sound ? "Sound on" : "Sound off"}
+            {sound ? t.soundOn : t.soundOff}
           </span>
         </button>
       </div>

@@ -10,6 +10,10 @@
  * (pedido do Rodrigo, 12/10) —, os créditos são dele e o convite leva pro
  * contato da página. Os fatos e a ordem são os mesmos de lá.
  *
+ * Desde 16/10/2026 o case existe em português também (tattoaria.pt.ts,
+ * em /pt/projects/tattoaria), a partir do texto em português da Tumulto,
+ * na mesma primeira pessoa. Mexeu num, mexe no outro.
+ *
  * Fotos em public/projects/tattoaria/case/ (webp, a partir de site/img da
  * Tumulto). `ratio` é o formato do recorte; `focus`, o ponto que o recorte
  * preserva.
@@ -37,6 +41,8 @@ export type Chapter = {
   list?: { title: string; text: string }[]
   press?: { outlet: string; title: string; href: string }[]
 }
+
+import { tattoariaPt } from "./tattoaria.pt"
 
 const img = (name: string) => `/projects/tattoaria/case/${name}.webp`
 
@@ -409,4 +415,11 @@ export const tattoaria = {
       { role: "Press relations", who: "Tudo em Pauta" },
     ],
   },
+}
+
+export type CaseTattoaria = typeof tattoaria
+
+/** O case na língua pedida. */
+export function caseTattoaria(lang: "en" | "pt"): CaseTattoaria {
+  return lang === "pt" ? tattoariaPt : tattoaria
 }

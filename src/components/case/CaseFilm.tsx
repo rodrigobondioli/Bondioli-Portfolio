@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import YouTube from "@/components/YouTube"
+import type { Lang } from "@/i18n"
 import styles from "./CaseFilm.module.css"
 
 /**
@@ -18,11 +19,13 @@ export default function CaseFilm({
   title,
   start,
   className = "",
+  lang = "en",
 }: {
   id: string
   title: string
   start?: number
   className?: string
+  lang?: Lang
 }) {
   const root = useRef<HTMLDivElement>(null)
   const fig = useRef<HTMLDivElement>(null)
@@ -64,7 +67,7 @@ export default function CaseFilm({
     <div ref={root} className={`grid ${styles.wrap} ${className}`}>
       <div ref={fig} className={styles.figure}>
         <div ref={media} className={styles.media}>
-          <YouTube id={id} title={title} start={start} autoplay />
+          <YouTube id={id} title={title} start={start} autoplay lang={lang} />
         </div>
       </div>
     </div>

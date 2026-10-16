@@ -1,6 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { dict, trocarLingua, type Lang } from "@/i18n"
 import styles from "./ThemeToggle.module.css"
 
 /**
@@ -10,14 +13,18 @@ import styles from "./ThemeToggle.module.css"
  * (O download do portfólio em .md foi pro rodapé, junto das redes.) —
  * desenho do Rodrigo a partir da referência "EN | PT ☼" (12/10). O tema
  * troca de verdade (dark é o padrão); o idioma, por enquanto, só mostra
- * como vai ficar.
+ * como vai ficar. Desde 16/10 o idioma funciona: EN leva pra raiz, BR
+ * pra /pt, na mesma página (ou na /pt/work, se a página não existe em
+ * português).
  *
  * O tema mora no `data-theme` do <html>. Quem aplica no carregamento é o
  * script do <head> (sem piscar); aqui só se troca e se grava a escolha.
  */
 type Tema = "dark" | "light"
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ lang = "en" }: { lang?: Lang }) {
+  const t = dict[lang]
+  const pathname = usePathname() ?? "/"
   const [tema, setTema] = useState<Tema>("dark")
 
   useEffect(() => {
@@ -39,24 +46,37 @@ export default function ThemeToggle() {
 
   return (
     <div className={styles.rail}>
-      {/* Idioma: por enquanto só a cara (12/10). O site é em inglês; o
-          português ainda não existe, então BR aparece apagado e não leva a
-          lugar nenhum — não é botão, pra ninguém clicar num link morto. */}
-      <div className={styles.langs}>
-        <span className={styles.lang} aria-current="true" lang="en">
-          EN
-        </span>
-        <span className={`${styles.lang} ${styles.soon}`} title="Portuguese — coming soon" lang="pt-BR">
-          BR
-        </span>
-      </div>
+      {/* Idioma (16/10): a língua atual acesa, a outra é link pro mesmo
+          lugar na outra língua. */}
+      <nav className={styles.langs} aria-label={t.langLabel}>
+        {(["en", "pt"] as const).map((l) => {
+          const rotulo = l === "en" ? "EN" : "BR"
+          const idioma = l === "en" ? "en" : "pt-BR"
+          return l === lang ? (
+            <span key={l} className={styles.lang} aria-current="true" lang={idioma}>
+              {rotulo}
+            </span>
+          ) : (
+            <Link
+              key={l}
+              href={trocarLingua(pathname, l)}
+              className={`no-underline ${styles.lang} ${styles.other}`}
+              hrefLang={idioma}
+              lang={idioma}
+              aria-label={l === "en" ? "English" : "Português"}
+            >
+              {rotulo}
+            </Link>
+          )
+        })}
+      </nav>
       <span className={styles.divider} aria-hidden="true" />
       <button
         type="button"
         className={styles.button}
         onClick={trocar}
-        aria-label={`Switch to ${destino} mode`}
-        title={`Switch to ${destino} mode`}
+        aria-label={t.themeTo(destino)}
+        title={t.themeTo(destino)}
       >
         {tema === "dark" ? <Sol /> : <Lua />}
       </button>

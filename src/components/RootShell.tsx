@@ -1,37 +1,51 @@
 import type { Metadata } from "next"
 import Script from "next/script"
+import type { Lang } from "@/i18n"
 import Preloader from "@/components/Preloader"
 import GridLines from "@/components/GridLines"
-import { body, mono } from "./fonts"
+import { body, mono } from "@/app/fonts"
 // o CSS que o Lenis pede: altura automática no html, trava que respeita
 // `stop()`, iframes sem ponteiro durante o scroll suave
 import "lenis/dist/lenis.css"
 import "@/styles/globals.css"
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://rodrigobondioli.com"),
-  title: {
-    default: "Rodrigo Bondioli — Creative Director",
-    template: "%s — Rodrigo Bondioli",
-  },
-  description:
-    "Rodrigo Bondioli brings design and AI together, with more than 20 years leading design for startups and global brands.",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://rodrigobondioli.com",
-    siteName: "Rodrigo Bondioli",
-  },
-  twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true },
+/* As duas línguas têm cada uma o seu layout raiz (app/(en) e app/(pt)),
+   porque o `lang` do <html> é do layout raiz e não muda por página. O
+   resto — fontes, tema, GTM, abertura, grade — é o mesmo, e mora aqui. */
+const DESCRICAO: Record<Lang, string> = {
+  en: "Rodrigo Bondioli brings design and AI together, with more than 20 years leading design for startups and global brands.",
+  pt: "Rodrigo Bondioli une design e IA, com mais de 20 anos liderando design pra startups e marcas globais.",
+}
+
+export function rootMetadata(lang: Lang): Metadata {
+  const cargo = lang === "pt" ? "Diretor de Criação" : "Creative Director"
+  return {
+    metadataBase: new URL("https://rodrigobondioli.com"),
+    title: {
+      default: `Rodrigo Bondioli — ${cargo}`,
+      template: "%s — Rodrigo Bondioli",
+    },
+    description: DESCRICAO[lang],
+    openGraph: {
+      type: "website",
+      locale: lang === "pt" ? "pt_BR" : "en_US",
+      alternateLocale: lang === "pt" ? "en_US" : "pt_BR",
+      url: lang === "pt" ? "https://rodrigobondioli.com/pt" : "https://rodrigobondioli.com",
+      siteName: "Rodrigo Bondioli",
+    },
+    twitter: { card: "summary_large_image" },
+    robots: { index: true, follow: true },
+  }
 }
 
 // GA4, Clarity e Meta Pixel são configurados dentro do container, não aqui.
 const GTM_ID = "GTM-PBHQZ25"
 
-export default function RootLayout({
+export default function RootShell({
+  lang,
   children,
 }: {
+  lang: Lang
   children: React.ReactNode
 }) {
   return (
@@ -42,7 +56,7 @@ export default function RootLayout({
        caso do <body> logo abaixo, e a marca é justamente algo que o
        servidor não tem como ter. */
     <html
-      lang="en"
+      lang={lang === "pt" ? "pt-BR" : "en"}
       className={`${body.variable} ${mono.variable}`}
       data-theme="dark"
       suppressHydrationWarning
@@ -74,7 +88,7 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <Preloader />
+        <Preloader lang={lang} />
         <GridLines />
         {children}
         <Script id="gtm" strategy="afterInteractive">

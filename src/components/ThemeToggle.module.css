@@ -39,8 +39,15 @@ button.button:hover { rotate: 45deg; }
   letter-spacing: 0;
   line-height: 1.3;
 }
-/* o que ainda não existe fica apagado */
-.soon { opacity: 0.4; cursor: default; }
+/* a outra língua fica apagada e acende (rosa, como todo link de texto)
+   no hover */
+.other {
+  color: inherit;
+  opacity: 0.4;
+  transition: opacity var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.other:hover,
+.other:focus-visible { opacity: 1; color: var(--accent-pink); }
 
 @media (prefers-reduced-motion: reduce) {
   .button { transition: none; }

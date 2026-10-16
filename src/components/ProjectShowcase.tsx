@@ -3,6 +3,7 @@ import CardReveal from "./CardReveal"
 import Flipbook from "./Flipbook"
 import type { Midia } from "@/content/showcase"
 import { imageSize } from "@/lib/imageSize"
+import { dict, href as hrefLang, servico, type Lang } from "@/i18n"
 import styles from "./ProjectShowcase.module.css"
 
 /**
@@ -43,7 +44,9 @@ export default function ProjectShowcase({
   images,
   index = 0,
   linked = false,
+  lang = "en",
 }: {
+  lang?: Lang
   slug: string
   name: string
   services?: string | null
@@ -54,7 +57,8 @@ export default function ProjectShowcase({
   /** tem página interna (case) */
   linked?: boolean
 }) {
-  const href = `/projects/${slug}`
+  const t = dict[lang].showcase
+  const href = hrefLang(lang, `/projects/${slug}`)
   // Até 8: com mais de 4, a linha de baixo espelha a de cima (como no
   // brandbeet). Com 4, o espelho alterna de um projeto pro outro.
   const fotos = images.slice(0, 8)
@@ -62,7 +66,7 @@ export default function ProjectShowcase({
   const linha1 = !duasLinhas && index % 2 ? [...SLOTS].reverse() : SLOTS
   const slots = duasLinhas ? [...linha1, ...[...SLOTS].reverse()] : linha1
   const lista = services
-    ? services.split("•").map((s) => s.trim()).filter(Boolean).join(", ")
+    ? services.split("•").map((s) => servico(lang, s.trim())).filter(Boolean).join(", ")
     : null
 
   // Com case, cada foto é o seu próprio link: o vão embaixo das menores
@@ -87,13 +91,13 @@ export default function ProjectShowcase({
       <Link
         href={href}
         className={`no-underline ${styles.shotLink}`}
-        aria-label={i === 0 ? `${name} — view case study` : undefined}
+        aria-label={i === 0 ? `${name} — ${t.viewCase}` : undefined}
         aria-hidden={i === 0 ? undefined : true}
         tabIndex={i === 0 ? undefined : -1}
       >
         {midia}
         <span className={styles.cta} aria-hidden="true">
-          View case study
+          {t.viewCase}
         </span>
       </Link>
     ) : (
@@ -118,7 +122,7 @@ export default function ProjectShowcase({
                 {name}
               </Link>
               {/* o que diferencia o projeto com página interna (14/10) */}
-              <span className={styles.tag}>(case study)</span>
+              <span className={styles.tag}>{t.caseTag}</span>
             </>
           ) : (
             name
@@ -126,7 +130,7 @@ export default function ProjectShowcase({
         </h3>
         {lista ? (
           <p className={styles.services}>
-            <span className={styles.servicesLabel}>Services</span>
+            <span className={styles.servicesLabel}>{t.services}</span>
             <span className={styles.servicesList}>{lista}</span>
           </p>
         ) : null}
