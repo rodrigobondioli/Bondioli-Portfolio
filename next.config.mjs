@@ -31,6 +31,9 @@ const nextConfig = {
       // Flashbang saiu do ar em 14/10/2026 (mesmo esquema)
       { source: "/projects/flashbang", destination: "/work", statusCode: 307 },
       { source: "/projects/tilt-tech", destination: "/work", statusCode: 307 },
+      // a página "Info" (16/10) atende pelos dois nomes; o endereço é /info
+      { source: "/about", destination: "/info", statusCode: 301 },
+      { source: "/pt/about", destination: "/pt/info", statusCode: 301 },
     ]
   },
 }

@@ -100,15 +100,14 @@ export default function NavRail({
               </ul>
             </li>
             <li>
-              <Link href={`${work}#about`} className={`no-underline ${styles.item}`} data-roll-host="" onClick={fechar}>
+              <Link href={href(lang, "/info")} className={`no-underline ${styles.item}`} data-roll-host="" onClick={fechar}>
                 <TextRoll text={t.nav.info} underline={false} />
               </Link>
             </li>
             <li>
-              {/* ainda não existe: apagado, sem link morto */}
-              <span className={`${styles.item} ${styles.soon}`} title={t.nav.soon}>
-                {t.nav.playground}
-              </span>
+              <Link href={href(lang, "/playground")} className={`no-underline ${styles.item}`} data-roll-host="" onClick={fechar}>
+                <TextRoll text={t.nav.playground} underline={false} />
+              </Link>
             </li>
           </ul>
 

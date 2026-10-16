@@ -93,9 +93,6 @@
   line-height: 1.6;
 }
 
-/* o que ainda não existe fica apagado */
-.soon { opacity: 0.4; cursor: default; }
-
 /* o fio entre o menu e as redes (pedido do Rodrigo) */
 .rule {
   width: 100%;

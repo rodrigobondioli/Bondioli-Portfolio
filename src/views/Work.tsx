@@ -2,10 +2,8 @@ import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
 import { SiteFooter } from "@/components/SiteFooter"
 import MeetingBar from "@/components/MeetingBar"
-import YouTube from "@/components/YouTube"
 import ProjectShowcase from "@/components/ProjectShowcase"
 import ClosingSection from "@/components/ClosingSection"
-import AboutSection from "@/components/AboutSection"
 import { orderedProjects, asset, galleryUrls, COM_CASE } from "@/lib/projects"
 import order from "@/content/order.json"
 import { SHOWCASE } from "@/content/showcase"
@@ -23,11 +21,11 @@ export default function Work({ lang }: { lang: Lang }) {
 
       <main>
         {/* ---------- Arquivo ---------- */}
-        <section className={`section ${s.archive}`} id="projects">
+        <section className={`section page-top ${s.archive}`} id="projects">
           <div className={`container ${s.archiveInner}`}>
             {/* A página começa aqui (16/10): o título na mesma linha do nome
                 da barra e do EN / BR. A frase da direita saiu. */}
-            <h2 className={`h3 ${s.archiveTitle}`}>{t.work.selectedWork}</h2>
+            <h2 className="h3 page-title">{t.work.selectedWork}</h2>
 
             {/* Um projeto por bloco, no desenho do brandbeet.com (12/10):
                 nome e serviços e uma colagem de quatro imagens que leva pro case. */}
@@ -61,42 +59,6 @@ export default function Work({ lang }: { lang: Lang }) {
                 )
               })}
             </ul>
-          </div>
-        </section>
-
-        {/* ---------- Manifesto ---------- */}
-        <section className={`section ${s.statement}`}>
-          <div className={`container ${s.statementInner}`}>
-            <div className={s.headLine}>
-              <p className="overline">{t.work.manifestoLabel}</p>
-            </div>
-            <p className={s.statementText}>{t.work.manifesto}</p>
-          </div>
-        </section>
-
-        {/* ---------- Sobre ---------- */}
-        <AboutSection lang={lang} />
-
-        {/* ---------- YouTube ---------- */}
-        <section className={`section on-accent ${s.youtube}`}>
-          <div className={s.youtubeInner}>
-            <div className="head-row">
-              <h2 className="h4">{t.work.contentCreator}</h2>
-              <p className="overline">YouTube @falabondioli</p>
-            </div>
-
-            <YouTube
-              id="cSBSVxPP0as"
-              start={1}
-              title="O que você tem feito com IA, além de conversar?"
-              hideLabel
-              lang={lang}
-            />
-
-            <div className="head-row">
-              <p className="overline">{t.work.subscribers}</p>
-              <h3 className="h4">{t.work.noBullshit}</h3>
-            </div>
           </div>
         </section>
 

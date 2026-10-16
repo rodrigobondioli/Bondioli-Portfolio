@@ -419,6 +419,23 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
   margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter));
 }
 
+/* O topo das páginas internas (16/10, pedido do Rodrigo: "sempre vai
+   seguir a altura que a gente definiu"): o título da página na mesma
+   linha do nome da barra e do EN / BR — o topo das maiúsculas dele no
+   topo das maiúsculas deles. Contas pela métrica da Geist (medida no
+   navegador): a maiúscula começa 0,297em abaixo do topo da caixa no texto
+   da barra (mono, entrelinha 1.3) e 0,231em no título (.h3, entrelinha
+   1.2). Abaixo de 1100 a barra vira a linha do "Menu" por cima, e o
+   título desce. Usar sempre `.page-top` na primeira seção e `.page-title
+   h3` no título. */
+.page-top {
+  padding-top: calc(var(--gutter) + 0.297 * var(--t-overline) - 0.231 * var(--t-h3));
+}
+@media (max-width: 1100px) {
+  .page-top { padding-top: calc(var(--gutter) + var(--s6)); }
+}
+.page-title { margin: 0; }
+
 .stack     { display: flex; flex-direction: column; }
 .row       { display: flex; flex-direction: row; align-items: center; }
 .row-wrap  { display: flex; flex-direction: row; align-items: center; flex-wrap: wrap; }

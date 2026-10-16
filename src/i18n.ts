@@ -22,7 +22,7 @@ export function href(lang: Lang, path: string) {
 
 /* As páginas que existem em português. As outras (media kit, projetos sem
    case) mandam o BR pra /pt/work, a vitrine. */
-const EM_PT = new Set(["/", "/work", "/thanks", "/projects/tattoaria"])
+const EM_PT = new Set(["/", "/work", "/info", "/playground", "/thanks", "/projects/tattoaria"])
 
 /** Pro EN / BR da barra: o endereço da página atual na outra língua. */
 export function trocarLingua(pathname: string, para: Lang) {
@@ -69,7 +69,6 @@ const en = {
     projects: "Projects",
     info: "Info",
     playground: "Playground",
-    soon: "Coming soon",
     email: "Email",
   },
   social: "Social",
@@ -93,6 +92,19 @@ const en = {
     contentCreator: "Content creator",
     subscribers: "31K subscribers",
     noBullshit: "No bullshit",
+  },
+
+  info: {
+    title: "Info",
+    description:
+      "Rodrigo Bondioli, Creative Director in São Paulo: 20+ years across advertising, branding and digital products, Head of Creative at Netshoes and Americanas.com.",
+    stats: ["years in the creative industry", "projects delivered", "countries served"],
+  },
+
+  playground: {
+    title: "Playground",
+    description: "Experiments, side projects and things I make for the fun of it.",
+    lead: "Experiments, side projects and things I make for the fun of it. Coming soon.",
   },
 
   showcase: {
@@ -182,7 +194,6 @@ const pt: Dict = {
     projects: "Projetos",
     info: "Info",
     playground: "Playground",
-    soon: "Em breve",
     email: "E-mail",
   },
   social: "Redes",
@@ -206,6 +217,19 @@ const pt: Dict = {
     contentCreator: "Criador de conteúdo",
     subscribers: "31 mil inscritos",
     noBullshit: "No bullshit",
+  },
+
+  info: {
+    title: "Info",
+    description:
+      "Rodrigo Bondioli, Diretor de Criação em São Paulo: mais de 20 anos entre publicidade, branding e produtos digitais, Head de Criação da Netshoes e da Americanas.com.",
+    stats: ["anos na indústria criativa", "projetos entregues", "países atendidos"],
+  },
+
+  playground: {
+    title: "Playground",
+    description: "Experimentos, projetos paralelos e coisas que eu faço pelo prazer de fazer.",
+    lead: "Experimentos, projetos paralelos e coisas que eu faço pelo prazer de fazer. Em breve.",
   },
 
   showcase: {

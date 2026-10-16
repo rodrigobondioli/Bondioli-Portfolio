@@ -11,7 +11,9 @@ mesma cara do Framer, código e design system novos.**
 
 - [x] `/` — capa de uma tela, logo girando (física própria, portada do Framer)
 - [x] `/thanks`
-- [x] `/work` — a página grande: hero, manifesto, arquivo, sobre, YouTube, contato. O destaque do Go Ink saiu em 12/10/2026, a pedido
+- [x] `/work` — só o "Selected work" e o contato (desde 16/10/2026)
+- [x] `/info` (também `/about`, 301) — números, sobre, manifesto, YouTube, contato (16/10/2026, saíram da /work)
+- [x] `/playground` — por enquanto só o título e "em breve"
 - [ ] `/projects/[slug]` — 16 páginas, conteúdo em `src/content/projects.json`.
       Estrutura extraída do Framer está descrita na conversa. Era escuro
       fixo (`--bg-dark`); desde 12/10/2026 segue o tema (ver "Tema").
@@ -325,8 +327,8 @@ A navegação é uma **barra fixa no alto à esquerda**, igual à do torgo.work
 (medida lá): só texto, Geist Mono em caixa alta no corpo do overline,
 tudo na mesma cor. De cima pra baixo: o nome; "Creative Director / São
 Paulo, Brazil"; **Projects** (abre a lista dos projetos, na ordem da
-/work, cada um leva pra `/work#slug`), **Info** (`#about`) e
-**Playground** (apagado — a página ainda não existe); um fio; LinkedIn,
+/work, cada um leva pra `/work#slug`), **Info** (`/info`) e
+**Playground** (`/playground`); um fio; LinkedIn,
 YouTube, Substack, X (`x.com/falabondioli`) e Email (copia o endereço).
 No canto direito, sozinhos, EN / BR e o sol.
 
@@ -346,6 +348,10 @@ projetos. O título "Selected work" fica **na mesma linha do nome da barra
 e do EN / BR** — o topo das maiúsculas dos três no mesmo pixel (conta
 pela métrica da Geist no `.archive`; o EN / BR sobe a diferença do ícone
 do sol). A frase "Work that started with a problem, not a prompt" saiu.
+
+**Toda página interna segue essa altura** (pedido do Rodrigo): a
+primeira seção leva `.page-top` e o título `.h3 .page-title` (globals).
+Vale pra /work, /info e /playground; página nova nasce assim.
 
 ## A grade (12/10/2026, do tumulto.ai)
 

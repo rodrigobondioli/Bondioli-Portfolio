@@ -1,0 +1,142 @@
+/* /info (16/10/2026): o que era o "resto" da /work — os números, o
+   sobre, o manifesto e o canal — numa página própria, aberta pelo "Info"
+   da barra. O manifesto e o canal vieram da /work com as mesmas regras. */
+
+.top { padding-bottom: 0; }
+.topInner { display: flex; flex-direction: column; gap: var(--s6); }
+
+/* ---------- Números ---------- */
+
+/* Os três números do antigo herói da /work, agora parados embaixo do
+   título: um terço da grade cada, o primeiro na margem esquerda, o
+   último terminando na direita. Fio em cima e embaixo. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  align-items: center;
+  margin: 0;
+  padding: var(--s3) 0;
+  border-block: var(--hairline) solid var(--rule);
+  list-style: none;
+}
+.stat {
+  grid-column: span 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s1);
+}
+@media (min-width: 1101px) { .stat { grid-column: span 8; } }
+.stat:first-child { justify-content: flex-start; }
+.stat:last-child { justify-content: flex-end; }
+
+/* números em Geist Mono: leem como dado, e os dígitos têm todos a mesma
+   largura enquanto o contador sobe — nada treme */
+.statNumber {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.statLabel {
+  font-size: var(--t-body-sm);
+  line-height: 1.3;
+}
+/* abaixo de 640 os três não cabem lado a lado: empilham, à esquerda */
+@media (max-width: 640px) {
+  .stat, .stat:last-child { grid-column: 1 / -1; justify-content: flex-start; }
+  .stats { row-gap: var(--s2); }
+}
+
+/* ---------- Manifesto ---------- */
+
+.statement { padding-block: var(--s6) var(--s7); }
+.statementInner { display: flex; flex-direction: column; gap: var(--s6); }
+/* Acima do celular, o rótulo mora no vão do recuo da primeira linha (12/10,
+   referência do Rodrigo): rótulo e texto dividem a mesma célula, o rótulo
+   preso no canto de cima e sem passar do recuo. */
+@media (min-width: 641px) {
+  .statementInner { display: grid; gap: 0; }
+  .statementInner > * { grid-area: 1 / 1; }
+  .statementInner > .headLine {
+    align-self: start;
+    max-width: calc(var(--col) * var(--cols) / 3 - var(--col-gap));
+    /* Pela linha de base (o Rodrigo pediu o rótulo sentado na base da
+       primeira linha, não no topo dela). Medido na Geist: com entrelinha
+       1.2 a base fica a 0.954 do corpo abaixo do topo da caixa; a do
+       rótulo (mono, entrelinha 1), a 0.857. A diferença alinha os dois em
+       qualquer tela, já que o corpo do texto é fluido. */
+    padding-top: calc(var(--t-h2) * 0.954 - var(--t-overline) * 0.857);
+  }
+}
+
+/* 48/57.6, largura inteira — medido no Framer (era Alpha Lyrae; Geist desde 12/10) */
+.statementText {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: var(--t-h2);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  /* Recuo da primeira linha, grande (12/10, referência do Rodrigo): a
+     frase começa a um terço da página e o resto volta pra margem. Um terço
+     da grade em qualquer tela (8 de 24, 4 de 12, 2 de 6), então a primeira
+     palavra cai em cima de uma linha da grade. */
+  text-indent: calc(var(--col) * var(--cols) / 3);
+}
+
+.headLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+}
+
+/* ---------- YouTube ---------- */
+
+/* NÃO zerar este padding-top.
+   Tentei, pra fechar o vão de 352 entre o "about" e este vídeo. Só que
+   aqui o padding não é só espaço: esta seção tem fundo próprio, e o topo
+   dela é a faixa amarela acima do rótulo. Zerando, o amarelo passa a
+   começar junto com o conteúdo e o "CONTENT CREATOR" fica grudado na
+   borda da cor. O vão de 352 é real, mas quem tem que ceder é o lado de
+   cima, que não tem cor nenhuma — não este. */
+.youtube {
+  /* a seção vira grade pra a caixa de dentro se posicionar por colunas */
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  /* nasce na cor da página e chega no tom da seção — sem o corte seco
+     entre o fundo e a faixa (14/10, pedido do Rodrigo) */
+  background: linear-gradient(var(--bg) 0%, var(--accent) 60%);
+  padding-top: var(--s7);
+  padding-bottom: 0;
+}
+/* Era uma caixa de 1140 centrada; agora vai da linha da coluna 3 até a
+   linha do meio da 23 (~1134 em 1440), pras duas bordas caírem em linhas. */
+.youtubeInner {
+  grid-column: 2 / 12;
+  margin-inline-end: calc(var(--col) / 2 - var(--col-gap));
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+@media (min-width: 1101px) { .youtubeInner { grid-column: 3 / 24; } }
+/* No escuro (o padrão) a seção do vídeo do canal é grafite #1E1E1C, não
+   amarela — pedido do Rodrigo (12/10); é o cinza dos cards do tumulto. O
+   texto volta pros tokens claros do tema (a classe on-accent, que é do
+   amarelo, deixava ele escuro). Emenda no degradê do fecho, que sai do
+   mesmo grafite. No claro, o amarelo de sempre. */
+:global([data-theme="dark"]) .youtube {
+  background: linear-gradient(var(--bg) 0%, #1e1e1c 60%);
+  --ink:    #f1f1f1;
+  --ink-60: rgba(241, 241, 241, 0.6);
+  --ink-25: rgba(241, 241, 241, 0.25);
+  --ink-10: rgba(241, 241, 241, 0.1);
+  --rule:   rgba(241, 241, 241, 0.16);
+  color: var(--ink);
+}
+:global([data-theme="dark"]) .youtube :global(.rule) { background: var(--rule); }
+/* tablet e celular: a caixa ocupa a largura toda (depois da regra base,
+   senão a base ganha) */
+@media (max-width: 900px) { .youtubeInner { grid-column: 1 / -1; margin-inline-end: 0; } }
