@@ -338,9 +338,14 @@ Quem sangra pra esquerda usa `--gutter-l`. Sem barra (capa, /thanks) e
 abaixo de 1100, `--rail` é 0. Abaixo de 1100 vira o que o torgo faz no
 celular: o nome, idioma/tema e "Menu", que abre a lista por cima.
 
-Substituiu a barra de quatro blocos em cima das linhas (14/10). No mesmo
-dia saíram o H1 e a linha de apoio do herói da /work ("depois a gente
-faz o resto"): por enquanto o herói é a tela vazia com a faixa de números.
+Substituiu a barra de quatro blocos em cima das linhas (14/10).
+
+**A /work começa no "Selected work"** (16/10): o herói inteiro saiu (H1,
+linha de apoio e a faixa de números) e o manifesto desceu pra depois dos
+projetos. O título "Selected work" fica **na mesma linha do nome da barra
+e do EN / BR** — o topo das maiúsculas dos três no mesmo pixel (conta
+pela métrica da Geist no `.archive`; o EN / BR sobe a diferença do ícone
+do sol). A frase "Work that started with a problem, not a prompt" saiu.
 
 ## A grade (12/10/2026, do tumulto.ai)
 

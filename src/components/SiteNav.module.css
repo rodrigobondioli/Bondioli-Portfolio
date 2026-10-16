@@ -34,7 +34,9 @@
 /* o idioma e o tema: no canto de cima à direita, na altura do nome */
 .prefs {
   position: fixed;
-  top: var(--gutter);
+  /* o sol tem 20px e o texto ~15: centrados, o EN / BR descia 2,7px da
+     linha do nome. Sobe a diferença. */
+  top: calc(var(--gutter) - (20px - 1.3 * var(--t-overline)) / 2);
   right: var(--gutter);
   z-index: 100;
   text-transform: none;

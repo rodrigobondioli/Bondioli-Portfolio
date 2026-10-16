@@ -2,7 +2,6 @@ import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
 import { SiteFooter } from "@/components/SiteFooter"
 import MeetingBar from "@/components/MeetingBar"
-import CountUpNumber from "@/components/CountUpNumber"
 import YouTube from "@/components/YouTube"
 import ProjectShowcase from "@/components/ProjectShowcase"
 import ClosingSection from "@/components/ClosingSection"
@@ -23,45 +22,12 @@ export default function Work({ lang }: { lang: Lang }) {
       <SiteNav lang={lang} />
 
       <main>
-        {/* ---------- Hero ---------- */}
-        <section className={s.hero}>
-          {/* O H1 e a linha de apoio saíram (16/10, pedido do Rodrigo, junto
-              com a barra nova da esquerda). O que entra aqui vem depois. */}
-          <div className={s.stats}>
-            <div className={`container ${s.statsInner}`}>
-              <p className={s.stat}>
-                <CountUpNumber target={20} className={s.statNumber} />
-                <span className={s.statLabel}>{t.work.stats[0]}</span>
-              </p>
-              <p className={s.stat}>
-                <CountUpNumber target={180} className={s.statNumber} />
-                <span className={s.statLabel}>{t.work.stats[1]}</span>
-              </p>
-              <p className={s.stat}>
-                <CountUpNumber target={6} padTo={2} className={s.statNumber} />
-                <span className={s.statLabel}>{t.work.stats[2]}</span>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------- Manifesto ---------- */}
-        <section className={`section ${s.statement}`}>
-          <div className={`container ${s.statementInner}`}>
-            <div className={s.headLine}>
-              <p className="overline">{t.work.manifestoLabel}</p>
-            </div>
-            <p className={s.statementText}>{t.work.manifesto}</p>
-          </div>
-        </section>
-
         {/* ---------- Arquivo ---------- */}
         <section className={`section ${s.archive}`} id="projects">
           <div className={`container ${s.archiveInner}`}>
-            <div className="head-row">
-              <h2 className="h3">{t.work.selectedWork}</h2>
-              <p className="overline">{t.work.selectedWorkLine}</p>
-            </div>
+            {/* A página começa aqui (16/10): o título na mesma linha do nome
+                da barra e do EN / BR. A frase da direita saiu. */}
+            <h2 className={`h3 ${s.archiveTitle}`}>{t.work.selectedWork}</h2>
 
             {/* Um projeto por bloco, no desenho do brandbeet.com (12/10):
                 nome e serviços e uma colagem de quatro imagens que leva pro case. */}
@@ -95,6 +61,16 @@ export default function Work({ lang }: { lang: Lang }) {
                 )
               })}
             </ul>
+          </div>
+        </section>
+
+        {/* ---------- Manifesto ---------- */}
+        <section className={`section ${s.statement}`}>
+          <div className={`container ${s.statementInner}`}>
+            <div className={s.headLine}>
+              <p className="overline">{t.work.manifestoLabel}</p>
+            </div>
+            <p className={s.statementText}>{t.work.manifesto}</p>
           </div>
         </section>
 

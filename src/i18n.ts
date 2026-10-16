@@ -86,12 +86,10 @@ const en = {
     title: "Work",
     description:
       "Selected work: brand, product and interface for startups and global brands. Work that started with a problem, not a prompt.",
-    stats: ["years in the creative industry", "projects delivered", "countries served"],
     manifestoLabel: "No point of view, no project.",
     manifesto:
       "Everyone is a prompt designer now. The result? Work that looks like it came from the same machine—because it did. I use the same tools. The difference is what I bring to them: a point of view, a problem worth solving, and the craft to make the answer feel inevitable. If you want fast and forgettable, plenty of people are waiting for your brief.",
     selectedWork: "Selected work",
-    selectedWorkLine: "Work that started with a problem, not a prompt.",
     contentCreator: "Content creator",
     subscribers: "31K subscribers",
     noBullshit: "No bullshit",
@@ -201,12 +199,10 @@ const pt: Dict = {
     title: "Portfólio",
     description:
       "Trabalhos selecionados: marca, produto e interface pra startups e marcas globais. Trabalho que começou com um problema, não com um prompt.",
-    stats: ["anos na indústria criativa", "projetos entregues", "países atendidos"],
     manifestoLabel: "Sem ponto de vista, sem projeto.",
     manifesto:
       "Todo mundo virou designer de prompt. O resultado? Trabalho que parece ter saído da mesma máquina—porque saiu. Eu uso as mesmas ferramentas. A diferença é o que eu levo pra elas: um ponto de vista, um problema que vale a pena resolver e o ofício pra fazer a resposta parecer inevitável. Se você quer rápido e esquecível, tem muita gente esperando o seu briefing.",
     selectedWork: "Selected work",
-    selectedWorkLine: "Trabalho que começou com um problema, não com um prompt.",
     contentCreator: "Criador de conteúdo",
     subscribers: "31 mil inscritos",
     noBullshit: "No bullshit",
