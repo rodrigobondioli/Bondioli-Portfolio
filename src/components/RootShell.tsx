@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import Script from "next/script"
 import type { Lang } from "@/i18n"
-import Preloader from "@/components/Preloader"
 import GridLines from "@/components/GridLines"
 import { body, mono } from "@/app/fonts"
 // o CSS que o Lenis pede: altura automática no html, trava que respeita
@@ -49,12 +48,8 @@ export default function RootShell({
   children: React.ReactNode
 }) {
   return (
-    /* `data-loading` entra no <html> quando o módulo do Preloader é
-       avaliado — antes da hidratação, de propósito (é o que impede os
-       efeitos de começarem atrás da cortina). O React compara o HTML do
-       servidor com o do navegador e reclama do atributo a mais; é o mesmo
-       caso do <body> logo abaixo, e a marca é justamente algo que o
-       servidor não tem como ter. */
+    /* Sem tela de carregamento desde 16/10/2026 (pedido do Rodrigo):
+       o Preloader saiu de todas as páginas. */
     <html
       lang={lang === "pt" ? "pt-BR" : "en"}
       className={`${body.variable} ${mono.variable}`}
@@ -75,11 +70,6 @@ export default function RootShell({
           atributos no <body> antes do React montar. O aviso de hidratação
           que sai disso não é do nosso código e não tem o que consertar. */}
       <body suppressHydrationWarning>
-        {/* Sem JS a tela de carregamento nunca sairia — então sem JS ela
-            também não entra. O conteúdo está no HTML de qualquer jeito. */}
-        <noscript>
-          <style>{`[data-preloader]{display:none!important}`}</style>
-        </noscript>
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
@@ -88,7 +78,6 @@ export default function RootShell({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <Preloader lang={lang} />
         <GridLines />
         {children}
         <Script id="gtm" strategy="afterInteractive">

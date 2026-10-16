@@ -161,7 +161,6 @@ const en = {
   },
 
   pill: "See if we’re a fit",
-  loading: "Loading",
   soundOn: "Sound on",
   soundOff: "Sound off",
 
@@ -286,7 +285,6 @@ const pt: Dict = {
   },
 
   pill: "Vamos ver se combina",
-  loading: "Carregando",
   soundOn: "Som ligado",
   soundOff: "Som desligado",
 

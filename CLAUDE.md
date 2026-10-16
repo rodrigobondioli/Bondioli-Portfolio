@@ -123,13 +123,11 @@ npm run start   # serve o build em localhost:3000
   máscara (quem põe é o efeito); a "porta" espera a imagem carregar (até
   1,2s) pra não abrir caixa vazia; e uma rede tira a máscara se o laço não
   terminar.
-- **A abertura (`Preloader`) só existe na `/work`**, e só quando a pessoa
-  chega direto nela (14/10, pedido do Rodrigo: a capa entra sem loading;
-  navegando da capa pra /work ela não volta). Ela também é a do tumulto (`components/Loader.tsx`
-  de lá), com a marca do Rodrigo no lugar do asterisco e a cortina no rosa.
-  Lá é GSAP; aqui é WAAPI com as mesmas curvas e tempos (~6s no total). Ela
-  ainda trava o scroll (CSS + Lenis) e só dispara `marcarPronto` quando a
-  cortina começa a subir. Com movimento reduzido, não aparece.
+- **Não há tela de carregamento** (16/10/2026, pedido do Rodrigo: "tirar
+  esse loading de todas as páginas"). O `Preloader` (a abertura do
+  tumulto, com a marca e a cortina) foi apagado; está no histórico do git
+  se um dia voltar. O `lib/ready.ts` ficou: sem a marca de carregando, o
+  site já nasce "pronto" e os contadores rodam na hora.
 - **Links de texto: `TextRoll`** (14/10). O cubo 3D numa mola (CubeLink,
   CopyEmail, RollLabel) "parecia bugado": a mola passava do ponto e
   voltava, a letra pequena borrava no giro e o sublinhado girava junto.
