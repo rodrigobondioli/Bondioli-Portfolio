@@ -3,6 +3,9 @@
  * português em /pt — uma URL cada. Todo texto que aparece na tela mora
  * aqui, nos dois idiomas lado a lado, pra nenhum ficar pra trás.
  *
+ * O que é mais expressivo em inglês fica em inglês no português também
+ * ("Selected work", "No bullshit") — pedido do Rodrigo (16/10).
+ *
  * REGRA: toda alteração vale pras duas versões. Texto novo entra nas duas
  * chaves ao mesmo tempo; o TypeScript reclama se o português faltar.
  *
@@ -57,11 +60,18 @@ export const servico = (lang: Lang, termo: string) =>
 const en = {
   role: "Creative Director",
   place: "São Paulo, Brazil",
-  getInTouch: "Get in touch",
   emailCopied: "Email copied",
   couldNotCopy: "Could not copy",
   copyEmail: "Copy email",
-  selectedWorkNav: "Selected Work",
+  nav: {
+    menu: "Menu",
+    close: "Close",
+    projects: "Projects",
+    info: "Info",
+    playground: "Playground",
+    soon: "Coming soon",
+    email: "Email",
+  },
   social: "Social",
   langLabel: "Language",
   themeTo: (tema: "light" | "dark") => `Switch to ${tema} mode`,
@@ -76,10 +86,6 @@ const en = {
     title: "Work",
     description:
       "Selected work: brand, product and interface for startups and global brands. Work that started with a problem, not a prompt.",
-    heroA: "If your product is hard to understand,",
-    heroB: "it’s impossible to sell.",
-    heroSupport:
-      "I shape the architecture, positioning and design of your product so any customer understands its value.",
     stats: ["years in the creative industry", "projects delivered", "countries served"],
     manifestoLabel: "No point of view, no project.",
     manifesto:
@@ -169,11 +175,18 @@ export type Dict = typeof en
 const pt: Dict = {
   role: "Diretor de Criação",
   place: "São Paulo, Brasil",
-  getInTouch: "Fale comigo",
   emailCopied: "E-mail copiado",
   couldNotCopy: "Não deu pra copiar",
   copyEmail: "Copiar o e-mail",
-  selectedWorkNav: "Portfólio",
+  nav: {
+    menu: "Menu",
+    close: "Fechar",
+    projects: "Projetos",
+    info: "Info",
+    playground: "Playground",
+    soon: "Em breve",
+    email: "E-mail",
+  },
   social: "Redes",
   langLabel: "Idioma",
   themeTo: (tema) => `Mudar pro modo ${tema === "light" ? "claro" : "escuro"}`,
@@ -188,19 +201,15 @@ const pt: Dict = {
     title: "Portfólio",
     description:
       "Trabalhos selecionados: marca, produto e interface pra startups e marcas globais. Trabalho que começou com um problema, não com um prompt.",
-    heroA: "Se o seu produto é difícil de entender,",
-    heroB: "ele é impossível de vender.",
-    heroSupport:
-      "Eu desenho a arquitetura, o posicionamento e o design do seu produto pra qualquer cliente entender o valor dele.",
     stats: ["anos na indústria criativa", "projetos entregues", "países atendidos"],
     manifestoLabel: "Sem ponto de vista, sem projeto.",
     manifesto:
       "Todo mundo virou designer de prompt. O resultado? Trabalho que parece ter saído da mesma máquina—porque saiu. Eu uso as mesmas ferramentas. A diferença é o que eu levo pra elas: um ponto de vista, um problema que vale a pena resolver e o ofício pra fazer a resposta parecer inevitável. Se você quer rápido e esquecível, tem muita gente esperando o seu briefing.",
-    selectedWork: "Trabalhos selecionados",
+    selectedWork: "Selected work",
     selectedWorkLine: "Trabalho que começou com um problema, não com um prompt.",
     contentCreator: "Criador de conteúdo",
     subscribers: "31 mil inscritos",
-    noBullshit: "Sem papo furado",
+    noBullshit: "No bullshit",
   },
 
   showcase: {

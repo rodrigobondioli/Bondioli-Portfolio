@@ -76,7 +76,7 @@
 .top::after {
   content: "";
   position: absolute;
-  inset: auto calc(var(--gutter) * -1) 0;
+  inset: auto calc(var(--gutter) * -1) 0 calc(var(--gutter-l) * -1);
   height: 1px;
   background: var(--rule);
 }

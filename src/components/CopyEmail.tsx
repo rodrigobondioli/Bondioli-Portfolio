@@ -15,6 +15,10 @@ import TextRoll from "./TextRoll"
 
 interface CopyEmailProps {
   email?: string
+  /** o que aparece parado (o padrão é o próprio e-mail) */
+  label?: string
+  /** o sublinhado do TextRoll (no menu, sem) */
+  underline?: boolean
   copiedLabel?: string
   failLabel?: string
   ariaLabel?: string
@@ -57,6 +61,8 @@ async function writeToClipboard(text: string): Promise<boolean> {
 
 export default function CopyEmail({
   email = "hello@rodrigobondioli.com",
+  label,
+  underline = true,
   copiedLabel = "Email copied",
   failLabel = "Could not copy",
   ariaLabel = "Copy email",
@@ -127,7 +133,7 @@ export default function CopyEmail({
         WebkitTapHighlightColor: "transparent",
       }}
     >
-      <TextRoll text={email} back={copiado ?? email} show={copiado !== null} />
+      <TextRoll text={label ?? email} back={copiado ?? label ?? email} show={copiado !== null} underline={underline} />
 
       <span
         aria-live="polite"

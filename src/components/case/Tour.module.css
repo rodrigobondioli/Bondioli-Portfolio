@@ -3,7 +3,7 @@
   position: relative;
   z-index: 2; /* por cima das linhas da grade */
   grid-column: 1 / -1;
-  margin-inline: calc(var(--gutter) * -1);
+  margin-inline: calc(var(--gutter-l) * -1) calc(var(--gutter) * -1);
 }
 
 /* celular / sem efeito: fotos empilhadas, cada uma com o nome embaixo */

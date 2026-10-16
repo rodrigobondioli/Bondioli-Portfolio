@@ -113,7 +113,7 @@ export default function ProjectShowcase({
   })
 
   return (
-    <article className={`${styles.project} ${linked ? styles.linked : ""}`}>
+    <article id={slug} className={`${styles.project} ${linked ? styles.linked : ""}`}>
       <header className={styles.head}>
         <h3 className={`h3 ${styles.name}`}>
           {linked ? (

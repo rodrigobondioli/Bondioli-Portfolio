@@ -319,17 +319,28 @@ centro, fica a `min(--s7, 12svh)` abaixo do título e começa na mesma
 linha do "Get in touch" da barra (coluna 15 de 24), em duas linhas. No
 celular e em tela baixa ela volta pro fluxo.
 
-## A barra do topo (14/10/2026)
+## A barra da esquerda (16/10/2026, do torgo.work)
 
-Quatro blocos: "Rodrigo Bondioli / Selected Work 15' — 26'", "Creative
-Director / São Paulo, Brazil", "Get in touch / e-mail" e o idioma/tema.
-Nome no canto esquerdo, idioma/tema no direito, e cargo e contato **em
-cima de linhas da grade**, num ritmo de 7 em 7 colunas: coluna 8 e 15 de
-24 (4 e 7 de 12). Foi primeiro `space-between` (espaço exato entre os
-quatro), mas aí o "Get in touch" caía entre duas linhas — o Rodrigo
-preferiu as linhas. A segunda linha de cada bloco é cinza (`--ink-60`).
-A linha de apoio do herói começa na mesma coluna do contato. Abaixo de 900 o
-cargo sai; o que não couber desce pra linha de baixo.
+A navegação é uma **barra fixa no alto à esquerda**, igual à do torgo.work
+(medida lá): só texto, Geist Mono em caixa alta no corpo do overline,
+tudo na mesma cor. De cima pra baixo: o nome; "Creative Director / São
+Paulo, Brazil"; **Projects** (abre a lista dos projetos, na ordem da
+/work, cada um leva pra `/work#slug`), **Info** (`#about`) e
+**Playground** (apagado — a página ainda não existe); um fio; LinkedIn,
+YouTube, Substack, X (`x.com/falabondioli`) e Email (copia o endereço).
+No canto direito, sozinhos, EN / BR e o sol.
+
+**O conteúdo fica do lado dela, não embaixo:** acima de 1100 a barra
+ocupa `--rail` (208px) além da margem, com fundo próprio, e a página
+inteira — seções e as linhas da grade — começa depois. A margem esquerda
+é `--gutter-l` (= `--gutter` + `--rail`); a direita continua `--gutter`.
+Quem sangra pra esquerda usa `--gutter-l`. Sem barra (capa, /thanks) e
+abaixo de 1100, `--rail` é 0. Abaixo de 1100 vira o que o torgo faz no
+celular: o nome, idioma/tema e "Menu", que abre a lista por cima.
+
+Substituiu a barra de quatro blocos em cima das linhas (14/10). No mesmo
+dia saíram o H1 e a linha de apoio do herói da /work ("depois a gente
+faz o resto"): por enquanto o herói é a tela vazia com a faixa de números.
 
 ## A grade (12/10/2026, do tumulto.ai)
 
@@ -470,6 +481,8 @@ da Tumulto em primeira pessoa). Cada página declara as duas versões pro
 Google (`alternates()` → hreflang).
 
 **REGRA DO RODRIGO: toda alteração que ele pedir vale pras DUAS versões.**
+E o que é mais expressivo em inglês fica em inglês no português também
+("Selected work", "No bullshit") — não traduzir no automático.
 Mexeu num texto, num layout, numa imagem — conferir e aplicar em EN e PT,
 sem ele precisar pedir. Texto novo nasce nos dois idiomas.
 

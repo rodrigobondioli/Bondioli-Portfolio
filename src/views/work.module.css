@@ -13,7 +13,7 @@
   min-height: 100svh;
   display: grid;
   place-items: center start;
-  padding-inline: var(--gutter);
+  padding-inline: var(--gutter-l) var(--gutter);
   overflow: hidden;
 }
 
@@ -104,7 +104,7 @@
   height: 88px;
   display: flex;
   align-items: center;
-  padding-inline: var(--gutter);
+  padding-inline: var(--gutter-l) var(--gutter);
   border-top: var(--hairline) solid var(--rule);
   background: var(--glass);
   backdrop-filter: blur(5px);
@@ -174,7 +174,7 @@
     padding-top: calc(var(--s7) + var(--s6));
   }
   .heroInner {
-    padding-inline: var(--gutter);
+    padding-inline: var(--gutter-l) var(--gutter);
     /* o respiro existia pra escapar da faixa absoluta; agora ela não passa
        mais por baixo */
     padding-bottom: 0;
@@ -238,7 +238,7 @@
     padding-inline: 0;
   }
   .heroInner {
-    padding-inline: var(--gutter);
+    padding-inline: var(--gutter-l) var(--gutter);
     padding-bottom: 0;
   }
   .stats {

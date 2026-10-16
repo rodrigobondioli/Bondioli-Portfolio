@@ -7,7 +7,8 @@
   position: fixed;
   z-index: 91;
   bottom: var(--gutter); /* a margem de baixo = a das laterais (14/10) */
-  left: 50%;
+  /* no meio do conteúdo, não da tela: a barra da esquerda fica fora */
+  left: calc(50% + var(--rail) / 2);
   display: inline-flex;
   align-items: center;
   gap: 10px;

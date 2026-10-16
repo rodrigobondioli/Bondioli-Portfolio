@@ -1,72 +1,35 @@
-import Link from "next/link"
-import CopyEmail from "./CopyEmail"
-import ThemeToggle from "./ThemeToggle"
-import { dict, href, type Lang } from "@/i18n"
-import styles from "./SiteNav.module.css"
+import NavRail from "./NavRail"
+import { orderedProjects } from "@/lib/projects"
+import order from "@/content/order.json"
+import type { Lang } from "@/i18n"
 
 /**
- * Navegação do topo — quatro blocos (14/10, desenho do Rodrigo):
+ * A navegação do site (16/10/2026, a partir do torgo.work, pedido do
+ * Rodrigo): uma barra fixa no alto à esquerda, só texto em mono caixa
+ * alta — o nome; o cargo e a cidade; Projects (abre a lista), Info e
+ * Playground; um fio; LinkedIn, YouTube, Substack, X e o e-mail. O
+ * conteúdo da página fica do lado dela (--rail em globals). No canto
+ * direito, só o idioma e o tema.
  *
- *   Rodrigo Bondioli      Creative Director      Get in touch      EN BR | ☼
- *   Selected Work 15'—26' São Paulo, Brazil      hello@…
+ * Substitui a barra de quatro blocos em cima das linhas da grade (14/10).
  *
- * Nome à esquerda, idioma/tema à direita, cargo e contato nas colunas 8 e
- * 15 da grade (um ritmo de 7 em 7) — todo bloco em cima de uma linha. O
- * idioma e o tema moram aqui, em linha, só texto (era uma cápsula de vidro
- * na lateral, "informação demais na tela"). A linha de apoio do herói
- * começa na mesma coluna do contato.
+ * No celular e no tablet ela vira o que o torgo faz: o nome e um botão
+ * "Menu" que abre a mesma lista por cima da página.
  *
- * Saiu o "Say hello" (a pílula rosa): o contato agora é o e-mail, com o
- * mesmo CopyEmail da capa — clique copia, hover gira o cubo. O nome volta
- * no lugar da marca girando, e "Selected Work" leva à grade de projetos.
- *
- * O ano final é o do build: em 2027 vira 27' sem ninguém lembrar.
+ * Aqui é só a parte do servidor: a lista de projetos, na ordem da /work.
  */
-const ATE = String(new Date().getFullYear()).slice(-2)
-
 export default function SiteNav({
   brandHref = "/",
   lang = "en",
 }: {
-  lang?: Lang
   /* o nome sobe um nível: da /work vai pra capa; de um projeto ou do
      media kit, volta pra /work */
   brandHref?: string
+  lang?: Lang
 }) {
-  const t = dict[lang]
-  return (
-    <header className={styles.nav}>
-      <div className={styles.block}>
-        <Link href={href(lang, brandHref)} className={`no-underline ${styles.label}`}>
-          Rodrigo Bondioli
-        </Link>
-        <Link href={href(lang, "/work") + "#projects"} className={`no-underline ${styles.value} ${styles.muted}`}>
-          {t.selectedWorkNav} 15&rsquo; &mdash; {ATE}&rsquo;
-        </Link>
-      </div>
-
-      <div className={styles.half}>
-        <div className={`${styles.block} ${styles.middle}`}>
-          <p className={styles.label}>{t.role}</p>
-          <p className={`${styles.value} ${styles.muted}`}>{t.place}</p>
-        </div>
-
-        <div className={styles.block}>
-          <p className={styles.label}>{t.getInTouch}</p>
-          <CopyEmail
-            email="hello@rodrigobondioli.com"
-            copiedLabel={t.emailCopied}
-            failLabel={t.couldNotCopy}
-            ariaLabel={t.copyEmail}
-            color="currentColor"
-            className={styles.value}
-          />
-        </div>
-      </div>
-
-      <div className={`${styles.block} ${styles.prefs}`}>
-        <ThemeToggle lang={lang} />
-      </div>
-    </header>
-  )
+  const projects = orderedProjects(order as string[]).map((p) => ({
+    slug: p.slug,
+    name: p.projectName ?? p.slug,
+  }))
+  return <NavRail brandHref={brandHref} lang={lang} projects={projects} />
 }

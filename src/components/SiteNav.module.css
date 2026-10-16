@@ -1,69 +1,148 @@
-/* Quatro blocos (14/10): o nome no canto esquerdo, o idioma/tema no
-   direito e os dois do meio num ritmo de 7 em 7 colunas — cargo na coluna
-   8, contato na 15 (de 24; 4 e 7 de 12, ritmo de 3). Espaço quase igual entre eles e
-   todo bloco em cima de uma linha da grade: soltos (space-between) o
-   espaço era exato, mas o "Get in touch" caía entre duas linhas. */
+/* A barra fixa à esquerda (16/10, do torgo.work, medido lá): mono 11px,
+   caixa alta, tudo na mesma cor; o nome, o cargo e a cidade, e o menu,
+   separados por um respiro; itens a ~19px um do outro; a lista de
+   projetos recuada 16. O conteúdo da página começa depois dela
+   (--rail, em globals). O idioma e o tema ficam sozinhos no canto
+   direito. */
 .nav {
-  position: absolute;
-  inset: 0 0 auto 0;
+  position: fixed;
+  inset: 0 auto 0 0;
   z-index: 100;
-  display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  column-gap: var(--col-gap);
-  align-items: start;
-  /* em cima a mesma margem das laterais (14/10: 32 / 16 no celular) */
-  padding: var(--gutter);
-  font-size: var(--t-body-sm);
-  line-height: 1.3;
-  /* a barra flutua por cima do herói: só os blocos recebem clique */
-  pointer-events: none;
-}
-.half { display: contents; }
-.nav > .block:first-child { grid-column: 1 / span 3; }
-.middle { grid-column: 4 / span 3; }
-.half > .block:last-child { grid-column: 7 / span 3; }
-.prefs { grid-column: 10 / -1; justify-self: end; padding-top: 1px; }
-@media (min-width: 1101px) {
-  .nav > .block:first-child { grid-column: 1 / span 6; }
-  .middle { grid-column: 8 / span 6; }
-  .half > .block:last-child { grid-column: 15 / span 6; }
-  .prefs { grid-column: 21 / -1; }
-}
-
-.block {
+  width: calc(var(--gutter) + var(--rail));
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  pointer-events: auto;
-  /* cada bloco é indivisível: "Creative Director" nunca vira duas linhas */
-  white-space: nowrap;
+  gap: var(--s3);
+  padding: var(--gutter);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  /* fundo próprio: o amarelo das seções passa por baixo e a barra
+     continua de pé, "uma área fixa do site" */
+  background: var(--bg);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--t-overline);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.nav::-webkit-scrollbar { display: none; }
+
+.brand { align-self: flex-start; }
+
+/* o idioma e o tema: no canto de cima à direita, na altura do nome */
+.prefs {
+  position: fixed;
+  top: var(--gutter);
+  right: var(--gutter);
+  z-index: 100;
+  text-transform: none;
 }
 
-.label { font-weight: 600; }
-.value { font-weight: 400; }
-/* A segunda linha dos blocos ("Selected Work 15' — 26'", "São Paulo,
-   Brazil") no cinza do cargo da capa ("· Creative Director") (14/10) */
-.muted { color: var(--ink-60); }
+.burger { display: none; }
 
-/* Nome e "Selected Work" são links: sublinham no hover, como o resto */
-.block a { transition: color var(--fast) var(--ease); }
-.block a:hover {
-  color: var(--accent-pink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: from-font;
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
 }
 
+.group {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
 
-/* Tablet e celular: abaixo de 900 o cargo sai (em 641 ele quebrava em
-   duas linhas); ficam nome, contato e idioma/tema. Se não couberem na
-   mesma linha, o que sobra desce inteiro pra linha de baixo. */
-@media (max-width: 900px) {
+.menu { display: flex; flex-direction: column; }
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* ~19px de um item pro outro, como lá */
+  line-height: 1.7;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+.chevron { transition: rotate 300ms var(--ease); }
+.item[aria-expanded="true"] .chevron { rotate: 180deg; }
+
+/* a lista de projetos: recuada 16, um pouco mais junta */
+.sub {
+  margin: 0;
+  padding: 0 0 0 var(--s2);
+  list-style: none;
+  line-height: 1.6;
+}
+
+/* o que ainda não existe fica apagado */
+.soon { opacity: 0.4; cursor: default; }
+
+/* o fio entre o menu e as redes (pedido do Rodrigo) */
+.rule {
+  width: 100%;
+  margin: var(--s1) 0;
+  border: 0;
+  border-top: var(--hairline) solid var(--rule);
+}
+
+/* Tablet e celular: o que o torgo faz — o nome e "Menu" no alto (o
+   idioma e o tema entre os dois), e a lista inteira abre por cima da
+   página. */
+@media (max-width: 1100px) {
   .nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: var(--s2) var(--s3);
+    position: absolute;
+    inset: 0 0 auto 0;
+    width: auto;
+    overflow: visible;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: var(--s3);
+    background: none;
   }
-  .middle { display: none; }
+  .prefs { position: static; }
+  .burger {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-transform: inherit;
+    cursor: pointer;
+  }
+  .burger:hover { color: var(--accent-pink); }
+  .panel { display: none; }
+
+  .open { position: fixed; }
+  .open .panel {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow-y: auto;
+    padding: calc(var(--gutter) + var(--s6)) var(--gutter) var(--gutter);
+    background: var(--bg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron { transition: none; }
 }

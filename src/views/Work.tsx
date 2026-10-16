@@ -25,19 +25,8 @@ export default function Work({ lang }: { lang: Lang }) {
       <main>
         {/* ---------- Hero ---------- */}
         <section className={s.hero}>
-          <div className={`container ${s.heroInner}`}>
-            {/* Frase de posicionamento no lugar da apresentação (12/10, pedido
-                do Rodrigo, a partir de "Se o seu produto é difícil de
-                entender, ele é impossível de vender."). Quem ele é já está na
-                barra do topo; os 20 anos, na faixa de números logo abaixo. */}
-            <h1 className={`h1 ${s.heroTitle}`}>
-              {t.work.heroA}{" "}
-              <br className={s.heroBreak} />
-              {t.work.heroB}
-            </h1>
-            <p className={s.heroSupport}>{t.work.heroSupport}</p>
-          </div>
-
+          {/* O H1 e a linha de apoio saíram (16/10, pedido do Rodrigo, junto
+              com a barra nova da esquerda). O que entra aqui vem depois. */}
           <div className={s.stats}>
             <div className={`container ${s.statsInner}`}>
               <p className={s.stat}>

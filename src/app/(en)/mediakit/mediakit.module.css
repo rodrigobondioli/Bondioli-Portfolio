@@ -17,7 +17,7 @@
   min-height: 100svh;
   display: grid;
   place-items: center;
-  padding-inline: var(--gutter);
+  padding-inline: var(--gutter-l) var(--gutter);
   overflow: hidden;
 }
 
@@ -110,8 +110,8 @@
     position: static;
     translate: none;
     order: 2;
-    width: calc(100% + 2 * var(--gutter));
-    margin-inline: calc(-1 * var(--gutter));
+    width: calc(100% + var(--gutter-l) + var(--gutter));
+    margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter));
   }
   .heroInner { order: 1; }
 }

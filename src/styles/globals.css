@@ -71,6 +71,12 @@
      em 22/09/2026 (86 em 1440); 56 fixo no desktop em 12/10/2026; 32 =
      vão em 14/10/2026, todos por decisão do Rodrigo. */
   --gutter: var(--col-gap);
+  /* A barra fixa da esquerda (16/10, do torgo.work): onde ela existe, o
+     conteúdo — e a grade com ele — começa depois dela. --gutter-l é a
+     margem da esquerda; a da direita continua --gutter. Sem barra (capa,
+     /thanks, tablet e celular) --rail é 0 e as duas são iguais. */
+  --rail: 0px;
+  --gutter-l: calc(var(--gutter) + var(--rail));
   --container: none;   /* o Framer nao limita: 100% - gutter dos dois lados */
 
   /* --- Grade (12/10/2026, do tumulto.ai) --- *
@@ -83,7 +89,7 @@
   --cols: 6;
   --col-gap: 16px;
   --page-w: 100vw;   /* o SmoothScroll troca pela largura sem a barra */
-  --col: calc((var(--page-w) - 2 * var(--gutter) + var(--col-gap)) / var(--cols));
+  --col: calc((var(--page-w) - var(--gutter-l) - var(--gutter) + var(--col-gap)) / var(--cols));
   --gap-line: calc(var(--col) / 2);
   /* As linhas verticais da grade são mais densas que as horizontais, então
      mais apagadas — 4,5%, como no tumulto (--c-line-soft de lá). */
@@ -385,12 +391,17 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
 .overline,
 .lead { text-wrap: balance; }
 
+/* a barra fixa só existe acima de 1100 (abaixo vira "Menu") */
+@media (min-width: 1101px) {
+  html:has([data-rail]) { --rail: 208px; }
+}
+
 /* ---------- 4. Layout ---------- */
 
 /* Toda seção usa isto. Sem exceção — é a regra que a produção não cumpria. */
 .section {
   width: 100%;
-  padding-inline: var(--gutter);
+  padding-inline: var(--gutter-l) var(--gutter);
 }
 
 .container {
@@ -404,8 +415,8 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
    `scrollbar-gutter: stable` está sempre reservada. A conta pelo gutter
    chega no mesmo lugar sem contar o que não existe. */
 .bleed {
-  width: calc(100% + 2 * var(--gutter));
-  margin-inline: calc(-1 * var(--gutter));
+  width: calc(100% + var(--gutter-l) + var(--gutter));
+  margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter));
 }
 
 .stack     { display: flex; flex-direction: column; }

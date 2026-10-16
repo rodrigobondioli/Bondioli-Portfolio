@@ -13,7 +13,7 @@
   display: grid;
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   column-gap: var(--col-gap);
-  padding-inline: var(--gutter);
+  padding-inline: var(--gutter-l) var(--gutter);
 }
 .lines > span { position: relative; }
 
