@@ -26,7 +26,9 @@ export const PLAYGROUND: PecaPlayground[] = [
   { ratio: "16 / 9", src: "/playground/play01.mp4" },
   { ratio: "3 / 4" },
   // coluna 2
-  { ratio: "1 / 1" },
+  // 04: o logo do Monster (17/10; original 1920×1080 em _originais/playground/,
+  // aqui recortado no quadrado da vaga, 900px, com o desenho 10% menor)
+  { ratio: "1 / 1", src: "/playground/logo-monster.webp", title: "Monster logo: a pale head with many eyes and three toothy mouths" },
   { ratio: "2 / 3" },
   { ratio: "3 / 2" },
   // coluna 3
