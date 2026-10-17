@@ -106,6 +106,8 @@ const en = {
 
   home: {
     title: "Rodrigo Bondioli · Creative Director",
+    // a descrição pro Google (17/10, texto do Rodrigo); a bio fica na tela
+    description: "Creative Director with 20+ years across agencies, retail and my own business. I help decide what’s worth building, then build it.",
     bio: "20+ years working across advertising, branding and digital products. Today I work at the intersection of strategy, design and technology, helping turn complex ideas into clear, relevant and future-ready products and brands.",
     getInTouch: "Get in touch:",
   },
@@ -113,7 +115,7 @@ const en = {
   work: {
     title: "Work",
     description:
-      "Selected work: brand, product and interface for startups and global brands. Work that started with a problem, not a prompt.",
+      "Selected work by Rodrigo Bondioli: brand, product and interface for startups and global brands, including the Tattoaria case study.",
     selectedWork: "Selected work",
     caseStudy: "Case study",
     readCase: "Read the case study",
@@ -126,7 +128,7 @@ const en = {
   info: {
     title: "Info",
     description:
-      "Rodrigo Bondioli, Creative Director in São Paulo: 20+ years across advertising, branding and digital products, Head of Creative at Netshoes and Americanas.com.",
+      "Former head of design at Netshoes and Americanas.com. Rodrigo Bondioli, Creative Director in São Paulo, 20+ years in advertising, branding and products.",
   },
 
   playground: {
@@ -159,7 +161,7 @@ const en = {
 
   about: {
     title: "I’m Rodrigo Bondioli",
-    body: "Big projects rarely fail because of execution. They fail because someone chose to build the wrong thing, and no one in the room had the nerve to say so. I’ve been in that room. I was Head of Creative at Netshoes and Americanas.com, two of Brazil’s largest digital businesses. Before that, I spent years at agencies including Wunderman Thompson and McCann. You’re hiring my judgment. I join the conversation where decisions are made, speak up before the wrong call becomes an expensive problem, and stay through launch—until the brand, product, and experience work as one.",
+    body: "Big projects rarely fail because of execution. They fail because someone chose to build the wrong thing, and no one in the room had the nerve to say so. I’ve been in that room. I was head of design at Netshoes and Americanas.com, two of Brazil’s largest digital businesses. Before that, I spent years at agencies including Wunderman Thompson and McCann. You’re hiring my judgement. I join the conversation where decisions are made, speak up before the wrong call becomes an expensive problem, and stay through launch—until the brand, product, and experience work as one.",
     brands: "Brands I've worked with",
     credentials: [
       ["Orpetron X3 / 2024", "Cannes Lion 2014 / Silver / Cyber"],
@@ -239,6 +241,7 @@ const pt: Dict = {
 
   home: {
     title: "Rodrigo Bondioli · Diretor de Criação",
+    description: "Diretor de Criação com mais de 20 anos entre agências, varejo e negócio próprio. Ajudo a decidir o que vale construir e construo.",
     bio: "Mais de 20 anos entre publicidade, branding e produtos digitais. Hoje eu trabalho no encontro entre estratégia, design e tecnologia, ajudando a transformar ideias complexas em produtos e marcas claros, relevantes e prontos pro futuro.",
     getInTouch: "Fale comigo:",
   },
@@ -246,7 +249,7 @@ const pt: Dict = {
   work: {
     title: "Portfólio",
     description:
-      "Trabalhos selecionados: marca, produto e interface pra startups e marcas globais. Trabalho que começou com um problema, não com um prompt.",
+      "Trabalhos selecionados de Rodrigo Bondioli: marca, produto e interface para startups e marcas globais, incluindo o case da Tattoaria.",
     selectedWork: "Selected work",
     caseStudy: "Case study",
     readCase: "Ler o case",
@@ -257,7 +260,7 @@ const pt: Dict = {
   info: {
     title: "Info",
     description:
-      "Rodrigo Bondioli, Diretor de Criação em São Paulo: mais de 20 anos entre publicidade, branding e produtos digitais, Head de Criação da Netshoes e da Americanas.com.",
+      "Ex-head de design da Netshoes e da Americanas.com. Rodrigo Bondioli, Diretor de Criação em São Paulo, 20+ anos em publicidade, branding e produtos.",
   },
 
   playground: {
@@ -289,7 +292,7 @@ const pt: Dict = {
 
   about: {
     title: "Eu sou o Rodrigo Bondioli",
-    body: "Projeto grande raramente dá errado na execução. Dá errado porque alguém escolheu construir a coisa errada, e ninguém na sala teve coragem de dizer. Eu já estive nessa sala. Fui Head de Criação da Netshoes e da Americanas.com, dois dos maiores negócios digitais do Brasil. Antes disso, passei anos em agências como Wunderman Thompson e McCann. Você está contratando o meu critério. Eu entro na conversa onde as decisões são tomadas, falo antes que a escolha errada vire um problema caro e fico até o lançamento—até a marca, o produto e a experiência funcionarem como uma coisa só.",
+    body: "Projeto grande raramente dá errado na execução. Dá errado porque alguém escolheu construir a coisa errada, e ninguém na sala teve coragem de dizer. Eu já estive nessa sala. Fui head de design da Netshoes e da Americanas.com, dois dos maiores negócios digitais do Brasil. Antes disso, passei anos em agências como Wunderman Thompson e McCann. Você está contratando o meu critério. Eu entro na conversa onde as decisões são tomadas, falo antes que a escolha errada vire um problema caro e fico até o lançamento—até a marca, o produto e a experiência funcionarem como uma coisa só.",
     brands: "Marcas com quem trabalhei",
     credentials: [
       ["Orpetron X3 / 2024", "Leão de Cannes 2014 / Prata / Cyber"],

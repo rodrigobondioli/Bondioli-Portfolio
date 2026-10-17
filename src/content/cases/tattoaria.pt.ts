@@ -14,7 +14,7 @@ const img = (name: string) => `/projects/tattoaria/case/${name}.webp`
 
 export const tattoariaPt: CaseTattoaria = {
   meta: {
-    title: "Tattoaria",
+    title: "Case Tattoaria",
     description:
       "O que começou como um blog de tatuagem virou um estúdio tão desejado que foi parar no Lollapalooza e atraiu marcas como Chevrolet, Budweiser e Vans.",
   },
@@ -30,7 +30,7 @@ export const tattoariaPt: CaseTattoaria = {
       label: "Frentes",
       value: "Modelo de negócio, espaço, marca, produto, mídia própria, ativações e parcerias",
     },
-    { label: "Quando", value: "A partir de março de 2016" },
+    { label: "Estúdio aberto em", value: "Março de 2016" },
   ],
   objective:
     "O objetivo lá no começo era um só: parar de dar audiência de graça e transformar desejo em negócio.",
