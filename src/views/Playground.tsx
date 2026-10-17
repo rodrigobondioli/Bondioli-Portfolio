@@ -38,9 +38,10 @@ export default function Playground({ lang }: { lang: Lang }) {
                       <img src={p.src} alt={p.title ?? ""} loading="lazy" />
                     )
                   ) : (
-                    // vaga: só o número, até o experimento chegar
+                    // vaga: "Coming soon", até o experimento chegar (17/10;
+                    // era o número da vaga)
                     <span className={s.num} aria-hidden="true">
-                      {String(i + 1).padStart(2, "0")}
+                      {t.soon}
                     </span>
                   )}
                 </li>

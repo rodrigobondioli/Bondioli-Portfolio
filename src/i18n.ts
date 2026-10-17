@@ -135,7 +135,8 @@ const en = {
   playground: {
     title: "Playground",
     description: "Experiments, side projects and things I make for the fun of it.",
-    lead: "Experiments, side projects and things I make for the fun of it. Coming soon.",
+    lead: "Experiments, side projects and things I make for the fun of it.",
+    soon: "Coming soon",
   },
 
   contact: {
@@ -268,7 +269,8 @@ const pt: Dict = {
   playground: {
     title: "Playground",
     description: "Experimentos, projetos paralelos e coisas que eu faço pelo prazer de fazer.",
-    lead: "Experimentos, projetos paralelos e coisas que eu faço pelo prazer de fazer. Em breve.",
+    lead: "Experimentos, projetos paralelos e coisas que eu faço pelo prazer de fazer.",
+    soon: "Em breve",
   },
 
   contact: {
