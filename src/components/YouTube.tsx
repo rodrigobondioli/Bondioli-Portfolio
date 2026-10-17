@@ -16,6 +16,17 @@ import styles from "./YouTube.module.css"
  * ele seria 1MB baixado antes de alguém ver.
  */
 
+/**
+ * Capas guardadas no próprio site (17/10, auditoria de performance): no
+ * case da Tattoaria a capa do filme é o maior elemento da primeira tela, e
+ * buscar no i.ytimg.com custava uma conexão nova e a imagem grande do
+ * YouTube — LCP de 5,6s no celular em 4G. Aqui ela vem do mesmo servidor,
+ * em WebP, com prioridade. Vídeo sem capa local segue com a do YouTube.
+ */
+const CAPA_LOCAL: Record<string, string> = {
+  oHxfuNjpOuo: "/projects/tattoaria/case/filme-capa.webp",
+}
+
 type Props = {
   id: string
   title: string
@@ -145,7 +156,8 @@ export default function YouTube({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className={styles.poster}
-          src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+          src={CAPA_LOCAL[id] ?? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+          fetchPriority={CAPA_LOCAL[id] ? "high" : undefined}
           alt=""
           aria-hidden="true"
           data-hidden={capaFora || undefined}

@@ -31,8 +31,11 @@ import localFont from "next/font/local"
 export const body = localFont({
   src: [
     { path: "../../public/fonts/Geist-Variable.woff2", weight: "100 900", style: "normal" },
-    // itálico de verdade (não o oblíquo falso do navegador): "Your next decision."
-    { path: "../../public/fonts/Geist-Italic-Variable.woff2", weight: "100 900", style: "italic" },
+    // O itálico (Geist-Italic-Variable.woff2, ainda em public/fonts) saiu em
+    // 17/10, na auditoria de performance: eram 72KB pré-carregados em toda
+    // página, e o único uso era o fecho "Your next decision."
+    // (ClosingSection), que não está em página nenhuma desde 16/10. Se o
+    // fecho voltar, a linha volta junto.
   ],
   variable: "--font-body",
   display: "swap",

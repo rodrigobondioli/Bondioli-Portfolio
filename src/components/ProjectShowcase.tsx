@@ -97,6 +97,7 @@ export default function ProjectShowcase({
     const key = flip ? flip.join() : framedList ? framedList.join() : spin ? spin.spin : (src as string)
     const video = !flip && !framed && !spin && (src as string).endsWith(".mp4")
     const size = video || flip || spin ? null : imageSize(framedList ? framedList[0] : (src as string))
+    const poster = video ? (src as string).replace(/\.mp4$/, ".poster.webp") : null
     // o texto alternativo (showcase-alt.ts); sem texto, a peça segue decorativa
     const alt = SHOWCASE_ALT[flip ? flip[0] : framedList ? framedList[0] : spin ? spin.spin : (src as string)]?.[lang] ?? ""
     const midia = spin ? (
@@ -115,8 +116,22 @@ export default function ProjectShowcase({
         )}
       </span>
     ) : video ? (
-      // vídeo curto: toca sozinho, mudo, em loop
-      <video src={src as string} autoPlay muted loop playsInline preload="metadata" {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })} data-sync={proprio?.sync} />
+      // vídeo curto: mudo, em loop. Nasce sem `src` e sem autoplay (17/10,
+      // auditoria de performance: com autoplay o navegador baixava os 20
+      // vídeos da /work ao abrir, 13MB): o VideoForaDaTela põe o `src` quando
+      // ele chega perto da tela e toca. Até lá aparece o pôster, que é o
+      // primeiro quadro exato do vídeo (<nome>.poster.webp) — não pisca
+      // quando o vídeo começa.
+      <video
+        data-src={src as string}
+        poster={poster && imageSize(poster) ? poster : undefined}
+        muted
+        loop
+        playsInline
+        preload="none"
+        {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })}
+        data-sync={proprio?.sync}
+      />
     ) : (
       /* eslint-disable-next-line @next/next/no-img-element */
       <img src={src as string} alt={alt} loading="lazy" width={size?.w} height={size?.h} />

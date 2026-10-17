@@ -309,7 +309,12 @@ reordenar os projetos (`order.json`) nunca muda o recorte de peça
 nenhuma. **Toda peça da colagem tem texto alternativo** (17/10, SEO) em
 `src/content/showcase-alt.ts`, EN e PT, chave = caminho da mídia: começa
 pelo nome do projeto, descreve o que se vê, até ~120 caracteres, sem
-"imagem de". Mídia nova pede texto novo lá. A ordem desde 17/10: Tattoaria, Amor de Cão (vai virar case), e
+"imagem de". Mídia nova pede texto novo lá. **Vídeo da colagem só baixa perto da tela** (17/10,
+performance): nasce com `data-src` e pôster, e o `VideoForaDaTela` põe o
+`src`. Vídeo novo precisa do pôster ao lado, `<nome>.poster.webp`, que é
+o primeiro quadro exato (`ffmpeg -frames:v 1`, WebP q72) — senão a vaga
+fica vazia até carregar. O GTM (GA4, Clarity) carrega em `lazyOnload`; o
+pixel da Meta fica desligado no GTM enquanto não houver anúncio. A ordem desde 17/10: Tattoaria, Amor de Cão (vai virar case), e
 os outros. Sem botão: a barra "View project" saiu no mesmo dia; o nome e
 qualquer imagem levam pra `/projects/<slug>`. As
 fotos saem da galeria; a thumb só entra se faltar imagem (ela costuma ser
