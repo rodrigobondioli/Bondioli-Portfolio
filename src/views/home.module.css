@@ -14,6 +14,12 @@
    (14/10: margem = vão entre colunas, 32 / 16 no celular). Era 32 em cima
    e embaixo contra 56 nas laterais. */
 .page { --gutter-poster: var(--gutter); }
+/* no desktop, a mesma margem da /work e das outras páginas (24 — lá é o
+   valor com a barra lateral; a capa não tem barra, mas a borda é a
+   mesma). 16/10, pedido do Rodrigo. */
+@media (min-width: 1101px) {
+  .page { --gutter-poster: 24px; }
+}
 
 /* O site reserva o lugar da barra de rolagem em toda página
    (scrollbar-gutter: stable). A capa não rola, então esse lugar virava
