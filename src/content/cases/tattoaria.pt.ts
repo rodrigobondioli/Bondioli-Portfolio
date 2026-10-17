@@ -36,7 +36,7 @@ export const tattoariaPt: CaseTattoaria = {
     "O objetivo lá no começo era um só: parar de dar audiência de graça e transformar desejo em negócio.",
   numbers: [
     { value: "200 mil", label: "seguidores no Instagram em cerca de 3 meses, antes de existir estúdio" },
-    { value: "R$ 400 mil", label: "de faturamento médio por mês" },
+    { value: "400 mil", label: "de faturamento médio por mês, em reais" },
     {
       value: "300+",
       label: "tatuadores do Brasil e de várias partes do mundo passaram por lá",

@@ -71,7 +71,7 @@ export const tattoaria = {
     "At the start, the goal was just one: stop giving attention away for free and turn desire into business.",
   numbers: [
     { value: "200K", label: "Instagram followers in about 3 months, before there was a studio" },
-    { value: "R$ 400K", label: "average monthly revenue" },
+    { value: "400K", label: "average monthly revenue, in reais" },
     {
       value: "300+",
       label: "tattoo artists from Brazil and around the world came through",
