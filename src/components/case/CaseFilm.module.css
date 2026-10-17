@@ -1,6 +1,4 @@
-/* O vídeo do case (tumulto.ai): 16:9 inteiro, por cima das linhas da grade.
-   No desktop, da coluna 3 até a linha do meio da 22; abaixo disso, a
-   largura toda do conteúdo. */
+/* O vídeo do case: 16:9 inteiro, na largura toda do conteúdo (16/10). */
 .wrap { grid-column: 1 / -1; }
 .figure {
   position: relative;
@@ -9,10 +7,4 @@
   overflow: hidden;
   background: var(--card);
 }
-@media (min-width: 1101px) {
-  .figure {
-    grid-column: 3 / 23;
-    margin-inline-end: calc(var(--col) / 2 - var(--col-gap));
-  }
-}
-.media { will-change: transform; }
+

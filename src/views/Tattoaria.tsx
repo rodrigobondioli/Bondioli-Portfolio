@@ -1,10 +1,5 @@
-import Link from "next/link"
 import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
-import { SiteFooter } from "@/components/SiteFooter"
-import MeetingBar from "@/components/MeetingBar"
-import ClosingSection from "@/components/ClosingSection"
-import PillButton from "@/components/PillButton"
 import StripReveal from "@/components/StripReveal"
 import CaseFilm from "@/components/case/CaseFilm"
 import LitText from "@/components/case/LitText"
@@ -12,7 +7,7 @@ import Tour from "@/components/case/Tour"
 import HoverZoom from "@/components/case/HoverZoom"
 import { imageSize } from "@/lib/imageSize"
 import { caseTattoaria, type Chapter, type Media } from "@/content/cases/tattoaria"
-import { dict, href, type Lang } from "@/i18n"
+import { dict, type Lang } from "@/i18n"
 import s from "./case.module.css"
 
 /**
@@ -72,16 +67,21 @@ function ChapterSection({ ch, lang }: { ch: Chapter; lang: Lang }) {
             {side.caption ? <p className={`${s.label} ${s.caption}`}>{side.caption}</p> : null}
           </div>
           {/* foto ao lado: o primeiro parágrafo no topo da foto, o resto no pé */}
-          <div className={`${s.bodyText} ${s.chText} ${s.chLead}`}>
-            <p>{ch.body[0]}</p>
-          </div>
-          {ch.body.length > 1 ? (
-            <div className={`${s.bodyText} ${s.chText} ${s.chRest}`}>
-              {ch.body.slice(1).map((p) => (
-                <p key={p.slice(0, 24)}>{p}</p>
-              ))}
+          {/* os dois blocos dividem uma coluna só: o primeiro no topo, o
+              resto no pé — e, se o texto for mais alto que a foto, um
+              embaixo do outro, sem se sobrepor (16/10) */}
+          <div className={`${s.chText} ${s.chPair}`}>
+            <div className={`${s.bodyText} ${s.chLead}`}>
+              <p>{ch.body[0]}</p>
             </div>
-          ) : null}
+            {ch.body.length > 1 ? (
+              <div className={`${s.bodyText} ${s.chRest}`}>
+                {ch.body.slice(1).map((p) => (
+                  <p key={p.slice(0, 24)}>{p}</p>
+                ))}
+              </div>
+            ) : null}
+          </div>
         </>
       ) : (
         <div className={`${s.bodyText} ${s.chText}`}>
@@ -156,20 +156,19 @@ export default function Tattoaria({ lang }: { lang: Lang }) {
       <SiteNav brandHref="/work" lang={lang} />
 
       <main className={`on-project ${s.page}`}>
-        <div className="section">
+        <div className={`section page-top ${s.pageTop}`}>
           <div className="container">
             {/* ---------- Abertura ---------- */}
             <section className={`grid ${s.head}`} aria-labelledby="case-title">
               <div className={`${s.small} ${s.top}`}>
                 <span>{place}</span>
-                <Link href={href(lang, "/work") + "#projects"} className={`no-underline ${s.back}`}>
-                  {t.caseUi.allProjects}
-                </Link>
+                {/* o "All projects" saiu (16/10): na linha da barra ele batia
+                    no EN / BR, e o menu da lateral já leva aos projetos */}
               </div>
               <h1 id="case-title" className={`h1 ${s.caseTitle}`}>
                 {title}
               </h1>
-              <p className={`${s.title} ${s.summary}`}>{summary}</p>
+              <p className={s.summary}>{summary}</p>
               <dl className={s.facts}>
                 {facts.map((f, i) => (
                   <div key={f.label} className={s.fact}>
@@ -239,34 +238,31 @@ export default function Tattoaria({ lang }: { lang: Lang }) {
               <LitText>{closing.quote}</LitText>
               <div className={`${s.bodyText} ${s.body}`}>
                 <p>{closing.text}</p>
-                <PillButton href={closing.cta.href} className={s.cta}>
-                  {closing.cta.label}
-                </PillButton>
+                {/* o "Let's talk" levava pro formulário do fim, que saiu (16/10):
+                    o CTA novo vem depois */}
               </div>
-            </section>
 
-            {/* Créditos */}
-            <section className={`grid ${s.credits}`} aria-labelledby="case-credits">
-              <h2 id="case-credits" className={`${s.label} ${s.creditsLabel}`}>
-                {credits.title}
-              </h2>
-              <dl className={s.creditList}>
-                {credits.items.map((c) => (
-                  <div key={c.role} className={s.creditRow}>
-                    <dt className={s.small}>{c.role}</dt>
-                    <dd className={s.small}>{c.who}</dd>
-                  </div>
-                ))}
-              </dl>
+              {/* Créditos ao lado do texto do fecho (16/10): sozinhos numa
+                  seção, o rótulo ficava perdido à esquerda e a lista à
+                  direita, com um buraco no meio */}
+              <div className={s.credits} aria-labelledby="case-credits" role="group">
+                <h2 id="case-credits" className={`${s.label} ${s.creditsLabel}`}>
+                  {credits.title}
+                </h2>
+                <dl className={s.creditList}>
+                  {credits.items.map((c) => (
+                    <div key={c.role} className={s.creditRow}>
+                      <dt className={s.small}>{c.role}</dt>
+                      <dd className={s.small}>{c.who}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
             </section>
           </div>
         </div>
 
       </main>
-
-      <ClosingSection lang={lang} />
-      <SiteFooter lang={lang} />
-      <MeetingBar label={t.pill} />
     </>
   )
 }

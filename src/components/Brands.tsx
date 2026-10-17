@@ -14,7 +14,7 @@ import styles from "./Brands.module.css"
  * primeiros são os melhores. O alfabeto não diz nada sobre ninguém.
  */
 
-const BRANDS: [string, string][] = [
+export const BRANDS: [string, string][] = [
   ["Banco do Brasil", "https://www.bb.com.br"],
   ["Chevrolet", "https://www.chevrolet.com.br"],
   ["Cinemark", "https://www.cinemark.com.br"],

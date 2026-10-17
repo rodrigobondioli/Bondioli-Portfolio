@@ -17,7 +17,7 @@
   min-height: 100svh;
   display: grid;
   place-items: center;
-  padding-inline: var(--gutter-l) var(--gutter);
+  padding-inline: var(--gutter-l) var(--gutter-r);
   overflow: hidden;
 }
 
@@ -29,7 +29,9 @@
    Aqui mora só o lugar dela. Quem corre é o TypeBand. */
 .band {
   position: absolute;
-  inset: 50% 0 auto 0;
+  /* parada (16/10), ela começa onde começa o conteúdo — da borda da tela,
+     o "M" ficava atrás da barra lateral */
+  inset: 50% 0 auto var(--gutter-l);
   translate: 0 -50%;
 }
 
@@ -51,7 +53,7 @@
   bottom: calc(100% + var(--s4));
   left: 0;
   right: 0;
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-body), system-ui, sans-serif;
   display: flex;
   justify-content: space-between;
   gap: var(--s2);
@@ -110,21 +112,22 @@
     position: static;
     translate: none;
     order: 2;
-    width: calc(100% + var(--gutter-l) + var(--gutter));
-    margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter));
+    width: calc(100% + var(--gutter-l) + var(--gutter-r));
+    margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r));
   }
   .heroInner { order: 1; }
 }
 
 /* ---------- Ritmo das seções ---------- */
 
-/* 88 entre seções (o respiro do Framer e o --s6 daqui), 56 entre o
-   cabeçalho e o conteúdo. */
-.sec { padding-top: var(--s6); }
+/* Padrão de espaçamento do site (16/10): entre seções --s7, título → o
+   conteúdo dele --s4. (Era 88 entre seções e 56 do cabeçalho pro
+   conteúdo, o ritmo do Framer.) */
+.sec { padding-top: var(--s7); }
 .secInner {
   display: flex;
   flex-direction: column;
-  gap: var(--s5);
+  gap: var(--s4);
 }
 
 /* ---------- Audiência ---------- */

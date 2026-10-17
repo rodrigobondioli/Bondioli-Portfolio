@@ -2,12 +2,9 @@ import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
-import { SiteFooter } from "@/components/SiteFooter"
-import MeetingBar from "@/components/MeetingBar"
 import StripReveal from "@/components/StripReveal"
 import ProjectVideo from "@/components/ProjectVideo"
 import ProjectPager from "@/components/ProjectPager"
-import ClosingSection from "@/components/ClosingSection"
 import {
   getProject,
   allSlugs,
@@ -145,7 +142,7 @@ export default async function ProjectPage({
 
       <main className={`on-project ${s.page}`}>
         {/* ---------- Capa ---------- */}
-        <section className={`section ${s.heroSection}`}>
+        <section className={`section page-top ${s.heroSection}`}>
           <div className="container">
             <div className={s.hero}>
               {capa ? (
@@ -275,10 +272,6 @@ export default async function ProjectPage({
       </main>
 
       {/* ---------- Contato: o mesmo fecho da /work ---------- */}
-      <ClosingSection />
-
-      <SiteFooter />
-      <MeetingBar />
     </>
   )
 }

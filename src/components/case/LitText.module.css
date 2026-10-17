@@ -1,20 +1,21 @@
-/* A frase solta do case (tumulto.ai): corpo do manifesto da /work, primeira
-   linha recuada — 4 colunas de 24, 2 de 12, 1 de 6, como lá. */
+/* A frase solta do case. Sem o recuo da primeira linha do tumulto (16/10:
+   sem as linhas da grade, o recuo parecia erro): o bloco começa onde
+   começam os títulos dos capítulos — coluna 2 acima de 640, a margem no
+   celular. */
 .text {
   grid-column: 1 / -1;
   font-family: var(--font-display), system-ui, sans-serif;
-  /* t-manifesto do tumulto, medido lá: 52px em 1440, peso 500 */
-  font-weight: 500;
-  font-size: clamp(1.625rem, 1.049rem + 2.46vw, 4rem);
+  /* teste (16/10): peso 400 — era 500, o do tumulto */
+  font-weight: 400;
+  font-size: var(--t-h2); /* era o corpo do tumulto, fora da escala (16/10) */
   line-height: 1.08;
   letter-spacing: -0.035em;
-  text-indent: calc(var(--col) * var(--cols) / 6);
-  text-wrap: pretty;
+  /* linhas equilibradas: com "pretty" a primeira linha ia quase até a
+     margem e a de baixo ficava curta (16/10) */
+  text-wrap: balance;
 }
 
-/* A cor de cada palavra mistura o texto com o destaque (--lit: verde-limão
-   no escuro, verde escuro no claro) na proporção que o efeito escreve em
-   --k. Sem o efeito, --k fica em 0%. */
-.word {
-  color: color-mix(in srgb, var(--lit) var(--k, 0%), currentColor);
+
+@media (min-width: 641px) {
+  .text { grid-column: 2 / -1; }
 }

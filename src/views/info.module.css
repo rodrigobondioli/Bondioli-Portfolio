@@ -1,142 +1,158 @@
-/* /info (16/10/2026): o que era o "resto" da /work — os números, o
-   sobre, o manifesto e o canal — numa página própria, aberta pelo "Info"
-   da barra. O manifesto e o canal vieram da /work com as mesmas regras. */
+/* /info (16/10/2026), na estrutura do torgo.work/info (medida lá), sem a
+   faixa de saudação: foto presa à esquerda com listas que abrem; o texto
+   longo à direita. Tudo na Geist normal. */
 
-.top { padding-bottom: 0; }
-.topInner { display: flex; flex-direction: column; gap: var(--s6); }
+/* ---------- Corpo ---------- */
 
-/* ---------- Números ---------- */
-
-/* Os três números do antigo herói da /work, agora parados embaixo do
-   título: um terço da grade cada, o primeiro na margem esquerda, o
-   último terminando na direita. Fio em cima e embaixo. */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  column-gap: var(--col-gap);
-  align-items: center;
-  margin: 0;
-  padding: var(--s3) 0;
-  border-block: var(--hairline) solid var(--rule);
-  list-style: none;
+/* O rótulo "About" abre a página, com as maiúsculas na linha da barra
+   (.page-top com o corpo dele; 0,281em = Geist, entrelinha 1.3). */
+.body {
+  --top-size: var(--t-small);
+  --top-k: 0.281;
+  padding-bottom: var(--s7);
 }
-.stat {
-  grid-column: span 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--s1);
-}
-@media (min-width: 1101px) { .stat { grid-column: span 8; } }
-.stat:first-child { justify-content: flex-start; }
-.stat:last-child { justify-content: flex-end; }
-
-/* números em Geist Mono: leem como dado, e os dígitos têm todos a mesma
-   largura enquanto o contador sobe — nada treme */
-.statNumber {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 1.1;
-}
-.statLabel {
-  font-size: var(--t-body-sm);
-  line-height: 1.3;
-}
-/* abaixo de 640 os três não cabem lado a lado: empilham, à esquerda */
-@media (max-width: 640px) {
-  .stat, .stat:last-child { grid-column: 1 / -1; justify-content: flex-start; }
-  .stats { row-gap: var(--s2); }
-}
-
-/* ---------- Manifesto ---------- */
-
-.statement { padding-block: var(--s6) var(--s7); }
-.statementInner { display: flex; flex-direction: column; gap: var(--s6); }
-/* Acima do celular, o rótulo mora no vão do recuo da primeira linha (12/10,
-   referência do Rodrigo): rótulo e texto dividem a mesma célula, o rótulo
-   preso no canto de cima e sem passar do recuo. */
-@media (min-width: 641px) {
-  .statementInner { display: grid; gap: 0; }
-  .statementInner > * { grid-area: 1 / 1; }
-  .statementInner > .headLine {
-    align-self: start;
-    max-width: calc(var(--col) * var(--cols) / 3 - var(--col-gap));
-    /* Pela linha de base (o Rodrigo pediu o rótulo sentado na base da
-       primeira linha, não no topo dela). Medido na Geist: com entrelinha
-       1.2 a base fica a 0.954 do corpo abaixo do topo da caixa; a do
-       rótulo (mono, entrelinha 1), a 0.857. A diferença alinha os dois em
-       qualquer tela, já que o corpo do texto é fluido. */
-    padding-top: calc(var(--t-h2) * 0.954 - var(--t-overline) * 0.857);
+/* A foto não começa no rótulo: desce até a primeira frase do texto
+   ("I started out building…"), o topo dela no topo das maiúsculas da
+   frase — o respiro que a faixa dava (16/10, ideia do Rodrigo). A conta:
+   a linha do rótulo + o vão até a frase + onde a maiúscula começa na
+   caixa dela (entrelinha 1.35 → 0,306em) − onde começa a do rótulo. */
+@media (min-width: 901px) {
+  .photo {
+    margin-top: calc(
+      1.3 * var(--t-small) + var(--s4) + 0.306 * var(--t-large)
+    );
   }
 }
+.grid { align-items: start; row-gap: var(--s5); }
 
-/* 48/57.6, largura inteira — medido no Framer (era Alpha Lyrae; Geist desde 12/10) */
-.statementText {
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-weight: 500;
-  font-size: var(--t-h2);
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-  /* Recuo da primeira linha, grande (12/10, referência do Rodrigo): a
-     frase começa a um terço da página e o resto volta pra margem. Um terço
-     da grade em qualquer tela (8 de 24, 4 de 12, 2 de 6), então a primeira
-     palavra cai em cima de uma linha da grade. */
-  text-indent: calc(var(--col) * var(--cols) / 3);
+/* À esquerda: a foto e as listas, presas na tela enquanto o texto corre */
+.side {
+  /* começa na primeira coluna do conteúdo — duas linhas depois da
+     primeira linha da grade, como toda página (--lead, globals) */
+  /* 7 colunas (era 6): com o texto indo até a margem direita, a foto
+     cresce um pouco pra equilibrar (16/10) */
+  grid-column: 1 / span 7;
+  position: sticky;
+  top: var(--gutter);
+  /* A coluna nunca passa da tela: com uma lista grande aberta (a
+     Experiência), ela rola por dentro, com o mouse em cima dela — o texto
+     da direita continua rolando sozinho (16/10). Sem barra de rolagem à
+     vista; sem nada aberto, nem chega a rolar. */
+  max-height: calc(100svh - 2 * var(--gutter));
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4); /* foto → listas: o vão de título → conteúdo */
+}
+.side::-webkit-scrollbar { display: none; }
+.photo {
+  flex: none;
+  position: relative;
+  z-index: 2; /* por cima das linhas da grade */
+  aspect-ratio: 4 / 5;
+  background: var(--ink-10);
+  overflow: hidden;
+}
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.headLine {
+/* As listas que abrem (no torgo: Details, Selected Clients, Jury &
+   Mentoring): um fio entre elas, uma setinha que gira ao abrir. */
+/* (sem fio em cima da primeira lista — 16/10; só entre elas) */
+.details { border-bottom: var(--hairline) solid var(--rule); }
+.summary {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--s3);
+  gap: var(--s1);
+  padding-block: var(--s2);
+  font-size: var(--t-small);
+  line-height: 1.3;
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--fast) var(--ease);
 }
-
-/* ---------- YouTube ---------- */
-
-/* NÃO zerar este padding-top.
-   Tentei, pra fechar o vão de 352 entre o "about" e este vídeo. Só que
-   aqui o padding não é só espaço: esta seção tem fundo próprio, e o topo
-   dela é a faixa amarela acima do rótulo. Zerando, o amarelo passa a
-   começar junto com o conteúdo e o "CONTENT CREATOR" fica grudado na
-   borda da cor. O vão de 352 é real, mas quem tem que ceder é o lado de
-   cima, que não tem cor nenhuma — não este. */
-.youtube {
-  /* a seção vira grade pra a caixa de dentro se posicionar por colunas */
-  display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  column-gap: var(--col-gap);
-  /* nasce na cor da página e chega no tom da seção — sem o corte seco
-     entre o fundo e a faixa (14/10, pedido do Rodrigo) */
-  background: linear-gradient(var(--bg) 0%, var(--accent) 60%);
-  padding-top: var(--s7);
-  padding-bottom: 0;
+.summary::-webkit-details-marker { display: none; }
+.summary:hover { color: var(--hover); }
+.seta { transition: rotate 300ms var(--ease); }
+.details[open] .seta { rotate: 90deg; }
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding-bottom: var(--s3);
+  font-size: var(--t-small);
+  line-height: 1.6;
+  color: var(--ink-60);
 }
-/* Era uma caixa de 1140 centrada; agora vai da linha da coluna 3 até a
-   linha do meio da 23 (~1134 em 1440), pras duas bordas caírem em linhas. */
-.youtubeInner {
-  grid-column: 2 / 12;
-  margin-inline-end: calc(var(--col) / 2 - var(--col-gap));
+.panel ul { margin: 0; padding: 0; list-style: none; }
+.groupLabel { margin: 0; color: var(--ink); }
+
+/* À direita: o texto. Rótulos pequenos em cinza; a apresentação no corpo
+   do h3; o parágrafo de abertura no do h4; a história no texto grande. */
+.text {
+  /* até a margem direita (16/10): terminava na coluna 21, longe do EN /
+     BR — que agora mora na margem — e sobrava um vazio à direita. Começa
+     na coluna 9: uma coluna de respiro depois da foto. */
+  grid-column: 9 / -1;
   display: flex;
   flex-direction: column;
   gap: var(--s4);
 }
-@media (min-width: 1101px) { .youtubeInner { grid-column: 3 / 24; } }
-/* No escuro (o padrão) a seção do vídeo do canal é grafite #1E1E1C, não
-   amarela — pedido do Rodrigo (12/10); é o cinza dos cards do tumulto. O
-   texto volta pros tokens claros do tema (a classe on-accent, que é do
-   amarelo, deixava ele escuro). Emenda no degradê do fecho, que sai do
-   mesmo grafite. No claro, o amarelo de sempre. */
-:global([data-theme="dark"]) .youtube {
-  background: linear-gradient(var(--bg) 0%, #1e1e1c 60%);
-  --ink:    #f1f1f1;
-  --ink-60: rgba(241, 241, 241, 0.6);
-  --ink-25: rgba(241, 241, 241, 0.25);
-  --ink-10: rgba(241, 241, 241, 0.1);
-  --rule:   rgba(241, 241, 241, 0.16);
-  color: var(--ink);
+.label {
+  margin: 0;
+  font-size: var(--t-small);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ink-60);
 }
-:global([data-theme="dark"]) .youtube :global(.rule) { background: var(--rule); }
-/* tablet e celular: a caixa ocupa a largura toda (depois da regra base,
-   senão a base ganha) */
-@media (max-width: 900px) { .youtubeInner { grid-column: 1 / -1; margin-inline-end: 0; } }
+/* um novo bloco do texto ("The story", "Let's talk") abre com o vão de
+   bloco (--s6) — o gap da coluna já dá o --s4 (16/10: padrão) */
+.label:not(:first-child) { margin-top: calc(var(--s6) - var(--s4)); }
+.lead {
+  margin: 0;
+  font-size: var(--t-large);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+  font-size: var(--t-medium);
+  line-height: 1.5;
+}
+.story p { margin: 0; }
+.closing {
+  margin: 0;
+  font-size: var(--t-large);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.work {
+  margin: 0;
+  font-size: var(--t-medium);
+  line-height: 1.5;
+}
+.email { align-self: flex-start; font-size: var(--t-large); }
+
+/* Tablet (12 colunas): foto e listas em 4, texto do 6 ao fim */
+@media (max-width: 1100px) {
+  .side { grid-column: 1 / span 4; }
+  .text { grid-column: 6 / -1; margin-inline-start: 0; }
+}
+/* Celular e tablet pequeno: um embaixo do outro, nada preso */
+@media (max-width: 900px) {
+  .side, .text { grid-column: 1 / -1; margin-inline-start: 0; }
+  .side { position: static; max-height: none; overflow: visible; }
+  .photo { width: min(70%, 24rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seta { transition: none; }
+}

@@ -11,7 +11,7 @@
    pode correr a seção inteira. (Do amarelo pro escuro virava uma faixa
    verde-oliva; foi por isso que a seção do vídeo virou grafite.) */
 :global([data-theme="dark"]) .closing {
-  background: linear-gradient(#1e1e1c 0%, var(--bg) 100%);
+  background: linear-gradient(var(--card) 0%, var(--bg) 100%);
 }
 /* O grafite de cima só faz sentido na /work, onde o contato vem logo
    depois da seção grafite do YouTube. Na página de projeto ele vem depois

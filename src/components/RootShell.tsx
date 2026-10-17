@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import Script from "next/script"
 import type { Lang } from "@/i18n"
-import GridLines from "@/components/GridLines"
-import { body, mono } from "@/app/fonts"
+import PageWidth from "@/components/PageWidth"
+import { body } from "@/app/fonts"
 // o CSS que o Lenis pede: altura automática no html, trava que respeita
 // `stop()`, iframes sem ponteiro durante o scroll suave
 import "lenis/dist/lenis.css"
@@ -52,7 +52,7 @@ export default function RootShell({
        o Preloader saiu de todas as páginas. */
     <html
       lang={lang === "pt" ? "pt-BR" : "en"}
-      className={`${body.variable} ${mono.variable}`}
+      className={body.variable}
       data-theme="dark"
       suppressHydrationWarning
     >
@@ -78,7 +78,7 @@ export default function RootShell({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <GridLines />
+        <PageWidth />
         {children}
         <Script id="gtm" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}

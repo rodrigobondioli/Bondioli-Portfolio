@@ -1,0 +1,92 @@
+/* /contact (16/10/2026): o desenho da /info — foto à esquerda (mesmo
+   lugar, tamanho e espaçamento de lá), texto e formulário à direita.
+   Espaçamento no padrão do site: título → conteúdo --s4, entre blocos
+   --s6, fim --s7. */
+
+/* o rótulo "Contact" abre a página, com as maiúsculas na linha da barra
+   (.page-top com o corpo dele; 0,281em = Geist, entrelinha 1.3) */
+.body {
+  --top-size: var(--t-small);
+  --top-k: 0.281;
+  /* o fim é curto (--s5): a página cabe na tela sem rolar (16/10) */
+  padding-bottom: var(--s5);
+}
+.grid { align-items: start; row-gap: var(--s5); }
+
+/* À esquerda: a foto — as mesmas regras da /info */
+.side {
+  grid-column: 1 / span 7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4); /* foto → e-mail: o mesmo vão da foto → listas da /info */
+}
+.photo {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--card);
+}
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 50%;
+}
+/* a foto desce até a primeira linha do texto, como na /info: a linha do
+   rótulo + o vão + onde a maiúscula do título começa na caixa dele */
+@media (min-width: 901px) {
+  .photo {
+    margin-top: calc(1.3 * var(--t-small) + var(--s4) + 0.231 * var(--t-h3));
+  }
+}
+
+/* À direita: rótulo, convite, formulário, e-mail */
+.text {
+  grid-column: 9 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+.label {
+  margin: 0;
+  font-size: var(--t-small);
+  line-height: 1.3;
+  color: var(--ink-60);
+}
+.title { margin: 0; }
+.paragraph {
+  margin: 0;
+  max-width: 34em;
+  font-size: var(--t-medium);
+  line-height: 1.5;
+}
+/* o formulário vem logo depois do convite, um pouco mais afastado que
+   os parágrafos (16/10: era o vão de bloco, --s6) */
+.form {
+  margin-top: calc(var(--s5) - var(--s4));
+  max-width: 34rem;
+}
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s1);
+  font-size: var(--t-small);
+  line-height: 1.4;
+}
+.meta p { margin: 0; }
+.muted { color: var(--ink-60); }
+.email { font-size: var(--t-small); }
+
+/* Tablet (12 colunas): foto em 4, texto do 6 ao fim */
+@media (max-width: 1100px) {
+  .side { grid-column: 1 / span 4; }
+  .text { grid-column: 6 / -1; }
+}
+/* Celular e tablet pequeno: um embaixo do outro */
+@media (max-width: 900px) {
+  .side, .text { grid-column: 1 / -1; }
+  .photo { width: min(70%, 24rem); }
+}

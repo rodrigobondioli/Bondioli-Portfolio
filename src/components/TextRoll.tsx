@@ -1,23 +1,16 @@
 import styles from "./TextRoll.module.css"
 
 /**
- * O hover dos links de texto do site (14/10, pedido do Rodrigo: a
- * cambalhota 3D dos links "parecia bugada"). Substitui o cubo do CubeLink,
- * do CopyEmail e do RollLabel nos links — o PillButton segue com a
- * cambalhota, que é dele.
+ * O texto dos links do site. Desde 16/10/2026 (pedido do Rodrigo: "tira
+ * todas as animações de texto") não rola mais: no hover só muda a cor
+ * (--hover), e o sublinhado, quando há, fica parado.
  *
- * O que era o problema: o cubo girava numa mola (damping 18), que passa do
- * ponto e volta, e a letra pequena borrava no meio da rotação 3D; o
- * sublinhado girava junto com a face. Agora é 2D: o texto sobe e uma cópia
- * entra por baixo, numa curva que só desacelera (sem repique), e o
- * sublinhado fica fora do texto — parado — e faz uma passada: some pela
- * direita e volta pela esquerda.
+ * Histórico: era um rolo 2D (o texto subia e uma cópia entrava por baixo,
+ * com uma passada no sublinhado), que em 14/10 tinha substituído o cubo
+ * 3D do CubeLink. O nome e a API ficaram pra não mexer em quem usa.
  *
- * Quem dá o hover é o elemento que tem `data-roll-host` (o link inteiro),
- * não este invólucro. `back` troca o texto da cópia (o CopyEmail usa pra
- * "Email copied"); `show` segura a cópia à vista sem hover.
- *
- * Sem JS: é só CSS. A cópia é `aria-hidden`: leitor de tela lê uma vez.
+ * `back` é o texto que aparece no lugar quando `show` liga (o CopyEmail usa
+ * pra "Email copied"). Quem dá o hover é o elemento com `data-roll-host`.
  */
 export default function TextRoll({
   text,
@@ -31,16 +24,8 @@ export default function TextRoll({
   underline?: boolean
 }) {
   return (
-    <span
-      className={`${styles.root} ${underline ? styles.underlined : ""}`}
-      data-show={show || undefined}
-    >
-      <span className={styles.mask}>
-        <span className={styles.face}>{text}</span>
-        <span className={`${styles.face} ${styles.back}`} aria-hidden="true">
-          {back ?? text}
-        </span>
-      </span>
+    <span className={`${styles.root} ${underline ? styles.underlined : ""}`}>
+      {show ? (back ?? text) : text}
     </span>
   )
 }

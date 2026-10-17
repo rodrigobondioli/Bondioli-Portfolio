@@ -14,20 +14,26 @@
    176 que sobram são todos amarelos. */
 /* Em cima, a quebra maior de seção: aqui ficava a faixa de chips
    (removida em 12/10), que dava o respiro entre os cases e este bloco. */
-.about { padding-top: var(--s7); padding-bottom: var(--s5); }
+.about { padding-top: var(--s7); padding-bottom: var(--s7); } /* fim da página: --s7, como as outras (16/10) */
 .aboutInner { display: flex; flex-direction: column; gap: var(--s5); }
 
-/* Só o título (a régua ao lado saiu em 12/10) — o cargo mora na
-   coluna de texto, não aqui. */
+/* O título e o cargo, no topo da coluna da direita (16/10: o título saiu
+   de cima do vídeo e veio pro lado do texto). */
 .aboutHead {
   display: flex;
-  align-items: center;
-  gap: var(--s3);
+  flex-direction: column;
+  gap: var(--s2);
 }
-@media (max-width: 640px) {
-  .aboutHead { flex-wrap: wrap; gap: var(--s2); }
-  .aboutHead :global(.rule) { display: none; }
-}
+
+/* Abrindo a página (/info): sem o respiro de seção em cima — quem dá a
+   altura é o .page-top (título na linha da barra) — e o vídeo desce até
+   o topo das maiúsculas do título. */
+.about.top { padding-top: var(--page-top-pad); }
+.top .aboutVideo { margin-top: calc(0.231 * var(--t-h3)); }
+@media (max-width: 900px) { .top .aboutVideo { margin-top: 0; } }
+/* o canto de cima à direita é do EN / BR e do sol (fixos): o título não
+   passa por baixo deles — em telas mais estreitas ele quebra a linha */
+@media (min-width: 1101px) { .top .aboutHead { padding-right: var(--s7); } }
 
 /* Duas colunas iguais, sem respiro entre elas. As duas ocupam a altura
    inteira da linha: é o que permite o cargo encostar no topo do vídeo. */
@@ -50,7 +56,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--s5);
-  margin-block: auto;
 }
 
 /* O vão entre vídeo e texto sai da largura do vídeo, não de um `gap` na

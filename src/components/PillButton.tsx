@@ -1,13 +1,12 @@
 import Link from "next/link"
-import RollLabel from "./RollLabel"
 import styles from "./PillButton.module.css"
 
 /**
  * O botão do site. Um componente só pra todos: se um dia o hover mudar,
  * muda em todos os lugares de uma vez.
  *
- * A cambalhota do hover mora no RollLabel — é o mesmo efeito da saída
- * "Back to portfolio" nas páginas de projeto.
+ * Sem a cambalhota do hover desde 16/10 (o site não tem mais animação de
+ * texto); o RollLabel ficou sem uso.
  *
  * `busy` existe porque este botão envia o formulário, e um botão que não
  * sabe dizer "estou ocupado" deixa a pessoa clicando de novo achando que
@@ -55,13 +54,13 @@ export default function PillButton({
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {})}
         >
-          <RollLabel text={children} />
+          {children}
         </a>
       )
     }
     return (
       <Link className={cls} data-roll-host="" href={href}>
-        <RollLabel text={children} />
+        {children}
       </Link>
     )
   }
@@ -77,9 +76,7 @@ export default function PillButton({
       aria-busy={busy || undefined}
       onClick={onClick}
     >
-      {/* a chave força o cubo a remontar quando o rótulo muda: sem ela as
-          duas faces ficariam com textos diferentes no meio do giro */}
-      <RollLabel key={rotulo} text={rotulo} />
+      {rotulo}
     </button>
   )
 }

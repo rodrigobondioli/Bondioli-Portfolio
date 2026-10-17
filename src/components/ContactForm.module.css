@@ -1,7 +1,9 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--s5);
+  /* entre os campos, o vão de título → conteúdo (16/10: era --s5; mais
+     junto, a página de contato cabe na tela sem rolar) */
+  gap: var(--s4);
   width: 100%;
 }
 
@@ -15,7 +17,7 @@
   background: none;
   border: 0;
   border-bottom: var(--hairline) solid var(--rule);
-  font-size: var(--t-body);
+  font-size: var(--t-medium);
   line-height: 1.5;
   /* sem a alça de esticar no canto (pedido do Rodrigo, 12/10) */
   resize: none;
@@ -24,7 +26,7 @@
     border-width var(--fast) var(--ease),
     color var(--fast) var(--ease);
 }
-.field textarea { min-height: 100px; }
+.field textarea { min-height: 72px; } /* era 100 (16/10: a página de contato cabe na tela) */
 .field input::placeholder,
 .field textarea::placeholder {
   color: var(--ink-60);
@@ -66,12 +68,18 @@
 
 .erro {
   margin-top: var(--s1);
-  font-size: var(--t-body-sm);
+  font-size: var(--t-small);
   line-height: 1.3;
   color: var(--erro, #c0392b);
 }
 
-.question { margin-top: var(--s2); }
+.question {
+  display: block;
+  margin: var(--s2) 0 var(--s2);
+  font-size: var(--t-small);
+  line-height: 1.3;
+  color: var(--ink-60);
+}
 
 .actions { display: flex; }
 
@@ -85,7 +93,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--s2);
-  font-size: var(--t-body-sm);
+  font-size: var(--t-small);
   line-height: 1.3;
 }
 

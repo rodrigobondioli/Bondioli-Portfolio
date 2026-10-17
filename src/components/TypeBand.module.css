@@ -13,7 +13,7 @@
 .track {
   display: flex;
   width: max-content;
-  animation: slide 30s linear infinite;
+  /* parada desde 16/10 (sem animação de texto no site; corria 30s em laço) */
   /* promove a camada uma vez, em vez de o navegador redecidir a cada
      quadro — a mesma regra do logo que gira na capa */
   will-change: transform;

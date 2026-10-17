@@ -14,6 +14,15 @@
 export type Midia = string | { flipbook: string[] } | null
 
 export const SHOWCASE: Record<string, Midia[]> = {
+  // Orbness (16/10, no lugar do Morpho): o produto dele, pela própria
+  // interface — o vídeo de demonstração do canvas e três telas reais
+  // (moodboard, kanban, painel), tiradas de ~/Developer/Orbness/marketing/out
+  orbness: [
+    "/projects/orbness/orbness-demo.mp4",
+    "/projects/orbness/orbness-moodboard.webp",
+    "/projects/orbness/orbness-kanban.webp",
+    "/projects/orbness/orbness-painel.webp",
+  ],
   // 14/10: no lugar do Tilt Tech; as 4 imagens do Rodrigo, na ordem dele
   worm: [
     "/projects/worm/worm-1.webp",

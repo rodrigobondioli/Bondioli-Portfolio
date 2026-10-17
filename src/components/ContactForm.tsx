@@ -156,17 +156,17 @@ export default function ContactForm({ lang = "en" }: { lang?: Lang }) {
         ) : null}
       </div>
 
-      <h3 className={`h4 ${styles.question}`}>{t.question}</h3>
-
+      {/* a pergunta é o rótulo do campo, não um título (16/10: vestida de
+          h4 em caixa alta, ela brigava com o título da página) */}
       <div className={styles.field}>
-        <label className="sr-only" htmlFor="cf-brief">
-          {t.situation}
+        <label className={styles.question} htmlFor="cf-brief">
+          {t.question}
         </label>
         <textarea
           ref={briefRef}
           id="cf-brief"
           name="brief"
-          rows={3}
+          rows={2}
           placeholder={t.placeholder}
           value={brief}
           onChange={(e) => {

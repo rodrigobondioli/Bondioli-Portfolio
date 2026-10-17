@@ -5,7 +5,7 @@
    O resto do sistema é o mesmo da /work — mesmas fontes, mesma régua,
    nada arredondado. */
 
-.page { background: var(--bg); }
+.page { background: var(--bg); padding-bottom: var(--s7); } /* fim da página: --s7 (16/10) */
 
 /* ---------- Capa ---------- */
 
@@ -13,7 +13,10 @@
    respiro conta desde o topo da página, não desde o fim da barra: 176 no
    Framer, que é o dobro do intervalo padrão. Com --s6 sozinho a foto
    encostava no botão. */
-.heroSection { padding-top: calc(var(--s6) * 2); }
+/* A capa começa na mesma altura das outras páginas (16/10): o topo dela
+   na linha das maiúsculas do nome da barra e do EN / BR (.page-top com
+   --top-k 0: é imagem, não tem maiúscula pra descontar). */
+.heroSection { --top-k: 0; padding-top: var(--page-top-pad); }
 
 /* A capa ocupa a largura inteira da coluna e a altura vem da própria
    imagem. Nada de caixa 16:9 fixa: nove das onze capas são 16:9, mas a do
@@ -50,7 +53,7 @@
 
 /* As disciplinas e o link andam juntos, separados por barras. */
 .meta {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-body), system-ui, sans-serif;
   display: flex;
   align-items: center;
   gap: var(--s2);
@@ -59,7 +62,7 @@
 }
 
 .year {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-body), system-ui, sans-serif;
   color: var(--ink-60);
   /* no desktop o ano fecha a linha, depois das disciplinas — é a ordem
      que o Framer usa. No HTML ele vem antes, colado ao nome, porque é

@@ -1,9 +1,52 @@
-/* Enquanto não tem conteúdo, a página ocupa a tela e o rodapé fica embaixo */
-.page { min-height: 100svh; }
+/* /playground (16/10/2026): título, frase e a grade masonry. Espaçamento
+   no padrão do site: título → frase --s4, frase → grade --s6 (bloco),
+   fim --s7. */
+.page { padding-bottom: var(--s7); }
 .inner { display: flex; flex-direction: column; gap: var(--s4); }
 .lead {
+  margin: 0;
   max-width: 32em;
   color: var(--ink-60);
-  font-size: var(--t-body);
+  font-size: var(--t-medium);
   line-height: 1.4;
+}
+
+/* Masonry: colunas de texto do CSS — cada peça desce na coluna até o fim
+   e passa pra próxima, então as alturas se desencontram como na colagem
+   da /work. 4 colunas no desktop, 3 no tablet, 2 no celular. O vão é o da
+   margem (--gutter), o mesmo da colagem. */
+.grid {
+  margin: calc(var(--s6) - var(--s4)) 0 0;
+  padding: 0;
+  list-style: none;
+  columns: 2;
+  column-gap: var(--gutter);
+}
+@media (min-width: 641px) {
+  .grid { columns: 3; }
+}
+@media (min-width: 1101px) {
+  .grid { columns: 4; }
+}
+.piece {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: var(--gutter);
+  overflow: hidden;
+  background: var(--card);
+}
+.piece img,
+.piece video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* o número da vaga, pequeno, no canto */
+.num {
+  position: absolute;
+  top: var(--s2);
+  left: var(--s2);
+  font-size: var(--t-small);
+  color: var(--ink-60);
 }

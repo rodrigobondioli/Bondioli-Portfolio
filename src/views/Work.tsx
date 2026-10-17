@@ -1,9 +1,6 @@
 import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
-import { SiteFooter } from "@/components/SiteFooter"
-import MeetingBar from "@/components/MeetingBar"
 import ProjectShowcase from "@/components/ProjectShowcase"
-import ClosingSection from "@/components/ClosingSection"
 import { orderedProjects, asset, galleryUrls, COM_CASE } from "@/lib/projects"
 import order from "@/content/order.json"
 import { SHOWCASE } from "@/content/showcase"
@@ -65,13 +62,7 @@ export default function Work({ lang }: { lang: Lang }) {
             </ul>
           </div>
         </section>
-
-        {/* ---------- Contato ---------- */}
-        <ClosingSection lang={lang} />
       </main>
-
-      <SiteFooter lang={lang} />
-      <MeetingBar label={t.pill} />
     </>
   )
 }

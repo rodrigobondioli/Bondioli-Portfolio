@@ -3,7 +3,7 @@
   position: relative;
   z-index: 2; /* por cima das linhas da grade */
   grid-column: 1 / -1;
-  margin-inline: calc(var(--gutter-l) * -1) calc(var(--gutter) * -1);
+  margin-inline: calc(var(--gutter-l) * -1) calc(var(--gutter-r) * -1);
 }
 
 /* celular / sem efeito: fotos empilhadas, cada uma com o nome embaixo */
@@ -28,8 +28,8 @@
   display: flex;
   justify-content: flex-end;
   padding: var(--s1) var(--gutter) 0;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.75rem;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--t-small);
   color: var(--ink-60);
 }
 
@@ -56,8 +56,8 @@
   display: flex;
   justify-content: flex-end;
   margin: 0;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.75rem;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--t-small);
   color: #f2f2f2;
   text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
   pointer-events: none;

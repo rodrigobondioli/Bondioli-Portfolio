@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { useWindSpin } from "./useWindSpin"
 
@@ -64,5 +65,54 @@ export function SpinningLogo({ size = 120, className, title }: LogoProps) {
     >
       <Logo size={size} title={title} />
     </motion.div>
+  )
+}
+
+/**
+ * A marca girando com o scroll, com embalo (16/10, pedido do Rodrigo: a
+ * da barra lateral girava sozinha, no vento da capa; agora responde a
+ * quem rola, "menos seco" que a da pílula, com uma patinadinha no fim).
+ *
+ * A cada quadro, a velocidade de giro corre atrás da do scroll (0.25° por
+ * pixel, o mesmo passo da pílula) e, quando o scroll para, ela não para
+ * junto: perde 7% por quadro e a marca desliza mais um pouco até parar.
+ * Descendo, horário; subindo, anti-horário. Com movimento reduzido, parada.
+ */
+export function ScrollSpinLogo({ size = 32, className, title }: LogoProps) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    let ultimo = window.scrollY
+    let angulo = 0
+    let v = 0 // graus por quadro
+    let raf = 0
+    const quadro = () => {
+      const y = window.scrollY
+      const d = y - ultimo
+      ultimo = y
+      // atrito: sem scroll, v cai 7% por quadro (o embalo); com scroll, a
+      // mesma conta puxa v pra 0.25°/px do que rolou
+      v = v * 0.93 + d * 0.25 * 0.07
+      angulo += v
+      el.style.rotate = `${angulo}deg`
+      raf = Math.abs(v) > 0.01 || d !== 0 ? requestAnimationFrame(quadro) : 0
+    }
+    const acordar = () => {
+      if (!raf) raf = requestAnimationFrame(quadro)
+    }
+    window.addEventListener("scroll", acordar, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", acordar)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  return (
+    <div ref={ref} className={className} style={{ width: size, height: size, lineHeight: 0, willChange: "rotate" }}>
+      <Logo size={size} title={title} />
+    </div>
   )
 }

@@ -30,6 +30,10 @@
   --accent:         #e7f99a;   /* verde-limão — destaques */
   --accent-violet:  #6d08ee;   /* roxo — seção de contato */
   --accent-pink:    #ff00d7;
+  /* O hover dos links (16/10, pedido do Rodrigo: sem o rosa, "um
+     cinzinha de boa", portfólio mais profissional, sem firula). O que já
+     é cinza acende pro --ink no hover (quem é cinza redefine --hover). */
+  --hover: var(--ink-60);
   --accent-cyan:    #00fff6;
 
   /* vidro da faixa de números do herói */
@@ -76,7 +80,17 @@
      margem da esquerda; a da direita continua --gutter. Sem barra (capa,
      /thanks, tablet e celular) --rail é 0 e as duas são iguais. */
   --rail: 0px;
-  --gutter-l: calc(var(--gutter) + var(--rail));
+  /* --lead (16/10, pedido do Rodrigo, a partir da /info): com a barra, a
+     primeira coluna da grade vira margem — as linhas continuam desenhadas
+     a partir da barra, mas o conteúdo começa duas linhas depois (uma
+     coluna). É 0 ou 1; a grade passa a ter cols + lead colunas desenhadas,
+     e o conteúdo continua com cols. */
+  --lead: 0;
+  /* --trail: a mesma coluna de margem do lado direito (16/10) — o bloco
+     fica centrado na grade, e o EN / BR do canto ganha espaço só dele. */
+  --trail: 0;
+  --gutter-l: calc(var(--gutter) + var(--rail) + var(--lead) * var(--col));
+  --gutter-r: calc(var(--gutter) + var(--trail) * var(--col));
   --container: none;   /* o Framer nao limita: 100% - gutter dos dois lados */
 
   /* --- Grade (12/10/2026, do tumulto.ai) --- *
@@ -89,7 +103,7 @@
   --cols: 6;
   --col-gap: 16px;
   --page-w: 100vw;   /* o SmoothScroll troca pela largura sem a barra */
-  --col: calc((var(--page-w) - var(--gutter-l) - var(--gutter) + var(--col-gap)) / var(--cols));
+  --col: calc((var(--page-w) - var(--rail) - 2 * var(--gutter) + var(--col-gap)) / (var(--cols) + var(--lead) + var(--trail)));
   --gap-line: calc(var(--col) / 2);
   /* As linhas verticais da grade são mais densas que as horizontais, então
      mais apagadas — 4,5%, como no tumulto (--c-line-soft de lá). */
@@ -108,11 +122,20 @@
   --t-h3: clamp(1.4rem, 2.5vw, 1.81rem);
   --t-h4: clamp(1.25rem, 2vw,  1.5rem);
   --t-h5: 1rem;
-  --t-body-lg: clamp(1rem,   1.4vw, 1.2rem);
-  --t-body:    1rem;
-  --t-body-sm: 0.8rem;
-  --t-caption: 0.7rem;
-  --t-overline: 0.7rem;
+  /* TEXTO (fora os títulos) tem três tamanhos, e só três (16/10/2026,
+     regra do Rodrigo: "small, medium e large, pra não ter inconsistência"):
+       small   12,8px     rótulo, ficha, legenda, menu, texto curto
+       medium  16px       texto corrido (era 16→19: "19 é muito grande")
+       large   20→24px    abertura e destaque de texto
+     Não criar um quarto. Os nomes antigos apontam pra eles. */
+  --t-small:  0.8rem;
+  --t-medium: 1rem;
+  --t-large:  clamp(1.25rem, 2vw,   1.5rem);
+  --t-body-sm: var(--t-small);
+  --t-body:    var(--t-medium);
+  --t-body-lg: var(--t-medium);
+  --t-caption: var(--t-small);
+  --t-overline: var(--t-small);
 
   /* --- Forma --- */
   --r-control: 8px;
@@ -135,8 +158,9 @@
  * O light é o site como sempre foi: os tokens de :root acima. */
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg:      #121211;
-  --bg-dark: #121211;   /* as páginas de projeto já eram escuras: mesmo fundo */
+  /* chumbo quase preto (16/10, pedido do Rodrigo; era #121211) */
+  --bg:      #0c0c0b;
+  --bg-dark: #0c0c0b;   /* as páginas de projeto já eram escuras: mesmo fundo */
   --ink:     #f1f1f1;
   --ink-60:  rgba(241, 241, 241, 0.6);
   --ink-25:  rgba(241, 241, 241, 0.25);
@@ -145,9 +169,9 @@
   /* réguas horizontais: 16%, o --c-rule do tumulto — mais fortes que as
      verticais da grade (4,5%) */
   --rule:    rgba(241, 241, 241, 0.16);
-  --glass:   rgba(18, 18, 17, 0.4);
+  --glass:   rgba(12, 12, 11, 0.4);
   --line-color: rgba(241, 241, 241, 0.045);
-  --card:    #1e1e1c;
+  --card:    #161615; /* era #1e1e1c; escureceu junto com o fundo (16/10) */
   --lit:     var(--accent);
 }
 
@@ -261,7 +285,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
-  font-size: var(--t-body);
+  font-size: var(--t-medium);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -279,12 +303,12 @@ a {
   text-underline-offset: 3px;
   text-decoration-thickness: from-font;
 }
-/* O hover dos links de texto é o rosa da marca (14/10, pedido do Rodrigo),
-   além do movimento de cada um. Botões, cards e marcas (.no-underline)
-   têm o hover deles. */
+/* O hover dos links de texto é o cinza (--hover; era o rosa da marca
+   até 16/10), além do movimento de cada um. Botões, cards e marcas
+   (.no-underline) têm o hover deles. */
 a { transition: color var(--fast) var(--ease); }
 a:hover { text-decoration-thickness: 2px; }
-a:not(.no-underline):hover { color: var(--accent-pink); }
+a:not(.no-underline):hover { color: var(--hover); }
 
 /* Botões, cards e marcas: a área inteira é clicável, o sublinhado só
    sujaria. `.face` é a peça do RollLabel — como ela é `inline-block`, o
@@ -303,13 +327,6 @@ input, textarea, select { font: inherit; color: inherit; }
 /* O gutter de celular (16px) vem da própria curva de --gutter lá em cima,
    sem media query: era este @media que produzia o salto de 55px pra 16px
    ao cruzar 641. */
-
-/* Caixa alta com espacejamento em 11.2px fica no limite do legível numa
-   tela de 390. No celular o overline sobe pra 12px — o mínimo confortável
-   pra versalete. No desktop segue o valor do Framer. */
-@media (max-width: 640px) {
-  :root { --t-overline: 0.75rem; }
-}
 
 @media (min-width: 641px) {
   :root { --cols: 12; --col-gap: 32px; }
@@ -352,8 +369,8 @@ input, textarea, select { font: inherit; color: inherit; }
    fábrica — o 0.1em da Inter abria demais; ficou um respiro curto. Peso
    500: em 600 a mono pequena empasta. */
 .overline {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: var(--t-overline);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--t-small);
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.04em;
@@ -361,12 +378,12 @@ input, textarea, select { font: inherit; color: inherit; }
 }
 
 /* Pra quem precisa da mono fora dos rótulos (metadados, números). */
-.mono { font-family: var(--font-mono), ui-monospace, monospace; }
+.mono { font-family: var(--font-body), system-ui, sans-serif; }
 
-.body-lg { font-size: var(--t-body-lg); line-height: 1.3; }
-.body    { font-size: var(--t-body);    line-height: 1.3; }
-.body-sm { font-size: var(--t-body-sm); line-height: 1.3; }
-.caption { font-size: var(--t-body-sm); line-height: 1.3; color: var(--ink); }
+.body-lg { font-size: var(--t-medium); line-height: 1.3; }
+.body    { font-size: var(--t-medium);    line-height: 1.3; }
+.body-sm { font-size: var(--t-small); line-height: 1.3; }
+.caption { font-size: var(--t-small); line-height: 1.3; color: var(--ink); }
 
 /* ---------- Quebra de linha ---------- *
  *
@@ -393,7 +410,13 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
 
 /* a barra fixa só existe acima de 1100 (abaixo vira "Menu") */
 @media (min-width: 1101px) {
-  html:has([data-rail]) { --rail: 208px; }
+  /* 16/10 (pedido do Rodrigo): sem as linhas da grade, e com a barra
+     tudo é 24 — o vão entre colunas e fotos (--col-gap) e as margens: da
+     borda à barra, da barra ao conteúdo (o padding direito dela), do
+     conteúdo à borda direita, o EN / BR e o topo. Margem = vão, de novo.
+     (Passou por 56 no mesmo dia: "foi muito".) A barra tem 176 de miolo.
+     Sem linhas, as colunas de margem (--lead / --trail) ficam 0. */
+  html:has([data-rail]) { --col-gap: 24px; --gutter: 24px; --rail: 200px; --lead: 0; --trail: 0; }
 }
 
 /* ---------- 4. Layout ---------- */
@@ -401,7 +424,7 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
 /* Toda seção usa isto. Sem exceção — é a regra que a produção não cumpria. */
 .section {
   width: 100%;
-  padding-inline: var(--gutter-l) var(--gutter);
+  padding-inline: var(--gutter-l) var(--gutter-r);
 }
 
 .container {
@@ -415,8 +438,8 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
    `scrollbar-gutter: stable` está sempre reservada. A conta pelo gutter
    chega no mesmo lugar sem contar o que não existe. */
 .bleed {
-  width: calc(100% + var(--gutter-l) + var(--gutter));
-  margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter));
+  width: calc(100% + var(--gutter-l) + var(--gutter-r));
+  margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r));
 }
 
 /* O topo das páginas internas (16/10, pedido do Rodrigo: "sempre vai
@@ -431,14 +454,19 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
    (--top-size) e onde a maiúscula começa na caixa dele (--top-k, em em;
    0,281 pra Geist com entrelinha 1.3). */
 .page-top {
-  padding-top: calc(
-    var(--gutter) + 0.297 * var(--t-overline) - var(--top-k, 0.231) * var(--top-size, var(--t-h3))
+  /* em variável também, pra quem tem padding-top próprio (um módulo
+     carregado depois) poder voltar pra ela: padding-top: var(--page-top-pad) */
+  --page-top-pad: calc(
+    var(--gutter) + 0.297 * var(--t-small) - var(--top-k, 0.231) * var(--top-size, var(--t-h3))
   );
+  padding-top: var(--page-top-pad);
 }
 @media (max-width: 1100px) {
-  .page-top { padding-top: calc(var(--gutter) + var(--s6)); }
+  .page-top { --page-top-pad: calc(var(--gutter) + var(--s6)); }
 }
-.page-title { margin: 0; }
+/* caixa normal, como os outros títulos grandes do site (16/10: em caixa
+   alta, "SELECTED WORK" e "LET'S TALK." pareciam de outro site) */
+.page-title { margin: 0; text-transform: none; }
 
 .stack     { display: flex; flex-direction: column; }
 .row       { display: flex; flex-direction: row; align-items: center; }

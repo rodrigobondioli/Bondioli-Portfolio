@@ -23,7 +23,7 @@
 .line {
   font-family: var(--font-display), system-ui, sans-serif;
   font-weight: 500;
-  font-size: var(--t-h3);
+  font-size: var(--t-large);
   line-height: 1.2;
   letter-spacing: -0.02em;
 }

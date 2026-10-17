@@ -1,6 +1,7 @@
-/* Pílula padrão do site: 48 de altura, texto preto sobre o rosa.
-   A cambalhota do hover está no RollLabel — o mesmo efeito vale aqui e na
-   saída "Back to portfolio" das páginas de projeto. */
+/* Pílula padrão do site: 48 de altura. Sem o rosa desde 16/10 (o Rodrigo
+   tirou o rosa do site): o contrário do fundo — clara no escuro, escura
+   no claro.
+   Sem cambalhota (16/10): no hover só troca de cor (ver abaixo). */
 
 .pill {
   display: inline-flex;
@@ -9,16 +10,23 @@
   height: 48px;
   padding-inline: var(--s3);
   border-radius: var(--r-pill);
-  background: var(--accent-pink);
-  /* preto sobre o rosa nos dois temas */
-  color: #101010;
-  font-size: 15px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: var(--t-medium); /* era 15px, fora da escala (16/10) */
   font-weight: 400;
   line-height: 20px;
   white-space: nowrap;
-  transition: filter var(--fast) var(--ease);
+  transition:
+    background-color var(--fast) var(--ease),
+    color var(--fast) var(--ease);
 }
-.pill:hover { filter: brightness(1.06); }
+/* O hover padrão de botão (16/10, pedido do Rodrigo): o botão apaga pra um
+   cinza quase da cor do fundo (--card) e o texto passa pra cor de texto. */
+.pill:hover,
+.pill:focus-visible {
+  background: var(--card);
+  color: var(--ink);
+}
 /* O clique tem que ter resposta física, senão o botão parece uma imagem. */
 .pill:active { transform: scale(0.98); }
 

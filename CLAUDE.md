@@ -12,8 +12,9 @@ mesma cara do Framer, código e design system novos.**
 - [x] `/` — capa de uma tela, logo girando (física própria, portada do Framer)
 - [x] `/thanks`
 - [x] `/work` — só o "Selected work" e o contato (desde 16/10/2026)
-- [x] `/info` (também `/about`, 301) — números, sobre, manifesto, YouTube, contato (16/10/2026, saíram da /work)
-- [x] `/playground` — por enquanto só o título e "em breve"
+- [x] `/info` (também `/about`, 301) — desde 16/10/2026 é a história do Rodrigo (texto dele, em PT; o EN é tradução), na estrutura do torgo.work/info: faixa "Oi & Hello &" correndo no topo (maiúsculas na linha da barra), foto presa à esquerda com listas que abrem (Experiência, Prêmios, Ensino, Marcas) e o texto longo à direita. Conteúdo em `src/content/info.ts`. O manifesto, o YouTube e o bloco "sobre" saíram daqui (o `AboutSection` segue só no media kit).
+- [x] `/playground` — título, frase e uma grade masonry (4 colunas no desktop, 3 no tablet, 2 no celular; cada peça num formato, colunas fechando juntas) com 12 vagas numeradas. Conteúdo em `src/content/playground.ts` (cada peça ganha `src` e `title` quando o experimento chegar)
+- [x] `/contact` (16/10/2026) — o desenho da /info: a foto dele trabalhando (`rodrigo-contato.webp`; original em `_originais/contato/`) à esquerda, no mesmo lugar, tamanho e espaçamento da foto da /info; à direita o rótulo "Contact" na linha da barra, "Let's talk." com o convite pra founder, o formulário (`ContactForm` → `/api/contact`) e o e-mail. Três colunas (texto · form · foto) foi testado e descartado. A pergunta do formulário é rótulo do campo, não título; todo título de página (`.page-title`) é em caixa normal; o `PillButton` perdeu o rosa e a cambalhota.
 - [ ] `/projects/[slug]` — 16 páginas, conteúdo em `src/content/projects.json`.
       Estrutura extraída do Framer está descrita na conversa. Era escuro
       fixo (`--bg-dark`); desde 12/10/2026 segue o tema (ver "Tema").
@@ -59,9 +60,10 @@ npm run start   # serve o build em localhost:3000
 
 ## Decisões que não são negociáveis sem falar com o Rodrigo
 
-- **Fonte: só a Geist.** Geist em tudo (títulos e texto) e Geist Mono na
-  "ficha técnica" (`.overline`, metadados de projeto, "Services", números
-  da faixa do herói, EN/BR, a abertura — texto que se lê como dado). OFL
+- **Fonte: só a Geist normal.** Geist em tudo, sem exceção. A Geist Mono
+  (que fazia a "ficha técnica": `.overline`, "Services", números, EN/BR)
+  saiu em 16/10/2026 — o Rodrigo viu que não havia critério pra onde ela
+  entrava e pediu "só Geist normal". Não trazer mono de volta. OFL
   1.1, variáveis (um arquivo cada), auto-hospedadas em `public/fonts` com a
   licença ao lado (`OFL-Geist.txt`). `--font-display` ainda existe, mas
   aponta pra Geist. Pesos: todos os títulos em 500, h1 inclusive (o
@@ -73,13 +75,20 @@ npm run start   # serve o build em localhost:3000
   do site. Inter e Alpha estão em `_to_delete/2026-10-12-*`.
 - **Espaçamento:** sete passos, `--s1` a `--s7` em `globals.css`. O Framer tinha
   acumulado 19 valores onde o sistema documentava 7. Não inventar um oitavo.
+  **Padrão de uso (16/10, revisão da /work e do case):** entre seções
+  `--s7` (171 em 1440) · entre blocos de uma seção `--s6` (88: partes da
+  abertura, entre projetos, vídeo → objetivo) · dentro do capítulo `--s5`
+  (56) · título → o conteúdo dele `--s4` (32). Espaço novo escolhe um
+  desses quatro papéis.
 - **Réguas** (as linhas curtas ao lado dos títulos) têm largura fixa por
   instância: `.rule-lg` 224, `.rule-md` 156, `.rule-sm` 88. Isso foi decisão
   dele depois de um teste com `1fr` que deu errado — a linha encostava no texto.
   Não "consertar" isso.
 - **Nada arredondado** no `/work`. Thumbs, vídeos e imagens são de canto vivo.
-- **Botão:** sempre `PillButton`. Rosa, texto preto, 48 de altura, cambalhota 3D
-  no hover.
+- **Botão:** sempre `PillButton`. 48 de altura, sem seta. Desde 16/10: a
+  cor contrária do fundo (claro no escuro) e, no hover, um cinza quase da
+  cor do fundo (`--card`) com o texto em `--ink` — é o hover padrão de
+  botão. (Era rosa com cambalhota 3D; os dois saíram.)
 
 ## Armadilhas do projeto
 
@@ -99,11 +108,10 @@ npm run start   # serve o build em localhost:3000
 - **Imagens dos projetos** estão em `public/projects/<slug>/`. O CMS do Framer
   guardava URLs de `framerusercontent.com`; `src/content/assets.json` traduz
   URL → arquivo local, e `asset()` em `src/lib/projects.ts` faz a busca.
-- **Rodapé:** as redes ficam no centro exato da tela (`1fr auto 1fr`
-  acima de 900). Na grade (12/10) elas começaram na linha da coluna 13, e
-  o Rodrigo achou torto, puxado pra direita — voltou pro centro no mesmo
-  dia. O último item é ".md", o download do portfólio (`/portfolio.md`),
-  sem ícone, no mesmo estilo das redes. No celular empilha à esquerda.
+- **Não há rodapé** (16/10/2026, pedido do Rodrigo: "a gente já tá com
+  tudo isso na lateral"). O `SiteFooter` foi apagado (fica no histórico).
+  O download do portfólio em .md (`/portfolio.md`) continua no ar, mas sem
+  link no site — era o último item do rodapé.
 - **A raiz foi limpa em 28/09/2026.** O que não fazia parte do site no ar
   (site-v2, landings do curso, assets do site estático antigo, backups)
   está em `_to_delete/2026-09-28-faxina/`, com um LEIA-ME. `_to_delete/`
@@ -113,6 +121,13 @@ npm run start   # serve o build em localhost:3000
   em `public/`.
 
 ## Animações — o que já deu errado
+
+**Não há animação de texto no site** (16/10/2026, pedido do Rodrigo). Os
+links (`TextRoll`) não rolam mais — no hover só muda a cor; as frases do
+case (`LitText`) não acendem mais palavra por palavra; a faixa "MEDIA KIT
+—" do media kit (`TypeBand`) parou; o "View case study" só aparece, sem
+subir. O que segue animado é imagem e vídeo (colagem, flipbook, reel) e
+a marca girando com o scroll. Os itens abaixo ficam como histórico.
 
 - **`StripReveal`** (12/10/2026, no lugar do `MaskReveal`) é a revelação do
   tumulto.ai, trabalho do Rodrigo (código em `~/Developer/Tumulto/site`,
@@ -135,9 +150,11 @@ npm run start   # serve o build em localhost:3000
   sem repique) e o sublinhado fica parado, fazendo uma passada (some pela
   direita, volta pela esquerda). Vale pra redes da capa, e-mail e redes do
   rodapé. O `PillButton` continua com a cambalhota: é decisão do botão.
-  **Todo link de texto fica rosa (`--accent-pink`) no hover**, além do
-  movimento — TextRoll, links da barra do topo, nome do projeto e qualquer
-  `<a>` sublinhado (regra em globals) (14/10, pedido do Rodrigo).
+  **Todo link de texto fica cinza (`--hover`) no hover**, além do
+  movimento — TextRoll, links da barra, nome do projeto e qualquer `<a>`
+  sublinhado (regra em globals). Era rosa (14/10); em 16/10 o Rodrigo
+  tirou: "portfólio mais profissional, sem firula". O que já é cinza
+  (lista de projetos, ícones das redes) acende pro `--ink` no hover.
 - **`lag`** desencontra uma grade: a peça espera mais um tanto da janela antes
   de largar. O valor vem de hash do índice, **nunca `Math.random`** — o
   servidor e o navegador têm que chegar no mesmo número, senão é erro de
@@ -268,21 +285,18 @@ da capa fala pelos números automáticos, não pelos do JSON.
 São contas. Se um dia forem automatizados, a fórmula tem que ser decidida
 antes — senão vira número oficial inventado.
 
-## A pílula "See if we're a fit" (era a barra "Book a call")
+## A pílula "See if we're a fit" — saiu (16/10/2026)
 
-Desde 12/10/2026 o `MeetingBar` tem o desenho do brandbeet.com: pílula
-pequena de vidro, a marca num disco claro (28 em 34) e "See if we're a
-fit". A marca gira **com o scroll** (0.25° por pixel: descendo, horário;
-subindo, anti-horário; parado, parada) — não com o vento da capa, que é
-aleatório. Pedido do Rodrigo. Atrás dela, um desfoque progressivo
-no pé da tela — quatro camadas de `backdrop-filter` (2/5/10/18px), cada
-uma com a sua faixa de máscara — que aparece e some junto. Uma camada só
-com blur forte faz emenda visível; em degraus ela some. A lógica de
-entrar e sair abaixo continua a mesma.
+O `MeetingBar` (pílula flutuante de vidro + desfoque no pé da tela) saiu
+do site inteiro, a pedido: o contato mora no menu da barra lateral. O
+fecho "Your next decision." (`ClosingSection`, com o formulário) também
+saiu de todas as páginas — o Rodrigo vai pensar num CTA mais discreto; o
+componente e o `/api/contact` continuam no código.
 
 O "Selected work" também veio do brandbeet: `ProjectShowcase` — nome
 grande + "Services" (o campo `type`) e uma colagem de quatro imagens em
-5·7·4·8 colunas de 24, presas pelo topo, nos formatos medidos lá (quase
+5·7·4·8 colunas de 24 (desde 16/10 é proporção, não a grade; o vão
+entre as fotos é o da margem), presas pelo topo, nos formatos medidos lá (quase
 quadrada, retrato 4:5, quadrada e 6:5 — a última mais deitada que a de
 lá, pra ficar entre o retrato e a quadrada (14/10) — recorte com
 `object-fit: cover`, as fotos são 16:9), espelhada projeto sim, projeto
@@ -290,22 +304,6 @@ não. Sem botão: a barra "View project" saiu no mesmo dia; o nome e
 qualquer imagem levam pra `/projects/<slug>`. As
 fotos saem da galeria; a thumb só entra se faltar imagem (ela costuma ser
 recorte da primeira da galeria, e as duas lado a lado se repetiam).
-
-### Entrar e sair
-
-O `MeetingBar` é o mesmo componente em todas as páginas, e o que muda é
-**quem manda nele entrar e sair**:
-
-- **Entrar:** o piso é sempre a altura medida da navegação — enquanto o
-  contato do topo estiver na tela, seriam dois convites ao mesmo tempo.
-  `entraApos` é um piso a mais, em frações da janela. Na `/work` ele é 0.9
-  porque lá o herói termina com a faixa de números presa no rodapé da tela,
-  e a barra entrando antes sentaria em cima dela. Na `/mediakit` é 0: não
-  há faixa, e ela entra assim que o botão do topo some.
-- **Sair:** `hideOver`. O padrão é `.on-accent, #contact` — o amarelo do
-  fecho, onde o convite já ocupa a página inteira. Em página sem contato
-  (o media kit) quem a esconde é o `footer`, senão ela termina sentada em
-  cima das redes.
 
 ## O herói da `/work` (14/10/2026)
 
@@ -327,8 +325,16 @@ tudo na mesma cor. De cima pra baixo: o nome; "Creative Director / São
 Paulo, Brazil"; **Projects** (abre a lista dos projetos, na ordem da
 /work, cada um leva pra `/work#slug`), **Info** (`/info`) e
 **Playground** (`/playground`); um fio; LinkedIn,
-YouTube, Substack, X (`x.com/falabondioli`) e Email (copia o endereço).
+YouTube, Substack e X (`x.com/falabondioli`) em ícones de 15px, em
+cinza. O e-mail virou **Contact** no menu, embaixo de Playground (o
+clique copia o endereço). Hierarquia (16/10, segunda volta): Geist em
+caixa normal — nome e menu em 16px/--ink, o resto em 13px/--ink-60 —, e
+a lista de projetos abre deslizando, numerada, num fio vertical.
 No canto direito, sozinhos, EN / BR e o sol.
+
+A marca em cima do nome gira **com o scroll, com embalo** (`ScrollSpinLogo`,
+16/10): 0.25° por pixel, e quando o scroll para ela ainda desliza ~1s até
+parar (atrito de 7% por quadro). Não é o vento da capa.
 
 **O conteúdo fica do lado dela, não embaixo:** acima de 1100 a barra
 ocupa `--rail` (208px) além da margem, com fundo próprio, e a página
@@ -354,7 +360,32 @@ da barra (a seção passa `--top-size`/`--top-k` pro `.page-top`).
 
 **Toda página interna segue essa altura** (pedido do Rodrigo): a
 primeira seção leva `.page-top` e o título `.h3 .page-title` (globals).
-Vale pra /work, /info e /playground; página nova nasce assim.
+Vale pra /work, /info e /playground; página nova nasce assim. As páginas de projeto também
+(16/10): no case da Tattoaria, "Tattoaria · São Paulo" na linha (o "All
+projects" saiu, batia no EN / BR); nas sem case, o topo da capa.
+
+**Escala tipográfica (16/10, regra do Rodrigo):** texto — tudo que não é
+título — tem **só três tamanhos**: `--t-small` 12,8 (rótulo, ficha,
+legenda, menu, texto curto), `--t-medium` 16 (texto corrido; era 16→19, "muito grande") e
+`--t-large` 20→24 (abertura e destaque de texto). Não criar um quarto; os
+nomes antigos (`--t-body-sm`, `--t-body`, `--t-body-lg`, `--t-caption`,
+`--t-overline`) apontam pra eles. Títulos à parte: h3 22–29, números e
+frases grandes 32–48, título de case 40–80; a faixa do media kit e o
+título do fecho se ajustam à largura.
+
+## Sem linhas da grade; margens de 56 (16/10/2026)
+
+**As linhas verticais da grade saíram do site inteiro** (pedido do
+Rodrigo). O `GridLines` foi apagado; ficou só o `PageWidth`, que publica
+`--page-w` pro `--col`. As colunas continuam existindo (`.grid`, 24/12/6,
+`--col`) — só não são mais desenhadas. As colunas de margem (`--lead` /
+`--trail`) testadas no mesmo dia ficaram em 0.
+
+**Com a barra lateral (acima de 1100), tudo é 24:** o vão entre colunas
+e entre as fotos (`--col-gap`) e toda margem — da borda à barra, da barra
+ao conteúdo (o padding direito dela), do conteúdo à borda direita, o EN /
+BR e o topo. `--gutter: 24px`, `--rail: 200px` (176 de miolo). Passou por
+56 no mesmo dia ("foi muito"). No tablet e no celular segue 32 / 16.
 
 ## A grade (12/10/2026, do tumulto.ai)
 
@@ -366,6 +397,15 @@ Linha na borda esquerda de cada coluna e no meio do passo (uma a cada
 ~28px) + fechamento na borda direita do conteúdo.
 
 **A regra:** todo bloco começa em cima de uma linha. Pra isso:
+
+**A coluna de margem (16/10/2026):** com a barra lateral (acima de 1100),
+a primeira coluna da grade vira margem: as linhas continuam desenhadas a
+partir da barra, mas o conteúdo de toda página começa duas linhas depois
+(`--lead: 1`). Veio da /info, onde o Rodrigo gostou do respiro, e virou
+regra de todas. No mesmo dia, a mesma coluna do lado direito (`--trail:
+1`, margem direita `--gutter-r`): o bloco fica centrado na grade e o EN /
+BR do canto ganha espaço só dele. A grade desenha 26 colunas; o conteúdo
+usa 24. Quem sangra até a borda usa `--gutter-l` / `--gutter-r`.
 - `.grid` (globals) monta as mesmas colunas dentro de uma `.section`;
   `.g-left` / `.g-right` são as duas metades; `.to-line` faz uma caixa
   terminar na linha do meio da última coluna dela (o vão até a vizinha
@@ -381,6 +421,12 @@ o script de auditoria compara a borda esquerda de cada bloco com a linha
 mais próxima.
 
 ## Só a Tattoaria tem link (14/10/2026)
+
+**Direção (16/10/2026):** a Tattoaria segue como o único case completo,
+mas os outros projetos vão ganhar páginas internas **menores** — mais
+fotos, pouca informação, sem o porte do case. Quando uma ficar pronta,
+o slug entra no `COM_CASE` e o item do menu "Projects" passa a abrir a
+página dela (hoje os outros rolam até o projeto na /work).
 
 Decisão do Rodrigo: a Tattoaria é o único projeto com case de verdade
 (resultados, história), então é o **único com página interna linkada**.
@@ -458,7 +504,7 @@ Tattoaria tem um case deste porte.
 
 ## Tema claro e escuro (12/10/2026)
 
-Dark (`#121211`) é o padrão; light é o site como era. O tema mora no
+Dark (`#0c0c0b`, chumbo quase preto desde 16/10; era `#121211`) é o padrão; light é o site como era. O tema mora no
 `data-theme` do `<html>`, posto por um script no `<head>` antes da primeira
 pintura; o `ThemeToggle` troca e grava em `localStorage`. Ele mora **na barra do topo**, em
 linha e só texto: EN, BR, um tracinho e o sol — o quarto bloco dela
@@ -471,9 +517,9 @@ destaque) usa `.on-accent`, que devolve os tokens escuros de texto.
 Rodrigo, a partir da Tattoaria): `<main class="on-project">` usa `--bg` e
 `--ink`, e tudo dentro delas — template do CMS, case da Tattoaria,
 `ProjectPager`, `case/*` — vai por token: `--ink`, `--ink-60`, `--rule`,
-`--card` (cartão/fundo de mídia) e `--lit` (o destaque do texto que
-acende: verde-limão no escuro, verde escuro no claro, porque o limão some
-no fundo claro). Nada de cor escrita, nem `--bg-dark`/`--rule-dark`; a
+`--card` (cartão/fundo de mídia). O `--lit` (o destaque amarelo/
+verde-limão do texto que acende) saiu do efeito em 16/10, a pedido: o
+texto que acende vai de apagado pra branco, sem cor no meio. Nada de cor escrita, nem `--bg-dark`/`--rule-dark`; a
 exceção é texto por cima de foto (o contador do passeio), que é branco
 nos dois temas. A `SiteNav` perdeu o modo `dark` forçado.
 
@@ -499,6 +545,12 @@ E o que é mais expressivo em inglês fica em inglês no português também
 ("Selected work", "No bullshit") — não traduzir no automático.
 Mexeu num texto, num layout, numa imagem — conferir e aplicar em EN e PT,
 sem ele precisar pedir. Texto novo nasce nos dois idiomas.
+
+O inglês do site é **britânico contemporâneo** (judgement, jewellery,
+-ise), direto e conversado, sem ficar mais formal que o português —
+decidido na revisão da /info (16/10). Não misturar com o americano.
+(O `projects.json`, despejo do Framer das páginas sem case, ainda tem
+"color" americano; essas páginas são noindex e nada leva até elas.)
 
 Comentário de código e mensagem de commit seguem em português.
 

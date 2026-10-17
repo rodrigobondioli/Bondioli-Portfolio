@@ -22,7 +22,7 @@ export function href(lang: Lang, path: string) {
 
 /* As páginas que existem em português. As outras (media kit, projetos sem
    case) mandam o BR pra /pt/work, a vitrine. */
-const EM_PT = new Set(["/", "/work", "/info", "/playground", "/thanks", "/projects/tattoaria"])
+const EM_PT = new Set(["/", "/work", "/info", "/playground", "/contact", "/thanks", "/projects/tattoaria"])
 
 /** Pro EN / BR da barra: o endereço da página atual na outra língua. */
 export function trocarLingua(pathname: string, para: Lang) {
@@ -69,7 +69,7 @@ const en = {
     projects: "Projects",
     info: "Info",
     playground: "Playground",
-    email: "Email",
+    contact: "Contact",
   },
   social: "Social",
   langLabel: "Language",
@@ -85,26 +85,33 @@ const en = {
     title: "Work",
     description:
       "Selected work: brand, product and interface for startups and global brands. Work that started with a problem, not a prompt.",
-    manifestoLabel: "No point of view, no project.",
-    manifesto:
-      "Everyone is a prompt designer now. The result? Work that looks like it came from the same machine—because it did. I use the same tools. The difference is what I bring to them: a point of view, a problem worth solving, and the craft to make the answer feel inevitable. If you want fast and forgettable, plenty of people are waiting for your brief.",
     selectedWork: "Selected work",
-    contentCreator: "Content creator",
-    subscribers: "31K subscribers",
-    noBullshit: "No bullshit",
   },
 
   info: {
     title: "Info",
     description:
       "Rodrigo Bondioli, Creative Director in São Paulo: 20+ years across advertising, branding and digital products, Head of Creative at Netshoes and Americanas.com.",
-    stats: ["years in the creative industry", "projects delivered", "countries served"],
   },
 
   playground: {
     title: "Playground",
     description: "Experiments, side projects and things I make for the fun of it.",
     lead: "Experiments, side projects and things I make for the fun of it. Coming soon.",
+  },
+
+  contact: {
+    label: "Contact",
+    title: "Tell me what you\u2019re building.",
+    description:
+      "Tell Rodrigo Bondioli what you\u2019re building: brand, product or website. No finished brief needed.",
+    paragraphs: [
+      "It could be a brand getting off the ground, a product that needs to get better, or a website that no longer keeps up with how the business is growing.",
+      "You don\u2019t need to arrive with a finished brief. I\u2019d rather understand the problem before I start designing solutions.",
+      "Tell me a little about what you have in mind in the form below, and we\u2019ll see if it makes sense to work together.",
+    ],
+    emailLabel: "Rather write an email?",
+    photoAlt: "Rodrigo Bondioli at his desk, drawing on a pen tablet next to a laptop, in a bright room with plants and shelves.",
   },
 
   showcase: {
@@ -138,7 +145,7 @@ const en = {
     question: "What decision are you facing?",
     situation: "Your situation",
     placeholder: "Ex: we're about to rebuild the brand and I don't want the obvious version.",
-    submit: "Start with the problem",
+    submit: "Let\u2019s talk",
     sending: "Sending…",
     errName: "Tell me your name.",
     errEmail: "I need an address to reply to.",
@@ -153,14 +160,6 @@ const en = {
     retry: "Try again",
   },
 
-  footer: {
-    signature: "Always made with love",
-    home: "Rodrigo Bondioli — home",
-    md: "Download portfolio as Markdown (.md)",
-    mdTitle: "Download portfolio (.md)",
-  },
-
-  pill: "See if we’re a fit",
   soundOn: "Sound on",
   soundOff: "Sound off",
 
@@ -171,7 +170,6 @@ const en = {
   },
 
   caseUi: {
-    allProjects: "All projects",
     objective: "Objective",
     numbers: "Numbers",
     closing: "Closing",
@@ -193,7 +191,7 @@ const pt: Dict = {
     projects: "Projetos",
     info: "Info",
     playground: "Playground",
-    email: "E-mail",
+    contact: "Contato",
   },
   social: "Redes",
   langLabel: "Idioma",
@@ -209,26 +207,33 @@ const pt: Dict = {
     title: "Portfólio",
     description:
       "Trabalhos selecionados: marca, produto e interface pra startups e marcas globais. Trabalho que começou com um problema, não com um prompt.",
-    manifestoLabel: "Sem ponto de vista, sem projeto.",
-    manifesto:
-      "Todo mundo virou designer de prompt. O resultado? Trabalho que parece ter saído da mesma máquina—porque saiu. Eu uso as mesmas ferramentas. A diferença é o que eu levo pra elas: um ponto de vista, um problema que vale a pena resolver e o ofício pra fazer a resposta parecer inevitável. Se você quer rápido e esquecível, tem muita gente esperando o seu briefing.",
     selectedWork: "Selected work",
-    contentCreator: "Criador de conteúdo",
-    subscribers: "31 mil inscritos",
-    noBullshit: "No bullshit",
   },
 
   info: {
     title: "Info",
     description:
       "Rodrigo Bondioli, Diretor de Criação em São Paulo: mais de 20 anos entre publicidade, branding e produtos digitais, Head de Criação da Netshoes e da Americanas.com.",
-    stats: ["anos na indústria criativa", "projetos entregues", "países atendidos"],
   },
 
   playground: {
     title: "Playground",
     description: "Experimentos, projetos paralelos e coisas que eu faço pelo prazer de fazer.",
     lead: "Experimentos, projetos paralelos e coisas que eu faço pelo prazer de fazer. Em breve.",
+  },
+
+  contact: {
+    label: "Contato",
+    title: "Me conta o que você está construindo.",
+    description:
+      "Conta pro Rodrigo Bondioli o que você está construindo: marca, produto ou site. Não precisa de briefing pronto.",
+    paragraphs: [
+      "Pode ser uma marca saindo do papel, um produto que precisa melhorar ou um site que já não acompanha o crescimento do negócio.",
+      "Não precisa chegar com o briefing pronto. Prefiro entender o problema antes de sair desenhando soluções.",
+      "Me conta um pouco do que você tem em mente no formulário abaixo e a gente vê se faz sentido trabalhar juntos.",
+    ],
+    emailLabel: "Prefere mandar e-mail?",
+    photoAlt: "Rodrigo Bondioli na mesa de trabalho, desenhando numa mesa digitalizadora ao lado de um notebook, numa sala clara com plantas e estantes.",
   },
 
   showcase: {
@@ -262,7 +267,7 @@ const pt: Dict = {
     question: "Que decisão você tem pela frente?",
     situation: "A sua situação",
     placeholder: "Ex: vamos refazer a marca e eu não quero a versão óbvia.",
-    submit: "Comece pelo problema",
+    submit: "Vamos conversar",
     sending: "Enviando…",
     errName: "Me diz o seu nome.",
     errEmail: "Preciso de um endereço pra responder.",
@@ -277,14 +282,6 @@ const pt: Dict = {
     retry: "Tentar de novo",
   },
 
-  footer: {
-    signature: "Sempre feito com amor",
-    home: "Rodrigo Bondioli — início",
-    md: "Baixar o portfólio em Markdown (.md)",
-    mdTitle: "Baixar o portfólio (.md)",
-  },
-
-  pill: "Vamos ver se combina",
   soundOn: "Som ligado",
   soundOff: "Som desligado",
 
@@ -295,7 +292,6 @@ const pt: Dict = {
   },
 
   caseUi: {
-    allProjects: "Todos os projetos",
     objective: "Objetivo",
     numbers: "Números",
     closing: "Fecho",

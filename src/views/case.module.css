@@ -18,54 +18,78 @@
   --to-line: calc(var(--col) / 2 - var(--col-gap));
 }
 
-/* --- Tipos (os do tumulto, em Geist) ---
+/* --- Tipos ---
+   Desde 16/10 nos passos da escala do site (--t-*), como as outras
+   páginas: rótulos e textos pequenos em --t-body-sm, texto corrido em
+   --t-body-lg (o mesmo da /info), títulos de capítulo em --t-h3, número e
+   frase grande em --t-h2, título do case em --t-h1. Antes eram os corpos
+   do tumulto, fora da escala. Os pesos continuam os de lá.
+
+   (histórico) Os do tumulto, em Geist ---
    Pesos e corpos medidos lá com getComputedStyle (12/10, pedido do
    Rodrigo: "igualzinho à Tumulto"). Por isso aqui os títulos são 500 e os
    números 700, e não os 300 do resto do portfólio. */
 .label {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.75rem;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--t-small);
   line-height: 1.3;
   margin: 0;
 }
 .small {
   font-weight: 500;
-  font-size: clamp(0.8125rem, 0.798rem + 0.06vw, 0.875rem);
+  font-size: var(--t-small);
   line-height: 1.3;
   letter-spacing: -0.005em;
   margin: 0;
 }
 .bodyText {
-  font-size: clamp(0.9375rem, 0.907rem + 0.13vw, 1.0625rem);
-  line-height: 1.4;
+  font-size: var(--t-medium);
+  line-height: 1.5;
   letter-spacing: -0.01em;
 }
 .title {
   font-family: var(--font-display), system-ui, sans-serif;
   font-weight: 500;
-  font-size: clamp(1.375rem, 1.223rem + 0.65vw, 2rem);
-  line-height: 1;
+  font-size: var(--t-h3);
+  line-height: 1.1;
   letter-spacing: -0.03em;
   margin: 0;
+}
+
+/* O conteúdo começa na mesma altura das outras páginas (16/10, pedido
+   do Rodrigo): "Tattoaria · São Paulo" com as maiúsculas na linha do nome
+   da barra e do EN / BR — .page-top com o corpo dele (0,281em = Geist,
+   entrelinha 1.3). Antes começava ~130px abaixo. */
+.pageTop {
+  --top-size: var(--t-small);
+  --top-k: 0.281;
 }
 
 /* --- Abertura: uma tela só no desktop --- */
 .head {
   --gap: var(--s6);
-  padding-block: calc(var(--s7) + var(--s4)) var(--s6);
+  padding-block: 0 var(--s6);
   row-gap: var(--s4);
 }
+/* A ficha (a.)–(d.) não fica mais presa no pé da tela (16/10, pedido do
+   Rodrigo: sobrava muito espaço embaixo do subtítulo) — vem logo depois
+   dele, no mesmo vão que separa o título do subtítulo. */
+/* Padrão de espaçamento (16/10): entre seções --s7, entre blocos de uma
+   seção --s6, título → conteúdo --s4, dentro do capítulo --s5. A abertura
+   usa o de bloco (era uma fórmula pela altura da tela, ~81 em 1440) e a
+   ficha → vídeo também (era 32). */
 @media (min-width: 1101px) {
   .head {
-    --gap: clamp(32px, 9svh, 96px);
-    min-height: 100svh;
-    grid-template-rows: auto auto auto 1fr;
+    --gap: var(--s6);
     row-gap: 0;
-    padding-block: calc(var(--s7) + var(--s2)) var(--s4);
+    padding-block: 0 var(--s6);
   }
 }
 
+/* "Tattoaria · São Paulo" em cinza (16/10): não é destaque — o título e o
+   subtítulo já são brancos */
 .top {
+  color: var(--ink-60);
   position: relative;
   grid-column: 1 / -1;
   display: flex;
@@ -73,10 +97,14 @@
   gap: var(--s2);
   padding-block-end: var(--s3);
 }
+/* sem o fio embaixo (16/10, pedido do Rodrigo) */
 .top::after {
+  display: none;
   content: "";
   position: absolute;
-  inset: auto calc(var(--gutter) * -1) 0 calc(var(--gutter-l) * -1);
+  /* da largura do conteúdo, como o fio da ficha embaixo (16/10: as duas
+     linhas horizontais do mesmo tamanho; esta sangrava até as bordas) */
+  inset: auto 0 0 0;
   height: 1px;
   background: var(--rule);
 }
@@ -92,7 +120,7 @@
   text-wrap: balance;
   margin: 0;
   font-weight: 500;
-  font-size: clamp(2rem, 0.6rem + 4.2vw, 6rem);
+  font-size: var(--t-h1);
   line-height: 1;
   letter-spacing: -0.04em;
 }
@@ -102,12 +130,22 @@
 
 /* Começa na mesma coluna do "Creative Director" da barra do topo — 8 de
    24, 4 de 12 (14/10, pedido do Rodrigo; no tumulto era a 13). */
-.summary { grid-column: 1 / -1; text-wrap: balance; }
+/* No mesmo corpo da apresentação da /work (16/10, pedido do Rodrigo):
+   texto grande, peso normal — era um título de capítulo (h3, 500). */
+.summary {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: var(--t-medium);
+  font-weight: 400;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+/* encostado à esquerda, sob o título (16/10; antes começava na coluna 8) */
 @media (min-width: 641px) {
-  .summary { grid-column: 4 / 13; }
+  .summary { grid-column: 1 / 10; }
 }
 @media (min-width: 1101px) {
-  .summary { grid-column: 8 / 23; margin-block-start: var(--gap); }
+  .summary { grid-column: 1 / 16; margin-block-start: var(--gap); }
 }
 
 /* ficha: (a.) (b.) (c.) (d.) */
@@ -121,7 +159,7 @@
   border-block-start: 1px solid var(--rule);
 }
 @media (min-width: 1101px) {
-  .facts { align-self: end; margin-block-start: var(--gap); }
+  .facts { margin-block-start: var(--gap); }
 }
 .fact {
   grid-column: 1 / -1;
@@ -131,9 +169,9 @@
 }
 .fact dt { color: var(--muted); }
 .fact dd { margin: 0; text-wrap: balance; }
-/* Nas colunas da barra do topo (14/10, pedido do Rodrigo): Role no nome,
-   Where no "Creative Director", Scope no "Get in touch" e When no que
-   sobra, onde fica o idioma/tema — 1, 8, 15, 21 de 24 (1, 4, 7, 10 de 12). */
+/* Quatro colunas iguais na largura toda, todas alinhadas à esquerda
+   (16/10: a barra do topo, que ditava 1/8/15/21, virou a lateral). A
+   última alinhada à direita foi testada e saiu: quebrava o padrão. */
 @media (min-width: 641px) {
   .fact:nth-child(1) { grid-column: 1 / 4; }
   .fact:nth-child(2) { grid-column: 4 / 7; }
@@ -142,14 +180,17 @@
 }
 @media (min-width: 1101px) {
   .fact:nth-child(1) { grid-column: 1 / 7; }
-  .fact:nth-child(2) { grid-column: 8 / 14; }
-  .fact:nth-child(3) { grid-column: 15 / 21; }
-  .fact:nth-child(4) { grid-column: 21 / -1; }
+  .fact:nth-child(2) { grid-column: 7 / 13; }
+  .fact:nth-child(3) { grid-column: 13 / 19; }
+  .fact:nth-child(4) { grid-column: 19 / -1; }
 }
 
 
 /* --- Objetivo --- */
 .objective { margin-block-start: var(--s6); }
+/* o objetivo não tem número do lado (como os capítulos): encosta na
+   margem, coluna 1 (16/10) */
+.objective > p { grid-column: 1 / -1; }
 
 /* --- Números: 2 cards grandes em cima, 3 fotos embaixo --- */
 .numbers {
@@ -172,11 +213,11 @@
   background: var(--card);
 }
 @media (min-width: 641px) {
-  .numCard { grid-column: span 6; min-height: 16rem; }
+  .numCard { grid-column: span 6; min-height: 12rem; }
   .numCard:first-child { margin-inline-end: var(--to-line); }
 }
 @media (min-width: 1101px) {
-  .numCard { grid-column: span 12; min-height: 20rem; }
+  .numCard { grid-column: span 12; min-height: 14rem; } /* era 20rem (16/10: mais baixos) */
 }
 
 .numPhotoItem {
@@ -222,12 +263,14 @@
   margin: 0;
   font-family: var(--font-display), system-ui, sans-serif;
   font-weight: 700;
-  font-size: clamp(1.625rem, 1.049rem + 2.46vw, 4rem);
+  font-size: var(--t-h2);
   line-height: 1.08;
   letter-spacing: -0.035em;
   font-variant-numeric: tabular-nums;
 }
-.numLabel { max-width: 34ch; color: var(--muted); text-wrap: pretty; }
+/* sem teto de 34ch (16/10): no card largo a legenda quebrava em duas
+   linhas com espaço sobrando; agora ocupa a largura do card */
+.numLabel { color: var(--muted); text-wrap: pretty; }
 
 /* --- Capítulos: (01) 1–2 · título 3–10 · texto 13–24, mídia depois --- */
 .chapter {
@@ -238,15 +281,18 @@
   align-items: start;
 }
 @media (min-width: 641px) {
-  .chapter { row-gap: calc(var(--s4) * 2); }
+  .chapter { row-gap: var(--s5); } /* dentro do capítulo (era 64, fora da escala) */
 }
 
 .chNum { grid-column: 1 / -1; color: var(--muted); }
 @media (min-width: 641px) {
   .chNum { grid-column: 1 / 2; padding-block-start: 0.6em; }
 }
+/* 16/10: o bloco da esquerda uma coluna mais perto da margem (sem as
+   linhas da grade, a coluna 3 parecia solta): número na 1, título, foto
+   ao lado, títulos da lista e veículos de imprensa a partir da 2 */
 @media (min-width: 1101px) {
-  .chNum { grid-column: 1 / 3; }
+  .chNum { grid-column: 1 / 2; }
 }
 
 .chTitle { grid-column: 1 / -1; text-wrap: balance; }
@@ -254,7 +300,7 @@
   .chTitle { grid-column: 2 / 6; }
 }
 @media (min-width: 1101px) {
-  .chTitle { grid-column: 3 / 11; }
+  .chTitle { grid-column: 2 / 11; }
 }
 
 .chText {
@@ -264,6 +310,7 @@
   text-wrap: pretty;
 }
 .chText p { margin: 0; }
+.chRest { display: grid; gap: var(--s2); }
 @media (min-width: 641px) {
   .chText { grid-column: 6 / 13; }
 }
@@ -285,12 +332,17 @@
   .chSide { grid-column: 2 / 6; grid-row: 2; margin-inline-end: var(--to-line); }
   /* a legenda fica pendurada embaixo, fora da conta: o pé da célula é o pé da foto */
   .chSide .caption { position: absolute; inset: calc(100% + var(--s1)) 0 auto; }
-  .chLead, .chRest { grid-row: 2; }
-  .chLead { align-self: start; margin-block-start: calc((1lh - 1cap) / -2); }
-  .chRest { align-self: end; }
+  .chPair {
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--s2);
+  }
+  .chLead { margin-block-start: calc((1lh - 1cap) / -2); }
 }
 @media (min-width: 1101px) {
-  .chSide { grid-column: 3 / 11; }
+  .chSide { grid-column: 2 / 11; }
 }
 
 .quote { padding-block-start: var(--s4); }
@@ -317,7 +369,7 @@
   .listText { grid-column: 6 / 13; }
 }
 @media (min-width: 1101px) {
-  .listTitle { grid-column: 3 / 11; }
+  .listTitle { grid-column: 2 / 11; }
   .listText { grid-column: 13 / 25; text-wrap: balance; }
 }
 
@@ -357,12 +409,12 @@
   .pressArrow { grid-column: -2 / -1; grid-row: auto; align-self: baseline; }
 }
 @media (min-width: 1101px) {
-  .pressOutlet { grid-column: 3 / 11; }
+  .pressOutlet { grid-column: 2 / 11; }
   .pressTitle { grid-column: 13 / 24; }
 }
 @media (hover: hover) {
   .pressRow:hover .pressTitle,
-  .pressRow:hover .pressArrow { color: var(--accent-pink); } /* o rosa dos links do site (era o verde do tumulto) */
+  .pressRow:hover .pressArrow { color: var(--hover); } /* o hover dos links do site (era o rosa; antes, o verde do tumulto) */
   .pressRow:hover .pressArrow { translate: 2px -2px; }
 }
 
@@ -482,22 +534,42 @@
   padding-block: var(--s6) var(--s7);
   border-block-start: 1px solid var(--rule);
 }
+/* Fecho (16/10): sem as linhas da grade, frase à esquerda e texto à
+   direita pareciam soltos. Agora os dois na margem esquerda — a frase na
+   coluna 1 (não tem número do lado, como o objetivo), o texto embaixo
+   dela, na largura de leitura; os créditos seguem com a lista à direita. */
+.closing > p { grid-column: 1 / -1; }
 .closing .body { grid-column: 1 / -1; justify-items: start; }
 @media (min-width: 641px) {
-  .closing .body { grid-column: 6 / 13; }
+  .closing .body { grid-column: 1 / 9; }
 }
 @media (min-width: 1101px) {
-  .closing .body { grid-column: 13 / 25; }
+  .closing .body { grid-column: 1 / 13; }
 }
 .cta { margin-block-start: var(--s4); }
 
-/* --- Créditos --- */
-.credits { padding-block-end: var(--s7); row-gap: var(--s4); }
-.creditsLabel { grid-column: 1 / -1; color: var(--muted); }
-.creditList { grid-column: 1 / -1; margin: 0; }
+/* --- Créditos: dentro do fecho, ao lado do texto --- */
+.credits {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+.creditsLabel { color: var(--muted); }
+.creditList { margin: 0; }
 @media (min-width: 1101px) {
-  .creditsLabel { grid-column: 1 / 13; }
-  .creditList { grid-column: 13 / 25; }
+  /* frase e texto na metade esquerda; os créditos na direita, começando
+     na altura da frase (16/10): o topo das maiúsculas do "Credits" no
+     topo das maiúsculas do "Every market…" (0,17em da frase, entrelinha
+     1.08, menos 0,281em do rótulo) */
+  .closing > p { grid-column: 1 / 13; grid-row: 1; }
+  .closing .body { grid-column: 1 / 13; grid-row: 2; }
+  .credits {
+    grid-column: 13 / 25;
+    grid-row: 1 / span 2;
+    align-self: start;
+    padding-top: calc(0.17 * var(--t-h2) - 0.281 * var(--t-small));
+  }
 }
 .creditRow {
   display: flex;

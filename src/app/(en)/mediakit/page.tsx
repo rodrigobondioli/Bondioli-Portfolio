@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
 import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
-import { SiteFooter } from "@/components/SiteFooter"
-import MeetingBar from "@/components/MeetingBar"
 import YouTube from "@/components/YouTube"
 import AboutSection from "@/components/AboutSection"
 import TypeBand from "@/components/TypeBand"
@@ -298,14 +296,11 @@ export default async function MediaKitPage() {
         {/* ---------- Sobre (o mesmo da /work) ---------- */}
         <AboutSection />
       </main>
-
-      <SiteFooter />
       {/* Duas diferenças em relação à /work, e as duas são por falta de
           vizinho: aqui não há faixa de números no pé do herói, então a
           barra pode entrar assim que o "Say hello" do topo sai da tela; e
           não há contato, então quem a esconde no fim é o rodapé — senão
           ela termina a página sentada em cima das redes. */}
-      <MeetingBar hideOver="footer" entraApos={0} />
     </>
   )
 }

@@ -1,7 +1,12 @@
 import localFont from "next/font/local"
 
 /**
- * Uma família só: Geist. Texto e títulos na Geist; a "ficha técnica"
+ * Uma família só: Geist — e, desde 16/10/2026, só a Geist normal: a Geist
+ * Mono saiu do site (pedido do Rodrigo: não havia critério pra onde ela
+ * entrava) e o arquivo foi apagado; a Geist Pixel foi testada no mesmo dia
+ * e também saiu.
+ *
+ * Antes: Texto e títulos na Geist; a "ficha técnica"
  * (rótulos em caixa alta, metadados de projeto, números da faixa do
  * herói, idioma, a abertura) na Geist Mono — texto que se lê como dado.
  *
@@ -33,12 +38,4 @@ export const body = localFont({
   display: "swap",
   fallback: ["system-ui", "sans-serif"],
   adjustFontFallback: "Arial",
-})
-
-export const mono = localFont({
-  src: [{ path: "../../public/fonts/GeistMono-Variable.woff2", weight: "100 900", style: "normal" }],
-  variable: "--font-mono",
-  display: "swap",
-  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
-  adjustFontFallback: false,
 })

@@ -1,5 +1,5 @@
 import NavRail from "./NavRail"
-import { orderedProjects } from "@/lib/projects"
+import { orderedProjects, COM_CASE } from "@/lib/projects"
 import order from "@/content/order.json"
 import type { Lang } from "@/i18n"
 
@@ -30,6 +30,8 @@ export default function SiteNav({
   const projects = orderedProjects(order as string[]).map((p) => ({
     slug: p.slug,
     name: p.projectName ?? p.slug,
+    // quem tem case vai pra página dele; os outros, pro projeto na /work
+    caso: COM_CASE.has(p.slug),
   }))
   return <NavRail brandHref={brandHref} lang={lang} projects={projects} />
 }

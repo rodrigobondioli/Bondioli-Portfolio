@@ -7,15 +7,19 @@ import s from "./AboutSection.module.css"
    uma cópia (retrato no lugar do vídeo, texto e espaçamento próprios) que
    foi se descolando (14/10, pedido do Rodrigo). Mudou aqui, muda nas duas. */
 
-export default function AboutSection({ lang = "en" }: { lang?: Lang }) {
+export default function AboutSection({
+  lang = "en",
+  top = false,
+}: {
+  lang?: Lang
+  /** abre a página (/info): o título na linha da barra e vira o h1 */
+  top?: boolean
+}) {
   const t = dict[lang]
+  const Titulo = top ? "h1" : "h2"
   return (
-    <section className={`section ${s.about}`} id="about">
+    <section className={`section ${s.about} ${top ? `page-top ${s.top}` : ""}`} id="about">
       <div className={`container ${s.aboutInner}`}>
-        <div className={s.aboutHead}>
-          <h2 className="h3">{t.about.title}</h2>
-        </div>
-
         <div className={s.aboutBody}>
           <div className={`to-line ${s.aboutVideo}`}>
             <video
@@ -28,9 +32,13 @@ export default function AboutSection({ lang = "en" }: { lang?: Lang }) {
             />
           </div>
           <div className={`g-right ${s.aboutText}`}>
-            {/* O cargo sai do cabeçalho e vem pra cá: encostado no topo
-                do vídeo e na esquerda do texto. */}
-            <p className={`overline ${s.aboutRole}`}>{t.role}</p>
+            {/* O título veio pra cá (16/10, pedido do Rodrigo): "joga pra
+                direita, junto com o texto". Ele e o cargo no topo da
+                coluna, na altura do topo do vídeo. */}
+            <div className={s.aboutHead}>
+              <Titulo className="h3 page-title">{t.about.title}</Titulo>
+              <p className={`overline ${s.aboutRole}`}>{t.role}</p>
+            </div>
             <div className={s.aboutCopy}>
               <p className="body">{t.about.body}</p>
               <Brands label={t.about.brands} />

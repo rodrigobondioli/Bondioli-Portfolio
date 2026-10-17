@@ -48,7 +48,7 @@
    tamanho (--t-caption, um passo abaixo do rótulo), peso normal,
    sublinhado, e o mesmo cubo no hover (CubeLink). */
 .socialLink {
-  font-size: var(--t-caption);
+  font-size: var(--t-small);
   line-height: 1.3;
 }
 
@@ -66,7 +66,7 @@
 
 /* Medido no Framer: 12.8/16.64 em bold. */
 .label {
-  font-size: var(--t-body-sm);
+  font-size: var(--t-small);
   font-weight: 700;
   line-height: 1.3;
   margin: 0;
@@ -74,11 +74,11 @@
 
 /* O e-mail em peso normal e sublinhado — é o que o diferencia do rótulo.
    Um passo abaixo do rótulo no tamanho: no Framer os dois eram 12.8, mas
-   o Rodrigo pediu menor duas vezes. Voltar pra var(--t-body-sm) se mudar
+   o Rodrigo pediu menor duas vezes. Voltar pra var(--t-small) se mudar
    de ideia. */
 .email {
   font-weight: 400;
-  font-size: var(--t-caption);
+  font-size: var(--t-small);
 }
 
 .bio {
