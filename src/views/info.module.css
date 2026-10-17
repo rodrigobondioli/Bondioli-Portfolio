@@ -160,6 +160,11 @@
   .side { position: static; max-height: none; overflow: visible; }
   .photo { width: min(70%, 24rem); }
 }
+/* Celular: a foto na largura toda (17/10, pedido do Rodrigo; vale pra
+   /info e /contact, que têm a mesma foto no mesmo lugar) */
+@media (max-width: 640px) {
+  .photo { width: 100%; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .seta { transition: none; }
