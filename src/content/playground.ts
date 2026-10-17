@@ -32,7 +32,8 @@ export const PLAYGROUND: PecaPlayground[] = [
   { ratio: "2 / 3" },
   { ratio: "3 / 2" },
   // coluna 3
-  { ratio: "3 / 4" },
+  // 07: a camiseta do Monster, no corpo (17/10; original em _originais/playground/)
+  { ratio: "3 / 4", src: "/playground/tshirt-monster.webp", title: "Black Monster T-shirt worn by a man leaning on a concrete wall" },
   { ratio: "4 / 3" },
   { ratio: "1 / 1" },
   // coluna 4
