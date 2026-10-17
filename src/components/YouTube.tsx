@@ -23,8 +23,13 @@ import styles from "./YouTube.module.css"
  * YouTube — LCP de 5,6s no celular em 4G. Aqui ela vem do mesmo servidor,
  * em WebP, com prioridade. Vídeo sem capa local segue com a do YouTube.
  */
-const CAPA_LOCAL: Record<string, string> = {
-  oHxfuNjpOuo: "/projects/tattoaria/case/filme-capa.webp",
+// `celular`: a versão de 720px pra tela de até 640 (o degrau do celular) —
+// lá a capa ocupa ~360px, e a de 1280 era peso à toa no 4G
+const CAPA_LOCAL: Record<string, { src: string; celular: string }> = {
+  oHxfuNjpOuo: {
+    src: "/projects/tattoaria/case/filme-capa.webp",
+    celular: "/projects/tattoaria/case/filme-capa-720.webp",
+  },
 }
 
 type Props = {
@@ -153,20 +158,23 @@ export default function YouTube({
             onLoad={() => setPlaying(true)}
           />
         ) : null}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className={styles.poster}
-          src={CAPA_LOCAL[id] ?? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
-          fetchPriority={CAPA_LOCAL[id] ? "high" : undefined}
-          alt=""
-          aria-hidden="true"
-          data-hidden={capaFora || undefined}
-          // nem todo vídeo tem a capa grande; a média existe sempre
-          onError={(e) => {
-            const img = e.currentTarget
-            if (!img.src.includes("hqdefault")) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
-          }}
-        />
+        <picture>
+          {CAPA_LOCAL[id] ? <source media="(max-width: 640px)" srcSet={CAPA_LOCAL[id].celular} /> : null}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className={styles.poster}
+            src={CAPA_LOCAL[id]?.src ?? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+            fetchPriority={CAPA_LOCAL[id] ? "high" : undefined}
+            alt=""
+            aria-hidden="true"
+            data-hidden={capaFora || undefined}
+            // nem todo vídeo tem a capa grande; a média existe sempre
+            onError={(e) => {
+              const img = e.currentTarget
+              if (!img.src.includes("hqdefault")) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+            }}
+          />
+        </picture>
         <button
           className={styles.soundToggle}
           onClick={toggleSound}
