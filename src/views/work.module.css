@@ -95,6 +95,22 @@
 @media (max-width: 900px) {
   .destaqueInfo { grid-template-columns: 1fr; row-gap: var(--s5); }
 }
+/* No celular os três cards se empilham na largura toda (17/10, pedido do
+   Rodrigo): lado a lado eles tinham 104px e a legenda estourava o
+   quadrado — cada um ficava de uma altura. Na largura toda o quadrado
+   viraria 358px de altura; aqui o card tem a altura do conteúdo, com o
+   número em cima e a legenda embaixo, como nos outros. */
+@media (max-width: 640px) {
+  .numeros {
+    grid-template-columns: 1fr;
+    row-gap: var(--col-gap);
+  }
+  .numeros li {
+    aspect-ratio: auto;
+    gap: var(--s3);
+  }
+  .numeros b { font-size: var(--t-h3); }
+}
 
 /* Título de seção = rótulo (17/10, auditoria de hierarquia): pequeno e
    cinza, como o "Contact" e o "About"; o nome do projeto continua grande.

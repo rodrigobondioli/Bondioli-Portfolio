@@ -32,3 +32,24 @@
   color: var(--ink-60);
 }
 .email { font-size: var(--t-small); }
+
+/* No celular, empilhado (17/10, pedido do Rodrigo: lado a lado ficava
+   estranho — o rótulo ao lado do título e a pergunta do e-mail solta ao
+   lado do botão). De cima pra baixo: rótulo, título, botão e, embaixo
+   dele, a pergunta com o e-mail. */
+@media (max-width: 640px) {
+  .convite {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .texto {
+    flex-direction: column;
+    gap: var(--s2);
+  }
+  .acao {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: var(--s4);
+  }
+  .ou { margin-bottom: calc(var(--s1) - var(--s4)); }
+}
