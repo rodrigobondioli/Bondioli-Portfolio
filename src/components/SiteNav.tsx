@@ -19,11 +19,11 @@ import type { Lang } from "@/i18n"
  * Aqui é só a parte do servidor: a lista de projetos, na ordem da /work.
  */
 export default function SiteNav({
-  brandHref = "/",
+  brandHref = "/work",
   lang = "en",
 }: {
-  /* o nome sobe um nível: da /work vai pra capa; de um projeto ou do
-     media kit, volta pra /work */
+  /* o nome e a marca levam pra /work, de qualquer página (17/10, pedido
+     do Rodrigo: a /work é a casa do site; ia pra capa) */
   brandHref?: string
   lang?: Lang
 }) {

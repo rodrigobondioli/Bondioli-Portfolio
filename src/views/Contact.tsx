@@ -23,7 +23,7 @@ export default function Contact({ lang }: { lang: Lang }) {
       <SmoothScroll />
       <SiteNav lang={lang} />
 
-      <main>
+      <main id="conteudo" tabIndex={-1}>
         <section className={`section page-top ${s.body}`}>
           <div className={`container grid ${s.grid}`}>
             <div className={s.side}>

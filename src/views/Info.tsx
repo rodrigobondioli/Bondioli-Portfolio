@@ -38,7 +38,7 @@ export default function Info({ lang }: { lang: Lang }) {
       <PersonJsonLd lang={lang} />
       <SiteNav lang={lang} />
 
-      <main>
+      <main id="conteudo" tabIndex={-1}>
         <section className={`section page-top ${s.body}`}>
           <div className={`container grid ${s.grid}`}>
             {/* com uma lista grande aberta, a coluna rola por dentro */}

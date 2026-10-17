@@ -42,7 +42,7 @@ export default function Work({ lang }: { lang: Lang }) {
       <VideoSync />
       <VideoForaDaTela />
 
-      <main>
+      <main id="conteudo" tabIndex={-1}>
         {/* ---------- Arquivo ---------- */}
         <section className={`section page-top ${s.archive}`}>
           <div className={`container ${s.archiveInner}`}>

@@ -142,7 +142,7 @@ export default async function ProjectPage({
       <SmoothScroll />
       <SiteNav brandHref="/work" />
 
-      <main className={`on-project ${s.page}`}>
+      <main id="conteudo" tabIndex={-1} className={`on-project ${s.page}`}>
         {/* ---------- Capa ---------- */}
         <section className={`section page-top ${s.heroSection}`}>
           <div className="container">

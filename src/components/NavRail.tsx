@@ -1,11 +1,12 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ScrollSpinLogo } from "./Logo"
 import TextRoll from "./TextRoll"
 import ThemeToggle from "./ThemeToggle"
+import { soltarScroll, travarScroll } from "@/lib/lenis"
 import { dict, href, type Lang } from "@/i18n"
 import styles from "./SiteNav.module.css"
 
@@ -55,19 +56,66 @@ export default function NavRail({
   // trocou de página (ou de âncora pela lista): o menu do celular fecha
   useEffect(() => setMenu(false), [pathname])
 
-  // menu aberto no celular: Esc fecha
+  // Menu aberto no celular (17/10, auditoria de acessibilidade): Esc fecha;
+  // o resto da página fica inerte (o Tab passava pros links escondidos
+  // atrás do menu) e parado; ao fechar, o foco volta pro botão "Menu" (ia
+  // pro começo da página).
+  const header = useRef<HTMLElement>(null)
+  const burger = useRef<HTMLButtonElement>(null)
+  const abriu = useRef(false)
   useEffect(() => {
-    if (!menu) return
+    if (!menu) {
+      if (abriu.current) burger.current?.focus()
+      return
+    }
+    abriu.current = true
     const esc = (e: KeyboardEvent) => e.key === "Escape" && setMenu(false)
     window.addEventListener("keydown", esc)
-    return () => window.removeEventListener("keydown", esc)
+    // os irmãos do menu, subindo até o <body>, saem do Tab e da leitura
+    const inertes: Element[] = []
+    for (let el: Element | null = header.current; el && el !== document.body; el = el.parentElement) {
+      for (const irmao of el.parentElement?.children ?? []) {
+        if (irmao !== el && !irmao.hasAttribute("inert")) {
+          irmao.setAttribute("inert", "")
+          inertes.push(irmao)
+        }
+      }
+    }
+    travarScroll()
+    document.documentElement.style.overflow = "hidden"
+    return () => {
+      window.removeEventListener("keydown", esc)
+      inertes.forEach((el) => el.removeAttribute("inert"))
+      soltarScroll()
+      document.documentElement.style.overflow = ""
+    }
   }, [menu])
 
   const work = href(lang, "/work")
-  const fechar = () => setMenu(false)
+  // fechou indo pra um link: o foco fica com a página nova, não no botão
+  const fechar = () => {
+    abriu.current = false
+    setMenu(false)
+  }
 
   return (
     <>
+    {/* Pular pro conteúdo (17/10, auditoria de acessibilidade): o primeiro
+        Tab da página. Invisível até receber o foco do teclado; leva ao
+        <main id="conteudo"> e poupa as ~11 paradas da barra. */}
+    <a
+      href="#conteudo"
+      className={styles.pular}
+      // o scroll suave (Lenis) segura a âncora: o foco vai na mão
+      onClick={(e) => {
+        const alvo = document.getElementById("conteudo")
+        if (!alvo) return
+        e.preventDefault()
+        alvo.focus()
+      }}
+    >
+      {t.skipToContent}
+    </a>
     {/* No desktop o idioma e o tema ficam fora da barra fixa: rolam junto
         com a página (16/10 — presos no canto, passavam por cima do
         "Services" dos projetos). Abaixo de 1100 quem aparece é o de dentro
@@ -75,7 +123,7 @@ export default function NavRail({
     <div className={styles.prefsPage}>
       <ThemeToggle lang={lang} />
     </div>
-    <header className={`${styles.nav} ${menu ? styles.open : ""}`} data-rail="">
+    <header ref={header} className={`${styles.nav} ${menu ? styles.open : ""}`} data-rail="">
       <Link href={href(lang, brandHref)} className={`no-underline ${styles.brand}`} data-roll-host="">
         {/* a marca gira com o scroll, com embalo no fim (16/10; antes
             girava sozinha, no vento da capa) */}
@@ -88,6 +136,7 @@ export default function NavRail({
       </div>
 
       <button
+        ref={burger}
         type="button"
         className={styles.burger}
         aria-expanded={menu}

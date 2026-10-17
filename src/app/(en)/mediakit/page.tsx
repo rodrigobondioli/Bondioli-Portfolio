@@ -82,7 +82,7 @@ export default async function MediaKitPage() {
       {/* A página não tem formulário: o "Say hello" atravessa pra /work */}
       <SiteNav brandHref="/work" />
 
-      <main>
+      <main id="conteudo" tabIndex={-1}>
         {/* ---------- Capa ---------- */}
         <section className={s.hero}>
           <h1 className="sr-only">

@@ -21,7 +21,10 @@ export default function CardReveal({
   style,
   ordem = 0,
   largo = false,
+  rotulo,
 }: {
+  /** descrição da peça pro leitor de tela (vídeo: ele não aceita a dele) */
+  rotulo?: string
   /** peça que vale por duas (data-largo: linha inteira no tablet/celular) */
   largo?: boolean
   children: ReactNode
@@ -62,6 +65,7 @@ export default function CardReveal({
       className={`${styles.card} ${className}`}
       style={{ ...style, ["--ordem" as string]: ordem }}
       data-largo={largo || undefined}
+      {...(rotulo ? { role: "img", "aria-label": rotulo } : {})}
     >
       {children}
     </div>

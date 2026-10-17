@@ -129,7 +129,7 @@ export default function ProjectShowcase({
         loop
         playsInline
         preload="none"
-        {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })}
+        aria-hidden="true"
         data-sync={proprio?.sync}
       />
     ) : (
@@ -156,7 +156,17 @@ export default function ProjectShowcase({
     const estilo = { ["--span" as string]: fmt?.span ?? slots[i].span, ["--vaos" as string]: fmt?.vaos ?? 0, aspectRatio: fmt?.ratio ?? slots[i].ratio, order: pos }
     // a entrada do brandbeet, em sequência na linha (de 4 em 4), na ordem da tela
     return (
-      <CardReveal key={key} className={styles.shot} style={estilo} ordem={pos % 4} largo={!!fmt?.vaos}>
+      <CardReveal
+        key={key}
+        className={styles.shot}
+        style={estilo}
+        ordem={pos % 4}
+        largo={!!fmt?.vaos}
+        // o texto do vídeo vai na caixa dele: <video> não aceita o papel de
+        // imagem (17/10, auditoria de acessibilidade). Com case, quem fala
+        // é o link.
+        rotulo={video && !linked && alt ? alt : undefined}
+      >
         {conteudo}
       </CardReveal>
     )

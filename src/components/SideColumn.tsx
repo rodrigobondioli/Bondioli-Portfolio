@@ -17,7 +17,7 @@ export default function SideColumn({
   className?: string
   children: React.ReactNode
 }) {
-  const ref = useRef<HTMLElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [transborda, setTransborda] = useState(false)
 
   useEffect(() => {
@@ -39,8 +39,11 @@ export default function SideColumn({
   }, [])
 
   return (
-    <aside ref={ref} className={className} data-lenis-prevent={transborda ? "" : undefined}>
+    // div e não <aside> (17/10, auditoria de acessibilidade): ela fica
+    // dentro do <main>, e um "complementar" lá dentro confunde a navegação
+    // por regiões do leitor de tela. Visual igual: o estilo é pela classe.
+    <div ref={ref} className={className} data-lenis-prevent={transborda ? "" : undefined}>
       {children}
-    </aside>
+    </div>
   )
 }

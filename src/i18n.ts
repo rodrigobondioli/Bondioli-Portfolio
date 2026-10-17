@@ -92,6 +92,7 @@ const en = {
   emailCopied: "Email copied",
   couldNotCopy: "Could not copy",
   copyEmail: "Copy email",
+  skipToContent: "Skip to content",
   nav: {
     menu: "Menu",
     close: "Close",
@@ -227,6 +228,7 @@ const pt: Dict = {
   emailCopied: "E-mail copiado",
   couldNotCopy: "Não deu pra copiar",
   copyEmail: "Copiar o e-mail",
+  skipToContent: "Pular pro conteúdo",
   nav: {
     menu: "Menu",
     close: "Fechar",

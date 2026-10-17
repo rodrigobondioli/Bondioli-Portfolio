@@ -156,7 +156,7 @@ export default function Tattoaria({ lang }: { lang: Lang }) {
       <HoverZoom />
       <SiteNav brandHref="/work" lang={lang} />
 
-      <main className={`on-project ${s.page}`}>
+      <main id="conteudo" tabIndex={-1} className={`on-project ${s.page}`}>
         <div className={`section page-top ${s.pageTop}`}>
           <div className="container">
             {/* ---------- Abertura ---------- */}

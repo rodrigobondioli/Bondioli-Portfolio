@@ -19,7 +19,7 @@ export default function Playground({ lang }: { lang: Lang }) {
       <SmoothScroll />
       <SiteNav lang={lang} />
 
-      <main className={s.page}>
+      <main id="conteudo" tabIndex={-1} className={s.page}>
         <section className="section page-top">
           <div className={`container ${s.inner}`}>
             {/* rótulo no topo, como as outras páginas (17/10, auditoria: era
