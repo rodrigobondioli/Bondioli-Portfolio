@@ -124,7 +124,16 @@
   .bio { max-width: none; }
 
   .socialTop { display: none; }
-  .role, .dot { display: none; }
+  .dot { display: none; }
+  /* o cargo sai só da vista: ele faz parte do H1 (o mesmo do .sr-only) */
+  .role {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
   .socialBottom { display: block; }
 
   .contact {

@@ -1,4 +1,5 @@
 import SiteNav from "@/components/SiteNav"
+import PersonJsonLd from "@/components/PersonJsonLd"
 import SmoothScroll from "@/components/SmoothScroll"
 import CopyEmail from "@/components/CopyEmail"
 import SideColumn from "@/components/SideColumn"
@@ -34,6 +35,7 @@ export default function Info({ lang }: { lang: Lang }) {
   return (
     <>
       <SmoothScroll />
+      <PersonJsonLd lang={lang} />
       <SiteNav lang={lang} />
 
       <main>

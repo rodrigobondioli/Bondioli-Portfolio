@@ -1,6 +1,7 @@
 import { SpinningLogo } from "@/components/Logo"
 import CopyEmail from "@/components/CopyEmail"
 import CubeLink from "@/components/CubeLink"
+import PersonJsonLd from "@/components/PersonJsonLd"
 import { dict, type Lang } from "@/i18n"
 import styles from "./home.module.css"
 
@@ -49,15 +50,20 @@ export default function Home({ lang }: { lang: Lang }) {
   const t = dict[lang]
   return (
     <main className={styles.page}>
+      <PersonJsonLd lang={lang} />
       <header className={styles.top}>
         {/* O mesmo desenho do nome da barra das outras páginas (SiteNav):
             nome, ponto apagado, cargo em cinza — e o cargo some no celular,
-            como lá. */}
-        <p className={`${styles.label} ${styles.brand}`}>
-          <span>Rodrigo Bondioli</span>
-          <span className={styles.dot} aria-hidden="true">·</span>
+            como lá. É o H1 da capa (17/10, SEO): diz quem e o quê, sem
+            frase nova. No celular o cargo sai só da vista (não do código),
+            pra o título continuar inteiro. */}
+        <h1 className={`${styles.label} ${styles.brand}`}>
+          {/* os espaços entre os spans não aparecem (flex) e deixam o texto
+              do título legível pra quem lê o código: "Rodrigo Bondioli · …" */}
+          <span>Rodrigo Bondioli</span>{" "}
+          <span className={styles.dot} aria-hidden="true">·</span>{" "}
           <span className={styles.role}>{t.role}</span>
-        </p>
+        </h1>
 
         <Social className={styles.socialTop} label={t.social} />
       </header>
