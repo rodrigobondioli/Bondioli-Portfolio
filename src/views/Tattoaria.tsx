@@ -5,6 +5,7 @@ import CaseFilm from "@/components/case/CaseFilm"
 import LitText from "@/components/case/LitText"
 import Tour from "@/components/case/Tour"
 import HoverZoom from "@/components/case/HoverZoom"
+import ConviteContato from "@/components/ConviteContato"
 import { imageSize } from "@/lib/imageSize"
 import { caseTattoaria, type Chapter, type Media } from "@/content/cases/tattoaria"
 import { dict, type Lang } from "@/i18n"
@@ -238,8 +239,9 @@ export default function Tattoaria({ lang }: { lang: Lang }) {
               <LitText>{closing.quote}</LitText>
               <div className={`${s.bodyText} ${s.body}`}>
                 <p>{closing.text}</p>
-                {/* o "Let's talk" levava pro formulário do fim, que saiu (16/10):
-                    o CTA novo vem depois */}
+                {/* o convite pro contato logo depois do "flash book" — o melhor
+                    argumento do case, e o fim da leitura (17/10, auditoria) */}
+                <ConviteContato lang={lang} soAcao />
               </div>
 
               {/* Créditos ao lado do texto do fecho (16/10): sozinhos numa

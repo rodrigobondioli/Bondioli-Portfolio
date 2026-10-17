@@ -290,8 +290,10 @@ antes — senão vira número oficial inventado.
 O `MeetingBar` (pílula flutuante de vidro + desfoque no pé da tela) saiu
 do site inteiro, a pedido: o contato mora no menu da barra lateral. O
 fecho "Your next decision." (`ClosingSection`, com o formulário) também
-saiu de todas as páginas — o Rodrigo vai pensar num CTA mais discreto; o
-componente e o `/api/contact` continuam no código.
+saiu de todas as páginas. O CTA discreto que entrou no lugar (17/10,
+auditoria): `ConviteContato` — no fim da /work, fio cinza + "Contact" +
+o título da página de contato + botão + e-mail; no case, só o botão e o
+e-mail, logo depois do "flash book". Textos reaproveitados da /contact.
 
 O "Selected work" também veio do brandbeet: `ProjectShowcase` — nome
 grande + "Services" (o campo `type`) e uma colagem de quatro imagens em
@@ -300,7 +302,12 @@ entre as fotos é o da margem), presas pelo topo, nos formatos medidos lá (quas
 quadrada, retrato 4:5, quadrada e 6:5 — a última mais deitada que a de
 lá, pra ficar entre o retrato e a quadrada (14/10) — recorte com
 `object-fit: cover`, as fotos são 16:9), espelhada projeto sim, projeto
-não. Sem botão: a barra "View project" saiu no mesmo dia; o nome e
+não. **O formato de cada vaga é da mídia, não da posição** (17/10): o
+espelho só troca a ordem na tela (`order`), e quem montou a lista pros
+formatos espelhados está em `FORMATO_ESPELHADO` (showcase.ts). Assim
+reordenar os projetos (`order.json`) nunca muda o recorte de peça
+nenhuma. A ordem desde 17/10: Tattoaria, Amor de Cão (vai virar case), e
+os outros. Sem botão: a barra "View project" saiu no mesmo dia; o nome e
 qualquer imagem levam pra `/projects/<slug>`. As
 fotos saem da galeria; a thumb só entra se faltar imagem (ela costuma ser
 recorte da primeira da galeria, e as duas lado a lado se repetiam).
@@ -358,9 +365,12 @@ capa ("20+ years working across…" / "Mais de 20 anos…"), no corpo do h4
 sem caixa alta, meia grade de largura. Ela é quem abre a página, na linha
 da barra (a seção passa `--top-size`/`--top-k` pro `.page-top`).
 
-**Toda página interna segue essa altura** (pedido do Rodrigo): a
-primeira seção leva `.page-top` e o título `.h3 .page-title` (globals).
-Vale pra /work, /info e /playground; página nova nasce assim. As páginas de projeto também
+**Toda página interna abre do mesmo jeito** (17/10, auditoria): um
+rótulo pequeno em cinza na linha da barra — "Work"/"Portfólio", "Info",
+"Playground", "Contact" — e o conteúdo logo abaixo. A seção leva
+`.page-top` com `--top-size: var(--t-small)`; o rótulo cai em 24,2px em
+todas (medido). Página nova nasce assim. O rótulo da /info é o nome do
+menu ("Info"; era "About"/"Sobre"). As páginas de projeto também
 (16/10): no case da Tattoaria, "Tattoaria · São Paulo" na linha (o "All
 projects" saiu, batia no EN / BR); nas sem case, o topo da capa.
 
@@ -420,6 +430,18 @@ Pra conferir depois de mexer: medir com as linhas na tela, não no olho —
 o script de auditoria compara a borda esquerda de cada bloco com a linha
 mais próxima.
 
+## Case study em destaque (17/10/2026)
+
+A /work abre com **"Case study"** (no lugar do título "Selected work"): o
+projeto com case (`COM_CASE`) em destaque — a colagem, o título e o resumo
+do case (do `cases/tattoaria*.ts`), três números e um botão explícito
+("Read the case study" / "Ler o case"). Embaixo, **"Selected work"** com os
+outros. Motivo (do Rodrigo): o visitante descia, clicava num projeto sem
+case, nada acontecia, e concluía que a Tattoaria também não abria. A
+diferença agora é de lugar e de formato, não de um selo. Quando o Amor de
+Cão virar case, entra no `COM_CASE` e sobe pro destaque. O lado de cada
+colagem continua contado pela posição na lista inteira.
+
 ## Só a Tattoaria tem link (14/10/2026)
 
 **Direção (16/10/2026):** a Tattoaria segue como o único case completo,
@@ -460,6 +482,9 @@ pôr um slug lá liga o link, a pílula e o `.md` daquele projeto.
   uma ~150ms depois da outra. Substitui o StripReveal no Selected work
   (pedido do Rodrigo: "bem parecido, com o refinamento", em todos). Vale
   pra foto, vídeo e flipbook.
+  Em 17/10 foi testada a entrada de papel do labs.griflan.com (cada
+  peça virando numa dobra em rolo, em WebGL) e descartada ("ficou tudo
+  cagado"); o código está em `_to_delete/2026-10-17-paper-reveal/`.
 - Roadr (14/10): vaga 1 é o app em movimento, feito em **Remotion** a
   partir do frame "Roadr1" do Figma Boards (home da Maia → carrossel →
   toque em "Tire change" → tela do pneu → "Front left" → capô ("Hood",

@@ -14,6 +14,7 @@ import {
   around,
 } from "@/lib/projects"
 import { imageSize } from "@/lib/imageSize"
+import { og } from "@/i18n"
 import s from "./project.module.css"
 
 /* Uma página, um conteúdo por projeto. A estrutura abaixo foi medida no
@@ -64,9 +65,10 @@ export async function generateMetadata({
     // sem case, sem link no site: a página existe, mas fora do Google (14/10)
     robots: { index: false, follow: false },
     openGraph: {
+      ...og("en", `/projects/${slug}`, "article"),
       title: p.projectName ?? slug,
       description: p.description ?? undefined,
-      images: capa ? [capa] : undefined,
+      ...(capa ? { images: [capa] } : {}),
     },
   }
 }

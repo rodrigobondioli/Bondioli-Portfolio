@@ -1,7 +1,8 @@
 import Link from "next/link"
 import CardReveal from "./CardReveal"
 import Flipbook from "./Flipbook"
-import type { Midia } from "@/content/showcase"
+import WindSpinMark from "./WindSpinMark"
+import { FORMATO_ESPELHADO, type Midia } from "@/content/showcase"
 import { imageSize } from "@/lib/imageSize"
 import { dict, href as hrefLang, servico, type Lang } from "@/i18n"
 import styles from "./ProjectShowcase.module.css"
@@ -63,8 +64,17 @@ export default function ProjectShowcase({
   // brandbeet). Com 4, o espelho alterna de um projeto pro outro.
   const fotos = images.slice(0, 8)
   const duasLinhas = fotos.length > 4
-  const linha1 = !duasLinhas && index % 2 ? [...SLOTS].reverse() : SLOTS
+  // O formato de cada vaga é da mídia (17/10): quem montou a lista pros
+  // formatos espelhados (FORMATO_ESPELHADO) fica com eles onde quer que o
+  // projeto caia na página. A alternância de um projeto pro outro só troca
+  // a ordem na tela (`order`): assim mudar a ordem dos projetos não muda o
+  // recorte de peça nenhuma.
+  const invertido = FORMATO_ESPELHADO.has(slug)
+  const linha1 = !duasLinhas && invertido ? [...SLOTS].reverse() : SLOTS
   const slots = duasLinhas ? [...linha1, ...[...SLOTS].reverse()] : linha1
+  // espelhado na tela = os formatos lidos 6:5 · 1:1 · 4:5 · quase quadrada
+  const espelha = !duasLinhas && index % 2 === 1
+  const aoContrario = espelha !== invertido
   const lista = services
     ? services.split("•").map((s) => servico(lang, s.trim())).filter(Boolean).join(", ")
     : null
@@ -72,17 +82,38 @@ export default function ProjectShowcase({
   // Com case, cada foto é o seu próprio link: o vão embaixo das menores
   // (as alturas variam) não pode virar área de clique. Só a primeira entra
   // no Tab; as outras levam ao mesmo lugar.
-  const fotosEl = fotos.map((src, i) => {
-    if (!src) return null // vaga guardada: a mídia ainda não chegou
-    const flip = typeof src === "object" ? src.flipbook : null
-    const key = flip ? flip.join() : (src as string)
-    const video = !flip && (src as string).endsWith(".mp4")
-    const size = video || flip ? null : imageSize(src as string)
-    const midia = flip ? (
+  const fotosEl = fotos.map((item, i) => {
+    if (!item) return null // vaga guardada: a mídia ainda não chegou
+    // foto/vídeo com formato próprio ({ src, ratio }): o resto é igual
+    const proprio = typeof item === "object" && "src" in item ? item : null
+    const src = proprio ? proprio.src : item
+    // formato próprio (ratio/span) vale pra foto, vídeo e marca girando
+    const fmt = typeof item === "object" && item && ("ratio" in item || "span" in item) ? (item as { ratio?: string; span?: number; vaos?: number }) : null
+    const flip = typeof src === "object" && "flipbook" in src ? src.flipbook : null
+    const framed = typeof src === "object" && "framed" in src ? src.framed : null
+    const spin = typeof src === "object" && "spin" in src ? src : null
+    const framedList = framed ? (Array.isArray(framed) ? framed : [framed]) : null
+    const key = flip ? flip.join() : framedList ? framedList.join() : spin ? spin.spin : (src as string)
+    const video = !flip && !framed && !spin && (src as string).endsWith(".mp4")
+    const size = video || flip || spin ? null : imageSize(framedList ? framedList[0] : (src as string))
+    const midia = spin ? (
+      <WindSpinMark src={spin.spin} bg={spin.bg} tamanho={spin.tamanho} />
+    ) : flip ? (
       <Flipbook srcs={flip} />
+    ) : framed ? (
+      // o print pequeno, centralizado num fundo claro, com respiro em volta
+      <span className={styles.frame}>
+        {framedList && framedList.length > 1 ? (
+          // vários prints: trocam em corte seco, como um gif
+          <Flipbook srcs={framedList} />
+        ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img src={framedList?.[0]} alt="" loading="lazy" width={size?.w} height={size?.h} />
+        )}
+      </span>
     ) : video ? (
       // vídeo curto: toca sozinho, mudo, em loop
-      <video src={src as string} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
+      <video src={src as string} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" data-sync={proprio?.sync} />
     ) : (
       /* eslint-disable-next-line @next/next/no-img-element */
       <img src={src as string} alt="" loading="lazy" width={size?.w} height={size?.h} />
@@ -103,10 +134,11 @@ export default function ProjectShowcase({
     ) : (
       midia
     )
-    const estilo = { ["--span" as string]: slots[i].span, aspectRatio: slots[i].ratio }
-    // a entrada do brandbeet, em sequência na linha (de 4 em 4)
+    const pos = aoContrario ? fotos.length - 1 - i : i
+    const estilo = { ["--span" as string]: fmt?.span ?? slots[i].span, ["--vaos" as string]: fmt?.vaos ?? 0, aspectRatio: fmt?.ratio ?? slots[i].ratio, order: pos }
+    // a entrada do brandbeet, em sequência na linha (de 4 em 4), na ordem da tela
     return (
-      <CardReveal key={key} className={styles.shot} style={estilo} ordem={i % 4}>
+      <CardReveal key={key} className={styles.shot} style={estilo} ordem={pos % 4} largo={!!fmt?.vaos}>
         {conteudo}
       </CardReveal>
     )
@@ -121,8 +153,8 @@ export default function ProjectShowcase({
               <Link href={href} className="no-underline">
                 {name}
               </Link>
-              {/* o que diferencia o projeto com página interna (14/10) */}
-              <span className={styles.tag}>{t.caseTag}</span>
+              {/* o "(case study)" ao lado do nome saiu (17/10): o projeto com
+                  case já fica sob o título "Case study" da /work */}
             </>
           ) : (
             name

@@ -13,7 +13,8 @@
      decision." — o contato está no menu — e sem rodapé), com um respiro */
   padding-bottom: var(--s7);
   /* quem abre a página é a apresentação, não o título (ver .page-top) */
-  --top-size: var(--t-medium);
+  /* quem abre a página é o rótulo "Work" (17/10) */
+  --top-size: var(--t-small);
   --top-k: 0.281;
 }
 
@@ -43,3 +44,68 @@
      espaçamento; era --s5) */
   gap: var(--s6);
 }
+
+/* ---------- Case study (17/10) ----------
+   O projeto com case em destaque, antes do Selected work: a colagem, e
+   embaixo o título e o resumo do case com o botão (à esquerda) e três
+   números (à direita). Título → conteúdo dele: --s4; entre as partes do
+   bloco: --s5. */
+.destaque { display: flex; flex-direction: column; gap: var(--s5); }
+.destaqueInfo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: var(--col-gap);
+  align-items: end;
+}
+.destaqueTexto { display: flex; flex-direction: column; gap: var(--s2); max-width: 34em; }
+.destaqueTitulo { margin: 0; font-size: var(--t-large); font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; }
+.destaqueResumo { margin: 0; font-size: var(--t-medium); line-height: 1.4; color: var(--ink-60); }
+.destaqueBotao { align-self: flex-start; margin-top: var(--s3); }
+.numeros {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* cada número num card quadrado, só com o fio cinza (17/10: soltos ao lado
+   do texto "ficavam desconectados"); o número no alto, a legenda no pé */
+.numeros li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s2);
+  aspect-ratio: 1;
+  padding: var(--s3);
+  border: var(--hairline) solid var(--rule);
+}
+.numeros b { font-size: clamp(1.2rem, 1.65vw, 1.75rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1; white-space: nowrap; }
+.numeros span { font-size: var(--t-small); line-height: 1.35; color: var(--ink-60); white-space: pre-line; }
+
+/* o Selected work começa depois do destaque, com o respiro de seção e um
+   fio cinza na largura toda separando um do outro (17/10) */
+.selectedTitle {
+  margin: var(--s5) 0 0;
+  padding-top: var(--s6);
+  border-top: var(--hairline) solid var(--rule);
+  text-transform: none;
+}
+
+@media (max-width: 900px) {
+  .destaqueInfo { grid-template-columns: 1fr; row-gap: var(--s5); }
+}
+
+/* Título de seção = rótulo (17/10, auditoria de hierarquia): pequeno e
+   cinza, como o "Contact" e o "About"; o nome do projeto continua grande.
+   Do rótulo ao que ele apresenta, o vão de título → conteúdo (--s4), não o
+   de bloco (--s6) da coluna. */
+.secao {
+  margin: 0;
+  font-size: var(--t-small);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--ink-60);
+}
+.secao + * { margin-top: calc(var(--s4) - var(--s6)); }

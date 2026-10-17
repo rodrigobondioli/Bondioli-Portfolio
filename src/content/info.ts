@@ -50,7 +50,7 @@ const AGENCIAS = [
 const VAREJO = ["Americanas.com", "Shoptime", "Netshoes"]
 
 const pt: InfoContent = {
-  aboutLabel: "Sobre",
+  aboutLabel: "Info", // o nome do menu (17/10, auditoria: era "Sobre")
   photoAlt: "Rodrigo Bondioli no palco, de camisa preta e braços tatuados, falando com um controle na mão ao lado de um telão.",
   lead: "Comecei fazendo site no FrontPage, em 1997. Passei por algumas das maiores agências do país, fui head de design da Americanas.com e da Netshoes, construí um negócio que cresceu muito rápido e vi a pandemia fechar as portas dele. Tudo isso virou o que eu ofereço hoje: critério.",
   storyTitle: "Senta que lá vem história",
@@ -114,7 +114,7 @@ const pt: InfoContent = {
 }
 
 const en: InfoContent = {
-  aboutLabel: "About",
+  aboutLabel: "Info", // o nome do menu (17/10, auditoria: era "About")
   photoAlt: "Rodrigo Bondioli on stage in a black shirt, tattooed arms, speaking with a clicker in hand next to a large screen.",
   lead: "I started out building websites in FrontPage, in 1997. I worked at some of the biggest agencies in Brazil, was head of design at Americanas.com and Netshoes, built a business that grew very fast and watched the pandemic shut its doors. All of that shaped what I offer today: good judgement.",
   storyTitle: "Pull up a chair. This might take a minute.",

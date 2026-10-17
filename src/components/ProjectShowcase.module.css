@@ -69,7 +69,8 @@
   background: var(--ink-10);
 }
 @media (min-width: 1101px) {
-  .shot { width: calc((100% - 3 * var(--gutter)) * var(--span) / 24); }
+  /* --vaos: uma peça que ocupa o lugar de duas engole o vão entre elas */
+  .shot { width: calc((100% - 3 * var(--gutter)) * var(--span) / 24 + var(--vaos, 0) * var(--gutter)); }
 }
 .shot img,
 .shot video {
@@ -81,6 +82,26 @@
     scale 700ms cubic-bezier(0.16, 1, 0.3, 1),
     transform 1400ms cubic-bezier(0.22, 1, 0.36, 1) var(--atraso, 0ms);
 }
+/* Print emoldurado (17/10): a imagem inteira (sem recorte), pequena e
+   centralizada, num fundo cinza claro com respiro em volta — como uma tela
+   apresentada. O fundo é claro nos dois temas, como o de um print. */
+.frame {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 12%;
+  background: #e6e6e3;
+}
+.shot .frame img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+/* com vários prints (Flipbook), a pilha tem a altura do print, não da
+   moldura: assim todos ficam no mesmo lugar */
+.frame > div { height: auto !important; }
+
 /* o zoom de hover só onde há clique: o projeto com case */
 .shotLink { position: relative; display: block; width: 100%; height: 100%; }
 
@@ -125,6 +146,8 @@
    Os formatos (aspect-ratio, no componente) valem em todos. */
 @media (max-width: 1100px) {
   .shot { width: calc((100% - var(--gutter)) / 2); }
+  /* a peça que vale por duas fica com a linha inteira */
+  .shot[data-largo] { width: 100%; }
 }
 @media (max-width: 640px) {
   .shot { width: calc((100% - var(--gutter)) / 2); }

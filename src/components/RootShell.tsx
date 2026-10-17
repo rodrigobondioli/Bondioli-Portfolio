@@ -29,7 +29,8 @@ export function rootMetadata(lang: Lang): Metadata {
       type: "website",
       locale: lang === "pt" ? "pt_BR" : "en_US",
       alternateLocale: lang === "pt" ? "en_US" : "pt_BR",
-      url: lang === "pt" ? "https://rodrigobondioli.com/pt" : "https://rodrigobondioli.com",
+      // sem `url` aqui (17/10, auditoria de SEO): fixa, ela dizia que toda
+      // página era a capa. Cada página põe a dela com og() (i18n.ts).
       siteName: "Rodrigo Bondioli",
     },
     twitter: { card: "summary_large_image" },

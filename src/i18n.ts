@@ -39,6 +39,35 @@ export function alternates(lang: Lang, path: string) {
   }
 }
 
+export const SITE = "https://rodrigobondioli.com"
+
+/* A imagem de prévia (WhatsApp, LinkedIn…) de cada página, 1200×630, em
+   public/og/ — feitas de fotos que já estão no site (17/10, auditoria de
+   SEO: só o case tinha prévia com imagem). */
+const OG_IMAGEM: Record<string, string> = {
+  "/": "/og/home.jpg",
+  "/work": "/og/work.jpg",
+  "/info": "/og/info.jpg",
+  "/contact": "/og/contact.jpg",
+  "/playground": "/og/playground.jpg",
+  "/projects/tattoaria": "/og/tattoaria.jpg",
+}
+
+/** O Open Graph de uma página: a URL dela (antes era sempre a da capa), o
+ *  idioma, o tipo e a imagem de prévia. Título e descrição o Next completa
+ *  com os da página. */
+export function og(lang: Lang, path: string, tipo: "website" | "article" = "website") {
+  const imagem = OG_IMAGEM[path]
+  return {
+    type: tipo,
+    url: SITE + (href(lang, path) === "/" ? "" : href(lang, path)),
+    siteName: "Rodrigo Bondioli",
+    locale: lang === "pt" ? "pt_BR" : "en_US",
+    alternateLocale: lang === "pt" ? "en_US" : "pt_BR",
+    ...(imagem ? { images: [{ url: imagem, width: 1200, height: 630 }] } : {}),
+  }
+}
+
 /* Os serviços de cada projeto vêm do projects.json, em inglês. A tradução
    é por termo; o que não estiver aqui aparece como está. */
 const SERVICOS_PT: Record<string, string> = {
@@ -86,6 +115,12 @@ const en = {
     description:
       "Selected work: brand, product and interface for startups and global brands. Work that started with a problem, not a prompt.",
     selectedWork: "Selected work",
+    caseStudy: "Case study",
+    readCase: "Read the case study",
+    /** o título da página, só pra leitor de tela e buscador (sr-only) */
+    h1: "Rodrigo Bondioli — Creative Director. Work",
+    /** o rótulo do topo, na linha da barra, como nas outras páginas */
+    label: "Work",
   },
 
   info: {
@@ -117,6 +152,8 @@ const en = {
   showcase: {
     services: "Services",
     caseTag: "(case study)",
+    /** ao lado do projeto com case, na lista "Projects" da barra (17/10) */
+    navTag: "(Case)",
     viewCase: "View case study",
   },
 
@@ -169,6 +206,9 @@ const en = {
     b: "I’ll get back to you soon.",
   },
 
+  /** a página 404 (17/10, auditoria de SEO: era a padrão do Next, sem idioma) */
+  notFound: { title: "Page not found.", back: "See the work" },
+
   caseUi: {
     objective: "Objective",
     numbers: "Numbers",
@@ -208,6 +248,10 @@ const pt: Dict = {
     description:
       "Trabalhos selecionados: marca, produto e interface pra startups e marcas globais. Trabalho que começou com um problema, não com um prompt.",
     selectedWork: "Selected work",
+    caseStudy: "Case study",
+    readCase: "Ler o case",
+    h1: "Rodrigo Bondioli — Diretor de Criação. Portfólio",
+    label: "Portfólio",
   },
 
   info: {
@@ -239,6 +283,7 @@ const pt: Dict = {
   showcase: {
     services: "Serviços",
     caseTag: "(case)",
+    navTag: "(Case)",
     viewCase: "Ver o case",
   },
 
@@ -290,6 +335,8 @@ const pt: Dict = {
     a: "Obrigado pelo contato.",
     b: "Eu te respondo em breve.",
   },
+
+  notFound: { title: "Página não encontrada.", back: "Ver o portfólio" },
 
   caseUi: {
     objective: "Objetivo",

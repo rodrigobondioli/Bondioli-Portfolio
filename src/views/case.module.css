@@ -362,7 +362,9 @@
   padding-block: var(--s4);
   border-block-start: 1px solid var(--rule);
 }
-.listTitle { grid-column: 1 / -1; text-wrap: balance; }
+/* um nível abaixo do título do capítulo (17/10, auditoria: os dois tinham
+   o mesmo corpo e liam como irmãos) */
+.listTitle { grid-column: 1 / -1; text-wrap: balance; font-size: var(--t-large); letter-spacing: -0.02em; line-height: 1.2; }
 .listText { grid-column: 1 / -1; color: var(--muted); text-wrap: pretty; margin: 0; }
 @media (min-width: 641px) {
   .listTitle { grid-column: 2 / 6; }
@@ -510,12 +512,17 @@
   gap: var(--s6) var(--col-gap);
   margin: 0;
 }
+/* cada número num card quadrado só com o fio cinza — o mesmo dos números
+   da /work (17/10, auditoria: aqui era um fio em cima, lá um card; o mesmo
+   dado em duas linguagens). O número no alto, a legenda no pé. */
 .strip li {
-  display: grid;
-  gap: var(--s1);
-  align-content: start;
-  padding-block-start: var(--s2);
-  border-block-start: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s2);
+  aspect-ratio: 1;
+  padding: var(--s3);
+  border: var(--hairline) solid var(--rule);
 }
 @media (min-width: 641px) {
   .strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -523,7 +530,14 @@
 @media (min-width: 1101px) {
   .strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
-.stripValue { color: var(--ink); }
+/* a medida do número dos cards da /work: numa linha só, cabe "R$ 400 mil" */
+.strip .stripValue {
+  color: var(--ink);
+  font-size: clamp(1.2rem, 1.65vw, 1.75rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
 /* "\n" no rótulo quebra a linha ali (o "3": depois da vírgula) */
 .stripLabel { max-width: 28ch; color: var(--muted); text-wrap: balance; white-space: pre-line; }
 

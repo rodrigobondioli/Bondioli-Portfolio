@@ -141,6 +141,10 @@ export default function NavRail({
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <TextRoll text={p.name} underline={false} />
+                        {/* o projeto com case abre outra página; os outros
+                            rolam a /work — a marca diz qual é qual (17/10,
+                            auditoria) */}
+                        {p.caso ? <span className={styles.caseTag}>{t.showcase.navTag}</span> : null}
                       </Link>
                     </li>
                   ))}
@@ -165,7 +169,6 @@ export default function NavRail({
             </li>
           </ul>
 
-          <hr className={styles.rule} />
 
           <ul className={styles.icons}>
             {SOCIAL.map(({ label, href: url, d }) => (

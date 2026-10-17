@@ -65,6 +65,9 @@
    Mentoring): um fio entre elas, uma setinha que gira ao abrir. */
 /* (sem fio em cima da primeira lista — 16/10; só entre elas) */
 .details { border-bottom: var(--hairline) solid var(--rule); }
+/* a última lista sem o fio de baixo (17/10, pedido do Rodrigo): os fios
+   separam uma lista da outra, não fecham a pilha */
+.details:last-of-type { border-bottom: 0; }
 .summary {
   display: flex;
   align-items: center;
@@ -127,6 +130,11 @@
   line-height: 1.5;
 }
 .story p { margin: 0; }
+/* O texto longo em ~70 caracteres por linha (17/10, auditoria: eram ~94
+   em 1440 e cansava). A faixa que sobra à direita fica como respiro — o
+   Rodrigo testou e gostou; o título grande de cima segue na largura toda e
+   faz o contrapeso. */
+.story, .work { max-width: 36em; }
 .closing {
   margin: 0;
   font-size: var(--t-large);

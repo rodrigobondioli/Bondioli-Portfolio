@@ -22,7 +22,9 @@ export default function Playground({ lang }: { lang: Lang }) {
       <main className={s.page}>
         <section className="section page-top">
           <div className={`container ${s.inner}`}>
-            <h1 className="h3 page-title">{t.title}</h1>
+            {/* rótulo no topo, como as outras páginas (17/10, auditoria: era
+                o único com título grande) */}
+            <h1 className={s.label}>{t.title}</h1>
             <p className={s.lead}>{t.lead}</p>
 
             <ul className={s.grid}>

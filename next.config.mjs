@@ -16,6 +16,17 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: false,
+  // a 404 global (app/global-not-found.tsx): com dois layouts raiz, é o
+  // jeito de a URL inexistente ter idioma e caminho de volta (17/10)
+  experimental: { globalNotFound: true },
+
+  /* Metadados no <head> também pro Googlebot (17/10, auditoria de SEO). O
+     Next 15 manda título e descrição por streaming, no fim do HTML, pra
+     quem não está nesta lista — e o Googlebot não estava: o Google lê
+     assim mesmo, mas no <head> é o caminho sem risco. A lista é a padrão
+     do Next (html-bots.js, 15.5) + Googlebot. */
+  htmlLimitedBots:
+    /Googlebot|[\w-]+-Google|Google-[\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight/i,
 
   /* Slug sem acento desde 05/10. A URL antiga pode chegar crua ("ã") ou
      codificada ("%C3%A3"), dependendo de quem a montou — as duas vão pra

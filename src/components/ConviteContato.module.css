@@ -1,0 +1,34 @@
+/* O convite do fim da página (17/10). Mesma régua do resto: o fio cinza
+   e o respiro de seção que separam o case do Selected work; rótulo →
+   título → ação nos vãos de título/conteúdo. */
+.convite {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: var(--s5);
+  row-gap: var(--s4);
+  margin-top: var(--s5);
+  padding-top: var(--s6);
+  border-top: var(--hairline) solid var(--rule);
+}
+.rotulo {
+  margin: 0;
+  font-size: var(--t-small);
+  line-height: 1.3;
+  color: var(--ink-60);
+}
+.texto { display: flex; align-items: baseline; gap: var(--s4); }
+.titulo { margin: 0; text-transform: none; }
+.acao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--s4);
+  row-gap: var(--s2);
+}
+.ou {
+  font-size: var(--t-small);
+  color: var(--ink-60);
+}
+.email { font-size: var(--t-small); }

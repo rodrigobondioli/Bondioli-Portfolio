@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { og } from "@/i18n"
 import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
 import YouTube from "@/components/YouTube"
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
   description:
     "YouTube media kit for @falabondioli: audience, performance, partnership options and rates.",
   alternates: { canonical: "/mediakit" },
+  openGraph: og("en", "/mediakit"),
 }
 
 /* Uma vez por dia a página se refaz sozinha com os números novos. Ela

@@ -20,7 +20,10 @@ export default function CardReveal({
   className = "",
   style,
   ordem = 0,
+  largo = false,
 }: {
+  /** peça que vale por duas (data-largo: linha inteira no tablet/celular) */
+  largo?: boolean
   children: ReactNode
   className?: string
   style?: CSSProperties
@@ -58,6 +61,7 @@ export default function CardReveal({
       ref={ref}
       className={`${styles.card} ${className}`}
       style={{ ...style, ["--ordem" as string]: ordem }}
+      data-largo={largo || undefined}
     >
       {children}
     </div>

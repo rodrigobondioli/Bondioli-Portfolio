@@ -43,7 +43,8 @@
   align-self: flex-start;
   display: flex;
   align-items: center;
-  gap: var(--s2);
+  /* a marca e o nome juntos (17/10: com --s2 "muito espaçado") */
+  gap: var(--s1);
   font-size: var(--t-small);
   font-weight: 500;
 }
@@ -83,6 +84,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--s5);
+  /* ocupa o resto da altura da barra: os ícones das redes descem pro pé */
+  flex: 1;
 }
 
 .group {
@@ -101,7 +104,10 @@
   color: var(--ink-60);
 }
 
-.menu { display: flex; flex-direction: column; }
+.menu { display: flex; flex-direction: column; flex: 1; }
+/* as redes no pé da barra, a --gutter da borda de baixo (17/10: sem o fio
+   que ficava em cima delas) */
+.menu .icons { margin-top: auto; padding-top: var(--s5); }
 
 .list {
   display: flex;
@@ -177,6 +183,12 @@
   opacity: 0.5;
   font-variant-numeric: tabular-nums;
 }
+/* "Case" ao lado do projeto que abre o case: mais apagado que o nome,
+   como o número */
+.caseTag {
+  font-size: var(--t-small);
+  opacity: 0.5;
+}
 /* quantos projetos, ao lado de "Projects" */
 .count {
   font-family: inherit;
@@ -206,14 +218,6 @@
 }
 .icon:hover,
 .icon:focus-visible { color: var(--ink); }
-
-/* o fio entre o menu e as redes (pedido do Rodrigo) */
-.rule {
-  width: 100%;
-  margin: var(--s3) 0;
-  border: 0;
-  border-top: var(--hairline) solid var(--rule);
-}
 
 /* Tablet e celular: o que o torgo faz — o nome e "Menu" no alto (o
    idioma e o tema entre os dois), e a lista inteira abre por cima da

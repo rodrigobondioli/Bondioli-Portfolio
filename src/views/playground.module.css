@@ -1,12 +1,28 @@
 /* /playground (16/10/2026): título, frase e a grade masonry. Espaçamento
    no padrão do site: título → frase --s4, frase → grade --s6 (bloco),
    fim --s7. */
-.page { padding-bottom: var(--s7); }
+.page {
+  padding-bottom: var(--s7);
+  /* quem abre a página é o rótulo (17/10): o topo dele na linha da barra */
+  --top-size: var(--t-small);
+  --top-k: 0.281;
+}
+/* o rótulo do topo, como "Info", "Contact" e "Work" (17/10, auditoria) */
+.label {
+  margin: 0;
+  font-size: var(--t-small);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--ink-60);
+}
 .inner { display: flex; flex-direction: column; gap: var(--s4); }
 .lead {
   margin: 0;
   max-width: 32em;
-  color: var(--ink-60);
+  /* em branco: com o título virando rótulo cinza, a frase é o conteúdo
+     (como a bio da /work) */
+  color: var(--ink);
   font-size: var(--t-medium);
   line-height: 1.4;
 }
