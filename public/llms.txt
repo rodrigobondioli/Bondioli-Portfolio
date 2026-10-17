@@ -1,0 +1,21 @@
+# Rodrigo Bondioli
+
+> Creative Director in São Paulo, Brazil, with 20+ years across agencies, retail and his own business. Former head of design at Netshoes and Americanas.com. He helps decide what's worth building, then builds it: brand, product and interface.
+
+The site is in English at the root and in Brazilian Portuguese under /pt. The full portfolio, with every project, is available as a single Markdown file.
+
+## Portfolio
+
+- [Portfolio in Markdown](https://rodrigobondioli.com/portfolio.md): every project, services and contact in one file
+- [Work](https://rodrigobondioli.com/work): selected work, opening with the Tattoaria case study
+- [Tattoaria case study](https://rodrigobondioli.com/projects/tattoaria): the rotating tattoo studio he founded and ran, 2015–2020
+
+## About
+
+- [Info](https://rodrigobondioli.com/info): his story, experience, awards, teaching and brands
+- [Contact](https://rodrigobondioli.com/contact): hello@rodrigobondioli.com
+
+## Optional
+
+- [Media kit](https://rodrigobondioli.com/mediakit): YouTube channel @falabondioli, audience and partnerships
+- [Portuguese version](https://rodrigobondioli.com/pt/work)

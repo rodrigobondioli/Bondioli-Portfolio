@@ -3,6 +3,7 @@ import CardReveal from "./CardReveal"
 import Flipbook from "./Flipbook"
 import WindSpinMark from "./WindSpinMark"
 import { FORMATO_ESPELHADO, type Midia } from "@/content/showcase"
+import { SHOWCASE_ALT } from "@/content/showcase-alt"
 import { imageSize } from "@/lib/imageSize"
 import { dict, href as hrefLang, servico, type Lang } from "@/i18n"
 import styles from "./ProjectShowcase.module.css"
@@ -96,27 +97,29 @@ export default function ProjectShowcase({
     const key = flip ? flip.join() : framedList ? framedList.join() : spin ? spin.spin : (src as string)
     const video = !flip && !framed && !spin && (src as string).endsWith(".mp4")
     const size = video || flip || spin ? null : imageSize(framedList ? framedList[0] : (src as string))
+    // o texto alternativo (showcase-alt.ts); sem texto, a peça segue decorativa
+    const alt = SHOWCASE_ALT[flip ? flip[0] : framedList ? framedList[0] : spin ? spin.spin : (src as string)]?.[lang] ?? ""
     const midia = spin ? (
       <WindSpinMark src={spin.spin} bg={spin.bg} tamanho={spin.tamanho} />
     ) : flip ? (
-      <Flipbook srcs={flip} />
+      <Flipbook srcs={flip} label={alt} />
     ) : framed ? (
       // o print pequeno, centralizado num fundo claro, com respiro em volta
       <span className={styles.frame}>
         {framedList && framedList.length > 1 ? (
           // vários prints: trocam em corte seco, como um gif
-          <Flipbook srcs={framedList} />
+          <Flipbook srcs={framedList} label={alt} />
         ) : (
           /* eslint-disable-next-line @next/next/no-img-element */
-          <img src={framedList?.[0]} alt="" loading="lazy" width={size?.w} height={size?.h} />
+          <img src={framedList?.[0]} alt={alt} loading="lazy" width={size?.w} height={size?.h} />
         )}
       </span>
     ) : video ? (
       // vídeo curto: toca sozinho, mudo, em loop
-      <video src={src as string} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" data-sync={proprio?.sync} />
+      <video src={src as string} autoPlay muted loop playsInline preload="metadata" {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })} data-sync={proprio?.sync} />
     ) : (
       /* eslint-disable-next-line @next/next/no-img-element */
-      <img src={src as string} alt="" loading="lazy" width={size?.w} height={size?.h} />
+      <img src={src as string} alt={alt} loading="lazy" width={size?.w} height={size?.h} />
     )
     const conteudo = linked ? (
       <Link

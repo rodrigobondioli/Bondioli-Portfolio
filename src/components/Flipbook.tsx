@@ -12,7 +12,8 @@ import { useEffect, useRef, useState } from "react"
  * Só roda com a vaga na tela (fora dela, para). Com movimento reduzido,
  * fica na primeira foto.
  */
-export default function Flipbook({ srcs, intervalo = 700 }: { srcs: string[]; intervalo?: number }) {
+/** `label`: o texto alternativo do conjunto (um só pras fotos todas) */
+export default function Flipbook({ srcs, intervalo = 700, label }: { srcs: string[]; intervalo?: number; label?: string }) {
   const [vez, setVez] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -33,7 +34,7 @@ export default function Flipbook({ srcs, intervalo = 700 }: { srcs: string[]; in
   }, [srcs.length, intervalo])
 
   return (
-    <div ref={ref} style={{ position: "relative", width: "100%", height: "100%" }} aria-hidden="true">
+    <div ref={ref} style={{ position: "relative", width: "100%", height: "100%" }} {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true })}>
       {srcs.map((src, i) => (
         // eslint-disable-next-line @next/next/no-img-element
         <img

@@ -306,7 +306,10 @@ não. **O formato de cada vaga é da mídia, não da posição** (17/10): o
 espelho só troca a ordem na tela (`order`), e quem montou a lista pros
 formatos espelhados está em `FORMATO_ESPELHADO` (showcase.ts). Assim
 reordenar os projetos (`order.json`) nunca muda o recorte de peça
-nenhuma. A ordem desde 17/10: Tattoaria, Amor de Cão (vai virar case), e
+nenhuma. **Toda peça da colagem tem texto alternativo** (17/10, SEO) em
+`src/content/showcase-alt.ts`, EN e PT, chave = caminho da mídia: começa
+pelo nome do projeto, descreve o que se vê, até ~120 caracteres, sem
+"imagem de". Mídia nova pede texto novo lá. A ordem desde 17/10: Tattoaria, Amor de Cão (vai virar case), e
 os outros. Sem botão: a barra "View project" saiu no mesmo dia; o nome e
 qualquer imagem levam pra `/projects/<slug>`. As
 fotos saem da galeria; a thumb só entra se faltar imagem (ela costuma ser
