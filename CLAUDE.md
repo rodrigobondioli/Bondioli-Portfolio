@@ -242,7 +242,8 @@ listas que abrem à esquerda, a abertura da história, o "Let's talk" e o
 e-mail à direita — os mesmos componentes e CSS da /info (`Lista`,
 `info.module.css`). O `AboutSection` (o "I'm Rodrigo Bondioli" com vídeo)
 foi pra `_to_delete/2026-10-18-about-section/`. A página não tem mais o
-menu lateral: só a marca, o nome, EN / BR e o tema (`SiteNav simples`).
+menu lateral nem EN / BR (ela só existe em inglês; o BR levava pra
+/pt/work e parecia quebrado): só a marca, o nome e o tema (`SiteNav simples`).
 Todos os cards (números, desempenho) são só fio cinza, como os da /work;
 só as cartelas do Lovable seguem roxas. O vão entre cards é o mesmo nas
 duas direções. Os títulos de seção daqui

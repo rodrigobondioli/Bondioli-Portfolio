@@ -21,8 +21,8 @@ export default function NavRail({
   brandHref: string
   lang: Lang
   projects: { slug: string; name: string; caso: boolean }[]
-  /** só a marca com o nome e, no canto, idioma e tema — sem o menu (o
-   *  media kit, 18/10, pedido do Rodrigo) */
+  /** só a marca com o nome e, no canto, o tema — sem o menu nem o idioma
+   *  (o media kit, que só existe em inglês; 18/10, pedido do Rodrigo) */
   simples?: boolean
 }) {
   const t = dict[lang]
@@ -80,7 +80,7 @@ export default function NavRail({
           <TextRoll text="Rodrigo Bondioli" underline={false} />
         </Link>
         <div className={styles.prefsTopo}>
-          <ThemeToggle lang={lang} />
+          <ThemeToggle lang={lang} semIdioma />
         </div>
       </header>
     )

@@ -22,7 +22,9 @@ import styles from "./ThemeToggle.module.css"
  */
 type Tema = "dark" | "light"
 
-export default function ThemeToggle({ lang = "en" }: { lang?: Lang }) {
+/** `semIdioma`: só o tema, sem o EN / BR (o media kit, que só existe em
+ *  inglês — o BR levava pra /pt/work e parecia quebrado; 18/10) */
+export default function ThemeToggle({ lang = "en", semIdioma = false }: { lang?: Lang; semIdioma?: boolean }) {
   const t = dict[lang]
   const pathname = usePathname() ?? "/"
   const [tema, setTema] = useState<Tema>("dark")
@@ -48,6 +50,7 @@ export default function ThemeToggle({ lang = "en" }: { lang?: Lang }) {
     <div className={styles.rail}>
       {/* Idioma (16/10): a língua atual acesa, a outra é link pro mesmo
           lugar na outra língua. */}
+      {semIdioma ? null : (
       <nav className={styles.langs} aria-label={t.langLabel}>
         {(["en", "pt"] as const).map((l) => {
           const rotulo = l === "en" ? "EN" : "BR"
@@ -70,7 +73,8 @@ export default function ThemeToggle({ lang = "en" }: { lang?: Lang }) {
           )
         })}
       </nav>
-      <span className={styles.divider} aria-hidden="true" />
+      )}
+      {semIdioma ? null : <span className={styles.divider} aria-hidden="true" />}
       <button
         type="button"
         className={styles.button}
