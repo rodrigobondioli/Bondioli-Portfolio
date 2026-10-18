@@ -23,9 +23,9 @@ export const SHOWCASE_ALT: Record<string, Record<Lang, string>> = {
     en: "Tattoaria logo in white script on black, with the line “Get inspired. Get inked.”",
     pt: "Logo da Tattoaria em letra cursiva branca sobre preto, com a frase “Get inspired. Get inked.”",
   },
-  "/projects/tattoaria/tattoaria-4.webp": {
-    en: "Tattoaria warehouse: a yellow pool table, clothing racks and motorcycles, with black walls and a white line mural",
-    pt: "Galpão da Tattoaria: sinuca amarela, araras de roupa e motos, com paredes pretas e mural em linha branca",
+  "/projects/tattoaria/lolla-home.webp": {
+    en: "Tattoaria’s space at Lollapalooza with Chevrolet: a queue of people at the glass entrance",
+    pt: "Espaço da Tattoaria no Lollapalooza com a Chevrolet: uma fila de gente na entrada de vidro",
   },
   "/projects/amor-de-cao/amor-celular.mp4": {
     en: "Amor de Cão app opening on a phone held in one hand, the logo animating on lime green",

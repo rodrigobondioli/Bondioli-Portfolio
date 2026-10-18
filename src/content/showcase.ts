@@ -183,7 +183,10 @@ export const SHOWCASE: Record<string, Midia[]> = {
     // Originais e o script que monta em _originais/tattoaria-reel/
     "/projects/tattoaria/reel.mp4",
     "/projects/tattoaria/logo.webp",
-    "/projects/tattoaria/tattoaria-4.webp",
+    // vaga 4 (17/10): a fila na porta do espaço da Tattoaria no
+    // Lollapalooza, com a Chevrolet (era a sinuca, tattoaria-4.webp);
+    // original em _originais/tattoaria/lolla-tattoaria-home.png
+    "/projects/tattoaria/lolla-home.webp",
   ],
   // Flex Pharma (17/10): era o único com duas linhas (8 peças). A de baixo
   // saiu, e o relógio (que estava nela) veio pra vaga 3, no lugar do "Our
