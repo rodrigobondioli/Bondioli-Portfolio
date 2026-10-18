@@ -3,7 +3,11 @@ import { og } from "@/i18n"
 import SiteNav from "@/components/SiteNav"
 import SmoothScroll from "@/components/SmoothScroll"
 import YouTube from "@/components/YouTube"
-import AboutSection from "@/components/AboutSection"
+import CopyEmail from "@/components/CopyEmail"
+import { SOCIAL } from "@/lib/redes"
+import { info } from "@/content/info"
+import { dict } from "@/i18n"
+import si from "@/views/info.module.css"
 import TypeBand from "@/components/TypeBand"
 import { dadosDoCanal } from "@/lib/youtube"
 import kit from "@/content/mediakit.json"
@@ -75,12 +79,15 @@ export default async function MediaKitPage() {
   /* A data é a da busca, não uma constante escrita à mão. Sem API, ela volta
      a ser a do JSON — que é a verdade nesse caso. */
   const atualizado = canal?.atualizado ?? kit.updated
+  // a bio da /info (o media kit só existe em inglês)
+  const sobre = info.en
+  const t = dict.en
 
   return (
     <>
       <SmoothScroll />
       {/* A página não tem formulário: o "Say hello" atravessa pra /work */}
-      <SiteNav brandHref="/work" />
+      <SiteNav brandHref="/work" simples />
 
       <main id="conteudo" tabIndex={-1}>
         {/* ---------- Capa ---------- */}
@@ -147,7 +154,7 @@ export default async function MediaKitPage() {
                     .join(" ") || undefined}
                   key={st.label}
                 >
-                  <div className={`on-accent ${s.stat}`}>
+                  <div className={s.stat}>
                     <p className="overline">{st.label}</p>
                     <p className="h3">
                       {st.value}
@@ -202,7 +209,7 @@ export default async function MediaKitPage() {
             <ul className={s.pairs}>
               {kit.performance.map(({ title, note }) => (
                 <li key={title}>
-                  <div className={`on-accent ${s.tile} ${s.accent}`}>
+                  <div className={`${s.tile} ${s.accent}`}>
                     <h3 className="h4">{title}</h3>
                     <p className="body">{note}</p>
                   </div>
@@ -295,8 +302,59 @@ export default async function MediaKitPage() {
           </div>
         </section>
 
-        {/* ---------- Sobre (o mesmo da /work) ---------- */}
-        <AboutSection />
+        {/* ---------- Sobre (18/10, pedido do Rodrigo) ----------
+            A bio, a foto e a estrutura da /info: à esquerda a foto (com o
+            topo na linha do rótulo "Info"; as listas da /info saíram, a
+            pedido); à direita o rótulo, a abertura da história e o
+            convite com o e-mail. Os mesmos componentes e o mesmo CSS da /info. Era o
+            "I'm Rodrigo Bondioli" do AboutSection, com o vídeo. */}
+        <section className={`section ${s.sec}`} id="about">
+          <div className={`container grid ${si.grid}`}>
+            <div className={si.side}>
+              <div className={`${si.photo} ${s.fotoSobre}`}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/rodrigo-info.webp" alt={sobre.photoAlt} width={760} height={950} loading="lazy" />
+              </div>
+            </div>
+            <article className={si.text}>
+              <h2 className={si.label}>{sobre.aboutLabel}</h2>
+              <p className={si.lead}>{sobre.lead}</p>
+              <h2 className={si.label}>{sobre.workTitle}</h2>
+              <p className={si.work}>{sobre.work}</p>
+              <CopyEmail
+                copiedLabel={t.emailCopied}
+                failLabel={t.couldNotCopy}
+                ariaLabel={t.copyEmail}
+                className={si.email}
+              />
+            </article>
+          </div>
+        </section>
+        {/* Rodapé só do media kit (18/10, pedido do Rodrigo): sem a barra
+            lateral, as redes dela vêm pra cá, em linha — os mesmos ícones,
+            no mesmo tamanho e cinza. */}
+        <footer className={`section ${s.rodape}`}>
+          <div className="container">
+            <ul className={s.redes}>
+              {SOCIAL.map(({ label, href: url, d }) => (
+                <li key={label}>
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`no-underline ${s.rede}`}
+                    aria-label={label}
+                    title={label}
+                  >
+                    <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+                      <path d={d} fill="currentColor" />
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </footer>
       </main>
       {/* Duas diferenças em relação à /work, e as duas são por falta de
           vizinho: aqui não há faixa de números no pé do herói, então a

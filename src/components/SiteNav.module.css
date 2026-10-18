@@ -342,3 +342,25 @@
   translate: 0 calc(-100% - var(--gutter) - 8px);
 }
 .pular:focus { translate: 0 0; }
+
+/* Só a barra do topo, sem o menu (o media kit, 18/10): a marca com o nome
+   à esquerda e, à direita, idioma e tema. Rola com a página, como o EN /
+   BR das outras. Na mesma margem (--gutter) do resto. */
+.topo {
+  position: absolute;
+  top: var(--gutter);
+  left: var(--gutter);
+  right: var(--gutter);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--t-small);
+  line-height: 1.3;
+  color: var(--ink);
+  pointer-events: none;
+}
+.topo > * { pointer-events: auto; }
+.logoTopo { color: var(--ink); }

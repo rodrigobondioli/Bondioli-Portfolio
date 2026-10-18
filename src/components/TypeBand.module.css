@@ -13,7 +13,10 @@
 .track {
   display: flex;
   width: max-content;
-  /* parada desde 16/10 (sem animação de texto no site; corria 30s em laço) */
+  /* corre de novo desde 18/10, pedido do Rodrigo (ficou parada de 16/10
+     a 18/10 pela regra de "sem animação de texto"). 20s em laço — era 30,
+     "mais rápido um pouco" (18/10) */
+  animation: slide 20s linear infinite;
   /* promove a camada uma vez, em vez de o navegador redecidir a cada
      quadro — a mesma regra do logo que gira na capa */
   will-change: transform;

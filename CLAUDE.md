@@ -12,7 +12,7 @@ mesma cara do Framer, código e design system novos.**
 - [x] `/` — capa de uma tela, logo girando (física própria, portada do Framer)
 - [x] `/thanks`
 - [x] `/work` — só o "Selected work" e o contato (desde 16/10/2026)
-- [x] `/info` (também `/about`, 301) — desde 16/10/2026 é a história do Rodrigo (texto dele, em PT; o EN é tradução), na estrutura do torgo.work/info: faixa "Oi & Hello &" correndo no topo (maiúsculas na linha da barra), foto presa à esquerda com listas que abrem (Experiência, Prêmios, Ensino, Marcas) e o texto longo à direita. Conteúdo em `src/content/info.ts`. O manifesto, o YouTube e o bloco "sobre" saíram daqui (o `AboutSection` segue só no media kit).
+- [x] `/info` (também `/about`, 301) — desde 16/10/2026 é a história do Rodrigo (texto dele, em PT; o EN é tradução), na estrutura do torgo.work/info: faixa "Oi & Hello &" correndo no topo (maiúsculas na linha da barra), foto presa à esquerda com listas que abrem (Experiência, Prêmios, Ensino, Marcas) e o texto longo à direita. Conteúdo em `src/content/info.ts`. O manifesto, o YouTube e o bloco "sobre" saíram daqui.
 - [x] `/playground` — título, frase e uma grade masonry (4 colunas no desktop, 3 no tablet, 2 no celular; cada peça num formato, colunas fechando juntas) com 12 vagas numeradas. Conteúdo em `src/content/playground.ts` (cada peça ganha `src` e `title` quando o experimento chegar)
 - [x] `/contact` (16/10/2026) — o desenho da /info: a foto dele trabalhando (`rodrigo-contato.webp`; original em `_originais/contato/`) à esquerda, no mesmo lugar, tamanho e espaçamento da foto da /info; à direita o rótulo "Contact" na linha da barra, "Let's talk." com o convite pra founder, o formulário (`ContactForm` → `/api/contact`) e o e-mail. Três colunas (texto · form · foto) foi testado e descartado. A pergunta do formulário é rótulo do campo, não título; todo título de página (`.page-title`) é em caixa normal; o `PillButton` perdeu o rosa e a cambalhota.
 - [ ] `/projects/[slug]` — 16 páginas, conteúdo em `src/content/projects.json`.
@@ -127,7 +127,13 @@ links (`TextRoll`) não rolam mais — no hover só muda a cor; as frases do
 case (`LitText`) não acendem mais palavra por palavra; a faixa "MEDIA KIT
 —" do media kit (`TypeBand`) parou; o "View case study" só aparece, sem
 subir. O que segue animado é imagem e vídeo (colagem, flipbook, reel) e
-a marca girando com o scroll. Os itens abaixo ficam como histórico.
+a marca girando com o scroll. (18/10: a seção 01 do case do Amor de Cão passou por uma linha do
+tempo animada e por um scrollytelling com texto trocando; os dois saíram.
+Ficou um índice preso em que só a COR muda — `case/IndicePassos`.)
+**Exceção (18/10, pedido do Rodrigo):** a faixa "MEDIA KIT —" do media
+kit (`TypeBand`) voltou a correr, 20s em laço, em cinza bem escuro (`--ink-10`); para fora da tela e com
+movimento reduzido.
+Os itens abaixo ficam como histórico.
 
 - **`StripReveal`** (12/10/2026, no lugar do `MaskReveal`) é a revelação do
   tumulto.ai, trabalho do Rodrigo (código em `~/Developer/Tumulto/site`,
@@ -231,10 +237,15 @@ cada lado.
 O vídeo da capa é o mesmo `eu-profile.mp4` do "about" da `/work` (o
 arquivo do Framer é byte a byte o mesmo).
 
-Ajustes de 14/10/2026 (pedido do Rodrigo): o "about" é o **mesmo da
-`/work`**, igualzinho — os dois usam `AboutSection` (texto, vídeo,
-credenciais e CSS num lugar só; o retrato `rodrigo-retrato.webp` e o
-`about` do `mediakit.json` ficaram sem uso). Os títulos de seção daqui
+Desde 18/10/2026 o fim do media kit é a **bio da /info**: a foto e as
+listas que abrem à esquerda, a abertura da história, o "Let's talk" e o
+e-mail à direita — os mesmos componentes e CSS da /info (`Lista`,
+`info.module.css`). O `AboutSection` (o "I'm Rodrigo Bondioli" com vídeo)
+foi pra `_to_delete/2026-10-18-about-section/`. A página não tem mais o
+menu lateral: só a marca, o nome, EN / BR e o tema (`SiteNav simples`).
+Todos os cards (números, desempenho) são só fio cinza, como os da /work;
+só as cartelas do Lovable seguem roxas. O vão entre cards é o mesmo nas
+duas direções. Os títulos de seção daqui
 **não têm régua**. A faixa "MEDIA KIT —" passa no **meio exato do vídeo**
 (a legenda de cima saiu do fluxo pra não empurrar o vídeo). Os cards de
 números são **brancos nos dois temas, sem contorno** (`.on-accent` pro

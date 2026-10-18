@@ -417,6 +417,9 @@ p, li, figcaption, blockquote, dd { text-wrap: pretty; }
      (Passou por 56 no mesmo dia: "foi muito".) A barra tem 176 de miolo.
      Sem linhas, as colunas de margem (--lead / --trail) ficam 0. */
   html:has([data-rail]) { --col-gap: 24px; --gutter: 24px; --rail: 200px; --lead: 0; --trail: 0; }
+  /* só a barra do topo, sem a lateral (o media kit, 18/10): as mesmas
+     margens de 24, sem o espaço da barra */
+  html:has([data-topo]) { --col-gap: 24px; --gutter: 24px; --lead: 0; --trail: 0; }
 }
 
 /* ---------- 4. Layout ---------- */

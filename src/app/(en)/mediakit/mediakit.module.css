@@ -14,7 +14,13 @@
 
 .hero {
   position: relative;
-  min-height: 100svh;
+  /* Termina no vídeo (18/10, pedido do Rodrigo: "muito espaço"). Era a
+     altura da tela inteira com o vídeo no meio — sobravam ~290px vazios
+     embaixo dele, mais os 171 da seção seguinte. Agora o respiro de cima é
+     o de seção (cabe a barra e a legenda) e embaixo fica só o --s7 da
+     próxima seção. */
+  --topo: calc(var(--s7) + var(--s4));
+  padding-block: var(--topo) 0;
   display: grid;
   place-items: center;
   padding-inline: var(--gutter-l) var(--gutter-r);
@@ -28,11 +34,16 @@
 
    Aqui mora só o lugar dela. Quem corre é o TypeBand. */
 .band {
+  /* cinza bem escuro (18/10, pedido do Rodrigo): textura atrás do vídeo,
+     não título. --ink-10 acompanha o tema. */
+  color: var(--ink-10);
   position: absolute;
-  /* parada (16/10), ela começa onde começa o conteúdo — da borda da tela,
-     o "M" ficava atrás da barra lateral */
-  inset: 50% 0 auto var(--gutter-l);
-  translate: 0 -50%;
+  /* de borda a borda (18/10: correndo de novo e sem a barra lateral; de
+     16 a 18/10, parada, começava no conteúdo pra o "M" não ficar atrás da
+     barra) */
+  inset: 50% 0 auto 0;
+  /* o meio do VÍDEO, não do herói: o herói tem --topo em cima e 0 embaixo */
+  translate: 0 calc(-50% + var(--topo) / 2);
 }
 
 .heroInner {
@@ -107,6 +118,7 @@
   .hero {
     align-content: center;
     gap: var(--s5);
+    --topo: calc(var(--s6) + var(--s4));
   }
   .band {
     position: static;
@@ -127,8 +139,15 @@
 .secInner {
   display: flex;
   flex-direction: column;
+  /* O que pertence ao título da seção (o texto, os cards) fica a --s4
+     (32) um do outro. Um bloco com título próprio ("Top countries",
+     "Audience extensions") lê como uma seção — o título dele tem o peso
+     do "Elite performance" —, então desce o mesmo --s7 das seções.
+     (18/10, pedido do Rodrigo: estava 88 aqui e 171 entre seções.) */
   gap: var(--s4);
 }
+.secInner > .tables,
+.secInner > .extensions { margin-top: calc(var(--s7) - var(--s4)); }
 
 /* ---------- Audiência ---------- */
 
@@ -161,7 +180,7 @@
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   column-gap: var(--col-gap);
 }
-.stats { row-gap: var(--s2); }
+.stats { row-gap: var(--col-gap); }
 .stats > li,
 .trio > li { grid-column: span 4; }
 .wide { grid-column: span 8 !important; }
@@ -181,21 +200,10 @@
    grade do arquivo na /work */
 .stats > li { min-width: 0; }
 
-/* Fim de fileira (14/10): a coluna termina 3px depois da linha (o vão é
-   maior que meio passo), então o card que tem vizinha à direita encolhe
-   até a linha do meio da última coluna dele — o `.to-line` dos globais.
-   O último da fileira não: esse fecha na linha da borda do conteúdo.
-   Nos números, quem fecha a fileira vem calculado no JSX (.fim3 em
-   terços, .fim2 em metades), porque os largos mudam a conta. */
-@media (min-width: 641px) {
-  .stats > li:not(.fim3),
-  .trio > li:not(:nth-child(3n)),
-  .pairs > li:nth-child(odd),
-  .picks > li:nth-child(odd),
-  .tables > :nth-child(odd) {
-    margin-inline-end: calc(var(--col) / 2 - var(--col-gap));
-  }
-}
+/* (18/10) Os recuos "até a linha do meio" saíram: eram das linhas da
+   grade, que não existem desde 16/10, e deixavam o vão entre os cards
+   maior na horizontal (~38px) que na vertical (16px). Agora o vão é o
+   --col-gap nas duas direções, pedido do Rodrigo. */
 
 .stat {
   display: flex;
@@ -203,15 +211,13 @@
   justify-content: center;
   gap: var(--s1);
   min-height: var(--s7);
-  /* meio passo: o texto cai na linha do meio */
-  padding: var(--gap-line);
-  /* cartão branco nos dois temas, sem contorno (14/10); o `on-accent` do
-     JSX devolve o texto escuro. Por cima das linhas da grade, como a
-     mídia. */
-  position: relative;
-  z-index: 2;
-  background: #fff;
+  padding: var(--s3);
+  /* (18/10, pedido do Rodrigo) só o fio cinza, como os cards de números
+     da /work e do case: rótulo em cinza, número na cor do texto. Era um
+     cartão branco nos dois temas. */
+  border: var(--hairline) solid var(--rule);
 }
+.stat .overline { color: var(--ink-60); }
 
 /* Países e faixa etária: duas listas lado a lado, com a mesma régua entre
    linhas das credenciais da /work. */
@@ -240,7 +246,7 @@
 /* ---------- Cartelas de cor ---------- */
 
 .pairs,
-.trio { row-gap: var(--s2); }
+.trio { row-gap: var(--col-gap); }
 .pairs > li,
 .trio > li { min-width: 0; }
 
@@ -250,12 +256,12 @@
   justify-content: center;
   gap: var(--s2);
   min-height: var(--s7);
-  padding: var(--gap-line);
-  /* a cor cobre as linhas da grade em vez de deixá-las passar (14/10) */
-  position: relative;
-  z-index: 2;
+  padding: var(--s3);
 }
-.accent { background: var(--accent); }
+/* (18/10) o desempenho também só com o fio: título na cor do texto, a
+   nota em cinza. Era a cartela verde-limão. */
+.accent { border: var(--hairline) solid var(--rule); }
+.accent p { color: var(--ink-60); }
 .violet {
   gap: var(--s1);
   background: var(--accent-violet);
@@ -312,9 +318,6 @@
   /* seis cartelas roxas em três colunas ficam estreitas antes de a tela
      virar tablet: o texto delas é título, não legenda */
   .trio > li { grid-column: span 6 !important; }
-  /* duas por fileira: fecha a de número par */
-  .trio > li:nth-child(odd) { margin-inline-end: calc(var(--col) / 2 - var(--col-gap)); }
-  .trio > li:nth-child(even) { margin-inline-end: 0; }
 }
 
 @media (max-width: 900px) {
@@ -322,12 +325,6 @@
   .wide { grid-column: 1 / -1 !important; }
   .pairs > li,
   .tables > * { grid-column: 1 / -1 !important; }
-  /* uma por fileira: ninguém tem vizinha */
-  .pairs > li,
-  .tables > * { margin-inline-end: 0 !important; }
-  /* números em metades: quem fecha agora é o .fim2 */
-  .stats > li:not(.fim2) { margin-inline-end: calc(var(--col) / 2 - var(--col-gap)); }
-  .stats > li.fim2 { margin-inline-end: 0; }
 }
 
 @media (max-width: 640px) {
@@ -335,9 +332,6 @@
   .trio > li,
   .picks > li,
   .wide { grid-column: 1 / -1 !important; }
-  .stats > li,
-  .trio > li,
-  .picks > li { margin-inline-end: 0 !important; }
 
   /* A tabela vira lista: formato e preço na primeira linha, descrição na
      segunda. O cabeçalho some da tela mas continua no leitor de tela.
@@ -374,3 +368,45 @@
   .rates td:nth-child(2) { grid-area: 2 / 1 / 3 / -1; }
   .rates td:nth-child(3) { grid-area: 1 / 2; justify-self: end; }
 }
+
+/* ---------- Sobre (a bio da /info) ---------- */
+/* a foto começa na linha do rótulo "Info" (18/10, pedido do Rodrigo); na
+   /info ela desce até a primeira frase */
+/* no topo das LETRAS do rótulo (0,281em da Geist na entrelinha 1.3),
+   não da caixa dele: a mesma conta do .page-top */
+.fotoSobre { margin-top: calc(0.281 * var(--t-small)) !important; }
+
+/* ---------- Rodapé (só o media kit, 18/10) ----------
+   As redes da barra lateral, em linha: ícones de 15px em cinza que acendem
+   pro --ink, como lá. O fio de cima separa da bio; o respiro é o de seção
+   em cima e a margem da página embaixo. */
+.rodape {
+  margin-top: var(--s7);
+  padding-bottom: var(--gutter);
+}
+/* o fio na largura do conteúdo, não da tela */
+.rodape > div {
+  padding-top: var(--s4);
+  border-top: var(--hairline) solid var(--rule);
+}
+.redes {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-60);
+}
+/* área de toque de 32, o ícone de 15 no meio; o primeiro encosta na margem */
+.rede {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  color: inherit;
+  transition: color var(--fast) var(--ease);
+}
+.redes li:first-child .rede { margin-left: -8.5px; }
+.rede:hover,
+.rede:focus-visible { color: var(--ink); }

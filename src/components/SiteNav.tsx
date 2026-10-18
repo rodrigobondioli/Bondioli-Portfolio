@@ -21,7 +21,10 @@ import type { Lang } from "@/i18n"
 export default function SiteNav({
   brandHref = "/work",
   lang = "en",
+  simples = false,
 }: {
+  /** só a marca, o nome, o idioma e o tema, sem o menu (media kit) */
+  simples?: boolean
   /* o nome e a marca levam pra /work, de qualquer página (17/10, pedido
      do Rodrigo: a /work é a casa do site; ia pra capa) */
   brandHref?: string
@@ -33,5 +36,5 @@ export default function SiteNav({
     // quem tem case vai pra página dele; os outros, pro projeto na /work
     caso: COM_CASE.has(p.slug),
   }))
-  return <NavRail brandHref={brandHref} lang={lang} projects={projects} />
+  return <NavRail brandHref={brandHref} lang={lang} projects={projects} simples={simples} />
 }
