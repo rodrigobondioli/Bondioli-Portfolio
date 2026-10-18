@@ -555,6 +555,10 @@
    coluna 1 (não tem número do lado, como o objetivo), o texto embaixo
    dela, na largura de leitura; os créditos seguem com a lista à direita. */
 .closing > p { grid-column: 1 / -1; }
+/* a frase do fecho em duas linhas equilibradas (18/10, pedido do Rodrigo:
+   "Todo mercado tem a sua pastinha." cabia numa linha só e ficava comprida).
+   12em dá duas linhas pras frases dos dois cases; balance divide por igual. */
+.closing > p { max-width: 12em; text-wrap: balance; }
 .closing .body { grid-column: 1 / -1; justify-items: start; }
 @media (min-width: 641px) {
   .closing .body { grid-column: 1 / 9; }
@@ -595,3 +599,99 @@
   border-block-start: 1px solid var(--rule);
 }
 .creditRow dd { margin: 0; color: var(--muted); text-align: end; }
+
+/* ===== Case do Amor de Cão (18/10) — o mesmo sistema, peças a mais =====
+   O case usa tudo o que está acima; o que vem aqui é só o que a Tattoaria
+   não tinha. */
+
+/* vaga de mídia que ainda não chegou: cinza, com o nome do arquivo */
+.vaga { display: grid; place-items: center; }
+.vagaNome {
+  padding: var(--s2);
+  font-size: var(--t-small);
+  line-height: 1.3;
+  color: var(--ink-60);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+/* vídeo do case (o da Tattoaria é YouTube): cobre a vaga */
+.video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* uma mídia na largura toda */
+.full .mediaItem { grid-column: 1 / -1; }
+
+/* telas de celular em fila: duas por linha no celular, três no tablet,
+   quatro no desktop (mais largas, ficariam altas demais) */
+.telas .mediaItem { grid-column: span 3; }
+@media (min-width: 641px) {
+  .telas .mediaItem { grid-column: span 4; }
+}
+@media (min-width: 1101px) {
+  .telas .mediaItem { grid-column: span 6; }
+}
+
+/* números: os três de baixo em terços (na Tattoaria são as fotos) */
+@media (min-width: 641px) {
+  .numCardTerco { grid-column: span 4; }
+  .numCardTerco:not(:last-child) { margin-inline-end: var(--to-line); }
+}
+@media (min-width: 1101px) {
+  .numCardTerco { grid-column: span 8; }
+}
+
+/* a citação do cliente: frase grande, autor pequeno embaixo */
+.citacao {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--s2);
+  margin: 0;
+}
+@media (min-width: 641px) {
+  .citacao { grid-column: 2 / -1; }
+}
+@media (min-width: 1101px) {
+  .citacao { grid-column: 2 / 21; }
+}
+.citacaoTexto { margin: 0; }
+.citacaoTexto p {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: var(--t-h2);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.citacaoAutor { color: var(--muted); }
+
+/* o que mudou: rótulo · antes (apagado) · → depois, nas linhas da lista */
+.mudanca {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  margin: 0;
+  border-block-end: 1px solid var(--rule);
+}
+.mudancaRow {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: var(--s1);
+  padding-block: var(--s3);
+  border-block-start: 1px solid var(--rule);
+}
+.mudancaRow dd { margin: 0; text-wrap: pretty; }
+.mudancaLabel { grid-column: 1 / -1; color: var(--muted); }
+.mudancaAntes { grid-column: 1 / -1; color: var(--muted); }
+.mudancaDepois { grid-column: 1 / -1; }
+.mudancaSeta { margin-inline-end: var(--s1); color: var(--muted); }
+@media (min-width: 641px) {
+  .mudancaLabel { grid-column: 1 / 4; }
+  .mudancaAntes { grid-column: 4 / 8; }
+  .mudancaDepois { grid-column: 8 / 13; }
+}
+@media (min-width: 1101px) {
+  .mudancaLabel { grid-column: 1 / 7; }
+  .mudancaAntes { grid-column: 7 / 15; }
+  .mudancaDepois { grid-column: 15 / 25; }
+}
