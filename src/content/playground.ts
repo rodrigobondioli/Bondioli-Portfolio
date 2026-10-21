@@ -29,7 +29,10 @@ export const PLAYGROUND: PecaPlayground[] = [
   // 04: o logo do Monster (17/10; original 1920×1080 em _originais/playground/,
   // aqui recortado no quadrado da vaga, 900px, com o desenho 10% menor)
   { ratio: "1 / 1", src: "/playground/logo-monster.webp", title: "Monster logo: a pale head with many eyes and three toothy mouths" },
-  { ratio: "2 / 3" },
+  // 05: corrida de triciclo entre os carros (21/10; original 1080×1920
+  // em _originais/playground/, aqui recortado no 2:3 da vaga, 640×960,
+  // sem áudio, ~1,5MB)
+  { ratio: "2 / 3", src: "/playground/triciclo.mp4", title: "Bearded man racing a red tricycle between two sports cars" },
   { ratio: "3 / 2" },
   // coluna 3
   // 07: a camiseta do Monster, no corpo (17/10; original em
