@@ -298,8 +298,11 @@
   white-space: nowrap;
 }
 .rates td strong { font-weight: 600; }
+/* descrição que quebra divide as linhas por igual, sem palavra sozinha
+   embaixo */
+.rates td { text-wrap: balance; }
 /* a coluna do meio é a que tem texto corrido: ela fica com a folga */
-.rates col.delivers { width: 44%; }
+.rates col.delivers { width: 60%; }
 
 .extensions {
   display: flex;
