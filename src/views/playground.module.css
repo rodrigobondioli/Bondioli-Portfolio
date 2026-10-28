@@ -17,9 +17,11 @@
   color: var(--ink-60);
 }
 .inner { display: flex; flex-direction: column; gap: var(--s4); }
+/* numa linha só (28/10, pedido do Rodrigo: com 32em o "de fazer." caía
+   sozinho na linha de baixo); onde não couber, quebra equilibrada */
 .lead {
   margin: 0;
-  max-width: 32em;
+  text-wrap: balance;
   /* em branco: com o título virando rótulo cinza, a frase é o conteúdo
      (como a bio da /work) */
   color: var(--ink);
