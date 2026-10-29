@@ -31,21 +31,30 @@
 
 /* Masonry: colunas de texto do CSS — cada peça desce na coluna até o fim
    e passa pra próxima, então as alturas se desencontram como na colagem
-   da /work. 4 colunas no desktop, 3 no tablet, 2 no celular. O vão é o da
-   margem (--gutter), o mesmo da colagem. */
+   da /work. Desde 29/10 em duas metades de 2 colunas, lado a lado acima
+   de 900 (as 4 colunas de antes) e uma embaixo da outra no tablet e no
+   celular: o masonry de colunas não deixa uma peça ocupar só duas, a
+   metade deixa (`.wide` atravessa a metade dela). O vão é o da margem
+   (--gutter), o mesmo da colagem. */
 .grid {
   margin: calc(var(--s6) - var(--s4)) 0 0;
+  display: grid;
+  gap: var(--gutter);
+  align-items: start;
+}
+@media (min-width: 901px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+.half {
+  margin: 0;
   padding: 0;
   list-style: none;
   columns: 2;
   column-gap: var(--gutter);
+  /* o vão de baixo da última peça não soma no fim da metade */
+  margin-bottom: calc(-1 * var(--gutter));
 }
-@media (min-width: 641px) {
-  .grid { columns: 3; }
-}
-@media (min-width: 1101px) {
-  .grid { columns: 4; }
-}
+.wide { column-span: all; }
 .piece {
   position: relative;
   break-inside: avoid;
